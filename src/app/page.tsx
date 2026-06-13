@@ -77,7 +77,7 @@ function Navbar() {
     { href: '#hero', label: 'الرئيسية' },
     { href: '#about', label: 'من نحن' },
     { href: '#services', label: 'خدماتنا' },
-    { href: '#projects', label: 'مشاريعنا' },
+    { href: '#gallery', label: 'المعرض' },
     { href: '#contact', label: 'تواصل معنا' },
   ]
 
@@ -578,6 +578,321 @@ function Brands() {
   )
 }
 
+/* ───────── gallery ───────── */
+function Gallery() {
+  const [activeTab, setActiveTab] = useState<'all' | 'video' | 'post'>('all')
+  const [lightboxVideo, setLightboxVideo] = useState<string | null>(null)
+
+  const mediaItems = [
+    {
+      type: 'video' as const,
+      platform: 'youtube' as const,
+      title: '3D Laser Scanning the Nablus Court of Appeal',
+      youtubeId: 'XgBOGJzBn5g',
+      thumb: 'https://i.ytimg.com/vi/XgBOGJzBn5g/hqdefault.jpg',
+      category: 'مسح ليزري',
+    },
+    {
+      type: 'video' as const,
+      platform: 'youtube' as const,
+      title: 'NavVis MLX – Redefining Handheld Reality Capture',
+      youtubeId: '-IDRr44-6RA',
+      thumb: 'https://i.ytimg.com/vi/-IDRr44-6RA/hqdefault.jpg',
+      category: 'مسح متنقل',
+    },
+    {
+      type: 'video' as const,
+      platform: 'youtube' as const,
+      title: 'NavVis VLX3 – Fast & Accurate 3D Laser Scanning',
+      youtubeId: 'TOZkZdhxvZk',
+      thumb: 'https://i.ytimg.com/vi/TOZkZdhxvZk/hqdefault.jpg',
+      category: 'مسح ليزري',
+    },
+    {
+      type: 'video' as const,
+      platform: 'youtube' as const,
+      title: 'High-Precision 3D Laser Scanning with Trimble X9',
+      youtubeId: 'mvGkQGVsQQI',
+      thumb: 'https://i.ytimg.com/vi/mvGkQGVsQQI/hqdefault.jpg',
+      category: 'Trimble',
+    },
+    {
+      type: 'video' as const,
+      platform: 'youtube' as const,
+      title: 'Trimble GNSS R580',
+      youtubeId: 'OmxZSrO7zTg',
+      thumb: 'https://i.ytimg.com/vi/OmxZSrO7zTg/hqdefault.jpg',
+      category: 'GPS / GNSS',
+    },
+    {
+      type: 'video' as const,
+      platform: 'youtube' as const,
+      title: 'Spectra GNSS SP85',
+      youtubeId: 'UV-q0YKINYQ',
+      thumb: 'https://i.ytimg.com/vi/UV-q0YKINYQ/hqdefault.jpg',
+      category: 'Spectra',
+    },
+    {
+      type: 'video' as const,
+      platform: 'youtube' as const,
+      title: 'From Point Cloud to Digital Terrain Models',
+      youtubeId: '5NWINk0x28w',
+      thumb: 'https://i.ytimg.com/vi/5NWINk0x28w/hqdefault.jpg',
+      category: 'نمذجة ثلاثية الأبعاد',
+    },
+    {
+      type: 'video' as const,
+      platform: 'youtube' as const,
+      title: 'Trimble TDC6 Data Collector',
+      youtubeId: 'r3wwTRqF0SA',
+      thumb: 'https://i.ytimg.com/vi/r3wwTRqF0SA/hqdefault.jpg',
+      category: 'جمع بيانات',
+    },
+    {
+      type: 'video' as const,
+      platform: 'youtube' as const,
+      title: 'Trimble TDC600 Handheld',
+      youtubeId: 'IBpddj4MPCs',
+      thumb: 'https://i.ytimg.com/vi/IBpddj4MPCs/hqdefault.jpg',
+      category: 'جمع بيانات',
+    },
+    {
+      type: 'video' as const,
+      platform: 'youtube' as const,
+      title: 'NavVis VLX – From Reality to CAD in Hours',
+      youtubeId: 'LgmeF3BZO4Y',
+      thumb: 'https://i.ytimg.com/vi/LgmeF3BZO4Y/hqdefault.jpg',
+      category: 'مسح متنقل',
+    },
+    {
+      type: 'post' as const,
+      platform: 'instagram' as const,
+      title: 'شكراً لكل من زارنا وتعرف على تقنيات Trimble و NavVis و Xgrids المتقدمة',
+      href: 'https://www.instagram.com/p/DYMX_zvCIAt',
+      category: 'معرض وأحداث',
+    },
+    {
+      type: 'post' as const,
+      platform: 'instagram' as const,
+      title: 'تعاون جمعية إعادة الإطار المعماري × اكسيس × جامعة القدس',
+      href: 'https://www.instagram.com/p/DYIVKBDiDkf',
+      category: 'شراكات',
+    },
+    {
+      type: 'post' as const,
+      platform: 'instagram' as const,
+      title: 'وراء كل طريق وبرج أيقوني في أبوظبي — Trimble Total Station',
+      href: 'https://www.instagram.com/reel/DXYyA2_DyhE',
+      category: 'Trimble',
+    },
+    {
+      type: 'post' as const,
+      platform: 'instagram' as const,
+      title: 'مسح رادار أرضي بالدرون Zond Aero 500 GPR',
+      href: 'https://www.instagram.com/reel/DSB4QDaDwLW',
+      category: 'مسح جيورادار',
+    },
+    {
+      type: 'post' as const,
+      platform: 'instagram' as const,
+      title: 'توتل ستيشن يجمع بين سهولة الاستخدام والدقة العالية',
+      href: 'https://www.instagram.com/reel/DXEuqvGD6Dw',
+      category: 'توتل ستيشن',
+    },
+    {
+      type: 'post' as const,
+      platform: 'facebook' as const,
+      title: 'تهنئة لـ Juman Home رام الله على اقتناء جهاز المسح ثلاثي الأبعاد Trimble X9!',
+      href: 'https://www.facebook.com/axisTRIMBLE',
+      category: 'مشاريع عملاء',
+    },
+    {
+      type: 'post' as const,
+      platform: 'facebook' as const,
+      title: 'ورشة لجنة التسوية حول مفاهيم GNSS — اكسيس تقدم أجهزة GPS',
+      href: 'https://www.facebook.com/lwscps/posts/1427944703988935',
+      category: 'ورش عمل',
+    },
+  ]
+
+  const filtered = activeTab === 'all' ? mediaItems : mediaItems.filter(m => m.type === activeTab)
+
+  const tabs = [
+    { key: 'all' as const, label: 'الكل', count: mediaItems.length },
+    { key: 'video' as const, label: 'فيديوهات', count: mediaItems.filter(m => m.type === 'video').length },
+    { key: 'post' as const, label: 'منشورات', count: mediaItems.filter(m => m.type === 'post').length },
+  ]
+
+  return (
+    <Section id="gallery" className="py-20 sm:py-28 relative">
+      <div className="absolute inset-0 grid-pattern opacity-10" />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">معرض الوسائط</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
+            أحدث <span className="gradient-text">فيديوهاتنا ومنشوراتنا</span>
+          </h2>
+          <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
+            تابع أحدث أعمالنا وتقنياتنا في المساحة والجيوماتكس عبر منصاتنا المختلفة
+          </p>
+        </div>
+
+        {/* Filter tabs */}
+        <div className="flex items-center justify-center gap-3 mb-10">
+          {tabs.map(t => (
+            <button
+              key={t.key}
+              onClick={() => setActiveTab(t.key)}
+              className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
+                activeTab === t.key
+                  ? 'bg-[oklch(0.72_0.14_180)] text-[oklch(0.13_0.02_250)] shadow-lg shadow-[oklch(0.72_0.14_180_/_0.2)]'
+                  : 'bg-[oklch(0.20_0.03_250)] border border-[oklch(0.30_0.03_250)] text-[oklch(0.60_0.01_250)] hover:border-[oklch(0.72_0.14_180_/_0.3)] hover:text-[oklch(0.72_0.14_180)]'
+              }`}
+            >
+              {t.label}
+              <span className={`mr-1.5 text-xs ${activeTab === t.key ? 'text-[oklch(0.13_0.02_250_/_0.6)]' : 'text-[oklch(0.40_0.02_250)]'}`}>({t.count})</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Media grid */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {filtered.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: Math.min(i * 0.08, 0.4) }}
+                className="group relative rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)] overflow-hidden hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500"
+              >
+                {item.type === 'video' && item.youtubeId && (
+                  <>
+                    {/* Video thumbnail */}
+                    <div className="relative aspect-video overflow-hidden cursor-pointer" onClick={() => setLightboxVideo(item.youtubeId!)}>
+                      <img
+                        src={item.thumb}
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                        <div className="w-14 h-14 rounded-full bg-[#FF0000]/90 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-[#FF0000]/30">
+                          <svg viewBox="0 0 24 24" fill="white" className="w-6 h-6 mr-[-2px]"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                      </div>
+                      {/* Category badge */}
+                      <span className="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-[oklch(0.13_0.02_250)]/80 backdrop-blur-sm text-[oklch(0.72_0.14_180)] text-[10px] font-semibold border border-[oklch(0.30_0.03_250)]">
+                        {item.category}
+                      </span>
+                      {/* YouTube badge */}
+                      <span className="absolute top-3 left-3 px-2 py-0.5 rounded bg-[#FF0000] text-white text-[10px] font-bold flex items-center gap-1">
+                        <svg viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        YouTube
+                      </span>
+                    </div>
+                    <div className="p-4">
+                      <h4 className="text-[oklch(0.90_0.005_250)] font-semibold text-sm leading-relaxed line-clamp-2">{item.title}</h4>
+                    </div>
+                  </>
+                )}
+
+                {item.type === 'post' && (
+                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="block">
+                    {/* Post card */}
+                    <div className="p-6 min-h-[200px] flex flex-col justify-between">
+                      <div>
+                        {/* Platform icon */}
+                        <div className="flex items-center gap-2 mb-4">
+                          {item.platform === 'instagram' ? (
+                            <span className="px-2.5 py-1 rounded-lg bg-gradient-to-l from-[#833AB4] via-[#FD1D1D] to-[#F77737] text-white text-[10px] font-bold flex items-center gap-1">
+                              <svg viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                              Instagram
+                            </span>
+                          ) : (
+                            <span className="px-2.5 py-1 rounded-lg bg-[#1877F2] text-white text-[10px] font-bold flex items-center gap-1">
+                              <svg viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                              Facebook
+                            </span>
+                          )}
+                          <span className="px-2.5 py-1 rounded-lg bg-[oklch(0.22_0.03_250)] text-[oklch(0.50_0.02_250)] text-[10px] font-medium border border-[oklch(0.30_0.03_250)]">
+                            {item.category}
+                          </span>
+                        </div>
+                        <h4 className="text-[oklch(0.90_0.005_250)] font-semibold text-sm leading-relaxed">{item.title}</h4>
+                      </div>
+                      <div className="mt-4 flex items-center gap-1 text-[oklch(0.50_0.02_250)] text-xs group-hover:text-[oklch(0.72_0.14_180)] transition-colors">
+                        <span>عرض المنشور</span>
+                        <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      </div>
+                    </div>
+                  </a>
+                )}
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Channel link */}
+        <div className="text-center mt-10">
+          <a
+            href="https://www.youtube.com/@axisgpssurveyinginstrument8400"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#FF0000]/10 border border-[#FF0000]/20 text-[#FF0000] font-semibold text-sm hover:bg-[#FF0000]/20 transition-all duration-300"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            زوروا قناتنا على يوتيوب — 105+ فيديو
+          </a>
+        </div>
+      </div>
+
+      {/* Video Lightbox */}
+      <AnimatePresence>
+        {lightboxVideo && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={() => setLightboxVideo(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+              className="relative w-full max-w-4xl aspect-video rounded-2xl overflow-hidden shadow-2xl"
+              onClick={e => e.stopPropagation()}
+            >
+              <iframe
+                src={`https://www.youtube.com/embed/${lightboxVideo}?autoplay=1&rel=0`}
+                title="YouTube video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              />
+              <button
+                onClick={() => setLightboxVideo(null)}
+                className="absolute top-3 left-3 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/80 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </Section>
+  )
+}
+
 /* ───────── projects ───────── */
 function Projects() {
   const projects = [
@@ -1010,8 +1325,8 @@ function Footer() {
           <div>
             <h4 className="text-[oklch(0.90_0.005_250)] font-semibold mb-4">روابط سريعة</h4>
             <div className="space-y-2">
-              {['الرئيسية', 'من نحن', 'خدماتنا', 'مشاريعنا', 'تواصل معنا'].map((l, i) => (
-                <a key={i} href={`#${['hero', 'about', 'services', 'projects', 'contact'][i]}`} className="block text-[oklch(0.50_0.02_250)] hover:text-[oklch(0.72_0.14_180)] text-sm transition-colors">
+              {['الرئيسية', 'من نحن', 'خدماتنا', 'المعرض', 'تواصل معنا'].map((l, i) => (
+                <a key={i} href={`#${['hero', 'about', 'services', 'gallery', 'contact'][i]}`} className="block text-[oklch(0.50_0.02_250)] hover:text-[oklch(0.72_0.14_180)] text-sm transition-colors">
                   {l}
                 </a>
               ))}
@@ -1115,6 +1430,7 @@ export default function Home() {
         <About />
         <Stats />
         <Brands />
+        <Gallery />
         <Services />
         <Projects />
         <WhyUs />
