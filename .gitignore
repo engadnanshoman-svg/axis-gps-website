@@ -61,3 +61,6 @@ server.log
 
 # Database
 /db/
+# Build outputs
+out/
+.netlify/
