@@ -6,7 +6,8 @@ import {
   Building2, Cog, HardHat, Wrench, Phone, Mail, MapPin,
   ChevronDown, ArrowLeft, Menu, X, CheckCircle2, Users,
   Target, Zap, Shield, ArrowUpRight, Send, Star,
-  Ruler, Compass, DraftingCompass, Factory, Calculator, BarChart3
+  Ruler, Compass, DraftingCompass, Factory, Calculator, BarChart3,
+  Satellite, ScanLine, GraduationCap, Monitor, Radio, Gauge
 } from 'lucide-react'
 
 /* ───────── animated counter ───────── */
@@ -194,8 +195,8 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-lg sm:text-xl text-[oklch(0.65_0.02_250)] max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          نقدم حلولاً هندسية مبتكرة ومتطورة تلبي احتياجات المشاريع الكبرى بأعلى معايير الجودة والكفاءة.
-          نحن شركاؤكم في تحويل الرؤى إلى واقع هندسي متقن.
+          الشركة الرائدة في فلسطين في مجال أجهزة المساحة والجيوماتكس. الوكيل الحصري لشركتي Spectra و Nikon.
+          نقدم أحدث تقنيات GPS و RTK والمسح الضوئي وأنظمة مراقبة التحرك.
         </motion.p>
 
         <motion.div
@@ -241,9 +242,9 @@ function Hero() {
 /* ───────── about ───────── */
 function About() {
   const features = [
-    { icon: <Target className="w-6 h-6" />, title: 'رؤية واضحة', desc: 'نسعى لأن نكون الرواد في تقديم الحلول الهندسية المبتكرة التي تتخطى التوقعات' },
-    { icon: <Shield className="w-6 h-6" />, title: 'جودة لا تُضاهى', desc: 'نلتزم بأعلى المعايير الدولية في كل تفصيلة هندسية نقدمها' },
-    { icon: <Zap className="w-6 h-6" />, title: 'ابتكار مستمر', desc: 'نوظف أحدث التقنيات والمنهجيات لتقديم حلول ذكية ومستدامة' },
+    { icon: <Target className="w-6 h-6" />, title: 'رؤية واضحة', desc: 'نسعى لأن نكون الرواد في تقديم حلول المساحة والجيوماتكس المبتكرة في فلسطين والمنطقة' },
+    { icon: <Shield className="w-6 h-6" />, title: 'وكيل حصري', desc: 'الوكيل الحصري لشركتي Spectra و Nikon العالميتين في تقديم أحدث أجهزة المساحة والقياس' },
+    { icon: <Zap className="w-6 h-6" />, title: 'تقنيات متقدمة', desc: 'نوظف أحدث تقنيات GPS و RTK والمسح الضوئي ثلاثي الأبعاد وأنظمة مراقبة التحرك' },
   ]
 
   return (
@@ -254,16 +255,18 @@ function About() {
           <div>
             <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">من نحن</span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-6 leading-tight">
-              نصنع المستقبل <br />
-              <span className="gradient-text">بالهندسة والإبداع</span>
+              قيادة تقنيات المساحة <br />
+              <span className="gradient-text">في فلسطين</span>
             </h2>
             <p className="text-[oklch(0.65_0.02_250)] text-lg leading-relaxed mb-8">
-              شركة اكسيس للحلول الهندسية المتقدمة هي شركة رائدة متخصصة في تقديم الحلول الهندسية الشاملة والمتكاملة.
-              نجمع بين الخبرة العميقة والابتكار المستمر لنقدم لعملائنا خدمات هندسية استثنائية تلبي تطلعاتهم وتتجاوز توقعاتهم.
+              شركة اكسيس للحلول الهندسية المتقدمة (AXIS GPS & Surveying Instruments LTD) هي الشركة الرائدة والأكبر
+              في فلسطين في مجال أجهزة المساحة والقياس والمسح الجيوماتيكي. نحن الوكيل الحصري لشركتي Spectra و Nikon
+              العالميتين، ونقدم أحدث التقنيات والحلول المتكاملة للمساحين والمهندسين.
             </p>
             <p className="text-[oklch(0.55_0.02_250)] leading-relaxed mb-8">
-              منذ تأسيسها، عملت اكسيس على تنفيذ مجموعة واسعة من المشاريع الهندسية المعقدة في مختلف القطاعات،
-              من المباني التجارية والسكنية إلى المنشآت الصناعية والبنية التحتية، مع التزام تام بالجودة والسلامة والاستدامة.
+              منذ تأسيسها على يد المهندس سلامة عواودة، عملت اكسيس على توفير أحدث أجهزة GPS و RTK والماسحات الضوئية
+              وأنظمة مراقبة التحرك، مع تقديم خدمات التدريب المتخصص والدعم الفني المستمر. تمتلك الشركة أربعة فروع
+              رئيسية في كفر كنا وكفر قاسم ورام الله والخليل، وتتعاون مع مؤسسات عالمية مثل UNDP.
             </p>
             <div className="space-y-4">
               {features.map((f, i) => (
@@ -343,34 +346,34 @@ function About() {
 function Services() {
   const services = [
     {
-      icon: <Building2 className="w-7 h-7" />,
-      title: 'التصميم الإنشائي',
-      desc: 'تصميم إنشائي متقن للمباني والمنشآت باستخدام أحدث البرامج والمعايير الدولية لضمان السلامة والاستدامة',
+      icon: <Satellite className="w-7 h-7" />,
+      title: 'أجهزة GPS و RTK',
+      desc: 'توفير أحدث أجهزة GPS و RTK عالية الدقة للمسح الميداني والقياسات الجيوديسية مع دعم فني متكامل',
     },
     {
-      icon: <Cog className="w-7 h-7" />,
-      title: 'الاستشارات الهندسية',
-      desc: 'تقديم استشارات هندسية شاملة من خلال فريق من الخبراء المتخصصين لمساعدة العملاء في اتخاذ القرارات الصائبة',
+      icon: <DraftingCompass className="w-7 h-7" />,
+      title: 'أجهزة التوتل ستيشن',
+      desc: 'توريد أحدث أجهزة التوتل ستيشن من Spectra و Nikon لقياسات المساحة الدقيقة في المشاريع الهندسية',
     },
     {
-      icon: <HardHat className="w-7 h-7" />,
-      title: 'إدارة المشاريع',
-      desc: 'إدارة متكاملة للمشاريع الهندسية من مرحلة التخطيط وحتى التسليم النهائي مع الالتزام بالجدول الزمني والميزانية',
+      icon: <ScanLine className="w-7 h-7" />,
+      title: 'المسح الضوئي ثلاثي الأبعاد',
+      desc: 'ماسحات ضوئية متنقلة وثابتة ومحمولة جواً ومركبة للمسح ثلاثي الأبعاد الدقيق والنمذجة المتقدمة',
     },
     {
-      icon: <Factory className="w-7 h-7" />,
-      title: 'الأنظمة الميكانيكية والكهربائية',
-      desc: 'تصميم وتنفيذ أنظمة MEP متكاملة تشمل التكييف والتهوية والسباكة والأنظمة الكهربائية بأعلى كفاءة',
+      icon: <Monitor className="w-7 h-7" />,
+      title: 'أنظمة GIS والخرائط',
+      desc: 'حلول نظم المعلومات الجغرافية والخرائط الرقمية المتكاملة لتحليل وإدارة البيانات المكانية',
     },
     {
-      icon: <Calculator className="w-7 h-7" />,
-      title: 'التكاليف والمقايسات',
-      desc: 'إعداد المقايسات التفصيلية وتقدير التكاليف بدقة عالية لضمان التحكم المالي الفعال في المشروعات',
+      icon: <Radio className="w-7 h-7" />,
+      title: 'أنظمة مراقبة التحرك',
+      desc: 'أنظمة مراقبة تحرك متقدمة للمباني والمنشآت والمنحدرات باستخدام أحدث أجهزة القياس والإنذار المبكر',
     },
     {
-      icon: <BarChart3 className="w-7 h-7" />,
-      title: 'الإشراف والمتابعة',
-      desc: 'إشراف ميداني دقيق على جميع مراحل التنفيذ لضمان مطابقة الأعمال للمواصفات والمعايير المعتمدة',
+      icon: <GraduationCap className="w-7 h-7" />,
+      title: 'التدريب والدعم الفني',
+      desc: 'برامج تدريبية متخصصة على أجهزة المساحة والقياس مع دعم فني مستمر وخدمة ما بعد البيع',
     },
   ]
 
@@ -381,10 +384,10 @@ function Services() {
         <div className="text-center mb-16">
           <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">خدماتنا</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
-            حلول هندسية <span className="gradient-text">شاملة ومتكاملة</span>
+            أجهزة وخدمات <span className="gradient-text">المساحة والجيوماتكس</span>
           </h2>
           <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
-            نقدم مجموعة متكاملة من الخدمات الهندسية المتخصصة التي تغطي جميع مراحل المشروع من التخطيط إلى التنفيذ
+            نقدم أحدث أجهزة المساحة والقياس من أبرز الشركات العالمية مع خدمات التدريب والدعم الفني المتكامل
           </p>
         </div>
 
@@ -423,10 +426,10 @@ function Services() {
 /* ───────── stats ───────── */
 function Stats() {
   const stats = [
-    { value: 250, suffix: '+', label: 'مشروع منجز', icon: <Building2 className="w-6 h-6" /> },
-    { value: 120, suffix: '+', label: 'عميل راضٍ', icon: <Users className="w-6 h-6" /> },
-    { value: 15, suffix: '+', label: 'سنوات خبرة', icon: <Wrench className="w-6 h-6" /> },
-    { value: 98, suffix: '%', label: 'نسبة الرضا', icon: <Star className="w-6 h-6" /> },
+    { value: 4, suffix: '', label: 'فروع في فلسطين', icon: <MapPin className="w-6 h-6" /> },
+    { value: 500, suffix: '+', label: 'عميل راضٍ', icon: <Users className="w-6 h-6" /> },
+    { value: 10, suffix: '+', label: 'سنوات خبرة', icon: <Wrench className="w-6 h-6" /> },
+    { value: 2, suffix: '', label: 'وكالة حصرية عالمية', icon: <Star className="w-6 h-6" /> },
   ]
 
   return (
@@ -466,28 +469,28 @@ function Stats() {
 function Projects() {
   const projects = [
     {
-      title: 'برج النخيل التجاري',
-      category: 'مباني تجارية',
-      desc: 'تصميم إنشائي متكامل لبرج تجاري يضم 35 طابقاً بأحدث المعايير الدولية للسلامة والاستدامة',
-      tags: ['تصميم إنشائي', 'MEP', 'إدارة مشروع'],
+      title: 'مختبر GIS والمساحة - جامعة الخليل',
+      category: 'التعليم الأكاديمي',
+      desc: 'إنشاء مختبر نظم المعلومات الجغرافية والمساحة في كلية المهن والعلوم التطبيقية بجامعة الخليل بالتعاون مع AXIS-GPS',
+      tags: ['GIS', 'أجهزة مساحة', 'جامعة الخليل'],
     },
     {
-      title: 'مجمع الواحة السكني',
-      category: 'مباني سكنية',
-      desc: 'مشروع سكني متكامل يضم 200 وحدة سكنية مع مرافق خدمية وحدائق ومساحات خضراء',
-      tags: ['تصميم معماري', 'إشراف', 'مقايسات'],
+      title: 'دعم جامعة البوليتكنك فلسطين',
+      category: 'المسؤولية المجتمعية',
+      desc: 'تبرع بأجهزة مساحة حديثة ودعم صندوق الطالب الكريم لصالح جامعة البوليتكنك فلسطين لتعزيز التخصصات الهندسية',
+      tags: ['تبرع', 'أجهزة مساحة', 'البوليتكنك'],
     },
     {
-      title: 'مصنع الخليج الصناعي',
-      category: 'منشآت صناعية',
-      desc: 'تصميم وتنفيذ منشأة صناعية متطورة بمساحة 50,000 م² تشمل خطوط إنتاج ومستودعات',
-      tags: ['تصميم إنشائي', 'MEP', 'إدارة مشروع'],
+      title: 'الشراكة مع UNDP',
+      category: 'مشاريع دولية',
+      desc: 'التعاون مع برنامج الأمم المتحدة الإنمائي في مشاريع المسح والخرائط ونظم المعلومات الجغرافية في فلسطين',
+      tags: ['UNDP', 'GIS', 'خرائط رقمية'],
     },
     {
-      title: 'مشروع المترو المركزي',
-      category: 'بنية تحتية',
-      desc: 'استشارات هندسية وإشراف على تنفيذ محطات المترو والأنفاق ضمن المشروع المركزي للنقل',
-      tags: ['استشارات', 'إشراف', 'سلامة'],
+      title: 'افتتاح فرع الخليل',
+      category: 'توسع الشركة',
+      desc: 'افتتاح الفرع الرابع لشركة اكسيس في الخليل تحت رعاية أحمد سعيد بيوض التميمي لتوسيع نطاق الخدمات في المنطقة',
+      tags: ['فرع جديد', 'الخليل', 'توسع'],
     },
   ]
 
@@ -497,10 +500,10 @@ function Projects() {
         <div className="text-center mb-16">
           <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">مشاريعنا</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
-            أعمال نفتخر <span className="gradient-text">بتنفيذها</span>
+            إنجازاتنا <span className="gradient-text">وشراكاتنا</span>
           </h2>
           <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
-            نفخر بتقديم سجل حافل من المشاريع الناجحة التي تعكس خبرتنا وجودة عملنا
+            نفخر بشراكاتنا مع المؤسسات الأكاديمية والدولية ومساهمتنا في تطوير قطاع المساحة والجيوماتكس في فلسطين
           </p>
         </div>
 
@@ -543,19 +546,19 @@ function Projects() {
 function Testimonials() {
   const testimonials = [
     {
-      name: 'م. أحمد الراشد',
-      role: 'مدير مشاريع - مجموعة الراشد',
-      text: 'تعاملنا مع اكسيس في عدة مشاريع وكانت النتائج مبهرة. احترافية عالية والتزام تام بالمواعيد والمواصفات.',
+      name: 'م. أنس أبو حديد',
+      role: 'مدير فرع الخليل - شركة اكسيس',
+      text: 'نلتزم في اكسيس بتقديم أحدث التقنيات وأفضل الخدمات لعملائنا في قطاع المساحة والجيوماتكس، ونسعى دائماً لتجاوز توقعاتهم.',
     },
     {
-      name: 'م. سارة المنصور',
-      role: 'مهندسة مدنية - شركة البناء المتقدمة',
-      text: 'فريق اكسيس يتحلى بالدقة والإبداع في التصميم الإنشائي. حلول مبتكرة وواقعية في آن واحد.',
+      name: 'م. سجى مسالمة',
+      role: 'فريق اكسيس - فرع الخليل',
+      text: 'فريق اكسيس يعمل بشغف لتوفير حلول مسح متكاملة تلبي احتياجات المشاريع المختلفة، من أجهزة GPS إلى أنظمة المراقبة المتقدمة.',
     },
     {
-      name: 'أ. خليل العمري',
-      role: 'رئيس مجلس الإدارة - العمري القابضة',
-      text: 'شراكتنا مع اكسيس أثمرت عن نتائج ممتازة. فريق متميز يفهم احتياجات العميل ويقدم أفضل الحلول.',
+      name: 'أحمد سعيد بيوض التميمي',
+      role: 'رئيس مجلس أمناء جامعة البوليتكنك',
+      text: 'نشيد بدور شركة اكسيس في إرفاد قطاع المساحة والجيوماتكس بأحدث التقنيات الحديثة من خلال مبادراتها وخبراتها المهنية للمساحين والمهندسين.',
     },
   ]
 
@@ -606,12 +609,12 @@ function Testimonials() {
 /* ───────── why us ───────── */
 function WhyUs() {
   const reasons = [
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'فريق من المهندسين المعتمدين والخبراء المتخصصين' },
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'التزام تام بالمعايير الدولية والمواصفات المحلية' },
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'استخدام أحدث التقنيات والبرامج الهندسية' },
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'تسليم المشاريع في الوقت المحدد وبالميزانية المتفق عليها' },
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'دعم فني متواصل بعد تسليم المشروع' },
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'حلول مستدامة صديقة للبيئة' },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'الوكيل الحصري لشركتي Spectra و Nikon العالميتين' },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'أكثر من 10 سنوات من الخبرة في قطاع أجهزة المساحة' },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: '4 فروع رئيسية تغطي مختلف مناطق فلسطين' },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'شراكة مع برنامج الأمم المتحدة الإنمائي UNDP' },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'تعاون مع جامعات فلسطينية (البوليتكنك، النجاح، الخليل)' },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'دعم فني متواصل وخدمة ما بعد البيع' },
   ]
 
   return (
@@ -622,11 +625,11 @@ function WhyUs() {
           <div>
             <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">لماذا اكسيس</span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-6 leading-tight">
-              شريكك الهندسي <span className="gradient-text">الأمثل</span>
+              لماذا تختار <span className="gradient-text">اكسيس؟</span>
             </h2>
             <p className="text-[oklch(0.55_0.02_250)] leading-relaxed mb-8">
-              نتميز عن غيرنا بمزيج فريد من الخبرة العميقة والابتكار المستمر والالتزام الثابت بتحقيق أعلى مستويات الجودة.
-              نحن لا نقدم خدمات هندسية فحسب، بل نبني شراكات طويلة الأمد مع عملائنا.
+              نتميز بأننا الشركة الرائدة والأكبر في فلسطين في مجال أجهزة المساحة والجيوماتكس.
+              وكالة حصرية لأكبر الشركات العالمية مع شبكة فروع واسعة وفريق متخصص يقدم أفضل الحلول والدعم لعملائنا.
             </p>
             <div className="grid sm:grid-cols-2 gap-4">
               {reasons.map((r, i) => (
@@ -801,12 +804,12 @@ function Contact() {
               <label className="block text-sm text-[oklch(0.60_0.01_250)] mb-2">نوع الخدمة</label>
               <select className="w-full px-4 py-3 rounded-xl bg-[oklch(0.22_0.03_250)] border border-[oklch(0.30_0.03_250)] text-[oklch(0.90_0.005_250)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors appearance-none">
                 <option value="">اختر الخدمة المطلوبة</option>
-                <option value="structural">التصميم الإنشائي</option>
-                <option value="consulting">الاستشارات الهندسية</option>
-                <option value="management">إدارة المشاريع</option>
-                <option value="mep">الأنظمة الميكانيكية والكهربائية</option>
-                <option value="cost">التكاليف والمقايسات</option>
-                <option value="supervision">الإشراف والمتابعة</option>
+                <option value="gps">أجهزة GPS و RTK</option>
+                <option value="total-station">أجهزة التوتل ستيشن</option>
+                <option value="scanning">المسح الضوئي ثلاثي الأبعاد</option>
+                <option value="gis">أنظمة GIS والخرائط</option>
+                <option value="monitoring">أنظمة مراقبة التحرك</option>
+                <option value="training">التدريب والدعم الفني</option>
               </select>
             </div>
             <div className="mb-6">
@@ -866,7 +869,7 @@ function Footer() {
               </div>
             </div>
             <p className="text-[oklch(0.50_0.02_250)] text-sm leading-relaxed">
-              شريكك الهندسي الموثوق لحلول مبتكرة ومتطورة تلبي تطلعاتك وتتجاوز توقعاتك
+              شريكك الموثوق لأجهزة المساحة والجيوماتكس - الوكيل الحصري لشركتي Spectra و Nikon في فلسطين
             </p>
           </div>
 
@@ -886,7 +889,7 @@ function Footer() {
           <div>
             <h4 className="text-[oklch(0.90_0.005_250)] font-semibold mb-4">خدماتنا</h4>
             <div className="space-y-2">
-              {['التصميم الإنشائي', 'الاستشارات الهندسية', 'إدارة المشاريع', 'أنظمة MEP', 'التكاليف والمقايسات'].map((s, i) => (
+              {['أجهزة GPS و RTK', 'أجهزة التوتل ستيشن', 'المسح الضوئي 3D', 'أنظمة GIS والخرائط', 'أنظمة مراقبة التحرك'].map((s, i) => (
                 <span key={i} className="block text-[oklch(0.50_0.02_250)] text-sm">{s}</span>
               ))}
             </div>

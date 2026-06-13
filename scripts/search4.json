@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://www.youtube.com/watch?v=UV-q0YKINYQ",
+    "name": "AXIS - Spectra GNSS SP85 - YouTube",
+    "snippet": "https://axis-gps.com/",
+    "host_name": "www.youtube.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://axis-gps.com",
+    "name": "Axis GPS: דף הבית",
+    "snippet": "חברת AXIS הינה חברת טכנולוגיות ופתרונות מתקדמים וחדשניים במגוון תחומים: מכשירי מדידה GPS, GIS, RTK, סורקים ניידים/נייחים, מוטסים ורכובים, מערכות ניטור תזוזה, ...\nמכשירי מדידה GPS, GIS, RTK, סורקים ניידים/נייחים, מוטסים ורכובים, מערכות ניטור תזוזה, ועוד.. כמו כן מתמחה בפתרונות מדידה לקבלנים כמו מכשירי לייזר לבנייה ...",
+    "host_name": "axis-gps.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://spectrageospatial.com",
+    "name": "Spectra Geospatial",
+    "snippet": "Spectra Geospatial is an established brand known for delivering quality products to the survey, GIS and construction markets.",
+    "host_name": "spectrageospatial.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://axis-gps.com/product/spectra-mobilemapper-50",
+    "name": "Spectra MobileMapper 50 - Axis GPS",
+    "snippet": "חיבורי רשת Wi-Fi ו-G4 · GNSS משופר עם post processing · הגנה מפני מים לפי תקן IP67 · Google Mobile Services · פתרון מלא למשרד ולשטח · קל לתפעול וללמידה.",
+    "host_name": "axis-gps.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.facebook.com/Axis-GPS-173760169364772",
+    "name": "Axis GPS - Facebook",
+    "snippet": "Axis GPS. 22 likes. Axis GPS. ... Data Collector - Spectra Precision Ranger 3. Spectra Precision, total station, surveying, GPS, Data...",
+    "host_name": "www.facebook.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=fCGWRgw1b_0",
+    "name": "How To Set Up RTK GPS/GNSS Base and Rover (BEGINNERS",
+    "snippet": "Email Nolan at nolan@bench-mark.ca with your questions! Here's your crash-course to get a brand-new RTK base and rover up and running—fast.",
+    "host_name": "www.youtube.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://docs.px4.io/main/en/gps_compass/rtk_gps",
+    "name": "RTK GNSS (GPS) | PX4 Guide (main)",
+    "snippet": "Start QGroundControl and attach the base RTK GPS via USB to the ground station. The device is recognized automatically. · Start the vehicle and make sure it is ...\nThe RTK GPS connection is essentially plug and play: Start QGroundControl and attach the base RTK GPS via USB to the ground station. The device is recognized ...",
+    "host_name": "docs.px4.io",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://ardupilot.org/copter/docs/common-rtk-correction.html",
+    "name": "RTK GPS Correction (Fixed Baseline) — Copter documentation",
+    "snippet": "It is possible to increase the normal position reporting accuracy of the GPS using RTK (Real Time Kinematics). Normal GPS accuracy is 3-5 meters using the Ublox ...",
+    "host_name": "ardupilot.org",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://axis-gps.com/product/spectra-focus-dl-15",
+    "name": "Spectra Focus DL-15 - Axis GPS",
+    "snippet": "קל ללמידה ולשימוש, פרודוקטיבי באופן מיידי, FOCUS DL-15 מספק דיוק מדידה עקבי. · השתמש במגוון רחב ומגוון של משימות הדורשות קביעת גובה מדויקת.",
+    "host_name": "axis-gps.com",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.axis.com/products/axis-sensor-metrics-dashboard",
+    "name": "AXIS Sensor Metrics Dashboard",
+    "snippet": "AXIS Sensor Metrics Dashboard gathers information from the connected sensor devices and stores the data directly on the main unit's SD card.",
+    "host_name": "www.axis.com",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]
