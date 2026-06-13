@@ -682,7 +682,10 @@ function Contact() {
     { icon: <Phone className="w-5 h-5" />, label: 'اتصل بنا', value: '0595289999' },
     { icon: <Mail className="w-5 h-5" />, label: 'البريد الإلكتروني', value: 'adnan@axis-gps.com' },
     { icon: <Mail className="w-5 h-5" />, label: 'البريد الإلكتروني', value: 'salama@axis-gps.com' },
-    { icon: <MapPin className="w-5 h-5" />, label: 'العنوان', value: 'الرياض، المملكة العربية السعودية' },
+    { icon: <MapPin className="w-5 h-5" />, label: 'الفرع الرئيسي', value: 'كفر كنا المنطقة الصناعية' },
+    { icon: <MapPin className="w-5 h-5" />, label: 'فرع الشمال', value: 'كفر قاسم الشارع الرئيسي' },
+    { icon: <MapPin className="w-5 h-5" />, label: 'فرع رام الله', value: 'شارع الإرسال قرب السفينة' },
+    { icon: <MapPin className="w-5 h-5" />, label: 'فرع الخليل', value: 'شارع عين سارة مقابل ملعب الحسين بن علي' },
   ]
 
   return (
@@ -721,13 +724,38 @@ function Contact() {
               </motion.div>
             ))}
 
-            {/* Map placeholder */}
-            <div className="rounded-xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)] overflow-hidden h-48 relative">
-              <div className="absolute inset-0 grid-pattern opacity-30" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-10 h-10 text-[oklch(0.72_0.14_180)] mx-auto mb-2" />
-                  <p className="text-[oklch(0.55_0.02_250)] text-sm">الرياض، المملكة العربية السعودية</p>
+            {/* Branches map */}
+            <div className="rounded-xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)] overflow-hidden p-5 relative">
+              <div className="absolute inset-0 grid-pattern opacity-20" />
+              <div className="relative space-y-3">
+                <h4 className="text-[oklch(0.72_0.14_180)] font-semibold text-sm mb-3">فروعنا</h4>
+                <div className="flex items-start gap-2">
+                  <MapPin className="w-4 h-4 text-[oklch(0.72_0.14_180)] mt-0.5 shrink-0" />
+                  <div>
+                    <span className="text-[oklch(0.80_0.005_250)] text-sm font-medium">الفرع الرئيسي</span>
+                    <p className="text-[oklch(0.50_0.02_250)] text-xs">كفر كنا المنطقة الصناعية</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2">
+                  <MapPin className="w-4 h-4 text-[oklch(0.65_0.16_200)] mt-0.5 shrink-0" />
+                  <div>
+                    <span className="text-[oklch(0.80_0.005_250)] text-sm font-medium">فرع الشمال</span>
+                    <p className="text-[oklch(0.50_0.02_250)] text-xs">كفر قاسم الشارع الرئيسي</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2">
+                  <MapPin className="w-4 h-4 text-[oklch(0.80_0.10_160)] mt-0.5 shrink-0" />
+                  <div>
+                    <span className="text-[oklch(0.80_0.005_250)] text-sm font-medium">فرع رام الله</span>
+                    <p className="text-[oklch(0.50_0.02_250)] text-xs">شارع الإرسال قرب السفينة</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2">
+                  <MapPin className="w-4 h-4 text-[oklch(0.60_0.18_30)] mt-0.5 shrink-0" />
+                  <div>
+                    <span className="text-[oklch(0.80_0.005_250)] text-sm font-medium">فرع الخليل</span>
+                    <p className="text-[oklch(0.50_0.02_250)] text-xs">شارع عين سارة مقابل ملعب الحسين بن علي</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -884,9 +912,14 @@ function Footer() {
                 <Mail className="w-4 h-4 text-[oklch(0.72_0.14_180)]" />
                 <span dir="ltr">salama@axis-gps.com</span>
               </div>
-              <div className="flex items-center gap-2 text-[oklch(0.50_0.02_250)] text-sm">
-                <MapPin className="w-4 h-4 text-[oklch(0.72_0.14_180)]" />
-                <span>الرياض، المملكة العربية السعودية</span>
+              <div className="flex items-start gap-2 text-[oklch(0.50_0.02_250)] text-sm">
+                <MapPin className="w-4 h-4 text-[oklch(0.72_0.14_180)] mt-0.5 shrink-0" />
+                <div>
+                  <p>الفرع الرئيسي: كفر كنا المنطقة الصناعية</p>
+                  <p>فرع الشمال: كفر قاسم الشارع الرئيسي</p>
+                  <p>فرع رام الله: شارع الإرسال قرب السفينة</p>
+                  <p>فرع الخليل: شارع عين سارة مقابل ملعب الحسين بن علي</p>
+                </div>
               </div>
             </div>
           </div>
