@@ -678,8 +678,8 @@ function Contact() {
   }
 
   const contactInfo = [
-    { icon: <Phone className="w-5 h-5" />, label: 'اتصل بنا', value: '+966 12 345 6789' },
-    { icon: <Mail className="w-5 h-5" />, label: 'البريد الإلكتروني', value: 'info@access-eng.com' },
+    { icon: <Mail className="w-5 h-5" />, label: 'البريد الإلكتروني', value: 'adnan@axis-gps.com' },
+    { icon: <Mail className="w-5 h-5" />, label: 'البريد الإلكتروني', value: 'salama@axis-gps.com' },
     { icon: <MapPin className="w-5 h-5" />, label: 'العنوان', value: 'الرياض، المملكة العربية السعودية' },
   ]
 
@@ -867,12 +867,12 @@ function Footer() {
             <h4 className="text-[oklch(0.90_0.005_250)] font-semibold mb-4">تواصل معنا</h4>
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-[oklch(0.50_0.02_250)] text-sm">
-                <Phone className="w-4 h-4 text-[oklch(0.72_0.14_180)]" />
-                <span dir="ltr">+966 12 345 6789</span>
+                <Mail className="w-4 h-4 text-[oklch(0.72_0.14_180)]" />
+                <span dir="ltr">adnan@axis-gps.com</span>
               </div>
               <div className="flex items-center gap-2 text-[oklch(0.50_0.02_250)] text-sm">
                 <Mail className="w-4 h-4 text-[oklch(0.72_0.14_180)]" />
-                <span dir="ltr">info@access-eng.com</span>
+                <span dir="ltr">salama@axis-gps.com</span>
               </div>
               <div className="flex items-center gap-2 text-[oklch(0.50_0.02_250)] text-sm">
                 <MapPin className="w-4 h-4 text-[oklch(0.72_0.14_180)]" />
