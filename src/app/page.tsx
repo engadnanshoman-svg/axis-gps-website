@@ -1681,14 +1681,7 @@ function Team() {
               <div className="flex flex-col items-center flex-1">
                 {/* Vertical connector from horizontal line */}
                 <div className="w-0.5 h-6 sm:h-8" style={{ background: 'linear-gradient(to bottom, oklch(0.72 0.14 180 / 0.25), oklch(0.72 0.14 180 / 0.1))' }} />
-                <div className="relative">
-                  {/* Direct connection indicator */}
-                  <div className="absolute -top-7 left-1/2 -translate-x-1/2 flex items-center gap-1 whitespace-nowrap">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[oklch(0.72_0.14_180)] animate-pulse" />
-                    <span className="text-[9px] sm:text-[10px] text-[oklch(0.72_0.14_180)] font-semibold">مباشر</span>
-                    <div className="w-1.5 h-1.5 rounded-full bg-[oklch(0.72_0.14_180)] animate-pulse" />
-                  </div>
-                </div>
+
                 <TeamCard member={accounting} size="manager" index={2} />
               </div>
 
