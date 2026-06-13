@@ -1245,6 +1245,15 @@ function Team() {
       glow: 'shadow-[oklch(0.50_0.15_150_/_0.15)]',
       badge: '',
     },
+    {
+      name: 'السيدة ولاء البكري',
+      role: 'قسم الحاسبة',
+      initials: 'و ب',
+      gradient: 'from-[oklch(0.70_0.12_90)] to-[oklch(0.60_0.14_60)]',
+      border: 'border-[oklch(0.70_0.12_90_/_0.3)]',
+      glow: 'shadow-[oklch(0.70_0.12_90_/_0.15)]',
+      badge: '',
+    },
   ]
 
   return (
