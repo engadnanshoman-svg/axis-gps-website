@@ -1525,7 +1525,7 @@ function Team() {
       name: 'المهندس حاتم عيدة',
       role: 'قسم الرسم',
       initials: 'ح ع',
-      photo: '',
+      photo: '/team/hatem.jpg',
       gradient: 'from-[oklch(0.50_0.15_150)] to-[oklch(0.72_0.14_180)]',
       border: 'border-[oklch(0.50_0.15_150_/_0.3)]',
       glow: 'shadow-[oklch(0.50_0.15_150_/_0.15)]',
