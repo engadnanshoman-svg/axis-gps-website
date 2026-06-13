@@ -471,19 +471,22 @@ function Brands() {
     {
       name: 'Trimble',
       desc: 'رائد عالمي في تقنيات المسح والبنية التحتية',
-      color: 'from-[#0063B2] to-[#004E90]',
+      color: 'from-[#FFC72C] to-[#E5B300]',
+      textColor: 'text-[#1a1a1a]',
       specialties: ['GPS / GNSS', 'Total Station', 'أجهزة ليزر', 'برامج المسح'],
     },
     {
       name: 'NavVis',
       desc: 'قائد تقنيات المسح المتنقل والنمذجة ثلاثية الأبعاد',
-      color: 'from-[#E31937] to-[#B8102A]',
+      color: 'from-[#0057B8] to-[#003F8A]',
+      textColor: 'text-white',
       specialties: ['مسح متنقل', 'ماسحات داخلية', 'نمذجة 3D', 'خرائط رقمية'],
     },
     {
       name: 'Spectra',
       desc: 'حلول مسح عالية الدقة للمساحين والمقاولين',
-      color: 'from-[#007A33] to-[#005C26]',
+      color: 'from-[#FFFFFF] to-[#E8F0FE]',
+      textColor: 'text-[#0057B8]',
       specialties: ['RTK / GPS', 'توتل ستيشن', 'مستويات ليزر', 'جمع بيانات'],
     },
   ]
@@ -514,8 +517,8 @@ function Brands() {
             >
               {/* Brand header gradient */}
               <div className={`bg-gradient-to-l ${b.color} p-6 text-center`}>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-wide">{b.name}</h3>
-                <p className="text-white/80 text-sm mt-2">{b.desc}</p>
+                <h3 className={`text-2xl sm:text-3xl font-bold tracking-wide ${b.textColor}`}>{b.name}</h3>
+                <p className={`text-sm mt-2 ${b.textColor === 'text-white' ? 'text-white/80' : b.textColor === 'text-[#1a1a1a]' ? 'text-[#1a1a1a]/70' : 'text-[#0057B8]/70'}`}>{b.desc}</p>
               </div>
 
               {/* Specialties */}
