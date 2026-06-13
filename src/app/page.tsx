@@ -1216,7 +1216,7 @@ function Team() {
       name: 'المهندسة ألاء أبو خلف',
       role: 'قسم الرسم والمسح الضوئي',
       initials: 'أ خ',
-      photo: '',
+      photo: '/team/alaa.jpg',
       gradient: 'from-[oklch(0.75_0.15_330)] to-[oklch(0.65_0.16_300)]',
       border: 'border-[oklch(0.75_0.15_330_/_0.3)]',
       glow: 'shadow-[oklch(0.75_0.15_330_/_0.15)]',
