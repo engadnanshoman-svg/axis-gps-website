@@ -1485,7 +1485,7 @@ function Team() {
       name: 'المهندس أنس أبو حديد',
       role: 'مدير فرع الخليل',
       initials: 'أ ح',
-      photo: '',
+      photo: '/team/anas.jpg',
       gradient: 'from-[oklch(0.60_0.18_30)] to-[oklch(0.55_0.14_50)]',
       border: 'border-[oklch(0.60_0.18_30_/_0.3)]',
       glow: 'shadow-[oklch(0.60_0.18_30_/_0.15)]',
