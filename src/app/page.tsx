@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import dynamic from 'next/dynamic'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import {
@@ -190,34 +190,311 @@ function Navbar() {
   )
 }
 
-/* ───────── hero ───────── */
+/* ───────── cinematic hero ───────── */
 function Hero() {
+  const [phase, setPhase] = useState<'converge' | 'merge' | 'reveal' | 'content'>('converge')
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setPhase('merge'), 2200)
+    const t2 = setTimeout(() => setPhase('reveal'), 3200)
+    const t3 = setTimeout(() => setPhase('content'), 4200)
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3) }
+  }, [])
+
+  /* Tech icons that converge from the edges */
+  const TECH_ITEMS = [
+    { icon: <Satellite className="w-5 h-5 sm:w-7 sm:h-7" />, label: 'GPS', color: 'oklch(0.72 0.14 180)', angle: 0 },
+    { icon: <Compass className="w-5 h-5 sm:w-7 sm:h-7" />, label: 'GNSS', color: 'oklch(0.75 0.15 200)', angle: 30 },
+    { icon: <ScanLine className="w-5 h-5 sm:w-7 sm:h-7" />, label: '3D Scan', color: 'oklch(0.80 0.10 160)', angle: 60 },
+    { icon: <Ruler className="w-5 h-5 sm:w-7 sm:h-7" />, label: 'RTK', color: 'oklch(0.72 0.14 180)', angle: 90 },
+    { icon: <Monitor className="w-5 h-5 sm:w-7 sm:h-7" />, label: 'GIS', color: 'oklch(0.65 0.16 200)', angle: 120 },
+    { icon: <Gauge className="w-5 h-5 sm:w-7 sm:h-7" />, label: 'VRS', color: 'oklch(0.80 0.10 160)', angle: 150 },
+    { icon: <DraftingCompass className="w-5 h-5 sm:w-7 sm:h-7" />, label: 'Mapping', color: 'oklch(0.72 0.14 180)', angle: 180 },
+    { icon: <Factory className="w-5 h-5 sm:w-7 sm:h-7" />, label: 'Machine', color: 'oklch(0.75 0.15 200)', angle: 210 },
+    { icon: <Radio className="w-5 h-5 sm:w-7 sm:h-7" />, label: 'HD Map', color: 'oklch(0.65 0.16 200)', angle: 240 },
+    { icon: <GraduationCap className="w-5 h-5 sm:w-7 sm:h-7" />, label: 'Campus', color: 'oklch(0.80 0.10 160)', angle: 270 },
+    { icon: <Cog className="w-5 h-5 sm:w-7 sm:h-7" />, label: 'TBC', color: 'oklch(0.72 0.14 180)', angle: 300 },
+    { icon: <BarChart3 className="w-5 h-5 sm:w-7 sm:h-7" />, label: 'Smart', color: 'oklch(0.75 0.15 200)', angle: 330 },
+  ]
+
+  /* Brand names orbiting */
+  const BRANDS = [
+    { name: 'Trimble', color: '#FFC107' },
+    { name: 'NavVis', color: '#3B82F6' },
+    { name: 'Spectra', color: '#06B6D4' },
+    { name: 'Applanix', color: '#10B981' },
+    { name: 'DJI', color: '#F97316' },
+    { name: 'Kaarta', color: '#8B5CF6' },
+  ]
+
+  /* Particle positions for each tech icon - scattered around edges */
+  const getScatteredPos = (angle: number) => {
+    const rad = (angle * Math.PI) / 180
+    const dist = 42 + Math.random() * 10 // 42-52% from center
+    return {
+      x: `${50 + dist * Math.cos(rad)}%`,
+      y: `${50 + dist * Math.sin(rad)}%`,
+    }
+  }
+
+  const isConverging = phase === 'converge' || phase === 'merge'
+  const showLogo = phase === 'reveal' || phase === 'content'
+  const showContent = phase === 'content'
+
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden hero-gradient">
       {/* Grid pattern overlay */}
       <div className="absolute inset-0 grid-pattern opacity-30" />
 
-      {/* Animated circles */}
-      <div className="absolute top-1/4 right-1/4 w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-[oklch(0.72_0.14_180_/_0.06)] blur-3xl animate-float" />
-      <div className="absolute bottom-1/4 left-1/4 w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-[oklch(0.65_0.16_200_/_0.05)] blur-3xl animate-float" style={{ animationDelay: '3s' }} />
+      {/* Animated background circles */}
+      <motion.div
+        animate={phase === 'reveal' ? { scale: [1, 1.5, 1], opacity: [0.06, 0.15, 0.06] } : {}}
+        transition={{ duration: 1.5 }}
+        className="absolute top-1/4 right-1/4 w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-[oklch(0.72_0.14_180_/_0.06)] blur-3xl animate-float"
+      />
+      <motion.div
+        animate={phase === 'reveal' ? { scale: [1, 1.4, 1], opacity: [0.05, 0.12, 0.05] } : {}}
+        transition={{ duration: 1.5, delay: 0.2 }}
+        className="absolute bottom-1/4 left-1/4 w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-[oklch(0.65_0.16_200_/_0.05)] blur-3xl animate-float"
+        style={{ animationDelay: '3s' }}
+      />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* ── Phase 1 & 2: Tech icons converging ── */}
+      <div className="absolute inset-0 pointer-events-none">
+        {TECH_ITEMS.map((tech, i) => {
+          const scattered = getScatteredPos(tech.angle)
+          return (
+            <motion.div
+              key={i}
+              initial={{ x: scattered.x, y: scattered.y, scale: 0, opacity: 0, rotate: -180 }}
+              animate={
+                phase === 'converge'
+                  ? { x: scattered.x, y: scattered.y, scale: 1, opacity: 1, rotate: 0 }
+                  : phase === 'merge'
+                  ? { x: '50%', y: '50%', scale: 1.2, opacity: 0.8, rotate: 360 }
+                  : { x: '50%', y: '50%', scale: 0, opacity: 0, rotate: 720 }
+              }
+              transition={{
+                duration: phase === 'converge' ? 1.2 : phase === 'merge' ? 1.0 : 0.6,
+                delay: phase === 'converge' ? i * 0.1 : phase === 'merge' ? i * 0.04 : i * 0.02,
+                ease: phase === 'converge' ? 'easeOut' : phase === 'merge' ? [0.43, 0.13, 0.23, 0.96] : 'easeIn',
+              }}
+              className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1"
+              style={{ color: tech.color, zIndex: 20 }}
+            >
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl bg-[oklch(0.17_0.02_250)]/80 backdrop-blur-sm border border-[oklch(0.30_0.03_250)]/50 flex items-center justify-center"
+                style={{ boxShadow: `0 0 20px ${tech.color}33` }}
+              >
+                {tech.icon}
+              </div>
+              <span className="text-[10px] sm:text-xs font-bold tracking-wider" style={{ color: tech.color }}>{tech.label}</span>
+            </motion.div>
+          )
+        })}
+      </div>
+
+      {/* ── Orbiting brand names ── */}
+      <div className="absolute inset-0 pointer-events-none">
+        {BRANDS.map((brand, i) => {
+          const angle = (i * 360 / BRANDS.length)
+          const scattered = getScatteredPos(angle + 15)
+          return (
+            <motion.div
+              key={brand.name}
+              initial={{ x: scattered.x, y: scattered.y, scale: 0, opacity: 0 }}
+              animate={
+                phase === 'converge'
+                  ? { x: scattered.x, y: scattered.y, scale: 1, opacity: 0.7 }
+                  : phase === 'merge'
+                  ? { x: '50%', y: '50%', scale: 0.8, opacity: 0.5 }
+                  : { x: '50%', y: '50%', scale: 0, opacity: 0 }
+              }
+              transition={{
+                duration: phase === 'converge' ? 1.4 : phase === 'merge' ? 1.0 : 0.5,
+                delay: phase === 'converge' ? 0.3 + i * 0.12 : phase === 'merge' ? i * 0.05 : i * 0.02,
+                ease: phase === 'converge' ? 'easeOut' : phase === 'merge' ? [0.43, 0.13, 0.23, 0.96] : 'easeIn',
+              }}
+              className="absolute -translate-x-1/2 -translate-y-1/2"
+              style={{ zIndex: 15 }}
+            >
+              <span
+                className="text-sm sm:text-base font-extrabold tracking-[0.2em] uppercase whitespace-nowrap"
+                style={{ color: brand.color, textShadow: `0 0 30px ${brand.color}66` }}
+              >
+                {brand.name}
+              </span>
+            </motion.div>
+          )
+        })}
+      </div>
+
+      {/* ── Convergence energy lines ── */}
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 18 }}>
+        {isConverging && (
+          <svg className="w-full h-full" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
+            {TECH_ITEMS.map((tech, i) => {
+              const rad = (tech.angle * Math.PI) / 180
+              const dist = 480
+              const sx = 500 + dist * Math.cos(rad)
+              const sy = 500 + dist * Math.sin(rad)
+              return (
+                <motion.line
+                  key={i}
+                  x1={sx} y1={sy} x2="500" y2="500"
+                  stroke={tech.color}
+                  strokeWidth="1"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={
+                    phase === 'converge'
+                      ? { pathLength: 0, opacity: 0 }
+                      : phase === 'merge'
+                      ? { pathLength: 1, opacity: 0.6 }
+                      : { pathLength: 1, opacity: 0 }
+                  }
+                  transition={{ duration: 0.8, delay: i * 0.04, ease: 'easeInOut' }}
+                  style={{ filter: `drop-shadow(0 0 6px ${tech.color})` }}
+                />
+              )
+            })}
+          </svg>
+        )}
+      </div>
+
+      {/* ── Central energy burst on reveal ── */}
+      <motion.div
+        initial={{ scale: 0, opacity: 0 }}
+        animate={
+          phase === 'reveal'
+            ? { scale: [0, 3, 1.5], opacity: [0, 0.8, 0] }
+            : phase === 'content'
+            ? { scale: 0, opacity: 0 }
+            : { scale: 0, opacity: 0 }
+        }
+        transition={{ duration: 1.2, ease: 'easeOut' }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full"
+        style={{
+          background: 'radial-gradient(circle, oklch(0.72 0.14 180 / 0.6), oklch(0.72 0.14 180 / 0.1), transparent)',
+          zIndex: 25,
+        }}
+      />
+
+      {/* ── Shockwave ring on reveal ── */}
+      <motion.div
+        initial={{ scale: 0, opacity: 0, borderWidth: 3 }}
+        animate={
+          phase === 'reveal'
+            ? { scale: [0, 2.5, 4], opacity: [0.8, 0.4, 0], borderWidth: [3, 1, 0] }
+            : { scale: 0, opacity: 0 }
+        }
+        transition={{ duration: 1.5, ease: 'easeOut' }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full border-[oklch(0.72_0.14_180)]"
+        style={{ zIndex: 24 }}
+      />
+      <motion.div
+        initial={{ scale: 0, opacity: 0, borderWidth: 2 }}
+        animate={
+          phase === 'reveal'
+            ? { scale: [0, 2, 3.5], opacity: [0.6, 0.3, 0], borderWidth: [2, 1, 0] }
+            : { scale: 0, opacity: 0 }
+        }
+        transition={{ duration: 1.5, delay: 0.15, ease: 'easeOut' }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full border-[oklch(0.65_0.16_200)]"
+        style={{ zIndex: 24 }}
+      />
+
+      {/* ── Floating particles (ambient) ── */}
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 5 }}>
+        {Array.from({ length: 30 }).map((_, i) => {
+          const left = Math.random() * 100
+          const top = Math.random() * 100
+          const size = 1 + Math.random() * 2
+          const delay = Math.random() * 4
+          const dur = 3 + Math.random() * 4
+          return (
+            <motion.div
+              key={`p-${i}`}
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: [0, 0.6, 0],
+                y: [0, -20, 0],
+                x: [0, (Math.random() - 0.5) * 10, 0],
+              }}
+              transition={{ duration: dur, delay, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute rounded-full bg-[oklch(0.72_0.14_180)]"
+              style={{ left: `${left}%`, top: `${top}%`, width: size, height: size }}
+            />
+          )
+        })}
+      </div>
+
+      {/* ── Orbiting tech icons after reveal (continuous) ── */}
+      <AnimatePresence>
+        {showContent && (
+          <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 12 }}>
+            {TECH_ITEMS.map((tech, i) => {
+              const orbitRadius = 32 + (i % 3) * 6
+              return (
+                <motion.div
+                  key={`orbit-${i}`}
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 0.35, scale: 1 }}
+                  transition={{ delay: 0.8 + i * 0.08, duration: 0.5 }}
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                  style={{ width: `${orbitRadius * 2}%`, height: `${orbitRadius * 2}%` }}
+                >
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20 + i * 3, repeat: Infinity, ease: 'linear' }}
+                    className="w-full h-full relative"
+                  >
+                    <motion.div
+                      className="absolute"
+                      style={{
+                        top: '0%',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        color: tech.color,
+                      }}
+                      animate={{ rotate: -360 }}
+                      transition={{ duration: 20 + i * 3, repeat: Infinity, ease: 'linear' }}
+                    >
+                      <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-[oklch(0.17_0.02_250)]/60 backdrop-blur-sm border border-[oklch(0.30_0.03_250)]/30 flex items-center justify-center">
+                        {React.cloneElement(tech.icon as React.ReactElement, { className: 'w-3.5 h-3.5 sm:w-4 sm:h-4' })}
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
+              )
+            })}
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Content layer ── */}
+      <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {/* Logo reveal */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+          initial={{ scale: 0, opacity: 0, rotate: -180 }}
+          animate={
+            showLogo
+              ? { scale: 1, opacity: 1, rotate: 0 }
+              : { scale: 0, opacity: 0, rotate: -180 }
+          }
+          transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
           className="mb-8"
         >
-          <div className="w-28 h-28 sm:w-36 sm:h-36 mx-auto rounded-2xl overflow-hidden glow-teal animate-pulse-glow">
-            <img src="/logo.png" alt="شعار اكسيس" className="w-full h-full object-contain p-2" />
+          <div className="w-28 h-28 sm:w-40 sm:h-40 mx-auto rounded-2xl overflow-hidden animate-pulse-glow"
+            style={{ boxShadow: '0 0 40px oklch(0.72 0.14 180 / 0.5), 0 0 80px oklch(0.72 0.14 180 / 0.2), 0 0 120px oklch(0.72 0.14 180 / 0.1)' }}
+          >
+            <img src="/logo.png" alt="شعار اكسيس" className="w-full h-full object-contain p-2 sm:p-3" />
           </div>
         </motion.div>
 
+        {/* Title */}
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0, y: 30, scale: 0.9 }}
+          animate={showContent ? { opacity: 1, y: 0, scale: 1 } : {}}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
           className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight"
         >
           <span className="gradient-text">اكسيس</span>
@@ -225,20 +502,22 @@ function Hero() {
           <span className="text-[oklch(0.90_0.005_250)]">للحلول الهندسية المتقدمة</span>
         </motion.h1>
 
+        {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          animate={showContent ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
           className="text-lg sm:text-xl text-[oklch(0.65_0.02_250)] max-w-2xl mx-auto mb-10 leading-relaxed"
         >
           الشركة الرائدة في فلسطين في مجال تقنيات المساحة والجيوماتكس. الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و DJI.
           نقدم أحدث تقنيات GPS و RTK والمسح الضوئي وأنظمة مراقبة التحرك.
         </motion.p>
 
+        {/* CTA buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          animate={showContent ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.4 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <a
@@ -255,22 +534,22 @@ function Hero() {
             تواصل معنا
           </a>
         </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <ChevronDown className="w-6 h-6 text-[oklch(0.50_0.02_250)]" />
-          </motion.div>
-        </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={showContent ? { opacity: 1 } : {}}
+        transition={{ delay: 2 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30"
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <ChevronDown className="w-6 h-6 text-[oklch(0.50_0.02_250)]" />
+        </motion.div>
+      </motion.div>
     </section>
   )
 }
