@@ -381,49 +381,71 @@ function Services() {
     {
       icon: <Satellite className="w-7 h-7" />,
       title: 'أجهزة GPS و GNSS',
-      desc: 'مستقبلات GNSS وهوائيات ومكونات OEM عالية الدقة من Trimble و Spectra للمسح الميداني والقياسات الجيوديسية',
+      desc: 'مستقبلات GNSS وهوائيات ومكونات OEM عالية الدقة للمسح الميداني والقياسات الجيوديسية',
+      brands: [
+        { name: 'Trimble', products: ['R580', 'R12i', 'Catalyst DA2', 'R980'], img: 'https://sfile.chatglm.cn/images-ppt/9acbc3847564.png' },
+        { name: 'Spectra', products: ['SP85', 'SP100', 'SP60'], img: 'https://sfile.chatglm.cn/images-ppt/7a2b9c9f47ee.jpg' },
+      ],
     },
     {
       icon: <DraftingCompass className="w-7 h-7" />,
       title: 'أجهزة التوتل ستيشن',
-      desc: 'أحدث أجهزة التوتل ستيشن وكالات القياس من Trimble و Spectra لقياسات المساحة الدقيقة في المشاريع الهندسية',
+      desc: 'أحدث أجهزة التوتل ستيشن وكالات القياس لقياسات المساحة الدقيقة في المشاريع الهندسية',
+      brands: [
+        { name: 'Trimble', products: ['S7', 'S5', 'C5', 'C3'], img: 'https://sfile.chatglm.cn/images-ppt/0682177bb704.png' },
+        { name: 'Spectra', products: ['FOCUS 35', 'FOCUS 30', 'FOCUS 6'], img: 'https://sfile.chatglm.cn/images-ppt/8b41468e6bcc.jpg' },
+      ],
     },
     {
       icon: <ScanLine className="w-7 h-7" />,
       title: 'المسح الضوئي 3D والواقع المعزز',
-      desc: 'ماسحات NavVis و Trimble المتنقلة والثابتة والمحمولة جواً مع حلول الواقع المعزز للنمذجة المتقدمة',
+      desc: 'ماسحات ضوئية متنقلة وثابتة مع حلول الواقع المعزز للنمذجة المتقدمة وتحويل الواقع إلى CAD',
+      brands: [
+        { name: 'NavVis', products: ['VLX3', 'MLX', 'M6', 'IVION'], img: 'https://sfile.chatglm.cn/images-ppt/55341288c96c.jpg' },
+        { name: 'Trimble', products: ['X9', 'X7', 'T10'], img: 'https://sfile.chatglm.cn/images-ppt/c174e820cca8.jpg' },
+      ],
     },
     {
       icon: <Monitor className="w-7 h-7" />,
       title: 'أنظمة GIS و VRS',
       desc: 'حلول نظم المعلومات الجغرافية وشبكة محطات VRS لخدمات تصحيح الموقع RTK والخرائط الرقمية المتكاملة',
+      brands: [
+        { name: 'Trimble', products: ['TDC6', 'TDC600', 'Trimble Access'], img: 'https://sfile.chatglm.cn/images-ppt/ab7357869e02.jpg' },
+      ],
     },
     {
       icon: <Radio className="w-7 h-7" />,
       title: 'رصد ومراقبة وتوجيه آليات',
       desc: 'أنظمة مراقبة تحرك ورصد هبوط مع SITECH لتوجيه الآليات الثقيلة Machine Control في مشاريع البناء',
+      brands: [],
     },
     {
       icon: <Gauge className="w-7 h-7" />,
       title: 'مستويات ليزر وبناء',
       desc: 'مستويات ليزر دوارة ومائلة وخطية وأنابيب وأجهزة قياس مسافة ليزرية لجميع أعمال البناء والطرق والصرف',
-    },
-    {
-      icon: <Satellite className="w-7 h-7" />,
-      title: 'درونات وتصوير جوي',
-      desc: 'رحلات مسح بالدرونات DJI مع معالجة Pix4D لرسم الخرائط الجوية عالية الدقة والتصوير والمسح المتنقل',
+      brands: [
+        { name: 'Spectra', products: ['LL500', 'HV301', 'DG613'], img: '' },
+      ],
     },
     {
       icon: <Calculator className="w-7 h-7" />,
       title: 'برمجيات ومعالجة بيانات',
       desc: 'برمجيات Trimble Business Center و TBC لمعالجة بيانات المسح وتحويلها إلى نماذج ومخططات هندسية دقيقة',
+      brands: [],
     },
     {
       icon: <GraduationCap className="w-7 h-7" />,
       title: 'Axis Campus للتدريب',
       desc: 'معهد Axis Campus المتخصص في التدريب المهني وورش العمل ودورات اعتماد المحترفين مع مختبر ودعم فني',
+      brands: [],
     },
   ]
+
+  const brandColors: Record<string, string> = {
+    Trimble: 'bg-[#FFC72C]/10 border-[#FFC72C]/30 text-[#FFC72C]',
+    NavVis: 'bg-[#0057B8]/10 border-[#0057B8]/30 text-[#0057B8]',
+    Spectra: 'bg-[#0057B8]/10 border-[#0057B8]/30 text-[#FFFFFF]',
+  }
 
   return (
     <Section id="services" className="py-20 sm:py-28 relative">
@@ -439,29 +461,66 @@ function Services() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="space-y-8">
           {services.map((s, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="group relative p-6 rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.4)] hover:bg-[oklch(0.19_0.02_250)] transition-all duration-500 cursor-pointer overflow-hidden"
+              transition={{ delay: i * 0.08 }}
+              className="group relative rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500 overflow-hidden"
             >
               {/* Hover glow */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[oklch(0.72_0.14_180_/_0.05)] rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute top-0 right-0 w-40 h-40 bg-[oklch(0.72_0.14_180_/_0.05)] rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <div className="relative">
-                <div className="p-3 rounded-xl bg-[oklch(0.72_0.14_180_/_0.1)] text-[oklch(0.72_0.14_180)] w-fit mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {s.icon}
+              <div className="relative p-6">
+                {/* Header */}
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="p-3 rounded-xl bg-[oklch(0.72_0.14_180_/_0.1)] text-[oklch(0.72_0.14_180)] shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    {s.icon}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold text-[oklch(0.90_0.005_250)] mb-1">{s.title}</h3>
+                    <p className="text-[oklch(0.55_0.02_250)] leading-relaxed text-sm">{s.desc}</p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-[oklch(0.90_0.005_250)] mb-3">{s.title}</h3>
-                <p className="text-[oklch(0.55_0.02_250)] leading-relaxed text-sm">{s.desc}</p>
-                <div className="mt-4 flex items-center gap-1 text-[oklch(0.72_0.14_180)] text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span>المزيد</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </div>
+
+                {/* Brand products with images */}
+                {s.brands.length > 0 && (
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                    {s.brands.map((b, j) => (
+                      <div
+                        key={j}
+                        className="rounded-xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.14_0.02_250)] overflow-hidden hover:border-[oklch(0.72_0.14_180_/_0.2)] transition-all duration-300"
+                      >
+                        {/* Product image */}
+                        {b.img && (
+                          <div className="relative aspect-[4/3] bg-gradient-to-b from-[oklch(0.20_0.02_250)] to-[oklch(0.14_0.02_250)] flex items-center justify-center p-4">
+                            <img
+                              src={b.img}
+                              alt={`${b.name} ${s.title}`}
+                              className="max-h-full max-w-full object-contain drop-shadow-lg"
+                            />
+                          </div>
+                        )}
+                        {/* Brand info */}
+                        <div className="p-4">
+                          <span className={`inline-block px-3 py-1 rounded-lg text-xs font-bold border mb-3 ${brandColors[b.name] || 'bg-[oklch(0.20_0.03_250)] border-[oklch(0.30_0.03_250)] text-[oklch(0.72_0.14_180)]'}`}>
+                            {b.name}
+                          </span>
+                          <div className="flex flex-wrap gap-1.5">
+                            {b.products.map((p, k) => (
+                              <span key={k} className="px-2.5 py-1 rounded-md bg-[oklch(0.22_0.03_250)] text-[oklch(0.70_0.01_250)] text-xs border border-[oklch(0.30_0.03_250)]">
+                                {p}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}
@@ -1354,7 +1413,7 @@ function Footer() {
           <div>
             <h4 className="text-[oklch(0.90_0.005_250)] font-semibold mb-4">خدماتنا</h4>
             <div className="space-y-2">
-              {['أجهزة GPS و GNSS', 'التوتل ستيشن', 'المسح الضوئي 3D', 'أنظمة GIS و VRS', 'ليزر ودرونات', 'Axis Campus'].map((s, i) => (
+              {['أجهزة GPS و GNSS', 'التوتل ستيشن', 'المسح الضوئي 3D', 'أنظمة GIS و VRS', 'ليزر وبناء', 'Axis Campus'].map((s, i) => (
                 <span key={i} className="block text-[oklch(0.50_0.02_250)] text-sm">{s}</span>
               ))}
             </div>
