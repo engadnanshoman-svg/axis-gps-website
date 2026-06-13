@@ -93,7 +93,7 @@ function Navbar() {
       transition={{ duration: 0.6 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-[oklch(0.13_0.02_250)]/90 backdrop-blur-xl border-b border-[oklch(0.30_0.03_250)] shadow-lg shadow-black/20'
+          ? 'bg-[oklch(0.18_0.02_250)]/90 backdrop-blur-xl border-b border-[oklch(0.30_0.03_250)] shadow-lg shadow-black/20'
           : 'bg-transparent'
       }`}
     >
@@ -162,7 +162,7 @@ function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[oklch(0.13_0.02_250)]/95 backdrop-blur-xl border-t border-[oklch(0.30_0.03_250)] overflow-hidden"
+            className="md:hidden bg-[oklch(0.18_0.02_250)]/95 backdrop-blur-xl border-t border-[oklch(0.30_0.03_250)] overflow-hidden"
           >
             <div className="px-4 py-4 space-y-1">
               {links.map(l => (
@@ -282,7 +282,7 @@ function Hero() {
               className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1"
               style={{ color: tech.color, zIndex: 20 }}
             >
-              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl bg-[oklch(0.17_0.02_250)]/80 backdrop-blur-sm border border-[oklch(0.30_0.03_250)]/50 flex items-center justify-center"
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl bg-[oklch(0.22_0.02_250)]/80 backdrop-blur-sm border border-[oklch(0.30_0.03_250)]/50 flex items-center justify-center"
                 style={{ boxShadow: `0 0 20px ${tech.color}33` }}
               >
                 {tech.icon}
@@ -458,7 +458,7 @@ function Hero() {
                       animate={{ rotate: -360 }}
                       transition={{ duration: 20 + i * 3, repeat: Infinity, ease: 'linear' }}
                     >
-                      <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-[oklch(0.17_0.02_250)]/60 backdrop-blur-sm border border-[oklch(0.30_0.03_250)]/30 flex items-center justify-center">
+                      <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-[oklch(0.22_0.02_250)]/60 backdrop-blur-sm border border-[oklch(0.30_0.03_250)]/30 flex items-center justify-center">
                         {React.cloneElement(tech.icon as React.ReactElement, { className: 'w-3.5 h-3.5 sm:w-4 sm:h-4' })}
                       </div>
                     </motion.div>
@@ -593,7 +593,7 @@ function About() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.15 }}
-                  className="flex items-start gap-4 p-4 rounded-xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.3)] transition-all duration-300"
+                  className="flex items-start gap-4 p-4 rounded-xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.3)] transition-all duration-300"
                 >
                   <div className="p-3 rounded-lg bg-[oklch(0.72_0.14_180_/_0.1)] text-[oklch(0.72_0.14_180)] shrink-0">
                     {f.icon}
@@ -626,28 +626,28 @@ function About() {
               <motion.div
                 animate={{ y: [-5, 5, -5] }}
                 transition={{ duration: 4, repeat: Infinity }}
-                className="absolute top-8 right-8 p-4 rounded-xl bg-[oklch(0.17_0.02_250)] border border-[oklch(0.30_0.03_250)] shadow-xl"
+                className="absolute top-8 right-8 p-4 rounded-xl bg-[oklch(0.22_0.02_250)] border border-[oklch(0.30_0.03_250)] shadow-xl"
               >
                 <Building2 className="w-8 h-8 text-[oklch(0.72_0.14_180)]" />
               </motion.div>
               <motion.div
                 animate={{ y: [5, -5, 5] }}
                 transition={{ duration: 4, repeat: Infinity }}
-                className="absolute bottom-8 left-8 p-4 rounded-xl bg-[oklch(0.17_0.02_250)] border border-[oklch(0.30_0.03_250)] shadow-xl"
+                className="absolute bottom-8 left-8 p-4 rounded-xl bg-[oklch(0.22_0.02_250)] border border-[oklch(0.30_0.03_250)] shadow-xl"
               >
                 <HardHat className="w-8 h-8 text-[oklch(0.65_0.16_200)]" />
               </motion.div>
               <motion.div
                 animate={{ y: [-3, 6, -3] }}
                 transition={{ duration: 5, repeat: Infinity }}
-                className="absolute top-1/2 left-0 -translate-y-1/2 p-4 rounded-xl bg-[oklch(0.17_0.02_250)] border border-[oklch(0.30_0.03_250)] shadow-xl"
+                className="absolute top-1/2 left-0 -translate-y-1/2 p-4 rounded-xl bg-[oklch(0.22_0.02_250)] border border-[oklch(0.30_0.03_250)] shadow-xl"
               >
                 <Ruler className="w-8 h-8 text-[oklch(0.80_0.10_160)]" />
               </motion.div>
               <motion.div
                 animate={{ y: [3, -6, 3] }}
                 transition={{ duration: 5, repeat: Infinity }}
-                className="absolute top-1/2 right-0 -translate-y-1/2 p-4 rounded-xl bg-[oklch(0.17_0.02_250)] border border-[oklch(0.30_0.03_250)] shadow-xl"
+                className="absolute top-1/2 right-0 -translate-y-1/2 p-4 rounded-xl bg-[oklch(0.22_0.02_250)] border border-[oklch(0.30_0.03_250)] shadow-xl"
               >
                 <Compass className="w-8 h-8 text-[oklch(0.60_0.18_30)]" />
               </motion.div>
@@ -753,7 +753,7 @@ function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="group relative rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500 overflow-hidden"
+              className="group relative rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500 overflow-hidden"
             >
               {/* Hover glow */}
               <div className="absolute top-0 right-0 w-40 h-40 bg-[oklch(0.72_0.14_180_/_0.05)] rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -776,11 +776,11 @@ function Services() {
                     {s.brands.map((b, j) => (
                       <div
                         key={j}
-                        className="rounded-xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.14_0.02_250)] overflow-hidden hover:border-[oklch(0.72_0.14_180_/_0.2)] transition-all duration-300"
+                        className="rounded-xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.18_0.02_250)] overflow-hidden hover:border-[oklch(0.72_0.14_180_/_0.2)] transition-all duration-300"
                       >
                         {/* Product image */}
                         {b.img && (
-                          <div className="relative aspect-[4/3] bg-gradient-to-b from-[oklch(0.20_0.02_250)] to-[oklch(0.14_0.02_250)] flex items-center justify-center p-4">
+                          <div className="relative aspect-[4/3] bg-gradient-to-b from-[oklch(0.25_0.02_250)] to-[oklch(0.18_0.02_250)] flex items-center justify-center p-4">
                             <img
                               src={b.img}
                               alt={`${b.name} ${s.title}`}
@@ -837,7 +837,7 @@ function Stats() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
-              className="relative p-6 sm:p-8 rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)]/80 backdrop-blur text-center group hover:border-[oklch(0.72_0.14_180_/_0.3)] transition-all duration-300"
+              className="relative p-6 sm:p-8 rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)]/80 backdrop-blur text-center group hover:border-[oklch(0.72_0.14_180_/_0.3)] transition-all duration-300"
             >
               <div className="mb-4 flex justify-center">
                 <div className="p-3 rounded-xl bg-[oklch(0.72_0.14_180_/_0.1)] text-[oklch(0.72_0.14_180)] group-hover:scale-110 transition-transform">
@@ -904,7 +904,7 @@ function Brands() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
-              className="group relative rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)] overflow-hidden hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500"
+              className="group relative rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] overflow-hidden hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500"
             >
               {/* Brand header gradient */}
               <div className={`bg-gradient-to-l ${b.color} p-6 text-center`}>
@@ -1132,7 +1132,7 @@ function Gallery() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: Math.min(i * 0.08, 0.4) }}
-                className="group relative rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)] overflow-hidden hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500"
+                className="group relative rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] overflow-hidden hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500"
               >
                 {item.type === 'video' && item.youtubeId && (
                   <>
@@ -1149,7 +1149,7 @@ function Gallery() {
                         </div>
                       </div>
                       {/* Category badge */}
-                      <span className="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-[oklch(0.13_0.02_250)]/80 backdrop-blur-sm text-[oklch(0.72_0.14_180)] text-[10px] font-semibold border border-[oklch(0.30_0.03_250)]">
+                      <span className="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-[oklch(0.18_0.02_250)]/80 backdrop-blur-sm text-[oklch(0.72_0.14_180)] text-[10px] font-semibold border border-[oklch(0.30_0.03_250)]">
                         {item.category}
                       </span>
                       {/* YouTube badge */}
@@ -1303,7 +1303,7 @@ function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.12 }}
-              className="group relative p-6 sm:p-8 rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500 overflow-hidden"
+              className="group relative p-6 sm:p-8 rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500 overflow-hidden"
             >
               {/* Decorative corner accent */}
               <div className="absolute top-0 left-0 w-24 h-24 bg-[oklch(0.72_0.14_180_/_0.04)] rounded-br-full" />
@@ -1369,7 +1369,7 @@ function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
-              className="p-6 rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.3)] transition-all duration-300"
+              className="p-6 rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.3)] transition-all duration-300"
             >
               <div className="flex gap-1 mb-4">
                 {[...Array(5)].map((_, j) => (
@@ -1543,10 +1543,14 @@ function Team() {
     },
   ]
 
+  const founder = teamMembers.find(m => m.badge === 'المؤسس')!
+  const executive = teamMembers.find(m => m.badge === 'تنفيذي')!
+  const rest = teamMembers.filter(m => m.badge !== 'المؤسس' && m.badge !== 'تنفيذي')
+
   return (
     <Section id="team" className="py-20 sm:py-28 relative overflow-hidden">
-      <div className="absolute top-1/4 left-0 w-72 h-72 bg-[oklch(0.72_0.14_180_/_0.06)] rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-0 w-64 h-64 bg-[oklch(0.65_0.16_200_/_0.06)] rounded-full blur-3xl" />
+      <div className="absolute top-1/4 left-0 w-80 h-80 bg-[oklch(0.72_0.14_180_/_0.08)] rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-0 w-72 h-72 bg-[oklch(0.65_0.16_200_/_0.08)] rounded-full blur-3xl" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">فريق العمل</span>
@@ -1558,59 +1562,111 @@ function Team() {
           </p>
         </div>
 
-        {/* Leadership Row - Founder & Executive Director */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 mb-12">
-          {teamMembers.filter(m => m.badge === 'المؤسس' || m.badge === 'تنفيذي').map((member, i) => (
-            <motion.div
-              key={`leader-${i}`}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.15, duration: 0.6 }}
-              className={`group relative p-6 sm:p-8 rounded-2xl border bg-[oklch(0.22_0.025_250)] hover:bg-[oklch(0.25_0.03_250)] transition-all duration-500 ${member.border} hover:${member.glow} text-center w-full sm:w-72`}
-            >
-              {/* Badge */}
-              {member.badge && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold bg-gradient-to-l from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)] text-[oklch(0.13_0.02_250)] shadow-lg">
-                  {member.badge}
-                </span>
-              )}
-
-              {/* Avatar - Larger for leaders */}
-              <div className="relative mx-auto mb-5 w-28 h-28 sm:w-32 sm:h-32">
-                {member.photo ? (
-                  <div className={`w-full h-full rounded-2xl overflow-hidden shadow-lg transition-transform duration-500 group-hover:scale-105 ring-2 ${member.border}`}>
-                    <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
-                  </div>
-                ) : (
-                  <div className={`w-full h-full rounded-2xl bg-gradient-to-br ${member.gradient} flex items-center justify-center shadow-lg transition-transform duration-500 group-hover:scale-105`}>
-                    <span className="text-white text-2xl sm:text-3xl font-bold select-none">{member.initials}</span>
-                  </div>
-                )}
-                {/* Decorative ring */}
-                <div className={`absolute -inset-2 rounded-2xl border-2 ${member.border} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+        {/* ═══ Founder - Hero Card ═══ */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, y: 40 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="flex justify-center mb-10"
+        >
+          <div className={`group relative rounded-3xl border-2 ${founder.border} bg-gradient-to-b from-[oklch(0.28_0.03_250)] to-[oklch(0.22_0.03_250)] hover:from-[oklch(0.30_0.035_250)] hover:to-[oklch(0.25_0.03_250)] transition-all duration-500 shadow-xl shadow-[oklch(0.72_0.14_180_/_0.08)] hover:shadow-2xl hover:shadow-[oklch(0.72_0.14_180_/_0.15)] text-center w-full max-w-lg p-8 sm:p-10`}
+          >
+            {/* Founder Crown/Star decoration */}
+            <div className="absolute -top-6 left-1/2 -translate-x-1/2 flex items-center justify-center">
+              <div className="relative">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)] flex items-center justify-center shadow-lg shadow-[oklch(0.72_0.14_180_/_0.3)]">
+                  <Star className="w-6 h-6 text-[oklch(0.13_0.02_250)]" />
+                </div>
+                <div className="absolute -inset-2 rounded-full border-2 border-[oklch(0.72_0.14_180_/_0.3)] animate-pulse" />
               </div>
+            </div>
 
-              {/* Info */}
-              <h3 className="text-[oklch(0.95_0.005_250)] font-bold text-base sm:text-lg mb-2 leading-tight">{member.name}</h3>
-              <p className="text-[oklch(0.60_0.02_250)] text-sm sm:text-base leading-relaxed">{member.role}</p>
+            {/* Badge */}
+            <div className="mt-4 mb-6">
+              <span className="inline-block px-6 py-1.5 rounded-full text-sm font-bold bg-gradient-to-l from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)] text-[oklch(0.13_0.02_250)] shadow-lg shadow-[oklch(0.72_0.14_180_/_0.2)]">
+                المؤسس
+              </span>
+            </div>
 
-              {/* Bottom accent line */}
-              <div className={`mt-5 h-0.5 w-0 group-hover:w-full bg-gradient-to-l ${member.gradient} transition-all duration-500 mx-auto rounded-full`} />
-            </motion.div>
-          ))}
-        </div>
+            {/* Avatar - Extra Large for Founder */}
+            <div className="relative mx-auto mb-6 w-36 h-36 sm:w-44 sm:h-44">
+              {founder.photo ? (
+                <div className={`w-full h-full rounded-2xl overflow-hidden shadow-xl transition-transform duration-500 group-hover:scale-105 ring-4 ${founder.border}`}>
+                  <img src={founder.photo} alt={founder.name} className="w-full h-full object-cover" />
+                </div>
+              ) : (
+                <div className={`w-full h-full rounded-2xl bg-gradient-to-br ${founder.gradient} flex items-center justify-center shadow-xl transition-transform duration-500 group-hover:scale-105`}>
+                  <span className="text-white text-4xl sm:text-5xl font-bold select-none">{founder.initials}</span>
+                </div>
+              )}
+              {/* Double decorative ring */}
+              <div className={`absolute -inset-3 rounded-2xl border-2 ${founder.border} opacity-40 group-hover:opacity-70 transition-opacity duration-500`} />
+              <div className={`absolute -inset-5 rounded-2xl border ${founder.border} opacity-0 group-hover:opacity-40 transition-opacity duration-700`} />
+              {/* Corner accents */}
+              <div className="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-[oklch(0.72_0.14_180_/_0.5)] rounded-tr-lg" />
+              <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-[oklch(0.72_0.14_180_/_0.5)] rounded-bl-lg" />
+            </div>
 
-        {/* Rest of team */}
+            {/* Info */}
+            <h3 className="text-[oklch(0.97_0.005_250)] font-bold text-xl sm:text-2xl mb-2 leading-tight">{founder.name}</h3>
+            <p className="text-[oklch(0.72_0.14_180)] text-base sm:text-lg font-semibold mb-1">{founder.role}</p>
+            <p className="text-[oklch(0.60_0.02_250)] text-sm leading-relaxed mt-2">مؤسس شركة اكسيس للحلول الهندسية المتقدمة ورائد في مجال تقنيات المسح والجيوماتكس</p>
+
+            {/* Bottom accent line */}
+            <div className={`mt-6 h-1 w-0 group-hover:w-3/4 bg-gradient-to-l ${founder.gradient} transition-all duration-700 mx-auto rounded-full`} />
+          </div>
+        </motion.div>
+
+        {/* ═══ Executive Director ═══ */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="flex justify-center mb-12"
+        >
+          <div className={`group relative p-6 sm:p-8 rounded-2xl border bg-[oklch(0.25_0.03_250)] hover:bg-[oklch(0.28_0.035_250)] transition-all duration-500 ${executive.border} hover:shadow-lg hover:shadow-[oklch(0.65_0.16_200_/_0.1)] text-center w-full max-w-sm`}
+          >
+            {/* Badge */}
+            <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-5 py-1 rounded-full text-xs font-bold bg-gradient-to-l from-[oklch(0.65_0.16_200)] to-[oklch(0.55_0.12_250)] text-[oklch(0.97_0.005_250)] shadow-lg">
+              المدير التنفيذي
+            </span>
+
+            {/* Avatar */}
+            <div className="relative mx-auto mb-5 w-28 h-28 sm:w-32 sm:h-32">
+              {executive.photo ? (
+                <div className={`w-full h-full rounded-2xl overflow-hidden shadow-lg transition-transform duration-500 group-hover:scale-105 ring-2 ${executive.border}`}>
+                  <img src={executive.photo} alt={executive.name} className="w-full h-full object-cover" />
+                </div>
+              ) : (
+                <div className={`w-full h-full rounded-2xl bg-gradient-to-br ${executive.gradient} flex items-center justify-center shadow-lg transition-transform duration-500 group-hover:scale-105`}>
+                  <span className="text-white text-2xl sm:text-3xl font-bold select-none">{executive.initials}</span>
+                </div>
+              )}
+              {/* Decorative ring */}
+              <div className={`absolute -inset-2 rounded-2xl border-2 ${executive.border} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+            </div>
+
+            {/* Info */}
+            <h3 className="text-[oklch(0.95_0.005_250)] font-bold text-base sm:text-lg mb-2 leading-tight">{executive.name}</h3>
+            <p className="text-[oklch(0.60_0.02_250)] text-sm sm:text-base leading-relaxed">{executive.role}</p>
+
+            {/* Bottom accent line */}
+            <div className={`mt-5 h-0.5 w-0 group-hover:w-full bg-gradient-to-l ${executive.gradient} transition-all duration-500 mx-auto rounded-full`} />
+          </div>
+        </motion.div>
+
+        {/* ═══ Rest of Team ═══ */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          {teamMembers.filter(m => m.badge !== 'المؤسس' && m.badge !== 'تنفيذي').map((member, i) => (
+          {rest.map((member, i) => (
             <motion.div
               key={`member-${i}`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
-              className={`group relative p-5 sm:p-6 rounded-2xl border bg-[oklch(0.22_0.025_250)] hover:bg-[oklch(0.25_0.03_250)] transition-all duration-500 ${member.border} hover:${member.glow} text-center`}
+              transition={{ delay: 0.4 + i * 0.1, duration: 0.5 }}
+              className={`group relative p-5 sm:p-6 rounded-2xl border bg-[oklch(0.25_0.03_250)] hover:bg-[oklch(0.28_0.035_250)] transition-all duration-500 ${member.border} hover:${member.glow} text-center`}
             >
               {/* Badge */}
               {member.badge && (
@@ -1644,14 +1700,14 @@ function Team() {
           ))}
         </div>
 
-        {/* Join CTA */}
+        {/* Team CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="mt-12 text-center"
         >
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl border border-[oklch(0.35_0.03_250)] bg-[oklch(0.22_0.025_250)]">
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl border border-[oklch(0.35_0.03_250)] bg-[oklch(0.25_0.03_250)]">
             <Users className="w-5 h-5 text-[oklch(0.72_0.14_180)]" />
             <span className="text-[oklch(0.65_0.02_250)] text-sm">فريق متخصص يضم نخبة من المهندسين ذوي الكفاءات العالية</span>
           </div>
@@ -1707,7 +1763,7 @@ function Contact() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="flex items-start gap-4 p-5 rounded-xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.3)] transition-all"
+                className="flex items-start gap-4 p-5 rounded-xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.3)] transition-all"
               >
                 <div className="p-3 rounded-lg bg-[oklch(0.72_0.14_180_/_0.1)] text-[oklch(0.72_0.14_180)] shrink-0">
                   {c.icon}
@@ -1728,7 +1784,7 @@ function Contact() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)] overflow-hidden p-4 sm:p-5"
+              className="rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] overflow-hidden p-4 sm:p-5"
             >
               <h4 className="text-[oklch(0.72_0.14_180)] font-semibold text-sm mb-4 flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
@@ -1744,7 +1800,7 @@ function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             onSubmit={handleSubmit}
-            className="lg:col-span-3 p-6 sm:p-8 rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)]"
+            className="lg:col-span-3 p-6 sm:p-8 rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)]"
           >
             <div className="grid sm:grid-cols-2 gap-4 mb-4">
               <div>
