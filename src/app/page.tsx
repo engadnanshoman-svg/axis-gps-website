@@ -1186,7 +1186,7 @@ function Team() {
       name: 'المهندس سلامة العواودة',
       role: 'المدير العام',
       initials: 'س ع',
-      photo: '',
+      photo: '/team/salame.jpg',
       gradient: 'from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)]',
       border: 'border-[oklch(0.72_0.14_180_/_0.3)]',
       glow: 'shadow-[oklch(0.72_0.14_180_/_0.15)]',
