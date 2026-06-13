@@ -1201,7 +1201,7 @@ function Team() {
       badge: 'تنفيذي',
     },
     {
-      name: 'المهندس أنس أبو حديدة',
+      name: 'المهندس أنس أبو حديد',
       role: 'مدير فرع الخليل',
       initials: 'أ ح',
       gradient: 'from-[oklch(0.60_0.18_30)] to-[oklch(0.55_0.14_50)]',
@@ -1339,7 +1339,7 @@ function Contact() {
     { icon: <Phone className="w-5 h-5" />, label: 'اتصل بنا', value: '0595289999' },
     { icon: <MessageCircle className="w-5 h-5 text-[#25D366]" />, label: 'واتساب', value: '+972 52-528-9999', href: 'https://wa.me/972525289999' },
     { icon: <Mail className="w-5 h-5" />, label: 'البريد الإلكتروني', value: 'adnan@axis-gps.com' },
-    { icon: <Mail className="w-5 h-5" />, label: 'البريد الإلكتروني', value: 'salama@axis-gps.com' },
+    { icon: <Mail className="w-5 h-5" />, label: 'البريد الإلكتروني', value: 'salame@axis-gps.com' },
     { icon: <MapPin className="w-5 h-5" />, label: 'الفرع الرئيسي', value: 'كفر كنا المنطقة الصناعية' },
     { icon: <MapPin className="w-5 h-5" />, label: 'فرع الشمال', value: 'كفر قاسم الشارع الرئيسي' },
     { icon: <MapPin className="w-5 h-5" />, label: 'فرع رام الله', value: 'شارع الإرسال قرب السفينة' },
@@ -1565,7 +1565,7 @@ function Footer() {
               </div>
               <div className="flex items-center gap-2 text-[oklch(0.50_0.02_250)] text-sm">
                 <Mail className="w-4 h-4 text-[oklch(0.72_0.14_180)]" />
-                <span dir="ltr">salama@axis-gps.com</span>
+                <span dir="ltr">salame@axis-gps.com</span>
               </div>
               <div className="flex items-center gap-2 text-[oklch(0.50_0.02_250)] text-sm">
                 <MessageCircle className="w-4 h-4 text-[#25D366]" />
