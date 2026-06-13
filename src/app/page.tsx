@@ -195,7 +195,7 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-lg sm:text-xl text-[oklch(0.65_0.02_250)] max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          الشركة الرائدة في فلسطين في مجال أجهزة المساحة والجيوماتكس. الوكيل الحصري لشركتي Spectra و Nikon.
+          الشركة الرائدة في فلسطين في مجال أجهزة المساحة والجيوماتكس. الوكيل الحصري لشركات Trimble و NavVis و Spectra.
           نقدم أحدث تقنيات GPS و RTK والمسح الضوئي وأنظمة مراقبة التحرك.
         </motion.p>
 
@@ -243,7 +243,7 @@ function Hero() {
 function About() {
   const features = [
     { icon: <Target className="w-6 h-6" />, title: 'رؤية واضحة', desc: 'نسعى لأن نكون الرواد في تقديم حلول المساحة والجيوماتكس المبتكرة في فلسطين والمنطقة' },
-    { icon: <Shield className="w-6 h-6" />, title: 'وكيل حصري', desc: 'الوكيل الحصري لشركتي Spectra و Nikon العالميتين في تقديم أحدث أجهزة المساحة والقياس' },
+    { icon: <Shield className="w-6 h-6" />, title: 'وكيل حصري', desc: 'الوكيل الحصري لشركات Trimble و NavVis و Spectra العالمية في تقديم أحدث أجهزة المساحة والقياس' },
     { icon: <Zap className="w-6 h-6" />, title: 'تقنيات متقدمة', desc: 'نوظف أحدث تقنيات GPS و RTK والمسح الضوئي ثلاثي الأبعاد وأنظمة مراقبة التحرك' },
   ]
 
@@ -260,7 +260,7 @@ function About() {
             </h2>
             <p className="text-[oklch(0.65_0.02_250)] text-lg leading-relaxed mb-8">
               شركة اكسيس للحلول الهندسية المتقدمة (AXIS GPS & Surveying Instruments LTD) هي الشركة الرائدة والأكبر
-              في فلسطين في مجال أجهزة المساحة والقياس والمسح الجيوماتيكي. نحن الوكيل الحصري لشركتي Spectra و Nikon
+              في فلسطين في مجال أجهزة المساحة والقياس والمسح الجيوماتيكي. نحن الوكيل الحصري لشركات Trimble و NavVis و Spectra
               العالميتين، ونقدم أحدث التقنيات والحلول المتكاملة للمساحين والمهندسين.
             </p>
             <p className="text-[oklch(0.55_0.02_250)] leading-relaxed mb-8">
@@ -353,7 +353,7 @@ function Services() {
     {
       icon: <DraftingCompass className="w-7 h-7" />,
       title: 'أجهزة التوتل ستيشن',
-      desc: 'توريد أحدث أجهزة التوتل ستيشن من Spectra و Nikon لقياسات المساحة الدقيقة في المشاريع الهندسية',
+      desc: 'توريد أحدث أجهزة التوتل ستيشن من Trimble و Spectra لقياسات المساحة الدقيقة في المشاريع الهندسية',
     },
     {
       icon: <ScanLine className="w-7 h-7" />,
@@ -429,7 +429,7 @@ function Stats() {
     { value: 4, suffix: '', label: 'فروع في فلسطين', icon: <MapPin className="w-6 h-6" /> },
     { value: 500, suffix: '+', label: 'عميل راضٍ', icon: <Users className="w-6 h-6" /> },
     { value: 10, suffix: '+', label: 'سنوات خبرة', icon: <Wrench className="w-6 h-6" /> },
-    { value: 2, suffix: '', label: 'وكالة حصرية عالمية', icon: <Star className="w-6 h-6" /> },
+    { value: 3, suffix: '', label: 'وكالات حصرية عالمية', icon: <Star className="w-6 h-6" /> },
   ]
 
   return (
@@ -457,6 +457,85 @@ function Stats() {
                 <Counter end={s.value} suffix={s.suffix} />
               </div>
               <div className="text-[oklch(0.55_0.02_250)] text-sm">{s.label}</div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </Section>
+  )
+}
+
+/* ───────── brands ───────── */
+function Brands() {
+  const brands = [
+    {
+      name: 'Trimble',
+      desc: 'رائد عالمي في تقنيات المسح والبنية التحتية',
+      color: 'from-[#0063B2] to-[#004E90]',
+      specialties: ['GPS / GNSS', 'Total Station', 'أجهزة ليزر', 'برامج المسح'],
+    },
+    {
+      name: 'NavVis',
+      desc: 'قائد تقنيات المسح المتنقل والنمذجة ثلاثية الأبعاد',
+      color: 'from-[#E31937] to-[#B8102A]',
+      specialties: ['مسح متنقل', 'ماسحات داخلية', 'نمذجة 3D', 'خرائط رقمية'],
+    },
+    {
+      name: 'Spectra',
+      desc: 'حلول مسح عالية الدقة للمساحين والمقاولين',
+      color: 'from-[#007A33] to-[#005C26]',
+      specialties: ['RTK / GPS', 'توتل ستيشن', 'مستويات ليزر', 'جمع بيانات'],
+    },
+  ]
+
+  return (
+    <Section id="brands" className="py-20 sm:py-28 relative">
+      <div className="absolute inset-0 grid-pattern opacity-10" />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">شراكاتنا</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
+            علامات تجارية <span className="gradient-text">عالمية رائدة</span>
+          </h2>
+          <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
+            وكيل حصري في فلسطين لأبرز الشركات العالمية المتخصصة في أجهزة المساحة والجيوماتكس
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {brands.map((b, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15 }}
+              className="group relative rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)] overflow-hidden hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500"
+            >
+              {/* Brand header gradient */}
+              <div className={`bg-gradient-to-l ${b.color} p-6 text-center`}>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-wide">{b.name}</h3>
+                <p className="text-white/80 text-sm mt-2">{b.desc}</p>
+              </div>
+
+              {/* Specialties */}
+              <div className="p-6">
+                <h4 className="text-[oklch(0.72_0.14_180)] font-semibold text-sm mb-3">التخصصات</h4>
+                <div className="flex flex-wrap gap-2">
+                  {b.specialties.map((s, j) => (
+                    <span
+                      key={j}
+                      className="px-3 py-1.5 rounded-lg bg-[oklch(0.22_0.03_250)] text-[oklch(0.70_0.01_250)] text-xs border border-[oklch(0.30_0.03_250)] group-hover:border-[oklch(0.72_0.14_180_/_0.2)] transition-colors"
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-4 flex items-center gap-1 text-[oklch(0.72_0.14_180)] text-sm font-medium">
+                  <span>الوكيل الحصري في فلسطين</span>
+                  <CheckCircle2 className="w-4 h-4" />
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -609,7 +688,7 @@ function Testimonials() {
 /* ───────── why us ───────── */
 function WhyUs() {
   const reasons = [
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'الوكيل الحصري لشركتي Spectra و Nikon العالميتين' },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'الوكيل الحصري لشركات Trimble و NavVis و Spectra العالمية' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'أكثر من 10 سنوات من الخبرة في قطاع أجهزة المساحة' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: '4 فروع رئيسية تغطي مختلف مناطق فلسطين' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'شراكة مع برنامج الأمم المتحدة الإنمائي UNDP' },
@@ -869,7 +948,7 @@ function Footer() {
               </div>
             </div>
             <p className="text-[oklch(0.50_0.02_250)] text-sm leading-relaxed">
-              شريكك الموثوق لأجهزة المساحة والجيوماتكس - الوكيل الحصري لشركتي Spectra و Nikon في فلسطين
+              شريكك الموثوق لأجهزة المساحة والجيوماتكس - الوكيل الحصري لشركات Trimble و NavVis و Spectra
             </p>
           </div>
 
@@ -951,6 +1030,7 @@ export default function Home() {
         <Hero />
         <About />
         <Stats />
+        <Brands />
         <Services />
         <Projects />
         <WhyUs />
