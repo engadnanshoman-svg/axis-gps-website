@@ -1545,8 +1545,8 @@ function Team() {
 
   return (
     <Section id="team" className="py-20 sm:py-28 relative overflow-hidden">
-      <div className="absolute top-1/4 left-0 w-72 h-72 bg-[oklch(0.72_0.14_180_/_0.04)] rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-0 w-64 h-64 bg-[oklch(0.65_0.16_200_/_0.04)] rounded-full blur-3xl" />
+      <div className="absolute top-1/4 left-0 w-72 h-72 bg-[oklch(0.72_0.14_180_/_0.06)] rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-0 w-64 h-64 bg-[oklch(0.65_0.16_200_/_0.06)] rounded-full blur-3xl" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">فريق العمل</span>
@@ -1558,15 +1558,59 @@ function Team() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          {teamMembers.map((member, i) => (
+        {/* Leadership Row - Founder & Executive Director */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 mb-12">
+          {teamMembers.filter(m => m.badge === 'المؤسس' || m.badge === 'تنفيذي').map((member, i) => (
             <motion.div
-              key={i}
+              key={`leader-${i}`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className={`group relative p-5 sm:p-6 rounded-2xl border bg-[oklch(0.17_0.02_250)] hover:bg-[oklch(0.20_0.03_250)] transition-all duration-500 ${member.border} hover:${member.glow} text-center`}
+              transition={{ delay: i * 0.15, duration: 0.6 }}
+              className={`group relative p-6 sm:p-8 rounded-2xl border bg-[oklch(0.22_0.025_250)] hover:bg-[oklch(0.25_0.03_250)] transition-all duration-500 ${member.border} hover:${member.glow} text-center w-full sm:w-72`}
+            >
+              {/* Badge */}
+              {member.badge && (
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold bg-gradient-to-l from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)] text-[oklch(0.13_0.02_250)] shadow-lg">
+                  {member.badge}
+                </span>
+              )}
+
+              {/* Avatar - Larger for leaders */}
+              <div className="relative mx-auto mb-5 w-28 h-28 sm:w-32 sm:h-32">
+                {member.photo ? (
+                  <div className={`w-full h-full rounded-2xl overflow-hidden shadow-lg transition-transform duration-500 group-hover:scale-105 ring-2 ${member.border}`}>
+                    <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
+                  </div>
+                ) : (
+                  <div className={`w-full h-full rounded-2xl bg-gradient-to-br ${member.gradient} flex items-center justify-center shadow-lg transition-transform duration-500 group-hover:scale-105`}>
+                    <span className="text-white text-2xl sm:text-3xl font-bold select-none">{member.initials}</span>
+                  </div>
+                )}
+                {/* Decorative ring */}
+                <div className={`absolute -inset-2 rounded-2xl border-2 ${member.border} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+              </div>
+
+              {/* Info */}
+              <h3 className="text-[oklch(0.95_0.005_250)] font-bold text-base sm:text-lg mb-2 leading-tight">{member.name}</h3>
+              <p className="text-[oklch(0.60_0.02_250)] text-sm sm:text-base leading-relaxed">{member.role}</p>
+
+              {/* Bottom accent line */}
+              <div className={`mt-5 h-0.5 w-0 group-hover:w-full bg-gradient-to-l ${member.gradient} transition-all duration-500 mx-auto rounded-full`} />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Rest of team */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          {teamMembers.filter(m => m.badge !== 'المؤسس' && m.badge !== 'تنفيذي').map((member, i) => (
+            <motion.div
+              key={`member-${i}`}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
+              className={`group relative p-5 sm:p-6 rounded-2xl border bg-[oklch(0.22_0.025_250)] hover:bg-[oklch(0.25_0.03_250)] transition-all duration-500 ${member.border} hover:${member.glow} text-center`}
             >
               {/* Badge */}
               {member.badge && (
@@ -1591,8 +1635,8 @@ function Team() {
               </div>
 
               {/* Info */}
-              <h3 className="text-[oklch(0.90_0.005_250)] font-bold text-sm sm:text-base mb-1.5 leading-tight">{member.name}</h3>
-              <p className="text-[oklch(0.50_0.02_250)] text-xs sm:text-sm leading-relaxed">{member.role}</p>
+              <h3 className="text-[oklch(0.95_0.005_250)] font-bold text-sm sm:text-base mb-1.5 leading-tight">{member.name}</h3>
+              <p className="text-[oklch(0.55_0.02_250)] text-xs sm:text-sm leading-relaxed">{member.role}</p>
 
               {/* Bottom accent line */}
               <div className={`mt-4 h-0.5 w-0 group-hover:w-full bg-gradient-to-l ${member.gradient} transition-all duration-500 mx-auto rounded-full`} />
@@ -1607,9 +1651,9 @@ function Team() {
           viewport={{ once: true }}
           className="mt-12 text-center"
         >
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)]">
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl border border-[oklch(0.35_0.03_250)] bg-[oklch(0.22_0.025_250)]">
             <Users className="w-5 h-5 text-[oklch(0.72_0.14_180)]" />
-            <span className="text-[oklch(0.60_0.02_250)] text-sm">فريق متخصص يضم نخبة من المهندسين ذوي الكفاءات العالية</span>
+            <span className="text-[oklch(0.65_0.02_250)] text-sm">فريق متخصص يضم نخبة من المهندسين ذوي الكفاءات العالية</span>
           </div>
         </motion.div>
       </div>
