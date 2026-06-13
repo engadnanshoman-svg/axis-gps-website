@@ -226,7 +226,7 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-lg sm:text-xl text-[oklch(0.65_0.02_250)] max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          الشركة الرائدة في فلسطين في مجال أجهزة المساحة والجيوماتكس. الوكيل الحصري لشركات Trimble و NavVis و Spectra.
+          الشركة الرائدة في فلسطين في مجال تقنيات المساحة والجيوماتكس. الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و DJI.
           نقدم أحدث تقنيات GPS و RTK والمسح الضوئي وأنظمة مراقبة التحرك.
         </motion.p>
 
@@ -273,9 +273,9 @@ function Hero() {
 /* ───────── about ───────── */
 function About() {
   const features = [
-    { icon: <Target className="w-6 h-6" />, title: 'رؤية واضحة', desc: 'نسعى لأن نكون الرواد في تقديم حلول المساحة والجيوماتكس المبتكرة في فلسطين والمنطقة' },
-    { icon: <Shield className="w-6 h-6" />, title: 'وكيل حصري', desc: 'الوكيل الحصري لشركات Trimble و NavVis و Spectra العالمية في تقديم أحدث أجهزة المساحة والقياس' },
-    { icon: <Zap className="w-6 h-6" />, title: 'تقنيات متقدمة', desc: 'نوظف أحدث تقنيات GPS و RTK والمسح الضوئي ثلاثي الأبعاد وأنظمة مراقبة التحرك' },
+    { icon: <Target className="w-6 h-6" />, title: 'رؤية واضحة', desc: 'الشركة الرائدة والأكبر في مجال تقنيات ووحلول المساحة والجيوماتكس والمعلومات الجغرافية في فلسطين' },
+    { icon: <Shield className="w-6 h-6" />, title: 'وكالات حصرية عالمية', desc: 'الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و DJI و Kaarta العالمية' },
+    { icon: <Zap className="w-6 h-6" />, title: 'تقنيات متقدمة', desc: 'نوظف أحدث تقنيات GPS و RTK والمسح الضوئي 3D والواقع المعزز ورسم الخرائط عالية الدقة HD Mapping' },
   ]
 
   return (
@@ -291,13 +291,15 @@ function About() {
             </h2>
             <p className="text-[oklch(0.65_0.02_250)] text-lg leading-relaxed mb-8">
               شركة اكسيس للحلول الهندسية المتقدمة (AXIS GPS & Surveying Instruments LTD) هي الشركة الرائدة والأكبر
-              في فلسطين في مجال أجهزة المساحة والقياس والمسح الجيوماتيكي. نحن الوكيل الحصري لشركات Trimble و NavVis و Spectra
-              العالميتين، ونقدم أحدث التقنيات والحلول المتكاملة للمساحين والمهندسين.
+              في فلسطين في مجال تقنيات وحلول المساحة والجيوماتكس والمعلومات الجغرافية. نحن الوكيل الحصري لشركات
+              Trimble و NavVis و Spectra و Applanix و DJI و Kaarta العالمية، ونقدم أحدث التقنيات والحلول المتكاملة.
             </p>
             <p className="text-[oklch(0.55_0.02_250)] leading-relaxed mb-8">
-              منذ تأسيسها على يد المهندس سلامة عواودة، عملت اكسيس على توفير أحدث أجهزة GPS و RTK والماسحات الضوئية
-              وأنظمة مراقبة التحرك، مع تقديم خدمات التدريب المتخصص والدعم الفني المستمر. تمتلك الشركة أربعة فروع
-              رئيسية في كفر كنا وكفر قاسم ورام الله والخليل، وتتعاون مع مؤسسات عالمية مثل UNDP.
+              منذ تأسيسها على يد المهندس سلامة عواودة، تعمل اكسيس في مجالات عديدة تشمل: المسح والجيوماتكس، أنظمة GIS،
+              شبكة محطات VRS وخدمات تصحيح الموقع RTK، رسم الخرائط عالية الدقة HD Mapping، المسح المتنقل Mobile Mapping،
+              المدن الذكية Smart City، الزراعة الدقيقة، أنظمة توجيه الآلات Machine Control، تقنيات البناء Construction Tech،
+              حلول الرصد والمراقبة، رحلات المسح بالدرونات، والواقع المعزز. تمتلك الشركة أربعة فروع رئيسية في كفر كنا وكفر قاسم
+              ورام الله والخليل، ومختبر ومعهد تدريب Axis Campus.
             </p>
             <div className="space-y-4">
               {features.map((f, i) => (
@@ -378,33 +380,48 @@ function Services() {
   const services = [
     {
       icon: <Satellite className="w-7 h-7" />,
-      title: 'أجهزة GPS و RTK',
-      desc: 'توفير أحدث أجهزة GPS و RTK عالية الدقة للمسح الميداني والقياسات الجيوديسية مع دعم فني متكامل',
+      title: 'أجهزة GPS و GNSS',
+      desc: 'مستقبلات GNSS وهوائيات ومكونات OEM عالية الدقة من Trimble و Spectra للمسح الميداني والقياسات الجيوديسية',
     },
     {
       icon: <DraftingCompass className="w-7 h-7" />,
       title: 'أجهزة التوتل ستيشن',
-      desc: 'توريد أحدث أجهزة التوتل ستيشن من Trimble و Spectra لقياسات المساحة الدقيقة في المشاريع الهندسية',
+      desc: 'أحدث أجهزة التوتل ستيشن وكالات القياس من Trimble و Spectra لقياسات المساحة الدقيقة في المشاريع الهندسية',
     },
     {
       icon: <ScanLine className="w-7 h-7" />,
-      title: 'المسح الضوئي ثلاثي الأبعاد',
-      desc: 'ماسحات ضوئية متنقلة وثابتة ومحمولة جواً ومركبة للمسح ثلاثي الأبعاد الدقيق والنمذجة المتقدمة',
+      title: 'المسح الضوئي 3D والواقع المعزز',
+      desc: 'ماسحات NavVis و Trimble المتنقلة والثابتة والمحمولة جواً مع حلول الواقع المعزز للنمذجة المتقدمة',
     },
     {
       icon: <Monitor className="w-7 h-7" />,
-      title: 'أنظمة GIS والخرائط',
-      desc: 'حلول نظم المعلومات الجغرافية والخرائط الرقمية المتكاملة لتحليل وإدارة البيانات المكانية',
+      title: 'أنظمة GIS و VRS',
+      desc: 'حلول نظم المعلومات الجغرافية وشبكة محطات VRS لخدمات تصحيح الموقع RTK والخرائط الرقمية المتكاملة',
     },
     {
       icon: <Radio className="w-7 h-7" />,
-      title: 'أنظمة مراقبة التحرك',
-      desc: 'أنظمة مراقبة تحرك متقدمة للمباني والمنشآت والمنحدرات باستخدام أحدث أجهزة القياس والإنذار المبكر',
+      title: 'رصد ومراقبة وتوجيه آليات',
+      desc: 'أنظمة مراقبة تحرك ورصد هبوط مع SITECH لتوجيه الآليات الثقيلة Machine Control في مشاريع البناء',
+    },
+    {
+      icon: <Gauge className="w-7 h-7" />,
+      title: 'مستويات ليزر وبناء',
+      desc: 'مستويات ليزر دوارة ومائلة وخطية وأنابيب وأجهزة قياس مسافة ليزرية لجميع أعمال البناء والطرق والصرف',
+    },
+    {
+      icon: <Satellite className="w-7 h-7" />,
+      title: 'درونات وتصوير جوي',
+      desc: 'رحلات مسح بالدرونات DJI مع معالجة Pix4D لرسم الخرائط الجوية عالية الدقة والتصوير والمسح المتنقل',
+    },
+    {
+      icon: <Calculator className="w-7 h-7" />,
+      title: 'برمجيات ومعالجة بيانات',
+      desc: 'برمجيات Trimble Business Center و TBC لمعالجة بيانات المسح وتحويلها إلى نماذج ومخططات هندسية دقيقة',
     },
     {
       icon: <GraduationCap className="w-7 h-7" />,
-      title: 'التدريب والدعم الفني',
-      desc: 'برامج تدريبية متخصصة على أجهزة المساحة والقياس مع دعم فني مستمر وخدمة ما بعد البيع',
+      title: 'Axis Campus للتدريب',
+      desc: 'معهد Axis Campus المتخصص في التدريب المهني وورش العمل ودورات اعتماد المحترفين مع مختبر ودعم فني',
     },
   ]
 
@@ -1037,7 +1054,7 @@ function Testimonials() {
 /* ───────── why us ───────── */
 function WhyUs() {
   const reasons = [
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'الوكيل الحصري لشركات Trimble و NavVis و Spectra العالمية' },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و DJI و Kaarta' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'أكثر من 10 سنوات من الخبرة في قطاع أجهزة المساحة' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: '4 فروع رئيسية تغطي مختلف مناطق فلسطين' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'شراكة مع برنامج الأمم المتحدة الإنمائي UNDP' },
@@ -1302,7 +1319,7 @@ function Footer() {
               </div>
             </div>
             <p className="text-[oklch(0.50_0.02_250)] text-sm leading-relaxed mb-4">
-              شريكك الموثوق لأجهزة المساحة والجيوماتكس - الوكيل الحصري لشركات Trimble و NavVis و Spectra
+              شريكك الموثوق لتقنيات المساحة والجيوماتكس - الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و DJI
             </p>
             {/* Footer Social Icons */}
             <div className="flex items-center gap-3">
@@ -1337,7 +1354,7 @@ function Footer() {
           <div>
             <h4 className="text-[oklch(0.90_0.005_250)] font-semibold mb-4">خدماتنا</h4>
             <div className="space-y-2">
-              {['أجهزة GPS و RTK', 'أجهزة التوتل ستيشن', 'المسح الضوئي 3D', 'أنظمة GIS والخرائط', 'أنظمة مراقبة التحرك'].map((s, i) => (
+              {['أجهزة GPS و GNSS', 'التوتل ستيشن', 'المسح الضوئي 3D', 'أنظمة GIS و VRS', 'ليزر ودرونات', 'Axis Campus'].map((s, i) => (
                 <span key={i} className="block text-[oklch(0.50_0.02_250)] text-sm">{s}</span>
               ))}
             </div>

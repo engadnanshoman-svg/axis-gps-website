@@ -15,15 +15,15 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "اكسيس | لأجهزة المساحة والجيوماتكس - AXIS GPS",
-  description: "شركة اكسيس للحلول الهندسية المتقدمة - الوكيل الحصري لشركات Trimble و NavVis و Spectra في فلسطين. أحدث أجهزة GPS و RTK والمسح الضوئي وأنظمة مراقبة التحرك",
-  keywords: ["اكسيس", "أجهزة المساحة", "GPS", "RTK", "GIS", "جيوماتكس", "Trimble", "NavVis", "Spectra", "توتل ستيشن", "مسح ضوئي"],
+  description: "شركة اكسيس للحلول الهندسية المتقدمة - الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و DJI في فلسطين. أحدث أجهزة GPS و RTK والمسح الضوئي وأنظمة مراقبة التحرك و VRS",
+  keywords: ["اكسيس", "أجهزة المساحة", "GPS", "RTK", "GIS", "جيوماتكس", "Trimble", "NavVis", "Spectra", "Applanix", "DJI", "VRS", "توتل ستيشن", "مسح ضوئي", "ليزر", "درونات", "Machine Control"],
   authors: [{ name: "اكسيس للحلول الهندسية المتقدمة" }],
   icons: {
     icon: "/logo.png",
   },
   openGraph: {
     title: "اكسيس | لأجهزة المساحة والجيوماتكس",
-    description: "الوكيل الحصري لشركات Trimble و NavVis و Spectra في فلسطين - أحدث أجهزة GPS و RTK والمسح الضوئي",
+    description: "الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و DJI في فلسطين - أحدث أجهزة GPS و RTK والمسح الضوئي و VRS",
     type: "website",
   },
 };
