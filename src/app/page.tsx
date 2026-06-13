@@ -1458,6 +1458,88 @@ function WhyUs() {
   )
 }
 
+/* ───────── team member card helper ───────── */
+function TeamCard({
+  member, size, index, showLine,
+}: {
+  member: {
+    name: string; role: string; initials: string; photo: string;
+    gradient: string; border: string; glow: string; badge: string;
+  }
+  size: 'founder' | 'executive' | 'manager' | 'staff'
+  index: number
+  showLine?: 'top' | 'bottom' | 'both'
+}) {
+  const sizeConfig = {
+    founder: { avatar: 'w-32 h-32 sm:w-40 sm:h-40', text: 'text-xl sm:text-2xl', roleText: 'text-base sm:text-lg', pad: 'p-7 sm:p-9', maxW: 'max-w-md', rounded: 'rounded-3xl', ring: 'ring-4', initialsText: 'text-4xl sm:text-5xl' },
+    executive: { avatar: 'w-24 h-24 sm:w-28 sm:h-28', text: 'text-base sm:text-lg', roleText: 'text-sm sm:text-base', pad: 'p-5 sm:p-6', maxW: 'max-w-xs', rounded: 'rounded-2xl', ring: 'ring-2', initialsText: 'text-2xl sm:text-3xl' },
+    manager: { avatar: 'w-20 h-20 sm:w-24 sm:h-24', text: 'text-sm sm:text-base', roleText: 'text-xs sm:text-sm', pad: 'p-4 sm:p-5', maxW: 'max-w-[200px]', rounded: 'rounded-2xl', ring: 'ring-2', initialsText: 'text-xl sm:text-2xl' },
+    staff: { avatar: 'w-16 h-16 sm:w-20 sm:h-20', text: 'text-xs sm:text-sm', roleText: 'text-[10px] sm:text-xs', pad: 'p-3 sm:p-4', maxW: 'max-w-[170px]', rounded: 'rounded-xl', ring: 'ring', initialsText: 'text-lg sm:text-xl' },
+  }
+  const cfg = sizeConfig[size]
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      className="flex flex-col items-center"
+    >
+      <div className={`group relative ${cfg.rounded} border ${cfg.pad} bg-[oklch(0.25_0.03_250)] hover:bg-[oklch(0.28_0.035_250)] transition-all duration-500 ${member.border} text-center w-full ${cfg.maxW} ${
+        size === 'founder' ? 'border-2 shadow-xl shadow-[oklch(0.72_0.14_180_/_0.1)] hover:shadow-2xl hover:shadow-[oklch(0.72_0.14_180_/_0.18)] bg-gradient-to-b from-[oklch(0.28_0.03_250)] to-[oklch(0.24_0.03_250)]' : ''
+      }`}
+      >
+        {/* Badge */}
+        {member.badge && size === 'founder' && (
+          <div className="absolute -top-5 left-1/2 -translate-x-1/2">
+            <div className="relative">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)] flex items-center justify-center shadow-lg shadow-[oklch(0.72_0.14_180_/_0.3)]">
+                <Star className="w-5 h-5 text-[oklch(0.13_0.02_250)]" />
+              </div>
+              <div className="absolute -inset-1.5 rounded-full border-2 border-[oklch(0.72_0.14_180_/_0.3)] animate-pulse" />
+            </div>
+          </div>
+        )}
+        {member.badge && size !== 'founder' && (
+          <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[10px] font-bold bg-gradient-to-l from-[oklch(0.65_0.16_200)] to-[oklch(0.55_0.12_250)] text-[oklch(0.97_0.005_250)] shadow-md whitespace-nowrap">
+            {member.badge === 'تنفيذي' ? 'المدير التنفيذي' : member.badge === 'فرع' ? 'مدير فرع' : member.badge}
+          </span>
+        )}
+
+        {/* Avatar */}
+        <div className={`relative mx-auto mb-3 ${cfg.avatar} ${size === 'founder' ? 'mt-3' : ''}`}>
+          {member.photo ? (
+            <div className={`w-full h-full ${cfg.rounded} overflow-hidden shadow-lg transition-transform duration-500 group-hover:scale-105 ${cfg.ring} ${member.border}`}>
+              <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
+            </div>
+          ) : (
+            <div className={`w-full h-full ${cfg.rounded} bg-gradient-to-br ${member.gradient} flex items-center justify-center shadow-lg transition-transform duration-500 group-hover:scale-105`}>
+              <span className={`text-white ${cfg.initialsText} font-bold select-none`}>{member.initials}</span>
+            </div>
+          )}
+        </div>
+
+        {/* Info */}
+        <h3 className={`text-[oklch(0.95_0.005_250)] font-bold ${cfg.text} mb-1 leading-tight`}>{member.name}</h3>
+        <p className={`text-[oklch(0.60_0.02_250)] ${cfg.roleText} leading-relaxed`}>{member.role}</p>
+      </div>
+    </motion.div>
+  )
+}
+
+/* ───────── org tree connector line ───────── */
+function TreeLine({ type }: { type: 'vertical' | 'horizontal' | 'branch-down' }) {
+  const lineColor = 'oklch(0.72 0.14 180 / 0.25)'
+  if (type === 'vertical') {
+    return <div className="w-0.5 h-8 sm:h-10 mx-auto" style={{ background: `linear-gradient(to bottom, ${lineColor}, oklch(0.72 0.14 180 / 0.08))` }} />
+  }
+  if (type === 'horizontal') {
+    return <div className="h-0.5 w-full" style={{ background: `linear-gradient(to right, oklch(0.72 0.14 180 / 0.08), ${lineColor}, oklch(0.72 0.14 180 / 0.08))` }} />
+  }
+  return null
+}
+
 /* ───────── team ───────── */
 function Team() {
   const teamMembers = [
@@ -1480,6 +1562,16 @@ function Team() {
       border: 'border-[oklch(0.65_0.16_200_/_0.3)]',
       glow: 'shadow-[oklch(0.65_0.16_200_/_0.15)]',
       badge: 'تنفيذي',
+    },
+    {
+      name: 'السيدة ولاء البكري',
+      role: 'قسم المحاسبة',
+      initials: 'و ب',
+      photo: '/team/walaa.jpg',
+      gradient: 'from-[oklch(0.70_0.12_90)] to-[oklch(0.60_0.14_60)]',
+      border: 'border-[oklch(0.70_0.12_90_/_0.3)]',
+      glow: 'shadow-[oklch(0.70_0.12_90_/_0.15)]',
+      badge: 'محاسبة',
     },
     {
       name: 'المهندس أنس أبو حديد',
@@ -1531,173 +1623,96 @@ function Team() {
       glow: 'shadow-[oklch(0.50_0.15_150_/_0.15)]',
       badge: '',
     },
-    {
-      name: 'السيدة ولاء البكري',
-      role: 'قسم الحاسبة',
-      initials: 'و ب',
-      photo: '/team/walaa.jpg',
-      gradient: 'from-[oklch(0.70_0.12_90)] to-[oklch(0.60_0.14_60)]',
-      border: 'border-[oklch(0.70_0.12_90_/_0.3)]',
-      glow: 'shadow-[oklch(0.70_0.12_90_/_0.15)]',
-      badge: '',
-    },
   ]
 
-  const founder = teamMembers.find(m => m.badge === 'المؤسس')!
-  const executive = teamMembers.find(m => m.badge === 'تنفيذي')!
-  const rest = teamMembers.filter(m => m.badge !== 'المؤسس' && m.badge !== 'تنفيذي')
+  const founder = teamMembers[0]
+  const executive = teamMembers[1]
+  const accounting = teamMembers[2] // ولاء - المحاسبة (directly under Executive)
+  const branch = teamMembers[3] // أنس - فرع الخليل
+  const departments = teamMembers.slice(4) // الأقسام الفنية
 
   return (
     <Section id="team" className="py-20 sm:py-28 relative overflow-hidden">
       <div className="absolute top-1/4 left-0 w-80 h-80 bg-[oklch(0.72_0.14_180_/_0.08)] rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 right-0 w-72 h-72 bg-[oklch(0.65_0.16_200_/_0.08)] rounded-full blur-3xl" />
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-14">
           <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">فريق العمل</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
-            نخبة من <span className="gradient-text">المهندسين المتخصصين</span>
+            الهيكل <span className="gradient-text">التنظيمي</span>
           </h2>
           <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
-            فريقنا المتميز من المهندسين ذوي الخبرة والكفاءة العالية يعمل على تقديم أفضل الحلول والخدمات لعملائنا في جميع المجالات
+            هيكل تنظيمي متكامل يضم نخبة من المهندسين والمتخصصين تحت قيادة متميزة
           </p>
         </div>
 
-        {/* ═══ Founder - Hero Card ═══ */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: 40 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="flex justify-center mb-10"
-        >
-          <div className={`group relative rounded-3xl border-2 ${founder.border} bg-gradient-to-b from-[oklch(0.28_0.03_250)] to-[oklch(0.22_0.03_250)] hover:from-[oklch(0.30_0.035_250)] hover:to-[oklch(0.25_0.03_250)] transition-all duration-500 shadow-xl shadow-[oklch(0.72_0.14_180_/_0.08)] hover:shadow-2xl hover:shadow-[oklch(0.72_0.14_180_/_0.15)] text-center w-full max-w-lg p-8 sm:p-10`}
-          >
-            {/* Founder Crown/Star decoration */}
-            <div className="absolute -top-6 left-1/2 -translate-x-1/2 flex items-center justify-center">
-              <div className="relative">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)] flex items-center justify-center shadow-lg shadow-[oklch(0.72_0.14_180_/_0.3)]">
-                  <Star className="w-6 h-6 text-[oklch(0.13_0.02_250)]" />
-                </div>
-                <div className="absolute -inset-2 rounded-full border-2 border-[oklch(0.72_0.14_180_/_0.3)] animate-pulse" />
-              </div>
-            </div>
+        {/* ═══════ ORG TREE ═══════ */}
+        <div className="flex flex-col items-center">
 
-            {/* Badge */}
-            <div className="mt-4 mb-6">
-              <span className="inline-block px-6 py-1.5 rounded-full text-sm font-bold bg-gradient-to-l from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)] text-[oklch(0.13_0.02_250)] shadow-lg shadow-[oklch(0.72_0.14_180_/_0.2)]">
-                المؤسس
-              </span>
-            </div>
+          {/* Level 1: المؤسس */}
+          <TeamCard member={founder} size="founder" index={0} />
 
-            {/* Avatar - Extra Large for Founder */}
-            <div className="relative mx-auto mb-6 w-36 h-36 sm:w-44 sm:h-44">
-              {founder.photo ? (
-                <div className={`w-full h-full rounded-2xl overflow-hidden shadow-xl transition-transform duration-500 group-hover:scale-105 ring-4 ${founder.border}`}>
-                  <img src={founder.photo} alt={founder.name} className="w-full h-full object-cover" />
-                </div>
-              ) : (
-                <div className={`w-full h-full rounded-2xl bg-gradient-to-br ${founder.gradient} flex items-center justify-center shadow-xl transition-transform duration-500 group-hover:scale-105`}>
-                  <span className="text-white text-4xl sm:text-5xl font-bold select-none">{founder.initials}</span>
-                </div>
-              )}
-              {/* Double decorative ring */}
-              <div className={`absolute -inset-3 rounded-2xl border-2 ${founder.border} opacity-40 group-hover:opacity-70 transition-opacity duration-500`} />
-              <div className={`absolute -inset-5 rounded-2xl border ${founder.border} opacity-0 group-hover:opacity-40 transition-opacity duration-700`} />
-              {/* Corner accents */}
-              <div className="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-[oklch(0.72_0.14_180_/_0.5)] rounded-tr-lg" />
-              <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-[oklch(0.72_0.14_180_/_0.5)] rounded-bl-lg" />
-            </div>
-
-            {/* Info */}
-            <h3 className="text-[oklch(0.97_0.005_250)] font-bold text-xl sm:text-2xl mb-2 leading-tight">{founder.name}</h3>
-            <p className="text-[oklch(0.72_0.14_180)] text-base sm:text-lg font-semibold mb-1">{founder.role}</p>
-            <p className="text-[oklch(0.60_0.02_250)] text-sm leading-relaxed mt-2">مؤسس شركة اكسيس للحلول الهندسية المتقدمة ورائد في مجال تقنيات المسح والجيوماتكس</p>
-
-            {/* Bottom accent line */}
-            <div className={`mt-6 h-1 w-0 group-hover:w-3/4 bg-gradient-to-l ${founder.gradient} transition-all duration-700 mx-auto rounded-full`} />
+          {/* Line: Founder → Executive */}
+          <div className="relative w-full flex flex-col items-center">
+            <TreeLine type="vertical" />
+            <svg width="2" height="40" className="sm:hidden" style={{ overflow: 'visible' }}>
+              <line x1="1" y1="0" x2="1" y2="40" stroke="oklch(0.72 0.14 180 / 0.25)" strokeWidth="2" strokeDasharray="4 4" />
+            </svg>
           </div>
-        </motion.div>
 
-        {/* ═══ Executive Director ═══ */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="flex justify-center mb-12"
-        >
-          <div className={`group relative p-6 sm:p-8 rounded-2xl border bg-[oklch(0.25_0.03_250)] hover:bg-[oklch(0.28_0.035_250)] transition-all duration-500 ${executive.border} hover:shadow-lg hover:shadow-[oklch(0.65_0.16_200_/_0.1)] text-center w-full max-w-sm`}
-          >
-            {/* Badge */}
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-5 py-1 rounded-full text-xs font-bold bg-gradient-to-l from-[oklch(0.65_0.16_200)] to-[oklch(0.55_0.12_250)] text-[oklch(0.97_0.005_250)] shadow-lg">
-              المدير التنفيذي
-            </span>
+          {/* Level 2: المدير التنفيذي */}
+          <TeamCard member={executive} size="executive" index={1} />
 
-            {/* Avatar */}
-            <div className="relative mx-auto mb-5 w-28 h-28 sm:w-32 sm:h-32">
-              {executive.photo ? (
-                <div className={`w-full h-full rounded-2xl overflow-hidden shadow-lg transition-transform duration-500 group-hover:scale-105 ring-2 ${executive.border}`}>
-                  <img src={executive.photo} alt={executive.name} className="w-full h-full object-cover" />
-                </div>
-              ) : (
-                <div className={`w-full h-full rounded-2xl bg-gradient-to-br ${executive.gradient} flex items-center justify-center shadow-lg transition-transform duration-500 group-hover:scale-105`}>
-                  <span className="text-white text-2xl sm:text-3xl font-bold select-none">{executive.initials}</span>
-                </div>
-              )}
-              {/* Decorative ring */}
-              <div className={`absolute -inset-2 rounded-2xl border-2 ${executive.border} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-            </div>
+          {/* Line: Executive → branches */}
+          <TreeLine type="vertical" />
 
-            {/* Info */}
-            <h3 className="text-[oklch(0.95_0.005_250)] font-bold text-base sm:text-lg mb-2 leading-tight">{executive.name}</h3>
-            <p className="text-[oklch(0.60_0.02_250)] text-sm sm:text-base leading-relaxed">{executive.role}</p>
-
-            {/* Bottom accent line */}
-            <div className={`mt-5 h-0.5 w-0 group-hover:w-full bg-gradient-to-l ${executive.gradient} transition-all duration-500 mx-auto rounded-full`} />
+          {/* Horizontal connector line spanning all Level 3 items */}
+          <div className="w-full max-w-4xl relative">
+            <div className="h-0.5 mx-auto" style={{ background: 'linear-gradient(to right, oklch(0.72 0.14 180 / 0.05), oklch(0.72 0.14 180 / 0.25), oklch(0.72 0.14 180 / 0.05))' }} />
           </div>
-        </motion.div>
 
-        {/* ═══ Rest of Team ═══ */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          {rest.map((member, i) => (
-            <motion.div
-              key={`member-${i}`}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 + i * 0.1, duration: 0.5 }}
-              className={`group relative p-5 sm:p-6 rounded-2xl border bg-[oklch(0.25_0.03_250)] hover:bg-[oklch(0.28_0.035_250)] transition-all duration-500 ${member.border} hover:${member.glow} text-center`}
-            >
-              {/* Badge */}
-              {member.badge && (
-                <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[10px] font-bold bg-gradient-to-l from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)] text-[oklch(0.13_0.02_250)]">
-                  {member.badge}
-                </span>
-              )}
+          {/* Level 3: المحاسبة (directly under Executive) + فرع الخليل + الأقسام */}
+          <div className="w-full max-w-5xl mt-0">
 
-              {/* Avatar */}
-              <div className="relative mx-auto mb-4 w-20 h-20 sm:w-24 sm:h-24">
-                {member.photo ? (
-                  <div className={`w-full h-full rounded-2xl overflow-hidden shadow-lg transition-transform duration-500 group-hover:scale-105 ring-2 ${member.border}`}>
-                    <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
+            {/* Three main branches under Executive */}
+            <div className="flex flex-col sm:flex-row items-start justify-center gap-3 sm:gap-4">
+
+              {/* Branch A: المحاسبة - directly connected to Executive */}
+              <div className="flex flex-col items-center flex-1">
+                {/* Vertical connector from horizontal line */}
+                <div className="w-0.5 h-6 sm:h-8" style={{ background: 'linear-gradient(to bottom, oklch(0.72 0.14 180 / 0.25), oklch(0.72 0.14 180 / 0.1))' }} />
+                <div className="relative">
+                  {/* Direct connection indicator */}
+                  <div className="absolute -top-7 left-1/2 -translate-x-1/2 flex items-center gap-1 whitespace-nowrap">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[oklch(0.72_0.14_180)] animate-pulse" />
+                    <span className="text-[9px] sm:text-[10px] text-[oklch(0.72_0.14_180)] font-semibold">مباشر</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-[oklch(0.72_0.14_180)] animate-pulse" />
                   </div>
-                ) : (
-                  <div className={`w-full h-full rounded-2xl bg-gradient-to-br ${member.gradient} flex items-center justify-center shadow-lg transition-transform duration-500 group-hover:scale-105`}>
-                    <span className="text-white text-xl sm:text-2xl font-bold select-none">{member.initials}</span>
-                  </div>
-                )}
-                {/* Decorative ring */}
-                <div className={`absolute -inset-1.5 rounded-2xl border ${member.border} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                </div>
+                <TeamCard member={accounting} size="manager" index={2} />
               </div>
 
-              {/* Info */}
-              <h3 className="text-[oklch(0.95_0.005_250)] font-bold text-sm sm:text-base mb-1.5 leading-tight">{member.name}</h3>
-              <p className="text-[oklch(0.55_0.02_250)] text-xs sm:text-sm leading-relaxed">{member.role}</p>
+              {/* Branch B: فرع الخليل */}
+              <div className="flex flex-col items-center flex-1">
+                <div className="w-0.5 h-6 sm:h-8" style={{ background: 'linear-gradient(to bottom, oklch(0.72 0.14 180 / 0.2), oklch(0.60 0.18 30 / 0.1))' }} />
+                <TeamCard member={branch} size="manager" index={3} />
+              </div>
 
-              {/* Bottom accent line */}
-              <div className={`mt-4 h-0.5 w-0 group-hover:w-full bg-gradient-to-l ${member.gradient} transition-all duration-500 mx-auto rounded-full`} />
-            </motion.div>
-          ))}
+              {/* Branch C: الأقسام الفنية (grouped) */}
+              <div className="flex flex-col items-center flex-[2]">
+                <div className="w-0.5 h-6 sm:h-8" style={{ background: 'linear-gradient(to bottom, oklch(0.72 0.14 180 / 0.2), oklch(0.55 0.12 250 / 0.1))' }} />
+                {/* Department group label */}
+                <div className="mb-3 px-4 py-1 rounded-full border border-[oklch(0.40_0.03_250)] bg-[oklch(0.22_0.025_250)]">
+                  <span className="text-[oklch(0.60_0.02_250)] text-[10px] sm:text-xs font-semibold">الأقسام الفنية</span>
+                </div>
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full">
+                  {departments.map((member, i) => (
+                    <TeamCard key={`dept-${i}`} member={member} size="staff" index={4 + i} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Team CTA */}
@@ -1705,9 +1720,9 @@ function Team() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-12 text-center"
+          className="mt-14 text-center"
         >
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl border border-[oklch(0.35_0.03_250)] bg-[oklch(0.25_0.03_250)]">
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl border border-[oklch(0.40_0.03_250)] bg-[oklch(0.25_0.03_250)]">
             <Users className="w-5 h-5 text-[oklch(0.72_0.14_180)]" />
             <span className="text-[oklch(0.65_0.02_250)] text-sm">فريق متخصص يضم نخبة من المهندسين ذوي الكفاءات العالية</span>
           </div>
