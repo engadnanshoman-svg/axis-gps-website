@@ -1186,6 +1186,7 @@ function Team() {
       name: 'المهندس سلامة العواودة',
       role: 'المدير العام',
       initials: 'س ع',
+      photo: '',
       gradient: 'from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)]',
       border: 'border-[oklch(0.72_0.14_180_/_0.3)]',
       glow: 'shadow-[oklch(0.72_0.14_180_/_0.15)]',
@@ -1195,6 +1196,7 @@ function Team() {
       name: 'المهندس عدنان شومان',
       role: 'المدير التنفيذي - الضفة الغربية',
       initials: 'ع ش',
+      photo: '/team/adnan.jpg',
       gradient: 'from-[oklch(0.65_0.16_200)] to-[oklch(0.55_0.12_250)]',
       border: 'border-[oklch(0.65_0.16_200_/_0.3)]',
       glow: 'shadow-[oklch(0.65_0.16_200_/_0.15)]',
@@ -1204,6 +1206,7 @@ function Team() {
       name: 'المهندس أنس أبو حديد',
       role: 'مدير فرع الخليل',
       initials: 'أ ح',
+      photo: '',
       gradient: 'from-[oklch(0.60_0.18_30)] to-[oklch(0.55_0.14_50)]',
       border: 'border-[oklch(0.60_0.18_30_/_0.3)]',
       glow: 'shadow-[oklch(0.60_0.18_30_/_0.15)]',
@@ -1213,6 +1216,7 @@ function Team() {
       name: 'المهندسة ألاء أبو خلف',
       role: 'قسم الرسم والمسح الضوئي',
       initials: 'أ خ',
+      photo: '',
       gradient: 'from-[oklch(0.75_0.15_330)] to-[oklch(0.65_0.16_300)]',
       border: 'border-[oklch(0.75_0.15_330_/_0.3)]',
       glow: 'shadow-[oklch(0.75_0.15_330_/_0.15)]',
@@ -1222,6 +1226,7 @@ function Team() {
       name: 'المهندسة سجى مسالمة',
       role: 'قسم الرسم والدعم الفني',
       initials: 'س م',
+      photo: '/team/saja.png',
       gradient: 'from-[oklch(0.80_0.10_160)] to-[oklch(0.72_0.14_180)]',
       border: 'border-[oklch(0.80_0.10_160_/_0.3)]',
       glow: 'shadow-[oklch(0.80_0.10_160_/_0.15)]',
@@ -1231,6 +1236,7 @@ function Team() {
       name: 'المهندس وعد وهدان',
       role: 'قسم الدعم الفني',
       initials: 'و و',
+      photo: '/team/dsc2.jpg',
       gradient: 'from-[oklch(0.55_0.12_250)] to-[oklch(0.65_0.16_200)]',
       border: 'border-[oklch(0.55_0.12_250_/_0.3)]',
       glow: 'shadow-[oklch(0.55_0.12_250_/_0.15)]',
@@ -1240,6 +1246,7 @@ function Team() {
       name: 'المهندس حاتم عيدة',
       role: 'قسم الرسم',
       initials: 'ح ع',
+      photo: '',
       gradient: 'from-[oklch(0.50_0.15_150)] to-[oklch(0.72_0.14_180)]',
       border: 'border-[oklch(0.50_0.15_150_/_0.3)]',
       glow: 'shadow-[oklch(0.50_0.15_150_/_0.15)]',
@@ -1249,6 +1256,7 @@ function Team() {
       name: 'السيدة ولاء البكري',
       role: 'قسم الحاسبة',
       initials: 'و ب',
+      photo: '/team/walaa.png',
       gradient: 'from-[oklch(0.70_0.12_90)] to-[oklch(0.60_0.14_60)]',
       border: 'border-[oklch(0.70_0.12_90_/_0.3)]',
       glow: 'shadow-[oklch(0.70_0.12_90_/_0.15)]',
@@ -1290,9 +1298,15 @@ function Team() {
 
               {/* Avatar */}
               <div className="relative mx-auto mb-4 w-20 h-20 sm:w-24 sm:h-24">
-                <div className={`w-full h-full rounded-2xl bg-gradient-to-br ${member.gradient} flex items-center justify-center shadow-lg transition-transform duration-500 group-hover:scale-105`}>
-                  <span className="text-white text-xl sm:text-2xl font-bold select-none">{member.initials}</span>
-                </div>
+                {member.photo ? (
+                  <div className={`w-full h-full rounded-2xl overflow-hidden shadow-lg transition-transform duration-500 group-hover:scale-105 ring-2 ${member.border}`}>
+                    <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
+                  </div>
+                ) : (
+                  <div className={`w-full h-full rounded-2xl bg-gradient-to-br ${member.gradient} flex items-center justify-center shadow-lg transition-transform duration-500 group-hover:scale-105`}>
+                    <span className="text-white text-xl sm:text-2xl font-bold select-none">{member.initials}</span>
+                  </div>
+                )}
                 {/* Decorative ring */}
                 <div className={`absolute -inset-1.5 rounded-2xl border ${member.border} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
               </div>
