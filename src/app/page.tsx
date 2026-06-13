@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import dynamic from 'next/dynamic'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import {
   Building2, Cog, HardHat, Wrench, Phone, Mail, MapPin,
@@ -9,6 +10,9 @@ import {
   Ruler, Compass, DraftingCompass, Factory, Calculator, BarChart3,
   Satellite, ScanLine, GraduationCap, Monitor, Radio, Gauge, MessageCircle
 } from 'lucide-react'
+
+/* ───────── dynamic map import (no SSR) ───────── */
+const BranchMap = dynamic(() => import('./BranchMap'), { ssr: false })
 
 /* ───────── animated counter ───────── */
 function Counter({ end, suffix = '', duration = 2 }: { end: number; suffix?: string; duration?: number }) {
@@ -1236,41 +1240,19 @@ function Contact() {
               </motion.div>
             ))}
 
-            {/* Branches map */}
-            <div className="rounded-xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)] overflow-hidden p-5 relative">
-              <div className="absolute inset-0 grid-pattern opacity-20" />
-              <div className="relative space-y-3">
-                <h4 className="text-[oklch(0.72_0.14_180)] font-semibold text-sm mb-3">فروعنا</h4>
-                <div className="flex items-start gap-2">
-                  <MapPin className="w-4 h-4 text-[oklch(0.72_0.14_180)] mt-0.5 shrink-0" />
-                  <div>
-                    <span className="text-[oklch(0.80_0.005_250)] text-sm font-medium">الفرع الرئيسي</span>
-                    <p className="text-[oklch(0.50_0.02_250)] text-xs">كفر كنا المنطقة الصناعية</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-2">
-                  <MapPin className="w-4 h-4 text-[oklch(0.65_0.16_200)] mt-0.5 shrink-0" />
-                  <div>
-                    <span className="text-[oklch(0.80_0.005_250)] text-sm font-medium">فرع الشمال</span>
-                    <p className="text-[oklch(0.50_0.02_250)] text-xs">كفر قاسم الشارع الرئيسي</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-2">
-                  <MapPin className="w-4 h-4 text-[oklch(0.80_0.10_160)] mt-0.5 shrink-0" />
-                  <div>
-                    <span className="text-[oklch(0.80_0.005_250)] text-sm font-medium">فرع رام الله</span>
-                    <p className="text-[oklch(0.50_0.02_250)] text-xs">شارع الإرسال قرب السفينة</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-2">
-                  <MapPin className="w-4 h-4 text-[oklch(0.60_0.18_30)] mt-0.5 shrink-0" />
-                  <div>
-                    <span className="text-[oklch(0.80_0.005_250)] text-sm font-medium">فرع الخليل</span>
-                    <p className="text-[oklch(0.50_0.02_250)] text-xs">شارع عين سارة مقابل ملعب الحسين بن علي</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* Branches interactive map */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)] overflow-hidden p-4 sm:p-5"
+            >
+              <h4 className="text-[oklch(0.72_0.14_180)] font-semibold text-sm mb-4 flex items-center gap-2">
+                <MapPin className="w-4 h-4" />
+                مواقع فروعنا على الخريطة
+              </h4>
+              <BranchMap />
+            </motion.div>
           </div>
 
           {/* Form */}
@@ -1447,11 +1429,19 @@ function Footer() {
               </div>
               <div className="flex items-start gap-2 text-[oklch(0.50_0.02_250)] text-sm">
                 <MapPin className="w-4 h-4 text-[oklch(0.72_0.14_180)] mt-0.5 shrink-0" />
-                <div>
-                  <p>الفرع الرئيسي: كفر كنا المنطقة الصناعية</p>
-                  <p>فرع الشمال: كفر قاسم الشارع الرئيسي</p>
-                  <p>فرع رام الله: شارع الإرسال قرب السفينة</p>
-                  <p>فرع الخليل: شارع عين سارة مقابل ملعب الحسين بن علي</p>
+                <div className="space-y-1.5">
+                  <a href="https://www.google.com/maps?q=32.7482,35.3438" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
+                    الفرع الرئيسي: كفر كنا المنطقة الصناعية ↗
+                  </a>
+                  <a href="https://www.google.com/maps?q=32.1141,34.9762" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
+                    فرع الشمال: كفر قاسم الشارع الرئيسي ↗
+                  </a>
+                  <a href="https://www.google.com/maps?q=31.8996,35.2042" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
+                    فرع رام الله: شارع الإرسال قرب السفينة ↗
+                  </a>
+                  <a href="https://www.google.com/maps?q=31.5294,35.0938" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
+                    فرع الخليل: شارع عين سارة مقابل ملعب الحسين بن علي ↗
+                  </a>
                 </div>
               </div>
             </div>
