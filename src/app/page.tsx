@@ -81,6 +81,7 @@ function Navbar() {
     { href: '#hero', label: 'الرئيسية' },
     { href: '#about', label: 'من نحن' },
     { href: '#services', label: 'خدماتنا' },
+    { href: '#team', label: 'فريقنا' },
     { href: '#gallery', label: 'المعرض' },
     { href: '#contact', label: 'تواصل معنا' },
   ]
@@ -1178,6 +1179,142 @@ function WhyUs() {
   )
 }
 
+/* ───────── team ───────── */
+function Team() {
+  const teamMembers = [
+    {
+      name: 'المهندس سلامة العواودة',
+      role: 'المدير العام',
+      initials: 'س ع',
+      gradient: 'from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)]',
+      border: 'border-[oklch(0.72_0.14_180_/_0.3)]',
+      glow: 'shadow-[oklch(0.72_0.14_180_/_0.15)]',
+      badge: 'المؤسس',
+    },
+    {
+      name: 'المهندس عدنان شومان',
+      role: 'المدير التنفيذي - الضفة الغربية',
+      initials: 'ع ش',
+      gradient: 'from-[oklch(0.65_0.16_200)] to-[oklch(0.55_0.12_250)]',
+      border: 'border-[oklch(0.65_0.16_200_/_0.3)]',
+      glow: 'shadow-[oklch(0.65_0.16_200_/_0.15)]',
+      badge: 'تنفيذي',
+    },
+    {
+      name: 'المهندس أنس أبو حديدة',
+      role: 'مدير فرع الخليل',
+      initials: 'أ ح',
+      gradient: 'from-[oklch(0.60_0.18_30)] to-[oklch(0.55_0.14_50)]',
+      border: 'border-[oklch(0.60_0.18_30_/_0.3)]',
+      glow: 'shadow-[oklch(0.60_0.18_30_/_0.15)]',
+      badge: 'فرع',
+    },
+    {
+      name: 'المهندسة ألاء أبو خلف',
+      role: 'قسم الرسم والمسح الضوئي',
+      initials: 'أ خ',
+      gradient: 'from-[oklch(0.75_0.15_330)] to-[oklch(0.65_0.16_300)]',
+      border: 'border-[oklch(0.75_0.15_330_/_0.3)]',
+      glow: 'shadow-[oklch(0.75_0.15_330_/_0.15)]',
+      badge: '',
+    },
+    {
+      name: 'المهندسة سجى مسالمة',
+      role: 'قسم الرسم والدعم الفني',
+      initials: 'س م',
+      gradient: 'from-[oklch(0.80_0.10_160)] to-[oklch(0.72_0.14_180)]',
+      border: 'border-[oklch(0.80_0.10_160_/_0.3)]',
+      glow: 'shadow-[oklch(0.80_0.10_160_/_0.15)]',
+      badge: '',
+    },
+    {
+      name: 'المهندس وعد وهدان',
+      role: 'قسم الدعم الفني',
+      initials: 'و و',
+      gradient: 'from-[oklch(0.55_0.12_250)] to-[oklch(0.65_0.16_200)]',
+      border: 'border-[oklch(0.55_0.12_250_/_0.3)]',
+      glow: 'shadow-[oklch(0.55_0.12_250_/_0.15)]',
+      badge: '',
+    },
+    {
+      name: 'المهندس حاتم عيدة',
+      role: 'قسم الرسم',
+      initials: 'ح ع',
+      gradient: 'from-[oklch(0.50_0.15_150)] to-[oklch(0.72_0.14_180)]',
+      border: 'border-[oklch(0.50_0.15_150_/_0.3)]',
+      glow: 'shadow-[oklch(0.50_0.15_150_/_0.15)]',
+      badge: '',
+    },
+  ]
+
+  return (
+    <Section id="team" className="py-20 sm:py-28 relative overflow-hidden">
+      <div className="absolute top-1/4 left-0 w-72 h-72 bg-[oklch(0.72_0.14_180_/_0.04)] rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-0 w-64 h-64 bg-[oklch(0.65_0.16_200_/_0.04)] rounded-full blur-3xl" />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">فريق العمل</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
+            نخبة من <span className="gradient-text">المهندسين المتخصصين</span>
+          </h2>
+          <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
+            فريقنا المتميز من المهندسين ذوي الخبرة والكفاءة العالية يعمل على تقديم أفضل الحلول والخدمات لعملائنا في جميع المجالات
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          {teamMembers.map((member, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              className={`group relative p-5 sm:p-6 rounded-2xl border bg-[oklch(0.17_0.02_250)] hover:bg-[oklch(0.20_0.03_250)] transition-all duration-500 ${member.border} hover:${member.glow} text-center`}
+            >
+              {/* Badge */}
+              {member.badge && (
+                <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[10px] font-bold bg-gradient-to-l from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)] text-[oklch(0.13_0.02_250)]">
+                  {member.badge}
+                </span>
+              )}
+
+              {/* Avatar */}
+              <div className="relative mx-auto mb-4 w-20 h-20 sm:w-24 sm:h-24">
+                <div className={`w-full h-full rounded-2xl bg-gradient-to-br ${member.gradient} flex items-center justify-center shadow-lg transition-transform duration-500 group-hover:scale-105`}>
+                  <span className="text-white text-xl sm:text-2xl font-bold select-none">{member.initials}</span>
+                </div>
+                {/* Decorative ring */}
+                <div className={`absolute -inset-1.5 rounded-2xl border ${member.border} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+              </div>
+
+              {/* Info */}
+              <h3 className="text-[oklch(0.90_0.005_250)] font-bold text-sm sm:text-base mb-1.5 leading-tight">{member.name}</h3>
+              <p className="text-[oklch(0.50_0.02_250)] text-xs sm:text-sm leading-relaxed">{member.role}</p>
+
+              {/* Bottom accent line */}
+              <div className={`mt-4 h-0.5 w-0 group-hover:w-full bg-gradient-to-l ${member.gradient} transition-all duration-500 mx-auto rounded-full`} />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Join CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-12 text-center"
+        >
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.17_0.02_250)]">
+            <Users className="w-5 h-5 text-[oklch(0.72_0.14_180)]" />
+            <span className="text-[oklch(0.60_0.02_250)] text-sm">فريق متخصص يضم نخبة من المهندسين ذوي الكفاءات العالية</span>
+          </div>
+        </motion.div>
+      </div>
+    </Section>
+  )
+}
+
 /* ───────── contact ───────── */
 function Contact() {
   const [submitted, setSubmitted] = useState(false)
@@ -1500,6 +1637,7 @@ export default function Home() {
         <Services />
         <Projects />
         <WhyUs />
+        <Team />
         <Testimonials />
         <Contact />
       </main>
