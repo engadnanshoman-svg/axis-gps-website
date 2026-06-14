@@ -30,3 +30,14 @@ model Post {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  company   String?
+  text      String
+  rating    Int
+  approved  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

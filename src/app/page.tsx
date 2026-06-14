@@ -1522,7 +1522,7 @@ function Projects() {
 }
 
 /* ───────── review form ───────── */
-function ReviewForm() {
+function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
   const [hoverRating, setHoverRating] = useState(0)
   const [selectedRating, setSelectedRating] = useState(0)
   const [submitted, setSubmitted] = useState(false)
@@ -1541,11 +1541,10 @@ function ReviewForm() {
       company: formData.get('review-company') as string,
       rating: selectedRating,
       text: formData.get('review-text') as string,
-      type: 'review' as const,
     }
 
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('/api/testimonials', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -1554,6 +1553,7 @@ function ReviewForm() {
         setSubmitted(true)
         form.reset()
         setSelectedRating(0)
+        onSubmitted?.()
         setTimeout(() => { setSubmitted(false); setFormOpen(false) }, 4000)
       }
     } catch { /* silent */ } finally {
@@ -1737,12 +1737,47 @@ function ReviewForm() {
   )
 }
 
+/* ───────── testimonials data types ───────── */
+interface TestimonialData {
+  id: string
+  name: string
+  company?: string | null
+  text: string
+  rating: number
+  createdAt?: string
+  initials?: string
+  color?: string
+  role?: string
+}
+
+/* Color palette for avatar gradients */
+const AVATAR_COLORS = [
+  'from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)]',
+  'from-[#E1306C] to-[#C1255E]',
+  'from-[oklch(0.55_0.12_250)] to-[oklch(0.65_0.16_200)]',
+  'from-[oklch(0.70_0.12_90)] to-[oklch(0.60_0.14_60)]',
+  'from-[oklch(0.75_0.15_330)] to-[oklch(0.65_0.16_300)]',
+  'from-[oklch(0.60_0.18_30)] to-[oklch(0.55_0.14_50)]',
+  'from-[oklch(0.80_0.10_160)] to-[oklch(0.72_0.14_180)]',
+]
+
+function getInitials(name: string): string {
+  const parts = name.trim().split(/\s+/)
+  if (parts.length === 1) return parts[0].slice(0, 2)
+  // Take first char of first and last name
+  return parts[0][0] + parts[parts.length - 1][0]
+}
+
 /* ───────── testimonials ───────── */
 function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [dbTestimonials, setDbTestimonials] = useState<TestimonialData[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const testimonials = [
+  // Seed testimonials (always shown)
+  const seedTestimonials: TestimonialData[] = [
     {
+      id: 'seed-1',
       name: 'م. أنس أبو حديد',
       role: 'مدير فرع الخليل - شركة اكسيس',
       text: 'نلتزم في اكسيس بتقديم أحدث التقنيات وأفضل الخدمات لعملائنا في قطاع المساحة والجيوماتكس، ونسعى دائماً لتجاوز توقعاتهم.',
@@ -1751,14 +1786,7 @@ function Testimonials() {
       color: 'from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)]',
     },
     {
-      name: 'م. سجى مسالمة',
-      role: 'فريق اكسيس - فرع الخليل',
-      text: 'فريق اكسيس يعمل بشغف لتوفير حلول مسح متكاملة تلبي احتياجات المشاريع المختلفة، من أجهزة GPS إلى أنظمة المراقبة المتقدمة.',
-      rating: 5,
-      initials: 'سجى',
-      color: 'from-[#E1306C] to-[#C1255E]',
-    },
-    {
+      id: 'seed-2',
       name: 'أحمد سعيد بيوض التميمي',
       role: 'رئيس مجلس أمناء جامعة البوليتكنك',
       text: 'نشيد بدور شركة اكسيس في إرفاد قطاع المساحة والجيوماتكس بأحدث التقنيات الحديثة من خلال مبادراتها وخبراتها المهنية للمساحين والمهندسين.',
@@ -1768,8 +1796,34 @@ function Testimonials() {
     },
   ]
 
+  // Fetch testimonials from database on mount
+  useEffect(() => {
+    async function fetchTestimonials() {
+      try {
+        const res = await fetch('/api/testimonials')
+        if (res.ok) {
+          const data = await res.json()
+          const mapped: TestimonialData[] = (data.testimonials || []).map((t: TestimonialData, i: number) => ({
+            ...t,
+            initials: getInitials(t.name),
+            color: AVATAR_COLORS[i % AVATAR_COLORS.length],
+            role: t.company || undefined,
+          }))
+          setDbTestimonials(mapped)
+        }
+      } catch { /* silent */ } finally {
+        setLoading(false)
+      }
+    }
+    fetchTestimonials()
+  }, [])
+
+  // Combine: seed + DB testimonials
+  const testimonials: TestimonialData[] = [...seedTestimonials, ...dbTestimonials]
+
   // Auto-rotate
   useEffect(() => {
+    if (testimonials.length <= 1) return
     const timer = setInterval(() => {
       setActiveIndex(prev => (prev + 1) % testimonials.length)
     }, 6000)
@@ -1795,129 +1849,150 @@ function Testimonials() {
           </p>
         </div>
 
-        {/* Featured Testimonial - Large Display */}
-        <div className="relative mb-10">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeIndex}
-              initial={{ opacity: 0, y: 20, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.97 }}
-              transition={{ duration: 0.5 }}
-              className="relative max-w-3xl mx-auto"
-            >
-              <div className="relative p-8 sm:p-12 rounded-3xl border border-[var(--b-1)] bg-[var(--bg-2)] overflow-hidden">
-                {/* Accent top line */}
-                <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-l from-[oklch(0.72_0.14_180)] via-[oklch(0.65_0.16_200)] to-[oklch(0.72_0.14_180)]" />
-                
-                {/* Large quote icon */}
-                <div className="absolute top-4 right-4 opacity-[0.04]">
-                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-32 h-32 text-[oklch(0.72_0.14_180)]"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
-                </div>
-
-                {/* Rating stars */}
-                <div className="flex items-center gap-1.5 mb-6">
-                  {[...Array(5)].map((_, j) => (
-                    <motion.div
-                      key={j}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: j * 0.1 + 0.3 }}
-                    >
-                      <Star className={`w-6 h-6 ${j < testimonials[activeIndex].rating ? 'fill-[#FBBF24] text-[#FBBF24]' : 'text-[var(--t-10)]'}`} />
-                    </motion.div>
-                  ))}
-                  <span className="mr-3 text-[var(--t-8)] text-sm font-medium">
-                    {testimonials[activeIndex].rating}.0
-                  </span>
-                </div>
-
-                {/* Quote text */}
-                <blockquote className="text-xl sm:text-2xl md:text-3xl font-bold text-[var(--t-1)] leading-relaxed mb-8 relative z-10">
-                  &ldquo;{testimonials[activeIndex].text}&rdquo;
-                </blockquote>
-
-                {/* Author info */}
-                <div className="flex items-center gap-4">
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${testimonials[activeIndex].color} flex items-center justify-center text-white font-bold text-lg shadow-lg`}>
-                    {testimonials[activeIndex].initials}
-                  </div>
-                  <div>
-                    <div className="font-bold text-[var(--t-0)] text-lg">{testimonials[activeIndex].name}</div>
-                    <div className="text-[var(--t-8)] text-sm">{testimonials[activeIndex].role}</div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Navigation dots */}
-          <div className="flex items-center justify-center gap-3 mt-8">
-            {testimonials.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveIndex(i)}
-                className={`transition-all duration-500 rounded-full ${
-                  i === activeIndex 
-                    ? 'w-10 h-3 bg-[oklch(0.72_0.14_180)]' 
-                    : 'w-3 h-3 bg-[var(--t-10)] hover:bg-[var(--t-8)]'
-                }`}
-                aria-label={`شهادة ${i + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Submit your review - Prominent CTA */}
+        {/* Submit your review - PROMINENT, at the top so users see it first */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative mt-12 p-6 sm:p-8 rounded-3xl border-2 border-dashed border-[oklch(0.72_0.14_180_/_0.3)] bg-[oklch(0.72_0.14_180_/_0.03)] overflow-hidden"
+          className="relative mb-12 p-6 sm:p-8 rounded-3xl border-2 border-dashed border-[oklch(0.72_0.14_180_/_0.3)] bg-[oklch(0.72_0.14_180_/_0.03)] overflow-hidden"
         >
           {/* Glow background */}
           <div className="absolute inset-0 bg-gradient-to-br from-[oklch(0.72_0.14_180_/_0.04)] to-transparent" />
           <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-l from-transparent via-[oklch(0.72_0.14_180_/_0.5)] to-transparent" />
 
           <div className="relative z-10">
-            <ReviewForm />
+            <ReviewForm onSubmitted={() => {
+              // Re-fetch testimonials after submission
+              fetch('/api/testimonials')
+                .then(r => r.json())
+                .then(data => {
+                  const mapped: TestimonialData[] = (data.testimonials || []).map((t: TestimonialData, i: number) => ({
+                    ...t,
+                    initials: getInitials(t.name),
+                    color: AVATAR_COLORS[(i + seedTestimonials.length) % AVATAR_COLORS.length],
+                    role: t.company || undefined,
+                  }))
+                  setDbTestimonials(mapped)
+                  setActiveIndex(seedTestimonials.length) // Show the new testimonial
+                })
+                .catch(() => {})
+            }} />
           </div>
         </motion.div>
 
-        {/* All testimonials grid - small cards */}
-        <div className="grid md:grid-cols-3 gap-5 mt-10">
-          {testimonials.map((t, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              onClick={() => setActiveIndex(i)}
-              className={`cursor-pointer group p-5 rounded-2xl border transition-all duration-300 ${
-                i === activeIndex 
-                  ? 'border-[oklch(0.72_0.14_180_/_0.4)] bg-[oklch(0.72_0.14_180_/_0.05)] shadow-lg shadow-[oklch(0.72_0.14_180_/_0.08)]' 
-                  : 'border-[var(--b-1)] bg-[var(--bg-2)] hover:border-[var(--accent-border-sm)]'
-              }`}
-            >
-              <div className="flex items-center gap-1 mb-3">
-                {[...Array(5)].map((_, j) => (
-                  <Star key={j} className={`w-3.5 h-3.5 ${j < t.rating ? 'fill-[#FBBF24] text-[#FBBF24]' : 'text-[var(--t-10)]'}`} />
+        {/* Featured Testimonial - Large Display */}
+        {testimonials.length > 0 && (
+          <div className="relative mb-10">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={testimonials[activeIndex]?.id || activeIndex}
+                initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -20, scale: 0.97 }}
+                transition={{ duration: 0.5 }}
+                className="relative max-w-3xl mx-auto"
+              >
+                <div className="relative p-8 sm:p-12 rounded-3xl border border-[var(--b-1)] bg-[var(--bg-2)] overflow-hidden">
+                  {/* Accent top line */}
+                  <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-l from-[oklch(0.72_0.14_180)] via-[oklch(0.65_0.16_200)] to-[oklch(0.72_0.14_180)]" />
+                  
+                  {/* Large quote icon */}
+                  <div className="absolute top-4 right-4 opacity-[0.04]">
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-32 h-32 text-[oklch(0.72_0.14_180)]"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                  </div>
+
+                  {/* Rating stars */}
+                  <div className="flex items-center gap-1.5 mb-6">
+                    {[...Array(5)].map((_, j) => (
+                      <motion.div
+                        key={j}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: j * 0.1 + 0.3 }}
+                      >
+                        <Star className={`w-6 h-6 ${j < testimonials[activeIndex].rating ? 'fill-[#FBBF24] text-[#FBBF24]' : 'text-[var(--t-10)]'}`} />
+                      </motion.div>
+                    ))}
+                    <span className="mr-3 text-[var(--t-8)] text-sm font-medium">
+                      {testimonials[activeIndex].rating}.0
+                    </span>
+                  </div>
+
+                  {/* Quote text */}
+                  <blockquote className="text-xl sm:text-2xl md:text-3xl font-bold text-[var(--t-1)] leading-relaxed mb-8 relative z-10">
+                    &ldquo;{testimonials[activeIndex].text}&rdquo;
+                  </blockquote>
+
+                  {/* Author info */}
+                  <div className="flex items-center gap-4">
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${testimonials[activeIndex].color || AVATAR_COLORS[0]} flex items-center justify-center text-white font-bold text-lg shadow-lg`}>
+                      {testimonials[activeIndex].initials || getInitials(testimonials[activeIndex].name)}
+                    </div>
+                    <div>
+                      <div className="font-bold text-[var(--t-0)] text-lg">{testimonials[activeIndex].name}</div>
+                      <div className="text-[var(--t-8)] text-sm">{testimonials[activeIndex].role || testimonials[activeIndex].company || ''}</div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Navigation dots */}
+            {testimonials.length > 1 && (
+              <div className="flex items-center justify-center gap-3 mt-8">
+                {testimonials.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveIndex(i)}
+                    className={`transition-all duration-500 rounded-full ${
+                      i === activeIndex 
+                        ? 'w-10 h-3 bg-[oklch(0.72_0.14_180)]' 
+                        : 'w-3 h-3 bg-[var(--t-10)] hover:bg-[var(--t-8)]'
+                    }`}
+                    aria-label={`شهادة ${i + 1}`}
+                  />
                 ))}
               </div>
-              <p className="text-[var(--t-4)] text-sm leading-relaxed mb-4 line-clamp-3">{t.text}</p>
-              <div className="flex items-center gap-2.5">
-                <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${t.color} flex items-center justify-center text-white font-bold text-xs`}>
-                  {t.initials}
+            )}
+          </div>
+        )}
+
+        {/* All testimonials grid - small cards */}
+        {testimonials.length > 0 && (
+          <div className={`grid gap-5 mt-10 ${testimonials.length <= 3 ? 'md:grid-cols-' + testimonials.length : 'md:grid-cols-3'}`} style={{ gridTemplateColumns: testimonials.length <= 3 ? `repeat(${Math.min(testimonials.length, 3)}, minmax(0, 1fr))` : undefined }}>
+            {testimonials.map((t, i) => (
+              <motion.div
+                key={t.id || i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                onClick={() => setActiveIndex(i)}
+                className={`cursor-pointer group p-5 rounded-2xl border transition-all duration-300 ${
+                  i === activeIndex 
+                    ? 'border-[oklch(0.72_0.14_180_/_0.4)] bg-[oklch(0.72_0.14_180_/_0.05)] shadow-lg shadow-[oklch(0.72_0.14_180_/_0.08)]' 
+                    : 'border-[var(--b-1)] bg-[var(--bg-2)] hover:border-[var(--accent-border-sm)]'
+                }`}
+              >
+                <div className="flex items-center gap-1 mb-3">
+                  {[...Array(5)].map((_, j) => (
+                    <Star key={j} className={`w-3.5 h-3.5 ${j < t.rating ? 'fill-[#FBBF24] text-[#FBBF24]' : 'text-[var(--t-10)]'}`} />
+                  ))}
                 </div>
-                <div>
-                  <div className="font-semibold text-[var(--t-1)] text-xs">{t.name}</div>
-                  <div className="text-[var(--t-9)] text-[10px]">{t.role}</div>
+                <p className="text-[var(--t-4)] text-sm leading-relaxed mb-4 line-clamp-3">{t.text}</p>
+                <div className="flex items-center gap-2.5">
+                  <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${t.color || AVATAR_COLORS[i % AVATAR_COLORS.length]} flex items-center justify-center text-white font-bold text-xs`}>
+                    {t.initials || getInitials(t.name)}
+                  </div>
+                  <div>
+                    <div className="font-semibold text-[var(--t-1)] text-xs">{t.name}</div>
+                    <div className="text-[var(--t-9)] text-[10px]">{t.role || t.company || ''}</div>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
     </Section>
   )
