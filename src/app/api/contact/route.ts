@@ -1,13 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const TO_EMAILS = ['adnan@axis-gps.com'];
+const TO_EMAIL = 'adnan@axis-gps.com';
 
+/* ── Resend (primary) ── */
 function getResend() {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return null;
   // Lazy import to avoid build-time errors
   const { Resend } = require('resend');
   return new Resend(apiKey);
+}
+
+/* ── Nodemailer (fallback SMTP) ── */
+async function sendViaNodemailer(htmlContent: string, subject: string) {
+  const nodemailer = require('nodemailer');
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST || '',
+    port: Number(process.env.SMTP_PORT) || 587,
+    secure: Number(process.env.SMTP_PORT) === 465,
+    auth: {
+      user: process.env.SMTP_USER || '',
+      pass: process.env.SMTP_PASS || '',
+    },
+  });
+
+  await transporter.sendMail({
+    from: `"اكسيس للحلول الهندسية" <${process.env.SMTP_USER || 'noreply@axis-gps.com'}>`,
+    to: TO_EMAIL,
+    subject,
+    html: htmlContent,
+  });
 }
 
 export async function POST(req: NextRequest) {
@@ -72,33 +94,63 @@ export async function POST(req: NextRequest) {
       </div>
     `;
 
-    // Check if Resend API key is configured
+    const subject = `طلب عرض جديد من ${name} - ${serviceName}`;
+
+    // Try Resend first
     const resend = getResend();
     if (resend) {
-      // Send email using Resend
       const { error } = await resend.emails.send({
         from: 'اكسيس للحلول الهندسية <onboarding@resend.dev>',
-        to: TO_EMAILS,
-        subject: `طلب عرض جديد من ${name} - ${serviceName}`,
+        to: TO_EMAIL,
+        subject,
         html: htmlContent,
       });
 
       if (error) {
         console.error('Resend error:', error);
+        // Try nodemailer fallback
+        if (process.env.SMTP_HOST) {
+          try {
+            await sendViaNodemailer(htmlContent, subject);
+            console.log('✅ Email sent via SMTP fallback');
+          } catch (smtpErr) {
+            console.error('SMTP fallback error:', smtpErr);
+            return NextResponse.json(
+              { error: 'حدث خطأ في إرسال البريد الإلكتروني' },
+              { status: 500 }
+            );
+          }
+        } else {
+          return NextResponse.json(
+            { error: 'حدث خطأ في إرسال البريد الإلكتروني' },
+            { status: 500 }
+          );
+        }
+      } else {
+        console.log('✅ Email sent via Resend to:', TO_EMAIL);
+      }
+    } else if (process.env.SMTP_HOST) {
+      // No Resend key, try SMTP
+      try {
+        await sendViaNodemailer(htmlContent, subject);
+        console.log('✅ Email sent via SMTP to:', TO_EMAIL);
+      } catch (smtpErr) {
+        console.error('SMTP error:', smtpErr);
         return NextResponse.json(
           { error: 'حدث خطأ في إرسال البريد الإلكتروني' },
           { status: 500 }
         );
       }
     } else {
-      // No API key - log to console and still return success
+      // No email service configured - log to console
       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-      console.log('📧 NEW CONTACT FORM SUBMISSION:');
+      console.log('📧 NEW CONTACT FORM SUBMISSION (no email service configured):');
       console.log(`  Name: ${name}`);
       console.log(`  Email: ${email}`);
       console.log(`  Phone: ${phone || 'N/A'}`);
       console.log(`  Service: ${serviceName}`);
       console.log(`  Message: ${message}`);
+      console.log('  ⚠️  Configure RESEND_API_KEY or SMTP settings in .env');
       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     }
 

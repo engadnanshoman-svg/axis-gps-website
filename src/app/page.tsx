@@ -169,38 +169,87 @@ function Navbar() {
                 </a>
               ))}
             </div>
-            {/* Desktop Theme toggle */}
+            {/* Desktop Theme toggle - INLINE SVG for guaranteed visibility */}
             <button
               onClick={toggleTheme}
-              className="theme-toggle-btn flex items-center justify-center w-[42px] h-[42px] min-w-[42px] rounded-full cursor-pointer transition-all duration-300 hover:scale-110"
+              className="theme-toggle-btn flex items-center justify-center rounded-full cursor-pointer transition-all duration-300 hover:scale-110 shrink-0"
               style={{
-                background: theme === 'dark' ? '#facc15' : '#1e293b',
+                width: '48px',
+                height: '48px',
+                minWidth: '48px',
+                background: theme === 'dark' ? 'linear-gradient(135deg, #facc15, #f59e0b)' : 'linear-gradient(135deg, #1e293b, #0f172a)',
                 color: theme === 'dark' ? '#0f172a' : '#facc15',
-                border: '3px solid ' + (theme === 'dark' ? '#eab308' : '#334155'),
-                boxShadow: theme === 'dark' ? '0 0 15px rgba(250,204,21,0.5)' : '0 0 15px rgba(30,41,59,0.3)',
+                border: '3px solid ' + (theme === 'dark' ? '#eab308' : '#475569'),
+                boxShadow: theme === 'dark'
+                  ? '0 0 20px rgba(250,204,21,0.6), 0 0 40px rgba(250,204,21,0.2)'
+                  : '0 0 20px rgba(30,41,59,0.4), 0 0 40px rgba(100,116,139,0.15)',
+                position: 'relative',
+                zIndex: 9999,
+                isolation: 'isolate',
               }}
               aria-label={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
               title={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
             >
-              {theme === 'dark' ? <Sun size={22} /> : <Moon size={22} />}
+              {theme === 'dark' ? (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="5" />
+                  <line x1="12" y1="1" x2="12" y2="3" />
+                  <line x1="12" y1="21" x2="12" y2="23" />
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                  <line x1="1" y1="12" x2="3" y2="12" />
+                  <line x1="21" y1="12" x2="23" y2="12" />
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                </svg>
+              ) : (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+              )}
             </button>
           </div>
 
           {/* Mobile: Theme toggle + Menu button */}
-          <div className="flex md:hidden items-center gap-2">
+          <div className="flex md:hidden items-center gap-3">
+            {/* Mobile Theme toggle - INLINE SVG for guaranteed visibility */}
             <button
               onClick={toggleTheme}
-              className="theme-toggle-btn flex items-center justify-center w-[42px] h-[42px] min-w-[42px] rounded-full cursor-pointer transition-all duration-300 hover:scale-110"
+              className="theme-toggle-btn flex items-center justify-center rounded-full cursor-pointer transition-all duration-300 hover:scale-110 shrink-0"
               style={{
-                background: theme === 'dark' ? '#facc15' : '#1e293b',
+                width: '48px',
+                height: '48px',
+                minWidth: '48px',
+                background: theme === 'dark' ? 'linear-gradient(135deg, #facc15, #f59e0b)' : 'linear-gradient(135deg, #1e293b, #0f172a)',
                 color: theme === 'dark' ? '#0f172a' : '#facc15',
-                border: '3px solid ' + (theme === 'dark' ? '#eab308' : '#334155'),
-                boxShadow: theme === 'dark' ? '0 0 15px rgba(250,204,21,0.5)' : '0 0 15px rgba(30,41,59,0.3)',
+                border: '3px solid ' + (theme === 'dark' ? '#eab308' : '#475569'),
+                boxShadow: theme === 'dark'
+                  ? '0 0 20px rgba(250,204,21,0.6), 0 0 40px rgba(250,204,21,0.2)'
+                  : '0 0 20px rgba(30,41,59,0.4), 0 0 40px rgba(100,116,139,0.15)',
+                position: 'relative',
+                zIndex: 9999,
+                isolation: 'isolate',
               }}
               aria-label={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
               title={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
             >
-              {theme === 'dark' ? <Sun size={22} /> : <Moon size={22} />}
+              {theme === 'dark' ? (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="5" />
+                  <line x1="12" y1="1" x2="12" y2="3" />
+                  <line x1="12" y1="21" x2="12" y2="23" />
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                  <line x1="1" y1="12" x2="3" y2="12" />
+                  <line x1="21" y1="12" x2="23" y2="12" />
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                </svg>
+              ) : (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+              )}
             </button>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -238,7 +287,23 @@ function Navbar() {
                 onClick={() => { toggleTheme(); setMobileOpen(false) }}
                 className="flex items-center gap-2 w-full px-4 py-3 text-[oklch(0.65_0.02_250)] hover:text-[oklch(0.72_0.14_180)] rounded-lg hover:bg-[oklch(0.72_0.14_180_/_0.08)] transition-all"
               >
-                {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                {theme === 'dark' ? (
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="5" />
+                    <line x1="12" y1="1" x2="12" y2="3" />
+                    <line x1="12" y1="21" x2="12" y2="23" />
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                    <line x1="1" y1="12" x2="3" y2="12" />
+                    <line x1="21" y1="12" x2="23" y2="12" />
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                  </svg>
+                ) : (
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                  </svg>
+                )}
                 {theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
               </button>
               <a
