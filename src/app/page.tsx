@@ -678,7 +678,6 @@ function Services() {
       brands: [
         {
           name: 'Trimble', products: [
-            { name: 'R12i', img: 'https://images.ctfassets.net/1nvkn1423yot/2sAoRXLMy3pnKfJTMFsnfa/1dde04c6a7bb9d3730b3ce54e72c4589/geo-r12i-productpage-fullbackgroundproducthero-800x960.png', datasheet: 'https://geonovus.ee/wp-content/uploads/Datasheet-Trimble-R12i.pdf' },
             { name: 'R580', img: 'https://images.ctfassets.net/1nvkn1423yot/gJeRON0RN9meNwu9LiC7r/28ded15c873baef48ae4d609e7c7b6e2/geo-r580-productpage-fullbackgroundproducthero-800x960.png', datasheet: 'https://www.geonovus.lt/sites/default/files/022516-677a_trimbler580_datasheet_usl_0923_lrsec_1.pdf' },
             { name: 'R980', img: 'https://images.ctfassets.net/1nvkn1423yot/1jtUB5X0fiJVKIiTfK9zC4/0e41587621af7156f5d6c38f730789a6/geo-product-r980-pim-image-800x960.png', datasheet: 'https://www.laserinst.com/content/R980_Datasheet.pdf' },
             { name: 'Catalyst DA2', img: 'https://images.ctfassets.net/1nvkn1423yot/5RDHxxntqleqha8WC295R6/25929a7fb312f0f657d025c8f6ce1c4e/geo-da2-productpage-fullbackgroundproducthero-800x960__1_.png', datasheet: 'https://buildingpoint.com.au/wp-content/uploads/2024/10/trimble-catalyst-spec-sheet.pdf' },
@@ -746,7 +745,11 @@ function Services() {
       title: 'مستويات ليزر وبناء',
       desc: 'مستويات ليزر دوارة ومائلة وخطية وأنابيب وأجهزة قياس مسافة ليزرية لجميع أعمال البناء والطرق والصرف',
       brands: [
-        { name: 'Spectra', products: [{ name: 'LL500', img: '', datasheet: '' }, { name: 'HV301', img: '', datasheet: '' }, { name: 'DG613', img: '', datasheet: '' }], __old: true },
+        { name: 'Spectra', products: [
+            { name: 'LL500', img: 'https://sfile.chatglm.cn/images-ppt/4f53457e5907.png', datasheet: 'https://www.spectraprecision.com/_files/ugd/cd4160_34f59423c5414a86b74a0cd6abffa024.pdf' },
+            { name: 'HV301', img: 'https://sfile.chatglm.cn/images-ppt/8c4c4d3b5ca7.jpg', datasheet: 'https://www.surveyinstrumentsales.com/PDFs/Brochures/Spectra-Precision-HV301-Brochure.pdf' },
+            { name: 'DG613', img: 'https://sfile.chatglm.cn/images-ppt/dd80ee5d60b2.jpg', datasheet: 'https://www.spectraprecision.com/_files/ugd/cd4160_ec44bf9f0ad8480a953c0313ef78bf7c.pdf' },
+        ] },
       ],
     },
     {
@@ -2232,7 +2235,7 @@ function Footer() {
                   <a href="https://www.google.com/maps?q=32.11146,34.96504" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
                     فرع الشمال: كفر قاسم شارع علي بن أبي طالب ↗
                   </a>
-                  <a href="https://www.google.com/maps?q=31.93306,35.21009" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
+                  <a href="https://www.google.com/maps?q=31.92730,35.20910" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
                     فرع رام الله: شارع الإرسال قرب السفينة ↗
                   </a>
                   <a href="https://www.google.com/maps?q=31.537372,35.0987544" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
@@ -2305,8 +2308,8 @@ function Branches() {
       name: 'فرع رام الله',
       address: 'رام الله - شارع الإرسال قرب السفينة',
       phone: '02-2950149',
-      lat: 31.93306,
-      lng: 35.21009,
+      lat: 31.92730,
+      lng: 35.20910,
       color: '#f59e0b',
     },
     {
@@ -2615,6 +2618,23 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
+        {/* ── Quick Access: فروعنا floating bar ── */}
+        <div className="relative z-40 -mt-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.a
+              href="#branches"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 5, duration: 0.8 }}
+              className="group flex items-center justify-center gap-3 py-4 px-8 rounded-2xl bg-gradient-to-l from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)] text-[oklch(0.13_0.02_250)] font-bold text-lg shadow-xl shadow-[oklch(0.72_0.14_180_/_0.25)] hover:shadow-2xl hover:shadow-[oklch(0.72_0.14_180_/_0.35)] hover:scale-[1.02] transition-all duration-300"
+            >
+              <MapPinned className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+              <span>فروعنا</span>
+              <span className="text-sm font-medium opacity-70">— 4 فروع تغطي فلسطين</span>
+              <ChevronDown className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
+            </motion.a>
+          </div>
+        </div>
         <Branches />
         <About />
         <CEOMessage />
