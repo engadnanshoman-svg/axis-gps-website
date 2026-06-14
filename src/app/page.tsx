@@ -653,32 +653,26 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          {/* رأيك يهمنا - Eye-catching modern CTA */}
+          {/* رأيك يهمنا - Wide prominent CTA */}
           <a
             href="#testimonials"
-            className="group relative px-8 py-4 rounded-2xl font-bold flex items-center gap-3 overflow-hidden transition-all duration-500 hover:scale-[1.04] active:scale-[0.98]"
+            className="group relative w-full sm:w-auto sm:min-w-[420px] px-10 py-5 rounded-2xl font-bold flex items-center justify-center gap-3 overflow-hidden transition-all duration-500 hover:scale-[1.03] active:scale-[0.98]"
           >
             {/* Animated gradient background */}
             <span className="absolute inset-0 bg-gradient-to-l from-[oklch(0.72_0.14_180)] via-[oklch(0.65_0.18_200)] to-[oklch(0.72_0.14_180)] transition-all duration-500" />
             {/* Shimmer overlay */}
             <span className="absolute inset-0 bg-gradient-to-l from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
             {/* Pulse ring behind star */}
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 animate-ping opacity-30" />
+            <span className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white/10 animate-ping opacity-30" />
             {/* Content */}
-            <span className="relative z-10 text-[oklch(0.13_0.02_250)] flex items-center gap-3">
+            <span className="relative z-10 text-[oklch(0.13_0.02_250)] flex items-center gap-3 text-lg">
               {/* Modern star-burst icon */}
-              <span className="relative flex items-center justify-center w-8 h-8">
-                <Star className="w-5 h-5 fill-[oklch(0.13_0.02_250)] text-[oklch(0.13_0.02_250)] group-hover:rotate-[72deg] transition-transform duration-500" />
+              <span className="relative flex items-center justify-center w-9 h-9">
+                <Star className="w-6 h-6 fill-[oklch(0.13_0.02_250)] text-[oklch(0.13_0.02_250)] group-hover:rotate-[72deg] transition-transform duration-500" />
               </span>
-              رأيك يهمنا
+              شاركنا رأيك — تجربتك تهمنا
               <MessageCircle className="w-5 h-5 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
             </span>
-          </a>
-          <a
-            href="#contact"
-            className="px-8 py-4 border border-[oklch(0.72_0.14_180_/_0.3)] text-[oklch(0.72_0.14_180)] font-semibold rounded-xl hover:bg-[var(--accent-bg-sm)] hover:border-[var(--accent-border-lg)] transition-all duration-300"
-          >
-            تواصل معنا
           </a>
         </motion.div>
       </div>
