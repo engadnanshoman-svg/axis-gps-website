@@ -124,7 +124,7 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
-          <a href="#hero" className="flex items-center gap-3 group">
+          <a href="#hero" className="flex items-center gap-3 group shrink-0">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg overflow-hidden glow-teal-sm transition-all duration-300 group-hover:scale-110">
               <img src="/logo.png" alt="اكسيس" className="w-full h-full object-contain" />
             </div>
@@ -134,7 +134,7 @@ function Navbar() {
             </div>
           </a>
 
-          {/* Desktop Links */}
+          {/* Desktop Links + Theme Toggle */}
           <div className="hidden md:flex items-center gap-1">
             {links.map(l => (
               <a
@@ -169,26 +169,63 @@ function Navbar() {
                 </a>
               ))}
             </div>
+            {/* Desktop Theme toggle */}
+            <button
+              onClick={toggleTheme}
+              style={{
+                width: '42px',
+                height: '42px',
+                minWidth: '42px',
+                borderRadius: '50%',
+                background: theme === 'dark' ? '#facc15' : '#1e293b',
+                color: theme === 'dark' ? '#0f172a' : '#facc15',
+                border: '3px solid ' + (theme === 'dark' ? '#eab308' : '#334155'),
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.3s',
+                boxShadow: theme === 'dark' ? '0 0 12px rgba(250, 204, 21, 0.4)' : '0 0 12px rgba(30, 41, 59, 0.3)',
+              }}
+              aria-label={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
+              title={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
+            >
+              {theme === 'dark' ? <Sun size={22} /> : <Moon size={22} />}
+            </button>
           </div>
 
-          {/* Theme toggle - always visible */}
-          <button
-            onClick={toggleTheme}
-            className="p-2.5 rounded-full bg-[oklch(0.72_0.14_180_/_0.15)] text-[oklch(0.72_0.14_180)] hover:bg-[oklch(0.72_0.14_180_/_0.25)] border border-[oklch(0.72_0.14_180_/_0.3)] transition-all duration-300 hover:scale-110"
-            aria-label={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
-            title={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
-          >
-            {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-          </button>
-
-          {/* Mobile toggle */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 text-[var(--t-3)]"
-            aria-label="القائمة"
-          >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile: Theme toggle + Menu button */}
+          <div className="flex md:hidden items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              style={{
+                width: '42px',
+                height: '42px',
+                minWidth: '42px',
+                borderRadius: '50%',
+                background: theme === 'dark' ? '#facc15' : '#1e293b',
+                color: theme === 'dark' ? '#0f172a' : '#facc15',
+                border: '3px solid ' + (theme === 'dark' ? '#eab308' : '#334155'),
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.3s',
+                boxShadow: theme === 'dark' ? '0 0 12px rgba(250, 204, 21, 0.4)' : '0 0 12px rgba(30, 41, 59, 0.3)',
+              }}
+              aria-label={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
+              title={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
+            >
+              {theme === 'dark' ? <Sun size={22} /> : <Moon size={22} />}
+            </button>
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="p-2 text-[var(--t-3)]"
+              aria-label="القائمة"
+            >
+              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
