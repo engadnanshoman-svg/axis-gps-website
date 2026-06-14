@@ -5,7 +5,7 @@ import subprocess, time, sys, os, signal
 # Start the server
 env = os.environ.copy()
 proc = subprocess.Popen(
-    ['npx', 'next', 'start', '-p', '3002', '-H', '0.0.0.0'],
+    ['npx', 'next', 'dev', '-p', '3002', '-H', '0.0.0.0'],
     cwd='/home/z/my-project',
     stdout=subprocess.PIPE,
     stderr=subprocess.PIPE,

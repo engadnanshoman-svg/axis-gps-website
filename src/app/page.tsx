@@ -112,7 +112,7 @@ function Navbar() {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
+      initial={{ y: 0 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -172,20 +172,12 @@ function Navbar() {
             {/* Desktop Theme toggle */}
             <button
               onClick={toggleTheme}
+              className="theme-toggle-btn flex items-center justify-center w-[42px] h-[42px] min-w-[42px] rounded-full cursor-pointer transition-all duration-300 hover:scale-110"
               style={{
-                width: '42px',
-                height: '42px',
-                minWidth: '42px',
-                borderRadius: '50%',
                 background: theme === 'dark' ? '#facc15' : '#1e293b',
                 color: theme === 'dark' ? '#0f172a' : '#facc15',
                 border: '3px solid ' + (theme === 'dark' ? '#eab308' : '#334155'),
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.3s',
-                boxShadow: theme === 'dark' ? '0 0 12px rgba(250, 204, 21, 0.4)' : '0 0 12px rgba(30, 41, 59, 0.3)',
+                boxShadow: theme === 'dark' ? '0 0 15px rgba(250,204,21,0.5)' : '0 0 15px rgba(30,41,59,0.3)',
               }}
               aria-label={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
               title={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
@@ -198,20 +190,12 @@ function Navbar() {
           <div className="flex md:hidden items-center gap-2">
             <button
               onClick={toggleTheme}
+              className="theme-toggle-btn flex items-center justify-center w-[42px] h-[42px] min-w-[42px] rounded-full cursor-pointer transition-all duration-300 hover:scale-110"
               style={{
-                width: '42px',
-                height: '42px',
-                minWidth: '42px',
-                borderRadius: '50%',
                 background: theme === 'dark' ? '#facc15' : '#1e293b',
                 color: theme === 'dark' ? '#0f172a' : '#facc15',
                 border: '3px solid ' + (theme === 'dark' ? '#eab308' : '#334155'),
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.3s',
-                boxShadow: theme === 'dark' ? '0 0 12px rgba(250, 204, 21, 0.4)' : '0 0 12px rgba(30, 41, 59, 0.3)',
+                boxShadow: theme === 'dark' ? '0 0 15px rgba(250,204,21,0.5)' : '0 0 15px rgba(30,41,59,0.3)',
               }}
               aria-label={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
               title={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
@@ -1857,11 +1841,46 @@ function Team() {
 /* ───────── contact ───────── */
 function Contact() {
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 4000)
+    setLoading(true)
+    setError('')
+
+    const form = e.currentTarget
+    const formData = new FormData(form)
+    const data = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      phone: formData.get('phone') as string,
+      service: formData.get('service') as string,
+      message: formData.get('message') as string,
+    }
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+
+      const result = await res.json()
+
+      if (!res.ok) {
+        throw new Error(result.error || 'حدث خطأ في الإرسال')
+      }
+
+      setSubmitted(true)
+      form.reset()
+      setTimeout(() => setSubmitted(false), 5000)
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'حدث خطأ غير متوقع'
+      setError(message)
+    } finally {
+      setLoading(false)
+    }
   }
 
   const contactInfo = [
@@ -1944,6 +1963,8 @@ function Contact() {
                 <label className="block text-sm text-[var(--t-6)] mb-2">الاسم الكامل</label>
                 <input
                   type="text"
+                  name="name"
+                  required
                   placeholder="أدخل اسمك"
                   className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] placeholder:text-[var(--t-10)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors"
                 />
@@ -1952,6 +1973,8 @@ function Contact() {
                 <label className="block text-sm text-[var(--t-6)] mb-2">البريد الإلكتروني</label>
                 <input
                   type="email"
+                  name="email"
+                  required
                   placeholder="example@email.com"
                   dir="ltr"
                   className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] placeholder:text-[var(--t-10)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors"
@@ -1962,14 +1985,15 @@ function Contact() {
               <label className="block text-sm text-[var(--t-6)] mb-2">رقم الهاتف</label>
               <input
                 type="tel"
-                placeholder="+966 XX XXX XXXX"
+                name="phone"
+                placeholder="+972 XX XXX XXXX"
                 dir="ltr"
                 className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] placeholder:text-[var(--t-10)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors"
               />
             </div>
             <div className="mb-4">
               <label className="block text-sm text-[var(--t-6)] mb-2">نوع الخدمة</label>
-              <select className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors appearance-none">
+              <select name="service" className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors appearance-none">
                 <option value="">اختر الخدمة المطلوبة</option>
                 <option value="gps">أجهزة GPS و RTK</option>
                 <option value="total-station">أجهزة التوتل ستيشن</option>
@@ -1983,6 +2007,8 @@ function Contact() {
               <label className="block text-sm text-[var(--t-6)] mb-2">تفاصيل المشروع</label>
               <textarea
                 rows={4}
+                name="message"
+                required
                 placeholder="اكتب تفاصيل مشروعك هنا..."
                 className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] placeholder:text-[var(--t-10)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors resize-none"
               />
@@ -1994,21 +2020,39 @@ function Contact() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
-                  className="flex items-center justify-center gap-2 py-3 text-[oklch(0.72_0.14_180)] font-semibold"
+                  className="flex items-center justify-center gap-2 py-4 text-[oklch(0.72_0.14_180)] font-semibold"
                 >
                   <CheckCircle2 className="w-5 h-5" />
-                  تم إرسال رسالتك بنجاح!
+                  تم إرسال رسالتك بنجاح! سنتواصل معك قريباً
                 </motion.div>
               ) : (
-                <motion.button
-                  initial={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  type="submit"
-                  className="w-full flex items-center justify-center gap-2 py-4 bg-[oklch(0.72_0.14_180)] text-[oklch(0.13_0.02_250)] font-bold rounded-xl hover:bg-[oklch(0.75_0.15_180)] transition-all duration-300 glow-teal-sm"
-                >
-                  <Send className="w-5 h-5" />
-                  إرسال الرسالة
-                </motion.button>
+                <motion.div initial={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  {error && (
+                    <div className="mb-3 p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm text-center">
+                      {error}
+                    </div>
+                  )}
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full flex items-center justify-center gap-2 py-4 bg-[oklch(0.72_0.14_180)] text-[oklch(0.13_0.02_250)] font-bold rounded-xl hover:bg-[oklch(0.75_0.15_180)] transition-all duration-300 glow-teal-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {loading ? (
+                      <>
+                        <svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                        </svg>
+                        جاري الإرسال...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5" />
+                        إرسال الرسالة
+                      </>
+                    )}
+                  </button>
+                </motion.div>
               )}
             </AnimatePresence>
           </motion.form>
