@@ -8,7 +8,8 @@ import {
   ChevronDown, ArrowLeft, Menu, X, CheckCircle2, Users,
   Target, Zap, Shield, ArrowUpRight, Send, Star,
   Ruler, Compass, DraftingCompass, Factory, Calculator, BarChart3,
-  Satellite, ScanLine, GraduationCap, Monitor, Radio, Gauge, MessageCircle
+  Satellite, ScanLine, GraduationCap, Monitor, Radio, Gauge, MessageCircle,
+  FileText, BookOpen, Globe, Award, Eye, Lock, Download
 } from 'lucide-react'
 
 /* ───────── dynamic map import (no SSR) ───────── */
@@ -82,6 +83,7 @@ function Navbar() {
     { href: '#about', label: 'من نحن' },
     { href: '#services', label: 'خدماتنا' },
     { href: '#team', label: 'فريقنا' },
+    { href: '#documents', label: 'المستندات' },
     { href: '#gallery', label: 'المعرض' },
     { href: '#contact', label: 'تواصل معنا' },
   ]
@@ -1639,10 +1641,10 @@ function Team() {
         <div className="text-center mb-14">
           <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">فريق العمل</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
-            الهيكل <span className="gradient-text">التنظيمي</span>
+            الهيكل <span className="gradient-text">الإداري</span>
           </h2>
           <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
-            هيكل تنظيمي متكامل يضم نخبة من المهندسين والمتخصصين تحت قيادة متميزة
+            هيكل إداري متكامل يضم نخبة من المهندسين والمتخصصين تحت قيادة متميزة
           </p>
         </div>
 
@@ -1889,6 +1891,201 @@ function Contact() {
   )
 }
 
+/* ───────── documents / resources ───────── */
+function Documents() {
+  const [activeDoc, setActiveDoc] = useState<string | null>(null)
+
+  const docs = [
+    {
+      id: 'cv-2025',
+      title: 'السيرة الذاتية 2025',
+      description: 'السيرة الذاتية المحدثة لشركة اكسيس للحلول الهندسية المتقدمة',
+      icon: <BookOpen className="w-6 h-6" />,
+      file: '/docs/cv-2025.pdf',
+      color: 'from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)]',
+      borderColor: 'border-[oklch(0.72_0.14_180_/_0.3)]',
+      category: 'السيرة الذاتية',
+    },
+    {
+      id: 'cv-2022',
+      title: 'السيرة الذاتية 2022',
+      description: 'النسخة السابقة من السيرة الذاتية لشركة اكسيس',
+      icon: <FileText className="w-6 h-6" />,
+      file: '/docs/cv-2022.pdf',
+      color: 'from-[oklch(0.65_0.16_200)] to-[oklch(0.55_0.12_250)]',
+      borderColor: 'border-[oklch(0.65_0.16_200_/_0.3)]',
+      category: 'السيرة الذاتية',
+    },
+    {
+      id: 'clients',
+      title: 'زبائن الشركة',
+      description: 'قائمة شاملة بعملاء شركة اكسيس والمشاريع المنفذة',
+      icon: <Users className="w-6 h-6" />,
+      file: '/docs/clients.pdf',
+      color: 'from-[oklch(0.75_0.15_330)] to-[oklch(0.65_0.16_300)]',
+      borderColor: 'border-[oklch(0.75_0.15_330_/_0.3)]',
+      category: 'الزبائن',
+    },
+    {
+      id: 'network-general',
+      title: 'شبكة المحطات الثابتة',
+      description: 'معلومات شبكة أكسيس للمحطات الثابتة المرجعية',
+      icon: <Globe className="w-6 h-6" />,
+      file: '/docs/network-general.pdf',
+      color: 'from-[oklch(0.80_0.10_160)] to-[oklch(0.72_0.14_180)]',
+      borderColor: 'border-[oklch(0.80_0.10_160_/_0.3)]',
+      category: 'شبكة المحطات',
+    },
+    {
+      id: 'network-complete',
+      title: 'أوراق اعتماد الشبكة',
+      description: 'الوثائق والأوراق الرسمية لاعتماد شبكة المحطات',
+      icon: <Award className="w-6 h-6" />,
+      file: '/docs/network-complete.pdf',
+      color: 'from-[oklch(0.60_0.18_30)] to-[oklch(0.55_0.14_50)]',
+      borderColor: 'border-[oklch(0.60_0.18_30_/_0.3)]',
+      category: 'أوراق الاعتماد',
+    },
+    {
+      id: 'tech-support',
+      title: 'الدعم الفني',
+      description: 'وثائق الدعم الفني والخدمات المقدمة للعملاء',
+      icon: <Cog className="w-6 h-6" />,
+      file: '/docs/technical-support.pdf',
+      color: 'from-[oklch(0.55_0.12_250)] to-[oklch(0.65_0.16_200)]',
+      borderColor: 'border-[oklch(0.55_0.12_250_/_0.3)]',
+      category: 'الدعم الفني',
+    },
+  ]
+
+  return (
+    <Section id="documents" className="py-20 sm:py-28 relative overflow-hidden">
+      <div className="absolute top-0 left-1/3 w-96 h-96 bg-[oklch(0.72_0.14_180_/_0.04)] rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/3 w-80 h-80 bg-[oklch(0.65_0.16_200_/_0.04)] rounded-full blur-3xl" />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-14">
+          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">المستندات والوثائق</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
+            مكتبة <span className="gradient-text">المستندات</span>
+          </h2>
+          <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
+            تصفح السيرة الذاتية للشركة ووثائق الاعتماد وشبكة المحطات وقائمة الزبائن
+          </p>
+        </div>
+
+        {/* Document cards grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+          {docs.map((doc, i) => (
+            <motion.div
+              key={doc.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              className={`group relative rounded-2xl border ${doc.borderColor} bg-[oklch(0.25_0.03_250)] hover:bg-[oklch(0.28_0.035_250)] transition-all duration-500 overflow-hidden hover:shadow-xl hover:shadow-[oklch(0.72_0.14_180_/_0.08)]`}
+              onContextMenu={(e) => e.preventDefault()}
+            >
+              {/* Category tag */}
+              <div className="absolute top-4 right-4">
+                <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-[oklch(0.22_0.02_250)] border border-[oklch(0.35_0.03_250)] text-[oklch(0.60_0.02_250)]">
+                  {doc.category}
+                </span>
+              </div>
+
+              {/* View-only badge */}
+              <div className="absolute top-4 left-4 flex items-center gap-1">
+                <Lock className="w-3 h-3 text-[oklch(0.55_0.02_250)]" />
+                <span className="text-[9px] text-[oklch(0.55_0.02_250)]">مشاهدة فقط</span>
+              </div>
+
+              {/* Icon + gradient header */}
+              <div className={`h-28 bg-gradient-to-bl ${doc.color} opacity-15 group-hover:opacity-25 transition-opacity duration-500 flex items-center justify-center relative`}>
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${doc.color} flex items-center justify-center text-white shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}>
+                  {doc.icon}
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-5">
+                <h3 className="text-[oklch(0.95_0.005_250)] font-bold text-base sm:text-lg mb-2 leading-tight">{doc.title}</h3>
+                <p className="text-[oklch(0.55_0.02_250)] text-xs sm:text-sm leading-relaxed mb-4">{doc.description}</p>
+
+                {/* Action buttons */}
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setActiveDoc(activeDoc === doc.id ? null : doc.id)}
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[oklch(0.72_0.14_180)] text-[oklch(0.13_0.02_250)] text-sm font-semibold hover:bg-[oklch(0.75_0.15_180)] transition-all duration-300"
+                  >
+                    <Eye className="w-4 h-4" />
+                    مشاهدة
+                  </button>
+                  <button
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl border border-[oklch(0.35_0.03_250)] text-[oklch(0.60_0.02_250)] text-sm cursor-not-allowed opacity-40"
+                    disabled
+                    title="التحميل غير متاح - مشاهدة فقط"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span className="hidden sm:inline">تحميل</span>
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* PDF Viewer Modal */}
+        <AnimatePresence>
+          {activeDoc && (() => {
+            const doc = docs.find(d => d.id === activeDoc)
+            if (!doc) return null
+            return (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+                onClick={() => setActiveDoc(null)}
+              >
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.9, opacity: 0 }}
+                  className="relative w-full max-w-5xl h-[85vh] bg-[oklch(0.18_0.02_250)] rounded-2xl border border-[oklch(0.35_0.03_250)] overflow-hidden shadow-2xl"
+                  onClick={(e) => e.stopPropagation()}
+                  onContextMenu={(e) => e.preventDefault()}
+                >
+                  {/* Modal header */}
+                  <div className="flex items-center justify-between px-5 py-3 border-b border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)]">
+                    <div className="flex items-center gap-3">
+                      <Lock className="w-4 h-4 text-[oklch(0.72_0.14_180)]" />
+                      <span className="text-[oklch(0.80_0.005_250)] text-sm font-semibold">{doc.title}</span>
+                      <span className="text-[oklch(0.50_0.02_250)] text-xs">- مشاهدة فقط</span>
+                    </div>
+                    <button
+                      onClick={() => setActiveDoc(null)}
+                      className="w-8 h-8 rounded-lg bg-[oklch(0.30_0.03_250)] hover:bg-[oklch(0.40_0.04_250)] flex items-center justify-center text-[oklch(0.70_0.01_250)] transition-colors"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                  {/* PDF iframe - view only, no download */}
+                  <iframe
+                    src={`${doc.file}#toolbar=0&navpanes=0&scrollbar=1`}
+                    className="w-full h-[calc(100%-52px)]"
+                    title={doc.title}
+                    style={{ userSelect: 'none' }}
+                    onContextMenu={(e) => e.preventDefault()}
+                  />
+                </motion.div>
+              </motion.div>
+            )
+          })()}
+        </AnimatePresence>
+      </div>
+    </Section>
+  )
+}
+
 /* ───────── footer ───────── */
 function Footer() {
   return (
@@ -2048,6 +2245,7 @@ export default function Home() {
         <Projects />
         <WhyUs />
         <Team />
+        <Documents />
         <Testimonials />
         <Contact />
       </main>
