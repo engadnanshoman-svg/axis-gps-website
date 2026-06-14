@@ -670,7 +670,7 @@ function Hero() {
               <span className="relative flex items-center justify-center w-9 h-9">
                 <Star className="w-6 h-6 fill-[oklch(0.13_0.02_250)] text-[oklch(0.13_0.02_250)] group-hover:rotate-[72deg] transition-transform duration-500" />
               </span>
-              شاركنا رأيك — تجربتك تهمنا
+              شاركنا تجربتك — رأيك يهمنا
               <MessageCircle className="w-5 h-5 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
             </span>
           </a>
@@ -1781,6 +1781,15 @@ function Testimonials() {
     },
     {
       id: 'seed-2',
+      name: 'م. سجى مسالمة',
+      role: 'فريق اكسيس - فرع الخليل',
+      text: 'فريق اكسيس يعمل بشغف لتوفير حلول مسح متكاملة تلبي احتياجات المشاريع المختلفة، من أجهزة GPS إلى أنظمة المراقبة المتقدمة.',
+      rating: 5,
+      initials: 'سجى',
+      color: 'from-[#E1306C] to-[#C1255E]',
+    },
+    {
+      id: 'seed-3',
       name: 'م. أنس أبو حديد',
       role: 'مدير فرع الخليل - شركة اكسيس',
       text: 'نلتزم في اكسيس بتقديم أحدث التقنيات وأفضل الخدمات لعملائنا في قطاع المساحة والجيوماتكس، ونسعى دائماً لتجاوز توقعاتهم.',
@@ -1789,7 +1798,7 @@ function Testimonials() {
       color: 'from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)]',
     },
     {
-      id: 'seed-3',
+      id: 'seed-4',
       name: 'أحمد سعيد بيوض التميمي',
       role: 'رئيس مجلس أمناء جامعة البوليتكنك',
       text: 'نشيد بدور شركة اكسيس في إرفاد قطاع المساحة والجيوماتكس بأحدث التقنيات الحديثة من خلال مبادراتها وخبراتها المهنية للمساحين والمهندسين.',
