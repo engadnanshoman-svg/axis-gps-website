@@ -221,29 +221,36 @@ function Navbar() {
 
 /* ───────── customer cinema images ───────── */
 const CUSTOMER_IMAGES = [
-  { src: '/customers/navvis-full-use-3.jpg', alt: 'شركاء النجاح - مسح ميداني بأجهزة NavVis في الضفة الغربية' },
-  { src: '/customers/navvis-full-use-4.jpg', alt: 'شركاء النجاح - فريق المسح بأجهزة NavVis في القدس' },
-  { src: '/customers/navvis-full-use-5.jpg', alt: 'شركاء النجاح - مسح ثلاثي الأبعاد في موقع إنشائي' },
-  { src: '/customers/navvis-full-use-6.jpg', alt: 'شركاء النجاح - تقنية المسح المتقدمة NavVis' },
+  { src: '/customers/website-1A.png', alt: 'شركاء النجاح - زبائن أكسيس في الضفة الغربية' },
+  { src: '/customers/website-2A.png', alt: 'شركاء النجاح - عملاء أكسيس في القدس' },
+  { src: '/customers/website-3A.png', alt: 'شركاء النجاح - مشاريع مسح في رام الله' },
+  { src: '/customers/website-4A.png', alt: 'شركاء النجاح - زبائن في الخليل' },
+  { src: '/customers/website-5A.png', alt: 'شركاء النجاح - فريق العمل الميداني' },
+  { src: '/customers/website-6A.png', alt: 'شركاء النجاح - خدمات المسح المتقدمة' },
+  { src: '/customers/website-7A.png', alt: 'شركاء النجاح - حلول GPS للمؤسسات' },
+  { src: '/customers/website-8A.png', alt: 'شركاء النجاح - تقنيات Trimble في فلسطين' },
+  { src: '/customers/website-9A.png', alt: 'شركاء النجاح - أجهزة NavVis الميدانية' },
+  { src: '/customers/website-10A.png', alt: 'شركاء النجاح - مشاريع البنية التحتية' },
+  { src: '/customers/website-11A.png', alt: 'شركاء النجاح - عملاء القطاع الحكومي' },
+  { src: '/customers/website-12A.png', alt: 'شركاء النجاح - شركاء في النجاح' },
   { src: '/customers/website-pic.jpg', alt: 'شركاء النجاح - زبائن شركة أكسيس في فلسطين' },
   { src: '/customers/trimble-fieldlink.jpg', alt: 'شركاء النجاح - أجهزة Trimble في الميدان' },
   { src: '/customers/trimble-s9.jpg', alt: 'شركاء النجاح - محطة Trimble S9 للمسح الدقيق' },
-  { src: '/customers/field-surveyor.jpg', alt: 'شركاء النجاح - مسح ميداني بأجهزة Trimble' },
-  { src: '/customers/navvis-scanning.jpg', alt: 'شركاء النجاح - مسح ضوئي ثلاثي الأبعاد' },
-  { src: '/customers/trimble-gnss.jpg', alt: 'شركاء النجاح - جهاز GNSS Trimble' },
 ]
 
 const CUSTOMER_IMAGES_LEFT = [
-  { src: '/customers/navvis-full-use-5.jpg', alt: 'من وثق بنا - مسح ميداني في رام الله' },
-  { src: '/customers/navvis-full-use-3.jpg', alt: 'من وثق بنا - فريق المسح في الخليل' },
-  { src: '/customers/navvis-full-use-6.jpg', alt: 'من وثق بنا - مسح صناعي بأجهزة NavVis' },
-  { src: '/customers/navvis-full-use-4.jpg', alt: 'من وثق بنا - مشاريع في القدس والضفة' },
+  { src: '/customers/navvis-full-use-3.jpg', alt: 'من وثق بنا - مسح ميداني بأجهزة NavVis' },
+  { src: '/customers/navvis-full-use-4.jpg', alt: 'من وثق بنا - فريق المسح في الميدان' },
+  { src: '/customers/navvis-full-use-5.jpg', alt: 'من وثق بنا - مسح ثلاثي الأبعاد' },
+  { src: '/customers/navvis-full-use-6.jpg', alt: 'من وثق بنا - تقنية NavVis المتقدمة' },
+  { src: '/customers/field-surveyor.jpg', alt: 'من وثق بنا - مسح ميداني بأجهزة Trimble' },
+  { src: '/customers/navvis-scanning.jpg', alt: 'من وثق بنا - مسح ضوئي ثلاثي الأبعاد' },
+  { src: '/customers/trimble-gnss.jpg', alt: 'من وثق بنا - جهاز GNSS Trimble' },
   { src: '/customers/navvis-industrial.jpg', alt: 'من وثق بنا - مسح صناعي متقدم' },
   { src: '/customers/surveyor-site.jpg', alt: 'من وثق بنا - مسح موقع إنشائي' },
+  { src: '/customers/gps-rover.jpg', alt: 'من وثق بنا - جهاز GPS Rover' },
   { src: '/customers/cat-excavator.jpg', alt: 'من وثق بنا - أنظمة التحكم بالآلات الثقيلة' },
   { src: '/customers/navvis-screen.jpg', alt: 'من وثق بنا - نماذج ثلاثية الأبعاد' },
-  { src: '/customers/gps-rover.jpg', alt: 'من وثق بنا - جهاز GPS Rover' },
-  { src: '/customers/trimble-tripod.jpg', alt: 'من وثق بنا - محطة Trimble على ثلاثية القوائم' },
 ]
 
 /* ───────── cinematic hero ───────── */
@@ -531,27 +538,33 @@ function Hero() {
       {/* ── Customer showcase cinema screens ── */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 35 }}>
         {/* Right screen - scrolls up */}
-        <div className="absolute top-0 right-0 bottom-0 overflow-hidden" style={{ width: '22%' }}>
+        <div className="absolute top-0 right-0 bottom-0 overflow-hidden" style={{ width: '24%' }}>
           {/* Top/bottom fade */}
-          <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
-          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[var(--bg-0)] via-[var(--bg-0)]/60 to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[var(--bg-0)] via-[var(--bg-0)]/60 to-transparent" style={{ zIndex: 3 }} />
           {/* Inner edge fade toward center */}
-          <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
+          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
+          {/* Decorative cinema edge line */}
+          <div className="absolute inset-y-0 left-0 w-[2px]" style={{ zIndex: 4, background: 'linear-gradient(180deg, transparent, oklch(0.72 0.14 180 / 0.5), oklch(0.72 0.14 180 / 0.3), oklch(0.72 0.14 180 / 0.5), transparent)' }} />
           <div className="cinema-scroll-right pr-2">
             {[...CUSTOMER_IMAGES, ...CUSTOMER_IMAGES, ...CUSTOMER_IMAGES].map((img, i) => (
-              <div key={`r-${i}`} className="cinema-card relative group flex-shrink-0 mb-3">
-                <div className="rounded-lg overflow-hidden border border-white/15"
-                  style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.5), 0 0 8px rgba(13,148,136,0.15)' }}
+              <div key={`r-${i}`} className="cinema-card relative group flex-shrink-0">
+                <div className="rounded-xl overflow-hidden border border-white/10 group-hover:border-[oklch(0.72_0.14_180_/_0.4)]"
+                  style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.4), 0 0 6px rgba(13,148,136,0.1)', animation: 'cinema-glow-pulse 4s ease-in-out infinite', animationDelay: `${(i % 5) * 0.8}s` }}
                 >
                   <img
                     src={img.src}
                     alt={img.alt}
-                    className="w-full h-28 sm:h-36 lg:h-44 object-cover opacity-75 group-hover:opacity-100 transition-opacity duration-500"
+                    className="w-full h-32 sm:h-40 lg:h-48 object-cover opacity-60 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
                     loading="lazy"
                   />
+                  <div className="cinema-overlay" />
                 </div>
-                <div className="absolute bottom-1 right-1 left-1 px-2 py-1 rounded-md bg-black/70 backdrop-blur-sm">
-                  <p className="text-[8px] sm:text-[10px] text-white/90 font-medium truncate">{img.alt}</p>
+                <div className="cinema-badge">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <div className="absolute bottom-1.5 right-1.5 left-1.5 px-2 py-1 rounded-lg bg-black/80 backdrop-blur-md border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                  <p className="text-[8px] sm:text-[10px] text-white/95 font-semibold truncate">{img.alt}</p>
                 </div>
               </div>
             ))}
@@ -559,27 +572,33 @@ function Hero() {
         </div>
 
         {/* Left screen - scrolls down */}
-        <div className="absolute top-0 left-0 bottom-0 overflow-hidden" style={{ width: '22%' }}>
+        <div className="absolute top-0 left-0 bottom-0 overflow-hidden" style={{ width: '24%' }}>
           {/* Top/bottom fade */}
-          <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
-          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[var(--bg-0)] via-[var(--bg-0)]/60 to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[var(--bg-0)] via-[var(--bg-0)]/60 to-transparent" style={{ zIndex: 3 }} />
           {/* Inner edge fade toward center */}
-          <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
+          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
+          {/* Decorative cinema edge line */}
+          <div className="absolute inset-y-0 right-0 w-[2px]" style={{ zIndex: 4, background: 'linear-gradient(180deg, transparent, oklch(0.72 0.14 180 / 0.5), oklch(0.72 0.14 180 / 0.3), oklch(0.72 0.14 180 / 0.5), transparent)' }} />
           <div className="cinema-scroll-left pl-2">
             {[...CUSTOMER_IMAGES_LEFT, ...CUSTOMER_IMAGES_LEFT, ...CUSTOMER_IMAGES_LEFT].map((img, i) => (
-              <div key={`l-${i}`} className="cinema-card relative group flex-shrink-0 mb-3">
-                <div className="rounded-lg overflow-hidden border border-white/15"
-                  style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.5), 0 0 8px rgba(13,148,136,0.15)' }}
+              <div key={`l-${i}`} className="cinema-card relative group flex-shrink-0">
+                <div className="rounded-xl overflow-hidden border border-white/10 group-hover:border-[oklch(0.72_0.14_180_/_0.4)]"
+                  style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.4), 0 0 6px rgba(13,148,136,0.1)', animation: 'cinema-glow-pulse 4s ease-in-out infinite', animationDelay: `${(i % 5) * 1.2}s` }}
                 >
                   <img
                     src={img.src}
                     alt={img.alt}
-                    className="w-full h-28 sm:h-36 lg:h-44 object-cover opacity-75 group-hover:opacity-100 transition-opacity duration-500"
+                    className="w-full h-32 sm:h-40 lg:h-48 object-cover opacity-60 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
                     loading="lazy"
                   />
+                  <div className="cinema-overlay" />
                 </div>
-                <div className="absolute bottom-1 right-1 left-1 px-2 py-1 rounded-md bg-black/70 backdrop-blur-sm">
-                  <p className="text-[8px] sm:text-[10px] text-white/90 font-medium truncate">{img.alt}</p>
+                <div className="cinema-badge">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <div className="absolute bottom-1.5 right-1.5 left-1.5 px-2 py-1 rounded-lg bg-black/80 backdrop-blur-md border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                  <p className="text-[8px] sm:text-[10px] text-white/95 font-semibold truncate">{img.alt}</p>
                 </div>
               </div>
             ))}
