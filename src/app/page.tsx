@@ -203,7 +203,7 @@ function Hero() {
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3) }
   }, [])
 
-  /* Tech icons that converge from the edges */
+  /* Tech icons that converge from the EDGES of the screen */
   const TECH_ITEMS = [
     { icon: <Satellite className="w-5 h-5 sm:w-7 sm:h-7" />, label: 'GPS', color: 'oklch(0.72 0.14 180)', angle: 0 },
     { icon: <Compass className="w-5 h-5 sm:w-7 sm:h-7" />, label: 'GNSS', color: 'oklch(0.75 0.15 200)', angle: 30 },
@@ -229,10 +229,10 @@ function Hero() {
     { name: 'Kaarta', color: '#8B5CF6' },
   ]
 
-  /* Particle positions for each tech icon - scattered around edges */
-  const getScatteredPos = (angle: number) => {
+  /* Positions far from center (screen edges) for each tech icon */
+  const getEdgePos = (angle: number) => {
     const rad = (angle * Math.PI) / 180
-    const dist = 42 + Math.random() * 10 // 42-52% from center
+    const dist = 48 + Math.random() * 4 // 48-52% from center = near edges
     return {
       x: `${50 + dist * Math.cos(rad)}%`,
       y: `${50 + dist * Math.sin(rad)}%`,
@@ -261,17 +261,17 @@ function Hero() {
         style={{ animationDelay: '3s' }}
       />
 
-      {/* ── Phase 1 & 2: Tech icons converging ── */}
+      {/* ── Phase 1 & 2: Tech icons converging from EDGES ── */}
       <div className="absolute inset-0 pointer-events-none">
         {TECH_ITEMS.map((tech, i) => {
-          const scattered = getScatteredPos(tech.angle)
+          const edge = getEdgePos(tech.angle)
           return (
             <motion.div
               key={i}
-              initial={{ x: scattered.x, y: scattered.y, scale: 0, opacity: 0, rotate: -180 }}
+              initial={{ x: edge.x, y: edge.y, scale: 0, opacity: 0, rotate: -180 }}
               animate={
                 phase === 'converge'
-                  ? { x: scattered.x, y: scattered.y, scale: 1, opacity: 1, rotate: 0 }
+                  ? { x: edge.x, y: edge.y, scale: 1, opacity: 1, rotate: 0 }
                   : phase === 'merge'
                   ? { x: '50%', y: '50%', scale: 1.2, opacity: 0.8, rotate: 360 }
                   : { x: '50%', y: '50%', scale: 0, opacity: 0, rotate: 720 }
@@ -295,18 +295,18 @@ function Hero() {
         })}
       </div>
 
-      {/* ── Orbiting brand names ── */}
+      {/* ── Brand names converging from edges ── */}
       <div className="absolute inset-0 pointer-events-none">
         {BRANDS.map((brand, i) => {
           const angle = (i * 360 / BRANDS.length)
-          const scattered = getScatteredPos(angle + 15)
+          const edge = getEdgePos(angle + 15)
           return (
             <motion.div
               key={brand.name}
-              initial={{ x: scattered.x, y: scattered.y, scale: 0, opacity: 0 }}
+              initial={{ x: edge.x, y: edge.y, scale: 0, opacity: 0 }}
               animate={
                 phase === 'converge'
-                  ? { x: scattered.x, y: scattered.y, scale: 1, opacity: 0.7 }
+                  ? { x: edge.x, y: edge.y, scale: 1, opacity: 0.7 }
                   : phase === 'merge'
                   ? { x: '50%', y: '50%', scale: 0.8, opacity: 0.5 }
                   : { x: '50%', y: '50%', scale: 0, opacity: 0 }
@@ -330,13 +330,13 @@ function Hero() {
         })}
       </div>
 
-      {/* ── Convergence energy lines ── */}
+      {/* ── Convergence energy lines from edges ── */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 18 }}>
         {isConverging && (
           <svg className="w-full h-full" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
             {TECH_ITEMS.map((tech, i) => {
               const rad = (tech.angle * Math.PI) / 180
-              const dist = 480
+              const dist = 490
               const sx = 500 + dist * Math.cos(rad)
               const sy = 500 + dist * Math.sin(rad)
               return (
@@ -344,7 +344,7 @@ function Hero() {
                   key={i}
                   x1={sx} y1={sy} x2="500" y2="500"
                   stroke={tech.color}
-                  strokeWidth="1"
+                  strokeWidth="1.5"
                   initial={{ pathLength: 0, opacity: 0 }}
                   animate={
                     phase === 'converge'
@@ -354,7 +354,7 @@ function Hero() {
                       : { pathLength: 1, opacity: 0 }
                   }
                   transition={{ duration: 0.8, delay: i * 0.04, ease: 'easeInOut' }}
-                  style={{ filter: `drop-shadow(0 0 6px ${tech.color})` }}
+                  style={{ filter: `drop-shadow(0 0 8px ${tech.color})` }}
                 />
               )
             })}
@@ -429,24 +429,24 @@ function Hero() {
         })}
       </div>
 
-      {/* ── Orbiting tech icons after reveal (continuous) ── */}
+      {/* ── Orbiting tech icons after reveal (CONTINUOUS SPINNING from edges) ── */}
       <AnimatePresence>
         {showContent && (
           <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 12 }}>
             {TECH_ITEMS.map((tech, i) => {
-              const orbitRadius = 32 + (i % 3) * 6
+              const orbitRadius = 30 + (i % 3) * 7
               return (
                 <motion.div
                   key={`orbit-${i}`}
                   initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 0.35, scale: 1 }}
+                  animate={{ opacity: 0.4, scale: 1 }}
                   transition={{ delay: 0.8 + i * 0.08, duration: 0.5 }}
                   className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                   style={{ width: `${orbitRadius * 2}%`, height: `${orbitRadius * 2}%` }}
                 >
                   <motion.div
                     animate={{ rotate: 360 }}
-                    transition={{ duration: 20 + i * 3, repeat: Infinity, ease: 'linear' }}
+                    transition={{ duration: 18 + i * 4, repeat: Infinity, ease: 'linear' }}
                     className="w-full h-full relative"
                   >
                     <motion.div
@@ -458,9 +458,11 @@ function Hero() {
                         color: tech.color,
                       }}
                       animate={{ rotate: -360 }}
-                      transition={{ duration: 20 + i * 3, repeat: Infinity, ease: 'linear' }}
+                      transition={{ duration: 18 + i * 4, repeat: Infinity, ease: 'linear' }}
                     >
-                      <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-[oklch(0.22_0.02_250)]/60 backdrop-blur-sm border border-[oklch(0.30_0.03_250)]/30 flex items-center justify-center">
+                      <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-[oklch(0.22_0.02_250)]/60 backdrop-blur-sm border border-[oklch(0.30_0.03_250)]/30 flex items-center justify-center"
+                        style={{ boxShadow: `0 0 12px ${tech.color}22` }}
+                      >
                         {React.cloneElement(tech.icon as React.ReactElement, { className: 'w-3.5 h-3.5 sm:w-4 sm:h-4' })}
                       </div>
                     </motion.div>
@@ -669,8 +671,19 @@ function Services() {
       title: 'أجهزة GPS و GNSS',
       desc: 'مستقبلات GNSS وهوائيات ومكونات OEM عالية الدقة للمسح الميداني والقياسات الجيوديسية',
       brands: [
-        { name: 'Trimble', products: ['R580', 'R12i', 'Catalyst DA2', 'R980'], img: 'https://sfile.chatglm.cn/images-ppt/9acbc3847564.png' },
-        { name: 'Spectra', products: ['SP85', 'SP100', 'SP60'], img: 'https://sfile.chatglm.cn/images-ppt/7a2b9c9f47ee.jpg' },
+        {
+          name: 'Trimble', products: [
+            { name: 'R12i', img: 'https://images.ctfassets.net/1nvkn1423yot/2sAoRXLMy3pnKfJTMFsnfa/1dde04c6a7bb9d3730b3ce54e72c4589/geo-r12i-productpage-fullbackgroundproducthero-800x960.png', datasheet: 'https://geonovus.ee/wp-content/uploads/Datasheet-Trimble-R12i.pdf' },
+            { name: 'R580', img: 'https://images.ctfassets.net/1nvkn1423yot/gJeRON0RN9meNwu9LiC7r/28ded15c873baef48ae4d609e7c7b6e2/geo-r580-productpage-fullbackgroundproducthero-800x960.png', datasheet: 'https://www.geonovus.lt/sites/default/files/022516-677a_trimbler580_datasheet_usl_0923_lrsec_1.pdf' },
+            { name: 'R980', img: 'https://images.ctfassets.net/1nvkn1423yot/1jtUB5X0fiJVKIiTfK9zC4/0e41587621af7156f5d6c38f730789a6/geo-product-r980-pim-image-800x960.png', datasheet: 'https://www.laserinst.com/content/R980_Datasheet.pdf' },
+            { name: 'Catalyst DA2', img: 'https://images.ctfassets.net/1nvkn1423yot/5RDHxxntqleqha8WC295R6/25929a7fb312f0f657d025c8f6ce1c4e/geo-da2-productpage-fullbackgroundproducthero-800x960__1_.png', datasheet: 'https://buildingpoint.com.au/wp-content/uploads/2024/10/trimble-catalyst-spec-sheet.pdf' },
+          ],
+        },
+        {
+          name: 'Spectra', products: [
+            { name: 'SP100', img: 'https://spectrageospatial.com/wp-content/uploads/sp100-product-shot.png', datasheet: 'http://trl.trimble.com/docushare/dsweb/Get/Document-1072959/SG_SP100%20GNSS%20Receiver_Datasheet_English%20US_LR.pdf' },
+          ],
+        },
       ],
     },
     {
@@ -678,8 +691,13 @@ function Services() {
       title: 'أجهزة التوتل ستيشن',
       desc: 'أحدث أجهزة التوتل ستيشن وكالات القياس لقياسات المساحة الدقيقة في المشاريع الهندسية',
       brands: [
-        { name: 'Trimble', products: ['S7', 'S5', 'C5', 'C3'], img: 'https://sfile.chatglm.cn/images-ppt/0682177bb704.png' },
-        { name: 'Spectra', products: ['FOCUS 35', 'FOCUS 30', 'FOCUS 6'], img: 'https://sfile.chatglm.cn/images-ppt/8b41468e6bcc.jpg' },
+        {
+          name: 'Trimble', products: [
+            { name: 'S7', img: 'https://images.ctfassets.net/1nvkn1423yot/0HpsPfei3wb4THphxFbp9/06466a90de405248afc0e38a23495d00/geo-s7-productpage-fullbackgroundproducthero-800x960.png', datasheet: 'https://www.korecgroup.com/wp-content/uploads/2020/02/022516-154G_TrimbleS7_DS_A4_0619_LR-SEC.pdf' },
+            { name: 'S5', img: 'https://images.ctfassets.net/1nvkn1423yot/SO4JJjOZ1SACwgkDJyKuJ/175913cbc27aa112f56f832371fa45b5/geo-s5-productpage-fullbackgroundproducthero-800x960.png', datasheet: 'https://geonovus.ee/wp-content/uploads/pdf/Datasheet%20-%20Trimble%20S5.pdf' },
+            { name: 'C5', img: 'https://images.ctfassets.net/1nvkn1423yot/3cSDqj8ZqX3SE45Pq503Je/1071896224b58e47cc962e00743b173d/geo-c5-productpage-fullbackgroundproducthero-800x960.png', datasheet: 'https://www.duncan-parnell.com/customer/docs/skudocs/trimble-c5-datasheet-www-duncan-parnell-com-.pdf' },
+          ],
+        },
       ],
     },
     {
@@ -687,8 +705,17 @@ function Services() {
       title: 'المسح الضوئي 3D والواقع المعزز',
       desc: 'ماسحات ضوئية متنقلة وثابتة مع حلول الواقع المعزز للنمذجة المتقدمة وتحويل الواقع إلى CAD',
       brands: [
-        { name: 'NavVis', products: ['VLX3', 'MLX', 'M6', 'IVION'], img: 'https://sfile.chatglm.cn/images-ppt/55341288c96c.jpg' },
-        { name: 'Trimble', products: ['X9', 'X7', 'T10'], img: 'https://sfile.chatglm.cn/images-ppt/c174e820cca8.jpg' },
+        {
+          name: 'NavVis', products: [
+            { name: 'VLX3', img: 'https://3339696.fs1.hubspotusercontent-na1.net/hub/3339696/hubfs/product-navvis-VLX-3-Front-800x800-2024.png', datasheet: 'https://www.aptella.com/wp-content/uploads/2023/05/NavVis-VLX-3-data-sheet-Digital_EN.pdf' },
+            { name: 'MLX', img: 'https://3339696.fs1.hubspotusercontent-na1.net/hub/3339696/hubfs/product-navvis-MLX-Display-800x800-2024.png', datasheet: 'https://assets.new.siemens.com/siemens/assets/api/uuid:ea0db4fb-f3fd-49e1-9656-2487a1d2f979/navvis-mlx-data-sheet-digital-en-2409.pdf' },
+          ],
+        },
+        {
+          name: 'Trimble', products: [
+            { name: 'X9', img: 'https://images.ctfassets.net/1nvkn1423yot/6PGYrL01kdT5NyqvCRJAz4/3b037f38b8735e747f0f3294cd49f435/geo-product-x9-pim-image-800x960.png', datasheet: 'https://frontierprecision.com/wp-content/uploads/2025/01/Frontier-Precision-Trimble-X9-3D-Laser-Scanning-System-Spec-Sheet.pdf' },
+          ],
+        },
       ],
     },
     {
@@ -696,7 +723,11 @@ function Services() {
       title: 'أنظمة GIS و VRS',
       desc: 'حلول نظم المعلومات الجغرافية وشبكة محطات VRS لخدمات تصحيح الموقع RTK والخرائط الرقمية المتكاملة',
       brands: [
-        { name: 'Trimble', products: ['TDC6', 'TDC600', 'Trimble Access'], img: 'https://sfile.chatglm.cn/images-ppt/ab7357869e02.jpg' },
+        {
+          name: 'Trimble', products: [
+            { name: 'TDC6', img: 'https://images.ctfassets.net/1nvkn1423yot/6orejDEuOzl53rmdqD672d/4bfcf62e1b1ae383f8d035dddb4e30bd/geo-tdc6-productpage-fullbackgroundproducthero-800x960.png', datasheet: 'https://frontierprecision.com/wp-content/uploads/2025/01/Frontier-Precision-Trimble-TDC6-Data-Collector-Spec-Sheet.pdf' },
+          ],
+        },
       ],
     },
     {
@@ -710,7 +741,7 @@ function Services() {
       title: 'مستويات ليزر وبناء',
       desc: 'مستويات ليزر دوارة ومائلة وخطية وأنابيب وأجهزة قياس مسافة ليزرية لجميع أعمال البناء والطرق والصرف',
       brands: [
-        { name: 'Spectra', products: ['LL500', 'HV301', 'DG613'], img: '' },
+        { name: 'Spectra', products: [{ name: 'LL500', img: '', datasheet: '' }, { name: 'HV301', img: '', datasheet: '' }, { name: 'DG613', img: '', datasheet: '' }], __old: true },
       ],
     },
     {
@@ -774,37 +805,47 @@ function Services() {
 
                 {/* Brand products with images */}
                 {s.brands.length > 0 && (
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-                    {s.brands.map((b, j) => (
-                      <div
-                        key={j}
-                        className="rounded-xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.18_0.02_250)] overflow-hidden hover:border-[oklch(0.72_0.14_180_/_0.2)] transition-all duration-300"
-                      >
-                        {/* Product image */}
-                        {b.img && (
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
+                    {s.brands.flatMap((b) =>
+                      b.products.map((p, k) => (
+                        <a
+                          key={`${b.name}-${k}`}
+                          href={typeof p === 'object' && p.datasheet ? p.datasheet : undefined}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group/product rounded-xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.18_0.02_250)] overflow-hidden hover:border-[oklch(0.72_0.14_180_/_0.3)] transition-all duration-300 hover:shadow-lg hover:shadow-[oklch(0.72_0.14_180_/_0.08)]"
+                        >
+                          {/* Product image */}
                           <div className="relative aspect-[4/3] bg-gradient-to-b from-[oklch(0.25_0.02_250)] to-[oklch(0.18_0.02_250)] flex items-center justify-center p-4">
-                            <img
-                              src={b.img}
-                              alt={`${b.name} ${s.title}`}
-                              className="max-h-full max-w-full object-contain drop-shadow-lg"
-                            />
+                            {typeof p === 'object' && p.img ? (
+                              <img
+                                src={p.img}
+                                alt={`${b.name} ${typeof p === 'object' ? p.name : p}`}
+                                className="max-h-full max-w-full object-contain drop-shadow-lg transition-transform duration-300 group-hover/product:scale-105"
+                              />
+                            ) : (
+                              <div className="text-[oklch(0.40_0.02_250)]">
+                                {b.name === 'Trimble' ? <Satellite className="w-10 h-10" /> : b.name === 'NavVis' ? <ScanLine className="w-10 h-10" /> : <Cog className="w-10 h-10" />}
+                              </div>
+                            )}
                           </div>
-                        )}
-                        {/* Brand info */}
-                        <div className="p-4">
-                          <span className={`inline-block px-3 py-1 rounded-lg text-xs font-bold border mb-3 ${brandColors[b.name] || 'bg-[oklch(0.20_0.03_250)] border-[oklch(0.30_0.03_250)] text-[oklch(0.72_0.14_180)]'}`}>
-                            {b.name}
-                          </span>
-                          <div className="flex flex-wrap gap-1.5">
-                            {b.products.map((p, k) => (
-                              <span key={k} className="px-2.5 py-1 rounded-md bg-[oklch(0.22_0.03_250)] text-[oklch(0.70_0.01_250)] text-xs border border-[oklch(0.30_0.03_250)]">
-                                {p}
+                          {/* Brand + product name */}
+                          <div className="p-3">
+                            <span className={`inline-block px-2.5 py-0.5 rounded-md text-[10px] font-bold border mb-2 ${brandColors[b.name] || 'bg-[oklch(0.20_0.03_250)] border-[oklch(0.30_0.03_250)] text-[oklch(0.72_0.14_180)]'}`}>
+                              {b.name}
+                            </span>
+                            <div className="flex items-center justify-between">
+                              <span className="text-[oklch(0.85_0.005_250)] text-sm font-semibold">
+                                {typeof p === 'object' ? p.name : p}
                               </span>
-                            ))}
+                              {typeof p === 'object' && p.datasheet && (
+                                <FileText className="w-3.5 h-3.5 text-[oklch(0.50_0.02_250)] group-hover/product:text-[oklch(0.72_0.14_180)] transition-colors" />
+                              )}
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                    ))}
+                        </a>
+                      ))
+                    )}
                   </div>
                 )}
               </div>
@@ -820,8 +861,8 @@ function Services() {
 function Stats() {
   const stats = [
     { value: 4, suffix: '', label: 'فروع في فلسطين', icon: <MapPin className="w-6 h-6" /> },
-    { value: 500, suffix: '+', label: 'عميل راضٍ', icon: <Users className="w-6 h-6" /> },
-    { value: 10, suffix: '+', label: 'سنوات خبرة', icon: <Wrench className="w-6 h-6" /> },
+    { value: 1000, suffix: '+', label: 'عميل راضٍ', icon: <Users className="w-6 h-6" /> },
+    { value: 20, suffix: '+', label: 'سنوات خبرة', icon: <Wrench className="w-6 h-6" /> },
     { value: 3, suffix: '', label: 'وكالات حصرية عالمية', icon: <Star className="w-6 h-6" /> },
   ]
 
@@ -1400,7 +1441,7 @@ function Testimonials() {
 function WhyUs() {
   const reasons = [
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و DJI و Kaarta' },
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'أكثر من 10 سنوات من الخبرة في قطاع أجهزة المساحة' },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'أكثر من 20 سنة من الخبرة في قطاع أجهزة المساحة' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: '4 فروع رئيسية تغطي مختلف مناطق فلسطين' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'شراكة مع برنامج الأمم المتحدة الإنمائي UNDP' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'تعاون مع جامعات فلسطينية (البوليتكنك، النجاح، الخليل)' },
@@ -1897,23 +1938,13 @@ function Documents() {
 
   const docs = [
     {
-      id: 'cv-2025',
-      title: 'السيرة الذاتية 2025',
-      description: 'السيرة الذاتية المحدثة لشركة اكسيس للحلول الهندسية المتقدمة',
+      id: 'cv',
+      title: 'السيرة الذاتية',
+      description: 'السيرة الذاتية لشركة اكسيس للحلول الهندسية المتقدمة',
       icon: <BookOpen className="w-6 h-6" />,
       file: '/docs/cv-2025.pdf',
       color: 'from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)]',
       borderColor: 'border-[oklch(0.72_0.14_180_/_0.3)]',
-      category: 'السيرة الذاتية',
-    },
-    {
-      id: 'cv-2022',
-      title: 'السيرة الذاتية 2022',
-      description: 'النسخة السابقة من السيرة الذاتية لشركة اكسيس',
-      icon: <FileText className="w-6 h-6" />,
-      file: '/docs/cv-2022.pdf',
-      color: 'from-[oklch(0.65_0.16_200)] to-[oklch(0.55_0.12_250)]',
-      borderColor: 'border-[oklch(0.65_0.16_200_/_0.3)]',
       category: 'السيرة الذاتية',
     },
     {
