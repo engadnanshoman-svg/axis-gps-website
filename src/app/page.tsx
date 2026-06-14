@@ -9,7 +9,7 @@ import {
   Target, Zap, Shield, ArrowUpRight, Send, Star,
   Ruler, Compass, DraftingCompass, Factory, Calculator, BarChart3,
   Satellite, ScanLine, GraduationCap, Monitor, Radio, Gauge, MessageCircle,
-  FileText, BookOpen, Globe, Award, Eye, Lock, Download
+  FileText, BookOpen, Globe, Award, Eye, Lock, Download, Quote, MapPinned
 } from 'lucide-react'
 
 /* ───────── dynamic map import (no SSR) ───────── */
@@ -79,13 +79,14 @@ function Navbar() {
   }, [])
 
   const links = [
-    { href: '#hero', label: 'الرئيسية' },
-    { href: '#about', label: 'من نحن' },
-    { href: '#services', label: 'خدماتنا' },
-    { href: '#team', label: 'فريقنا' },
-    { href: '#documents', label: 'تعرف اكثر علينا' },
-    { href: '#gallery', label: 'المعرض' },
-    { href: '#contact', label: 'تواصل معنا' },
+    { href: '#hero', label: 'الرئيسية', icon: undefined },
+    { href: '#branches', label: 'فروعنا', icon: <MapPinned className="w-4 h-4" /> },
+    { href: '#about', label: 'من نحن', icon: undefined },
+    { href: '#services', label: 'خدماتنا', icon: undefined },
+    { href: '#team', label: 'فريقنا', icon: undefined },
+    { href: '#documents', label: 'تعرف اكثر علينا', icon: undefined },
+    { href: '#gallery', label: 'المعرض', icon: undefined },
+    { href: '#contact', label: 'تواصل معنا', icon: undefined },
   ]
 
   return (
@@ -120,7 +121,10 @@ function Navbar() {
                 href={l.href}
                 className="px-4 py-2 text-sm text-[oklch(0.75_0.01_250)] hover:text-[oklch(0.72_0.14_180)] rounded-lg hover:bg-[oklch(0.72_0.14_180_/_0.08)] transition-all duration-300"
               >
-                {l.label}
+                <span className="flex items-center gap-1.5">
+                  {l.icon}
+                  {l.label}
+                </span>
               </a>
             ))}
             <a
@@ -172,8 +176,9 @@ function Navbar() {
                   key={l.href}
                   href={l.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block px-4 py-3 text-[oklch(0.75_0.01_250)] hover:text-[oklch(0.72_0.14_180)] rounded-lg hover:bg-[oklch(0.72_0.14_180_/_0.08)] transition-all"
+                  className="flex items-center gap-2 px-4 py-3 text-[oklch(0.75_0.01_250)] hover:text-[oklch(0.72_0.14_180)] rounded-lg hover:bg-[oklch(0.72_0.14_180_/_0.08)] transition-all"
                 >
+                  {l.icon}
                   {l.label}
                 </a>
               ))}
@@ -861,8 +866,8 @@ function Services() {
 function Stats() {
   const stats = [
     { value: 4, suffix: '', label: 'فروع في فلسطين', icon: <MapPin className="w-6 h-6" /> },
-    { value: 1000, suffix: '+', label: 'عميل راضٍ', icon: <Users className="w-6 h-6" /> },
-    { value: 20, suffix: '+', label: 'سنوات خبرة', icon: <Wrench className="w-6 h-6" /> },
+    { value: 1000, suffix: '+', label: 'أكثر من عميل راضٍ', icon: <Users className="w-6 h-6" /> },
+    { value: 20, suffix: '+', label: 'سنة خبرة', icon: <Wrench className="w-6 h-6" /> },
     { value: 3, suffix: '', label: 'وكالات حصرية عالمية', icon: <Star className="w-6 h-6" /> },
   ]
 
@@ -2224,10 +2229,10 @@ function Footer() {
                   <a href="https://www.google.com/maps?q=32.7579702,35.3189103" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
                     الفرع الرئيسي: المنطقة الصناعية تسيفوريت ↗
                   </a>
-                  <a href="https://www.google.com/maps?q=32.1169613,34.968664" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
+                  <a href="https://www.google.com/maps?q=32.11146,34.96504" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
                     فرع الشمال: كفر قاسم شارع علي بن أبي طالب ↗
                   </a>
-                  <a href="https://www.google.com/maps?q=31.8652474,35.2287424" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
+                  <a href="https://www.google.com/maps?q=31.93306,35.21009" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
                     فرع رام الله: شارع الإرسال قرب السفينة ↗
                   </a>
                   <a href="https://www.google.com/maps?q=31.537372,35.0987544" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
@@ -2277,6 +2282,332 @@ function FloatingWhatsApp() {
   )
 }
 
+/* ───────── branches quick section ───────── */
+function Branches() {
+  const branches = [
+    {
+      name: 'الفرع الرئيسي',
+      address: 'المنطقة الصناعية تسيفوريت',
+      phone: '04-6419995',
+      lat: 32.7579702,
+      lng: 35.3189103,
+      color: '#0ea5a0',
+    },
+    {
+      name: 'فرع الشمال',
+      address: 'كفر قاسم - شارع علي بن أبي طالب 2',
+      phone: '0595289999',
+      lat: 32.11146,
+      lng: 34.96504,
+      color: '#6366f1',
+    },
+    {
+      name: 'فرع رام الله',
+      address: 'رام الله - شارع الإرسال قرب السفينة',
+      phone: '02-2950149',
+      lat: 31.93306,
+      lng: 35.21009,
+      color: '#f59e0b',
+    },
+    {
+      name: 'فرع الخليل',
+      address: 'الخليل - برج العز ط5 شارع عين سارة',
+      phone: '0594224498',
+      lat: 31.537372,
+      lng: 35.0987544,
+      color: '#ef4444',
+    },
+  ]
+
+  return (
+    <Section id="branches" className="py-20 sm:py-28 relative overflow-hidden">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-[oklch(0.72_0.14_180_/_0.04)] rounded-full blur-3xl" />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-14">
+          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase flex items-center justify-center gap-2">
+            <MapPinned className="w-4 h-4" />
+            فروعنا
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
+            نصل <span className="gradient-text">إليك أينما كنت</span>
+          </h2>
+          <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
+            أربعة فروع رئيسية تغطي جميع مناطق فلسطين لخدمتكم بأسرع وقت وأعلى جودة
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {branches.map((b, i) => (
+            <motion.a
+              key={b.name}
+              href={`https://www.google.com/maps?q=${b.lat},${b.lng}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.12 }}
+              className="group relative p-6 rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500 overflow-hidden text-right"
+            >
+              {/* Color accent top */}
+              <div className="absolute top-0 right-0 left-0 h-1 rounded-t-2xl" style={{ backgroundColor: b.color }} />
+              
+              {/* Hover glow */}
+              <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ backgroundColor: `${b.color}15` }} />
+
+              <div className="relative">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: `${b.color}15`, border: `1px solid ${b.color}30` }}>
+                  <MapPin className="w-5 h-5" style={{ color: b.color }} />
+                </div>
+                <h3 className="text-lg font-bold text-[oklch(0.90_0.005_250)] mb-2">{b.name}</h3>
+                <p className="text-[oklch(0.55_0.02_250)] text-sm leading-relaxed mb-3">{b.address}</p>
+                <div className="flex items-center gap-2 text-[oklch(0.50_0.02_250)] text-xs">
+                  <Phone className="w-3.5 h-3.5" />
+                  <span dir="ltr">{b.phone}</span>
+                </div>
+                <div className="mt-3 flex items-center gap-1 text-[oklch(0.72_0.14_180)] text-xs font-medium group-hover:gap-2 transition-all">
+                  <span>عرض على الخريطة</span>
+                  <ArrowUpRight className="w-3 h-3" />
+                </div>
+              </div>
+            </motion.a>
+          ))}
+        </div>
+      </div>
+    </Section>
+  )
+}
+
+/* ───────── CEO message / quote ───────── */
+function CEOMessage() {
+  return (
+    <Section id="ceo-message" className="py-20 sm:py-28 relative overflow-hidden">
+      {/* Background accent */}
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[oklch(0.72_0.14_180_/_0.05)] rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-[oklch(0.65_0.16_200_/_0.04)] rounded-full blur-3xl" />
+
+      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10">
+          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase flex items-center justify-center gap-2">
+            <Quote className="w-4 h-4" />
+            كلمة المدير العام
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
+            رسالة <span className="gradient-text">المهندس سلامة عواودة</span>
+          </h2>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="relative rounded-3xl border border-[oklch(0.72_0.14_180_/_0.2)] bg-[oklch(0.22_0.02_250)] p-8 sm:p-12"
+        >
+          {/* Decorative quote marks */}
+          <div className="absolute top-4 right-6 text-[oklch(0.72_0.14_180)] opacity-15">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+          </div>
+          <div className="absolute bottom-4 left-6 text-[oklch(0.72_0.14_180)] opacity-15 rotate-180">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+          </div>
+
+          <div className="relative space-y-5">
+            <p className="text-[oklch(0.80_0.01_250)] text-base sm:text-lg leading-loose">
+              خلال أكثر من عشرين عاماً من الزمان، نجحت شركة أكسيس في أن تصبح الشركة الأولى في فلسطين من خلال فروعها المنتشرة والتي تصل لكل المحافظات، والتي سهلت الوصول لكل من له علاقة بالمساحة من أفراد ومؤسسات أهلية وحكومية كالوزارات والبلديات والجامعات ومكاتب المساحة المرخصة والمساحين.
+            </p>
+            <p className="text-[oklch(0.75_0.01_250)] text-base sm:text-lg leading-loose">
+              تزايدت الطاقة الإنتاجية وصارت اكسيس دعامة قوية وأساسية في النهضة التكنولوجية والتقنية التي تشهدها فلسطين في عالم المساحة وخاصة مع بدء أعمال ومشاريع التسوية الوطنية في الأراضي الفلسطينية. لقد أعطت اكسيس دفعة قوية لعمليات المساحة والتسوية، وصارت مورّداً يعتمد عليه في تغذية التكنولوجيا الحديثة في عالم المساحة وتقنياتها وخصوصاً في تقنية GPS.
+            </p>
+            <p className="text-[oklch(0.70_0.01_250)] text-base sm:text-lg leading-loose">
+              حرصت إدارة شركة أكسيس على التجاوب السريع والفعال مع جهود الحكومة الفلسطينية في التنمية والتطور في مجال المساحة، بإعتبار أن مشروع التسوية هو مشروع وطني بامتياز يهدف إلى حفظ الأرض والتي هي حجر الأساس في مشروع الدولة المنتظر. وعليه استطاعت أكسيس أن توفر ما يزيد عن 85% من احتياجات البلديات والمساحين العاملين في مشروع التسوية بأفضل التقنيات وبأسرع وقت وبتواصل ودعم فني مستمر بشكل يومي ومباشر.
+            </p>
+
+            {/* Highlighted quote */}
+            <div className="relative my-8 px-6 py-5 rounded-2xl bg-[oklch(0.72_0.14_180_/_0.08)] border border-[oklch(0.72_0.14_180_/_0.15)]">
+              <Quote className="absolute top-3 right-3 w-5 h-5 text-[oklch(0.72_0.14_180)] opacity-30" />
+              <p className="text-[oklch(0.90_0.005_250)] text-lg sm:text-xl font-bold leading-relaxed">
+                سوف تواصل شركة AXIS بالاستثمار للحفاظ على التميز في مجال المساحة وسوف تعمل على ترقية هذه المهنة في البلاد.
+              </p>
+            </div>
+
+            {/* Signature */}
+            <div className="flex items-center justify-end gap-4 pt-4 border-t border-[oklch(0.30_0.03_250)]">
+              <div className="text-left">
+                <p className="text-[oklch(0.90_0.005_250)] font-bold text-base">المهندس سلامة عواودة</p>
+                <p className="text-[oklch(0.55_0.02_250)] text-sm">المدير العام — شركة أكسيس للحلول الهندسية المتقدمة</p>
+              </div>
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)] flex items-center justify-center text-white font-bold text-xl shrink-0">
+                س
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </Section>
+  )
+}
+
+/* ───────── social media feed ───────── */
+function SocialFeed() {
+  const [activePlatform, setActivePlatform] = useState<'all' | 'instagram' | 'facebook' | 'youtube'>('all')
+
+  const feedItems = [
+    {
+      platform: 'instagram' as const,
+      title: 'شكراً لكل من زارنا وتعرف على تقنيات Trimble و NavVis و Xgrids المتقدمة',
+      href: 'https://www.instagram.com/p/DYMX_zvCIAt',
+      date: '2025',
+    },
+    {
+      platform: 'instagram' as const,
+      title: 'تعاون جمعية إعادة الإطار المعماري × اكسيس × جامعة القدس',
+      href: 'https://www.instagram.com/p/DYIVKBDiDkf',
+      date: '2025',
+    },
+    {
+      platform: 'instagram' as const,
+      title: 'وراء كل طريق وبرج أيقوني في أبوظبي — Trimble Total Station',
+      href: 'https://www.instagram.com/reel/DXYyA2_DyhE',
+      date: '2025',
+    },
+    {
+      platform: 'facebook' as const,
+      title: 'تهنئة لـ Juman Home رام الله على اقتناء جهاز المسح ثلاثي الأبعاد Trimble X9!',
+      href: 'https://www.facebook.com/axisTRIMBLE',
+      date: '2025',
+    },
+    {
+      platform: 'youtube' as const,
+      title: '3D Laser Scanning the Nablus Court of Appeal',
+      href: 'https://www.youtube.com/watch?v=XgBOGJzBn5g',
+      date: '2025',
+    },
+    {
+      platform: 'youtube' as const,
+      title: 'NavVis MLX – Redefining Handheld Reality Capture',
+      href: 'https://www.youtube.com/watch?v=-IDRr44-6RA',
+      date: '2025',
+    },
+    {
+      platform: 'instagram' as const,
+      title: 'مسح رادار أرضي بالدرون Zond Aero 500 GPR',
+      href: 'https://www.instagram.com/reel/DSB4QDaDwLW',
+      date: '2025',
+    },
+    {
+      platform: 'instagram' as const,
+      title: 'توتل ستيشن يجمع بين سهولة الاستخدام والدقة العالية',
+      href: 'https://www.instagram.com/reel/DXEuqvGD6Dw',
+      date: '2025',
+    },
+    {
+      platform: 'facebook' as const,
+      title: 'ورشة لجنة التسوية حول مفاهيم GNSS — اكسيس تقدم أجهزة GPS',
+      href: 'https://www.facebook.com/lwscps/posts/1427944703988935',
+      date: '2025',
+    },
+  ]
+
+  const filtered = activePlatform === 'all' ? feedItems : feedItems.filter(f => f.platform === activePlatform)
+
+  const platformConfig = {
+    instagram: { color: 'from-[#833AB4] via-[#FD1D1D] to-[#F77737]', label: 'Instagram', icon: <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg> },
+    facebook: { color: 'from-[#1877F2] to-[#0d5bbf]', label: 'Facebook', icon: <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> },
+    youtube: { color: 'from-[#FF0000] to-[#cc0000]', label: 'YouTube', icon: <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> },
+  }
+
+  return (
+    <Section id="social" className="py-20 sm:py-28 relative">
+      <div className="absolute inset-0 grid-pattern opacity-10" />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-14">
+          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">تابعنا</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
+            أحدث <span className="gradient-text">أخبارنا ومنشوراتنا</span>
+          </h2>
+          <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
+            تابعونا على منصات التواصل الاجتماعي للحصول على آخر الأخبار والعروض والفيديوهات التعليمية
+          </p>
+        </div>
+
+        {/* Platform filter */}
+        <div className="flex items-center justify-center gap-3 mb-10">
+          {(['all', 'instagram', 'facebook', 'youtube'] as const).map(p => (
+            <button
+              key={p}
+              onClick={() => setActivePlatform(p)}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
+                activePlatform === p
+                  ? 'bg-[oklch(0.72_0.14_180)] text-[oklch(0.13_0.02_250)] shadow-lg shadow-[oklch(0.72_0.14_180_/_0.2)]'
+                  : 'bg-[oklch(0.20_0.03_250)] border border-[oklch(0.30_0.03_250)] text-[oklch(0.60_0.01_250)] hover:border-[oklch(0.72_0.14_180_/_0.3)] hover:text-[oklch(0.72_0.14_180)]'
+              }`}
+            >
+              {p !== 'all' && platformConfig[p].icon}
+              {p === 'all' ? 'الكل' : platformConfig[p].label}
+            </button>
+          ))}
+        </div>
+
+        {/* Feed grid */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activePlatform}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          >
+            {filtered.map((item, i) => (
+              <motion.a
+                key={`${item.platform}-${i}`}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: Math.min(i * 0.08, 0.4) }}
+                className="group relative p-6 rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500"
+              >
+                {/* Platform badge */}
+                <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-gradient-to-l ${platformConfig[item.platform].color} text-white text-[10px] font-bold mb-4`}>
+                  {platformConfig[item.platform].icon}
+                  {platformConfig[item.platform].label}
+                </div>
+                
+                <h4 className="text-[oklch(0.90_0.005_250)] font-semibold text-sm leading-relaxed mb-4">{item.title}</h4>
+                
+                <div className="flex items-center gap-1 text-[oklch(0.50_0.02_250)] text-xs group-hover:text-[oklch(0.72_0.14_180)] transition-colors">
+                  <span>عرض المنشور</span>
+                  <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </div>
+              </motion.a>
+            ))}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Social links */}
+        <div className="flex flex-wrap items-center justify-center gap-4 mt-10">
+          {SOCIALS.map(s => (
+            <a
+              key={s.name}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-5 py-3 rounded-xl bg-[oklch(0.22_0.02_250)] border border-[oklch(0.30_0.03_250)] text-[oklch(0.65_0.01_250)] hover:border-[oklch(0.72_0.14_180_/_0.4)] hover:text-[oklch(0.72_0.14_180)] transition-all duration-300 text-sm font-medium"
+            >
+              {s.icon}
+              {s.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    </Section>
+  )
+}
+
 /* ───────── main page ───────── */
 export default function Home() {
   return (
@@ -2284,9 +2615,12 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
+        <Branches />
         <About />
+        <CEOMessage />
         <Stats />
         <Brands />
+        <SocialFeed />
         <Gallery />
         <Services />
         <Projects />
