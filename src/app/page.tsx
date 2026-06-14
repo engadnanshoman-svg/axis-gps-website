@@ -221,21 +221,29 @@ function Navbar() {
 
 /* ───────── customer cinema images ───────── */
 const CUSTOMER_IMAGES = [
-  { src: '/customers/field-surveyor.jpg', alt: 'مسح ميداني بأجهزة Trimble' },
-  { src: '/customers/navvis-scanning.jpg', alt: 'مسح ضوئي ثلاثي الأبعاد NavVis' },
-  { src: '/customers/trimble-gnss.jpg', alt: 'جهاز GNSS Trimble للمسح الدقيق' },
-  { src: '/customers/navvis-team.jpg', alt: 'فريق المسح بأجهزة NavVis' },
-  { src: '/customers/gps-rover.jpg', alt: 'جهاز GPS Rover للمسح الميداني' },
-  { src: '/customers/trimble-tripod.jpg', alt: 'محطة Trimble على ثلاثية القوائم' },
+  { src: '/customers/navvis-full-use-3.jpg', alt: 'شركاء النجاح - مسح ميداني بأجهزة NavVis في الضفة الغربية' },
+  { src: '/customers/navvis-full-use-4.jpg', alt: 'شركاء النجاح - فريق المسح بأجهزة NavVis في القدس' },
+  { src: '/customers/navvis-full-use-5.jpg', alt: 'شركاء النجاح - مسح ثلاثي الأبعاد في موقع إنشائي' },
+  { src: '/customers/navvis-full-use-6.jpg', alt: 'شركاء النجاح - تقنية المسح المتقدمة NavVis' },
+  { src: '/customers/website-pic.jpg', alt: 'شركاء النجاح - زبائن شركة أكسيس في فلسطين' },
+  { src: '/customers/trimble-fieldlink.jpg', alt: 'شركاء النجاح - أجهزة Trimble في الميدان' },
+  { src: '/customers/trimble-s9.jpg', alt: 'شركاء النجاح - محطة Trimble S9 للمسح الدقيق' },
+  { src: '/customers/field-surveyor.jpg', alt: 'شركاء النجاح - مسح ميداني بأجهزة Trimble' },
+  { src: '/customers/navvis-scanning.jpg', alt: 'شركاء النجاح - مسح ضوئي ثلاثي الأبعاد' },
+  { src: '/customers/trimble-gnss.jpg', alt: 'شركاء النجاح - جهاز GNSS Trimble' },
 ]
 
 const CUSTOMER_IMAGES_LEFT = [
-  { src: '/customers/navvis-industrial.jpg', alt: 'مسح صناعي بأجهزة NavVis' },
-  { src: '/customers/surveyor-site.jpg', alt: 'مسح موقع إنشائي' },
-  { src: '/customers/cat-excavator.jpg', alt: 'أنظمة التحكم بالآلات الثقيلة' },
-  { src: '/customers/navvis-screen.jpg', alt: 'نماذج ثلاثية الأبعاد للمباني' },
-  { src: '/customers/field-surveyor.jpg', alt: 'خبير مسح ميداني' },
-  { src: '/customers/trimble-gnss.jpg', alt: 'تقنية GNSS المتقدمة' },
+  { src: '/customers/navvis-full-use-5.jpg', alt: 'من وثق بنا - مسح ميداني في رام الله' },
+  { src: '/customers/navvis-full-use-3.jpg', alt: 'من وثق بنا - فريق المسح في الخليل' },
+  { src: '/customers/navvis-full-use-6.jpg', alt: 'من وثق بنا - مسح صناعي بأجهزة NavVis' },
+  { src: '/customers/navvis-full-use-4.jpg', alt: 'من وثق بنا - مشاريع في القدس والضفة' },
+  { src: '/customers/navvis-industrial.jpg', alt: 'من وثق بنا - مسح صناعي متقدم' },
+  { src: '/customers/surveyor-site.jpg', alt: 'من وثق بنا - مسح موقع إنشائي' },
+  { src: '/customers/cat-excavator.jpg', alt: 'من وثق بنا - أنظمة التحكم بالآلات الثقيلة' },
+  { src: '/customers/navvis-screen.jpg', alt: 'من وثق بنا - نماذج ثلاثية الأبعاد' },
+  { src: '/customers/gps-rover.jpg', alt: 'من وثق بنا - جهاز GPS Rover' },
+  { src: '/customers/trimble-tripod.jpg', alt: 'من وثق بنا - محطة Trimble على ثلاثية القوائم' },
 ]
 
 /* ───────── cinematic hero ───────── */
