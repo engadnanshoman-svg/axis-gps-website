@@ -1743,10 +1743,10 @@ function Contact() {
     { icon: <MessageCircle className="w-5 h-5 text-[#25D366]" />, label: 'واتساب', value: '+972 52-528-9999', href: 'https://wa.me/972525289999' },
     { icon: <Mail className="w-5 h-5" />, label: 'البريد الإلكتروني', value: 'adnan@axis-gps.com' },
     { icon: <Mail className="w-5 h-5" />, label: 'البريد الإلكتروني', value: 'salame@axis-gps.com' },
-    { icon: <MapPin className="w-5 h-5" />, label: 'الفرع الرئيسي', value: 'كفر كنا المنطقة الصناعية' },
-    { icon: <MapPin className="w-5 h-5" />, label: 'فرع الشمال', value: 'كفر قاسم الشارع الرئيسي' },
+    { icon: <MapPin className="w-5 h-5" />, label: 'الفرع الرئيسي', value: 'المنطقة الصناعية تسيفوريت' },
+    { icon: <MapPin className="w-5 h-5" />, label: 'فرع الشمال', value: 'كفر قاسم - شارع علي بن أبي طالب' },
     { icon: <MapPin className="w-5 h-5" />, label: 'فرع رام الله', value: 'شارع الإرسال قرب السفينة' },
-    { icon: <MapPin className="w-5 h-5" />, label: 'فرع الخليل', value: 'شارع عين سارة مقابل ملعب الحسين بن علي' },
+    { icon: <MapPin className="w-5 h-5" />, label: 'فرع الخليل', value: 'شارع عين سارة مقابل ستاد الحسين' },
   ]
 
   return (
@@ -2190,17 +2190,17 @@ function Footer() {
               <div className="flex items-start gap-2 text-[oklch(0.50_0.02_250)] text-sm">
                 <MapPin className="w-4 h-4 text-[oklch(0.72_0.14_180)] mt-0.5 shrink-0" />
                 <div className="space-y-1.5">
-                  <a href="https://www.google.com/maps?q=32.7482,35.3438" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
-                    الفرع الرئيسي: كفر كنا المنطقة الصناعية ↗
+                  <a href="https://www.google.com/maps?q=32.7579702,35.3189103" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
+                    الفرع الرئيسي: المنطقة الصناعية تسيفوريت ↗
                   </a>
-                  <a href="https://www.google.com/maps?q=32.1141,34.9762" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
-                    فرع الشمال: كفر قاسم الشارع الرئيسي ↗
+                  <a href="https://www.google.com/maps?q=32.1169613,34.968664" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
+                    فرع الشمال: كفر قاسم شارع علي بن أبي طالب ↗
                   </a>
-                  <a href="https://www.google.com/maps?q=31.8996,35.2042" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
+                  <a href="https://www.google.com/maps?q=31.8652474,35.2287424" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
                     فرع رام الله: شارع الإرسال قرب السفينة ↗
                   </a>
-                  <a href="https://www.google.com/maps?q=31.5294,35.0938" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
-                    فرع الخليل: شارع عين سارة مقابل ملعب الحسين بن علي ↗
+                  <a href="https://www.google.com/maps?q=31.537372,35.0987544" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
+                    فرع الخليل: شارع عين سارة مقابل ستاد الحسين ↗
                   </a>
                 </div>
               </div>

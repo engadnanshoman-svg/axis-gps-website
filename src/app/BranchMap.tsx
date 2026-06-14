@@ -32,11 +32,11 @@ const branches = [
   {
     id: 'main',
     name: 'الفرع الرئيسي',
-    nameEn: 'Kafr Kanna',
-    address: 'كفر كنا - المنطقة الصناعية',
-    phone: '0594224497',
-    lat: 32.7482,
-    lng: 35.3438,
+    nameEn: 'Tziporit Industrial Zone',
+    address: 'المنطقة الصناعية تسيفوريت - شارع הסדנא',
+    phone: '04-6419995',
+    lat: 32.7579702,
+    lng: 35.3189103,
     icon: icons.main,
     color: '#0ea5a0',
   },
@@ -44,10 +44,10 @@ const branches = [
     id: 'north',
     name: 'فرع الشمال',
     nameEn: 'Kafr Qasim',
-    address: 'كفر قاسم - الشارع الرئيسي',
+    address: 'كفر قاسم - شارع علي بن أبي طالب 2',
     phone: '0595289999',
-    lat: 32.1141,
-    lng: 34.9762,
+    lat: 32.1169613,
+    lng: 34.968664,
     icon: icons.north,
     color: '#6366f1',
   },
@@ -56,9 +56,9 @@ const branches = [
     name: 'فرع رام الله',
     nameEn: 'Ramallah',
     address: 'رام الله - شارع الإرسال قرب السفينة',
-    phone: '0594224497',
-    lat: 31.8996,
-    lng: 35.2042,
+    phone: '02-2950149',
+    lat: 31.8652474,
+    lng: 35.2287424,
     icon: icons.ramallah,
     color: '#f59e0b',
   },
@@ -66,10 +66,10 @@ const branches = [
     id: 'hebron',
     name: 'فرع الخليل',
     nameEn: 'Hebron',
-    address: 'الخليل - شارع عين سارة مقابل ملعب الحسين بن علي',
-    phone: '0595289999',
-    lat: 31.5294,
-    lng: 35.0938,
+    address: 'الخليل - برج العز ط5 شارع عين سارة مقابل ستاد الحسين',
+    phone: '0594224498',
+    lat: 31.537372,
+    lng: 35.0987544,
     icon: icons.hebron,
     color: '#ef4444',
   },
@@ -138,7 +138,7 @@ export default function BranchMap() {
       {/* Map */}
       <div className="relative rounded-2xl overflow-hidden border border-[oklch(0.30_0.03_250)] shadow-xl">
         <MapContainer
-          center={[32.2, 35.15]}
+          center={[32.15, 35.15]}
           zoom={8}
           scrollWheelZoom={true}
           style={{ height: '420px', width: '100%' }}
