@@ -1509,58 +1509,164 @@ function Projects() {
 
 /* ───────── testimonials ───────── */
 function Testimonials() {
+  const [activeIndex, setActiveIndex] = useState(0)
+
   const testimonials = [
     {
       name: 'م. أنس أبو حديد',
       role: 'مدير فرع الخليل - شركة اكسيس',
       text: 'نلتزم في اكسيس بتقديم أحدث التقنيات وأفضل الخدمات لعملائنا في قطاع المساحة والجيوماتكس، ونسعى دائماً لتجاوز توقعاتهم.',
+      rating: 5,
+      initials: 'أنس',
+      color: 'from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)]',
     },
     {
       name: 'م. سجى مسالمة',
       role: 'فريق اكسيس - فرع الخليل',
       text: 'فريق اكسيس يعمل بشغف لتوفير حلول مسح متكاملة تلبي احتياجات المشاريع المختلفة، من أجهزة GPS إلى أنظمة المراقبة المتقدمة.',
+      rating: 5,
+      initials: 'سجى',
+      color: 'from-[#E1306C] to-[#C1255E]',
     },
     {
       name: 'أحمد سعيد بيوض التميمي',
       role: 'رئيس مجلس أمناء جامعة البوليتكنك',
       text: 'نشيد بدور شركة اكسيس في إرفاد قطاع المساحة والجيوماتكس بأحدث التقنيات الحديثة من خلال مبادراتها وخبراتها المهنية للمساحين والمهندسين.',
+      rating: 5,
+      initials: 'أحمد',
+      color: 'from-[oklch(0.55_0.12_250)] to-[oklch(0.65_0.16_200)]',
     },
   ]
 
+  // Auto-rotate
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex(prev => (prev + 1) % testimonials.length)
+    }, 6000)
+    return () => clearInterval(timer)
+  }, [testimonials.length])
+
   return (
-    <Section id="testimonials" className="py-20 sm:py-28 relative">
-      <div className="absolute inset-0 grid-pattern opacity-10" />
+    <Section id="testimonials" className="py-20 sm:py-28 relative overflow-hidden">
+      {/* Decorative background */}
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-[oklch(0.72_0.14_180_/_0.04)] rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-[oklch(0.65_0.16_200_/_0.04)] rounded-full blur-3xl" />
+      <div className="absolute inset-0 grid-pattern opacity-5" />
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">آراء عملائنا</span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
-            ثقة <span className="gradient-text">عملائنا</span> هي شهادتنا
+        {/* Header */}
+        <div className="text-center mb-14">
+          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">مشاركة شركاء النجاح</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-3">
+            رأيك <span className="gradient-text">يهمنا</span>
           </h2>
+          <p className="text-[var(--t-7)] max-w-xl mx-auto text-sm">
+            نفتخر بثقة شركائنا وعملائنا ونسعى دائماً لتحقيق رضاهم وتجاوز توقعاتهم
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        {/* Featured Testimonial - Large Display */}
+        <div className="relative mb-10">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0, y: 20, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.97 }}
+              transition={{ duration: 0.5 }}
+              className="relative max-w-3xl mx-auto"
+            >
+              <div className="relative p-8 sm:p-12 rounded-3xl border border-[var(--b-1)] bg-[var(--bg-2)] overflow-hidden">
+                {/* Accent top line */}
+                <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-l from-[oklch(0.72_0.14_180)] via-[oklch(0.65_0.16_200)] to-[oklch(0.72_0.14_180)]" />
+                
+                {/* Large quote icon */}
+                <div className="absolute top-4 right-4 opacity-[0.04]">
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-32 h-32 text-[oklch(0.72_0.14_180)]"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                </div>
+
+                {/* Rating stars */}
+                <div className="flex items-center gap-1.5 mb-6">
+                  {[...Array(5)].map((_, j) => (
+                    <motion.div
+                      key={j}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: j * 0.1 + 0.3 }}
+                    >
+                      <Star className={`w-6 h-6 ${j < testimonials[activeIndex].rating ? 'fill-[#FBBF24] text-[#FBBF24]' : 'text-[var(--t-10)]'}`} />
+                    </motion.div>
+                  ))}
+                  <span className="mr-3 text-[var(--t-8)] text-sm font-medium">
+                    {testimonials[activeIndex].rating}.0
+                  </span>
+                </div>
+
+                {/* Quote text */}
+                <blockquote className="text-xl sm:text-2xl md:text-3xl font-bold text-[var(--t-1)] leading-relaxed mb-8 relative z-10">
+                  &ldquo;{testimonials[activeIndex].text}&rdquo;
+                </blockquote>
+
+                {/* Author info */}
+                <div className="flex items-center gap-4">
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${testimonials[activeIndex].color} flex items-center justify-center text-white font-bold text-lg shadow-lg`}>
+                    {testimonials[activeIndex].initials}
+                  </div>
+                  <div>
+                    <div className="font-bold text-[var(--t-0)] text-lg">{testimonials[activeIndex].name}</div>
+                    <div className="text-[var(--t-8)] text-sm">{testimonials[activeIndex].role}</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation dots */}
+          <div className="flex items-center justify-center gap-3 mt-8">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveIndex(i)}
+                className={`transition-all duration-500 rounded-full ${
+                  i === activeIndex 
+                    ? 'w-10 h-3 bg-[oklch(0.72_0.14_180)]' 
+                    : 'w-3 h-3 bg-[var(--t-10)] hover:bg-[var(--t-8)]'
+                }`}
+                aria-label={`شهادة ${i + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* All testimonials grid - small cards */}
+        <div className="grid md:grid-cols-3 gap-5">
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className="p-6 rounded-2xl border border-[var(--b-1)] bg-[var(--bg-2)] hover:border-[var(--accent-border-sm)] transition-all duration-300"
+              transition={{ delay: i * 0.1 }}
+              onClick={() => setActiveIndex(i)}
+              className={`cursor-pointer group p-5 rounded-2xl border transition-all duration-300 ${
+                i === activeIndex 
+                  ? 'border-[oklch(0.72_0.14_180_/_0.4)] bg-[oklch(0.72_0.14_180_/_0.05)] shadow-lg shadow-[oklch(0.72_0.14_180_/_0.08)]' 
+                  : 'border-[var(--b-1)] bg-[var(--bg-2)] hover:border-[var(--accent-border-sm)]'
+              }`}
             >
-              <div className="flex gap-1 mb-4">
+              <div className="flex items-center gap-1 mb-3">
                 {[...Array(5)].map((_, j) => (
-                  <Star key={j} className="w-4 h-4 fill-[oklch(0.72_0.14_180)] text-[oklch(0.72_0.14_180)]" />
+                  <Star key={j} className={`w-3.5 h-3.5 ${j < t.rating ? 'fill-[#FBBF24] text-[#FBBF24]' : 'text-[var(--t-10)]'}`} />
                 ))}
               </div>
-              <p className="text-[var(--t-4)] leading-relaxed mb-6 text-sm">"{t.text}"</p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[oklch(0.72_0.14_180_/_0.15)] flex items-center justify-center text-[oklch(0.72_0.14_180)] font-bold text-sm">
-                  {t.name.charAt(2)}
+              <p className="text-[var(--t-4)] text-sm leading-relaxed mb-4 line-clamp-3">{t.text}</p>
+              <div className="flex items-center gap-2.5">
+                <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${t.color} flex items-center justify-center text-white font-bold text-xs`}>
+                  {t.initials}
                 </div>
                 <div>
-                  <div className="font-semibold text-[var(--t-1)] text-sm">{t.name}</div>
-                  <div className="text-[var(--t-8)] text-xs">{t.role}</div>
+                  <div className="font-semibold text-[var(--t-1)] text-xs">{t.name}</div>
+                  <div className="text-[var(--t-9)] text-[10px]">{t.role}</div>
                 </div>
               </div>
             </motion.div>
