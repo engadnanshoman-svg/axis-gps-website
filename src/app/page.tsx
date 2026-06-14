@@ -154,6 +154,16 @@ function Navbar() {
             >
               احصل على عرض
             </a>
+            {/* Theme toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg text-[var(--t-3)] hover:text-[oklch(0.72_0.14_180)] hover:bg-[var(--accent-bg-xs)] transition-all duration-300"
+              aria-label={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
+              title={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
+            >
+              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+
             {/* Social icons */}
             <div className="flex items-center gap-2 mr-3 border-r border-[var(--b-1)] pr-3">
               {SOCIALS.map(s => (
