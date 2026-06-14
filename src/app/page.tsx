@@ -653,12 +653,26 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
+          {/* رأيك يهمنا - Eye-catching modern CTA */}
           <a
-            href="#services"
-            className="group px-8 py-4 bg-[oklch(0.72_0.14_180)] text-[oklch(0.13_0.02_250)] font-bold rounded-xl hover:bg-[oklch(0.75_0.15_180)] transition-all duration-300 glow-teal flex items-center gap-2"
+            href="#testimonials"
+            className="group relative px-8 py-4 rounded-2xl font-bold flex items-center gap-3 overflow-hidden transition-all duration-500 hover:scale-[1.04] active:scale-[0.98]"
           >
-            اكتشف خدماتنا
-            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+            {/* Animated gradient background */}
+            <span className="absolute inset-0 bg-gradient-to-l from-[oklch(0.72_0.14_180)] via-[oklch(0.65_0.18_200)] to-[oklch(0.72_0.14_180)] transition-all duration-500" />
+            {/* Shimmer overlay */}
+            <span className="absolute inset-0 bg-gradient-to-l from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+            {/* Pulse ring behind star */}
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 animate-ping opacity-30" />
+            {/* Content */}
+            <span className="relative z-10 text-[oklch(0.13_0.02_250)] flex items-center gap-3">
+              {/* Modern star-burst icon */}
+              <span className="relative flex items-center justify-center w-8 h-8">
+                <Star className="w-5 h-5 fill-[oklch(0.13_0.02_250)] text-[oklch(0.13_0.02_250)] group-hover:rotate-[72deg] transition-transform duration-500" />
+              </span>
+              رأيك يهمنا
+              <MessageCircle className="w-5 h-5 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
+            </span>
           </a>
           <a
             href="#contact"
@@ -1547,28 +1561,72 @@ function ReviewForm() {
     }
   }
 
-  // Collapsed state: show inviting CTA
+  // Collapsed state: show inviting CTA — modern, non-traditional design
   if (!formOpen && !submitted) {
     return (
-      <div className="text-center">
-        <div className="flex items-center justify-center gap-2 mb-3">
-          <div className="flex gap-0.5">
-            {[1,2,3,4,5].map(i => (
-              <Star key={i} className="w-5 h-5 fill-[#FBBF24] text-[#FBBF24]" />
-            ))}
-          </div>
+      <div className="relative text-center py-4">
+        {/* Decorative floating stars */}
+        <div className="absolute -top-2 right-8 animate-bounce" style={{ animationDelay: '0.2s', animationDuration: '2.5s' }}>
+          <Star className="w-4 h-4 fill-[#FBBF24] text-[#FBBF24] opacity-60" />
         </div>
-        <h3 className="text-xl sm:text-2xl font-bold text-[var(--t-0)] mb-2">شاركنا رأيك</h3>
-        <p className="text-[var(--t-7)] text-sm mb-5 max-w-md mx-auto">
+        <div className="absolute -top-1 left-12 animate-bounce" style={{ animationDelay: '0.8s', animationDuration: '3s' }}>
+          <Star className="w-3 h-3 fill-[#FBBF24] text-[#FBBF24] opacity-40" />
+        </div>
+        <div className="absolute bottom-4 right-16 animate-bounce" style={{ animationDelay: '1.4s', animationDuration: '2.8s' }}>
+          <Star className="w-3.5 h-3.5 fill-[#FBBF24] text-[#FBBF24] opacity-50" />
+        </div>
+
+        {/* Animated stars row */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          className="flex items-center justify-center gap-1.5 mb-4"
+        >
+          {[1,2,3,4,5].map(i => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 10, rotate: -20 }}
+              animate={{ opacity: 1, y: 0, rotate: 0 }}
+              transition={{ delay: i * 0.1 + 0.3, type: 'spring', stiffness: 300 }}
+            >
+              <Star className="w-7 h-7 fill-[#FBBF24] text-[#FBBF24] drop-shadow-[0_0_6px_rgba(251,191,36,0.5)]" />
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <h3 className="text-2xl sm:text-3xl font-bold text-[var(--t-0)] mb-2">
+          شاركنا <span className="gradient-text">رأيك</span>
+        </h3>
+        <p className="text-[var(--t-6)] text-sm mb-6 max-w-lg mx-auto leading-relaxed">
           تجربتك معنا تهمّنا! شاركنا تقييمك وسيظهر رأيك هنا ليستفيد منه الآخرون
         </p>
-        <button
+
+        {/* Modern CTA button with gradient ring */}
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.96 }}
           onClick={() => setFormOpen(true)}
-          className="inline-flex items-center gap-2 px-7 py-3.5 bg-[oklch(0.72_0.14_180)] text-[oklch(0.13_0.02_250)] font-bold rounded-xl hover:bg-[oklch(0.75_0.15_180)] transition-all duration-300 glow-teal-sm text-sm"
+          className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-bold text-base overflow-hidden transition-all duration-500"
         >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-5 h-5"><path d="M12 5v14M5 12h14"/></svg>
-          أضف مشاركتك الآن
-        </button>
+          {/* Rotating gradient border effect */}
+          <span className="absolute -inset-[2px] rounded-2xl bg-gradient-to-l from-[oklch(0.72_0.14_180)] via-[#FBBF24] to-[oklch(0.65_0.16_200)] opacity-80 group-hover:opacity-100 transition-opacity animate-[spin_4s_linear_infinite]" style={{ filter: 'blur(1px)' }} />
+          {/* Inner background */}
+          <span className="absolute inset-0 rounded-2xl bg-gradient-to-l from-[oklch(0.72_0.14_180)] via-[oklch(0.68_0.16_190)] to-[oklch(0.65_0.16_200)] group-hover:from-[oklch(0.75_0.15_180)] group-hover:via-[oklch(0.70_0.17_190)] group-hover:to-[oklch(0.68_0.17_200)] transition-all duration-300" />
+          {/* Shimmer sweep */}
+          <span className="absolute inset-0 bg-gradient-to-l from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+          {/* Content */}
+          <span className="relative z-10 text-[oklch(0.13_0.02_250)] flex items-center gap-3">
+            {/* Animated pen/plus icon */}
+            <span className="relative w-7 h-7 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-colors">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-4 h-4 group-hover:rotate-90 transition-transform duration-400">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </span>
+            أضف مشاركتك الآن
+            <MessageCircle className="w-5 h-5 opacity-70 group-hover:opacity-100 group-hover:rotate-12 transition-all duration-300" />
+          </span>
+        </motion.button>
       </div>
     )
   }
