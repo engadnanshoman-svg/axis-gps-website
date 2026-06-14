@@ -1947,16 +1947,50 @@ function Contact() {
     }
   }
 
-  const contactInfo = [
-    { icon: <Phone className="w-5 h-5" />, label: 'اتصل بنا', value: '0594224497' },
-    { icon: <Phone className="w-5 h-5" />, label: 'اتصل بنا', value: '0595289999' },
-    { icon: <MessageCircle className="w-5 h-5 text-[#25D366]" />, label: 'واتساب', value: '+972 52-528-9999', href: 'https://wa.me/972525289999' },
-    { icon: <Mail className="w-5 h-5" />, label: 'البريد الإلكتروني', value: 'adnan@axis-gps.com' },
-    { icon: <Mail className="w-5 h-5" />, label: 'البريد الإلكتروني', value: 'salame@axis-gps.com' },
-    { icon: <MapPin className="w-5 h-5" />, label: 'الفرع الرئيسي', value: 'المنطقة الصناعية تسيفوريت' },
-    { icon: <MapPin className="w-5 h-5" />, label: 'فرع الشمال', value: 'كفر قاسم - شارع علي بن أبي طالب' },
-    { icon: <MapPin className="w-5 h-5" />, label: 'فرع رام الله', value: 'شارع الإرسال قرب السفينة' },
-    { icon: <MapPin className="w-5 h-5" />, label: 'فرع الخليل', value: 'شارع عين سارة مقابل ستاد الحسين' },
+  /* WhatsApp chat URL with pre-filled message */
+  const whatsappMsg = encodeURIComponent('مرحباً، أود الاستفسار عن خدمات اكسيس للحلول الهندسية')
+  const whatsappUrl = `https://wa.me/972525289999?text=${whatsappMsg}`
+  const messengerUrl = 'https://m.me/axisTRIMBLE'
+  const instagramUrl = 'https://www.instagram.com/axis.gps/'
+
+  const socialChannels = [
+    {
+      name: 'واتساب',
+      nameEn: 'WhatsApp',
+      href: whatsappUrl,
+      color: '#25D366',
+      hoverColor: '#20BD5A',
+      icon: <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>,
+      desc: 'تواصل معنا فوراً عبر واتساب',
+      badge: 'الأسرع',
+    },
+    {
+      name: 'ماسنجر',
+      nameEn: 'Messenger',
+      href: messengerUrl,
+      color: '#0084FF',
+      hoverColor: '#0070E0',
+      icon: <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8"><path d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.2 5.42 3.15 7.15.16.14.26.34.27.56l.05 1.74c.02.57.61.94 1.14.72l1.94-.8c.16-.07.34-.09.51-.05.88.24 1.82.37 2.79.37 5.64 0 10-4.13 10-9.7C22 6.13 17.64 2 12 2zm5.89 7.54l-2.83 4.48c-.45.71-1.39.89-2.07.39l-2.25-1.69a.75.75 0 00-.9 0l-3.04 2.31c-.41.31-.94-.2-.67-.64l2.83-4.48c.45-.71 1.39-.89 2.07-.39l2.25 1.69a.75.75 0 00.9 0l3.04-2.31c.41-.31.94.2.67.64z"/></svg>,
+      desc: 'أرسل لنا رسالة عبر ماسنجر',
+      badge: null,
+    },
+    {
+      name: 'انستغرام',
+      nameEn: 'Instagram',
+      href: instagramUrl,
+      color: '#E1306C',
+      hoverColor: '#C1255E',
+      icon: <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>,
+      desc: 'تابعنا وتواصل معنا على انستغرام',
+      badge: null,
+    },
+  ]
+
+  const contactDetails = [
+    { icon: <Phone className="w-5 h-5" />, label: 'هاتف', value: '0594224497' },
+    { icon: <Phone className="w-5 h-5" />, label: 'هاتف', value: '0595289999' },
+    { icon: <Mail className="w-5 h-5" />, label: 'بريد إلكتروني', value: 'adnan@axis-gps.com' },
+    { icon: <Mail className="w-5 h-5" />, label: 'بريد إلكتروني', value: 'salame@axis-gps.com' },
   ]
 
   return (
@@ -1969,32 +2003,70 @@ function Contact() {
             لنبدأ <span className="gradient-text">مشروعك القادم</span>
           </h2>
           <p className="text-[var(--t-7)] max-w-2xl mx-auto">
-            تواصل معنا اليوم لمناقشة متطلبات مشروعك والحصول على استشارة مجانية من خبرائنا
+            تواصل معنا مباشرة عبر قنوات التواصل الاجتماعي أو أرسل لنا تفاصيل مشروعك
           </p>
         </div>
 
+        {/* ── Primary: Social Chat Channels ── */}
+        <div className="grid sm:grid-cols-3 gap-5 mb-12">
+          {socialChannels.map((ch, i) => (
+            <motion.a
+              key={ch.nameEn}
+              href={ch.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.12, duration: 0.5 }}
+              whileHover={{ y: -4, scale: 1.02 }}
+              className="group relative flex flex-col items-center text-center p-6 sm:p-8 rounded-2xl border border-[var(--b-1)] bg-[var(--bg-2)] hover:border-transparent transition-all duration-500 overflow-hidden"
+              style={{ ['--ch-color' as string]: ch.color, ['--ch-hover' as string]: ch.hoverColor }}
+            >
+              {/* Background glow on hover */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `radial-gradient(circle at center, ${ch.color}15, transparent 70%)` }} />
+              {/* Top border accent */}
+              <div className="absolute top-0 inset-x-0 h-1 opacity-60 group-hover:opacity-100 transition-opacity duration-300" style={{ background: `linear-gradient(90deg, transparent, ${ch.color}, transparent)` }} />
+
+              {ch.badge && (
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold text-white" style={{ background: ch.color }}>
+                  {ch.badge}
+                </div>
+              )}
+
+              <div className="relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110" style={{ background: `${ch.color}18` }}>
+                <div style={{ color: ch.color }}>{ch.icon}</div>
+              </div>
+
+              <h3 className="relative z-10 text-xl font-bold text-[var(--t-0)] mb-1">{ch.name}</h3>
+              <p className="relative z-10 text-[var(--t-8)] text-sm">{ch.desc}</p>
+
+              <div className="relative z-10 mt-5 flex items-center gap-2 px-5 py-2.5 rounded-xl text-white font-semibold text-sm transition-all duration-300" style={{ background: ch.color }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                افتح {ch.name}
+              </div>
+            </motion.a>
+          ))}
+        </div>
+
         <div className="grid lg:grid-cols-5 gap-8">
-          {/* Contact info */}
-          <div className="lg:col-span-2 space-y-6">
-            {contactInfo.map((c, i) => (
+          {/* Contact details + Map */}
+          <div className="lg:col-span-2 space-y-4">
+            {contactDetails.map((c, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="flex items-start gap-4 p-5 rounded-xl border border-[var(--b-1)] bg-[var(--bg-2)] hover:border-[var(--accent-border-sm)] transition-all"
+                transition={{ delay: i * 0.08 }}
+                className="flex items-center gap-4 p-4 rounded-xl border border-[var(--b-1)] bg-[var(--bg-2)] hover:border-[var(--accent-border-sm)] transition-all"
               >
-                <div className="p-3 rounded-lg bg-[oklch(0.72_0.14_180_/_0.1)] text-[oklch(0.72_0.14_180)] shrink-0">
+                <div className="p-2.5 rounded-lg bg-[oklch(0.72_0.14_180_/_0.1)] text-[oklch(0.72_0.14_180)] shrink-0">
                   {c.icon}
                 </div>
                 <div>
-                  <div className="text-sm text-[var(--t-8)]">{c.label}</div>
-                  {c.href ? (
-                    <a href={c.href} target="_blank" rel="noopener noreferrer" className="text-[var(--t-1)] font-medium mt-1 hover:text-[#25D366] transition-colors" dir="ltr">{c.value}</a>
-                  ) : (
-                    <div className="text-[var(--t-1)] font-medium mt-1" dir="ltr">{c.value}</div>
-                  )}
+                  <div className="text-xs text-[var(--t-9)]">{c.label}</div>
+                  <div className="text-[var(--t-1)] font-medium text-sm" dir="ltr">{c.value}</div>
                 </div>
               </motion.div>
             ))}
@@ -2022,6 +2094,10 @@ function Contact() {
             onSubmit={handleSubmit}
             className="lg:col-span-3 p-6 sm:p-8 rounded-2xl border border-[var(--b-1)] bg-[var(--bg-2)]"
           >
+            <h3 className="text-lg font-bold text-[var(--t-0)] mb-5 flex items-center gap-2">
+              <Mail className="w-5 h-5 text-[oklch(0.72_0.14_180)]" />
+              أو أرسل لنا تفاصيل مشروعك
+            </h3>
             <div className="grid sm:grid-cols-2 gap-4 mb-4">
               <div>
                 <label className="block text-sm text-[var(--t-6)] mb-2">الاسم الكامل</label>
