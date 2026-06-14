@@ -451,3 +451,43 @@ html {
   width: 22px;
   height: 22px;
 }
+
+/* ── Cinema scroll animations ── */
+@keyframes cinema-scroll-up {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-33.333%); }
+}
+
+@keyframes cinema-scroll-down {
+  0% { transform: translateY(-33.333%); }
+  100% { transform: translateY(0); }
+}
+
+.cinema-scroll-right {
+  display: flex;
+  flex-direction: column;
+  animation: cinema-scroll-up 45s linear infinite;
+}
+
+.cinema-scroll-left {
+  display: flex;
+  flex-direction: column;
+  animation: cinema-scroll-down 40s linear infinite;
+}
+
+.cinema-scroll-right:hover,
+.cinema-scroll-left:hover {
+  animation-play-state: paused;
+}
+
+.cinema-card {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.cinema-card:hover {
+  transform: scale(1.03);
+}
+
+.cinema-card:hover img {
+  opacity: 0.85 !important;
+}

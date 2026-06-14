@@ -256,6 +256,25 @@ function Navbar() {
   )
 }
 
+/* ───────── customer cinema images ───────── */
+const CUSTOMER_IMAGES = [
+  { src: '/customers/field-surveyor.jpg', alt: 'مسح ميداني بأجهزة Trimble' },
+  { src: '/customers/navvis-scanning.jpg', alt: 'مسح ضوئي ثلاثي الأبعاد NavVis' },
+  { src: '/customers/trimble-gnss.jpg', alt: 'جهاز GNSS Trimble للمسح الدقيق' },
+  { src: '/customers/navvis-team.jpg', alt: 'فريق المسح بأجهزة NavVis' },
+  { src: '/customers/gps-rover.jpg', alt: 'جهاز GPS Rover للمسح الميداني' },
+  { src: '/customers/trimble-tripod.jpg', alt: 'محطة Trimble على ثلاثية القوائم' },
+]
+
+const CUSTOMER_IMAGES_LEFT = [
+  { src: '/customers/navvis-industrial.jpg', alt: 'مسح صناعي بأجهزة NavVis' },
+  { src: '/customers/surveyor-site.jpg', alt: 'مسح موقع إنشائي' },
+  { src: '/customers/cat-excavator.jpg', alt: 'أنظمة التحكم بالآلات الثقيلة' },
+  { src: '/customers/navvis-screen.jpg', alt: 'نماذج ثلاثية الأبعاد للمباني' },
+  { src: '/customers/field-surveyor.jpg', alt: 'خبير مسح ميداني' },
+  { src: '/customers/trimble-gnss.jpg', alt: 'تقنية GNSS المتقدمة' },
+]
+
 /* ───────── cinematic hero ───────── */
 function Hero() {
   const [phase, setPhase] = useState<'converge' | 'merge' | 'reveal' | 'content'>('converge')
@@ -537,6 +556,71 @@ function Hero() {
           </div>
         )}
       </AnimatePresence>
+
+      {/* ── Customer showcase cinema screens ── */}
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 8 }}>
+        {/* Right screen - scrolls up */}
+        <div className="absolute top-0 right-0 bottom-0 overflow-hidden" style={{ width: '28%' }}>
+          {/* Top/bottom fade only */}
+          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
+          {/* Inner edge fade toward center */}
+          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
+          <div className="cinema-scroll-right pr-3">
+            {[...CUSTOMER_IMAGES, ...CUSTOMER_IMAGES, ...CUSTOMER_IMAGES].map((img, i) => (
+              <div key={`r-${i}`} className="cinema-card relative group flex-shrink-0 mb-3">
+                <div className="rounded-xl overflow-hidden border border-white/10"
+                  style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.4)' }}
+                >
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    className="w-full h-28 sm:h-36 lg:h-44 object-cover opacity-60 group-hover:opacity-90 transition-opacity duration-500"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="absolute bottom-1.5 right-1.5 left-1.5 px-2 py-1 rounded-lg bg-black/60 backdrop-blur-sm">
+                  <p className="text-[9px] sm:text-[11px] text-white/80 font-medium truncate">{img.alt}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Left screen - scrolls down */}
+        <div className="absolute top-0 left-0 bottom-0 overflow-hidden" style={{ width: '28%' }}>
+          {/* Top/bottom fade only */}
+          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
+          {/* Inner edge fade toward center */}
+          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
+          <div className="cinema-scroll-left pl-3">
+            {[...CUSTOMER_IMAGES_LEFT, ...CUSTOMER_IMAGES_LEFT, ...CUSTOMER_IMAGES_LEFT].map((img, i) => (
+              <div key={`l-${i}`} className="cinema-card relative group flex-shrink-0 mb-3">
+                <div className="rounded-xl overflow-hidden border border-white/10"
+                  style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.4)' }}
+                >
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    className="w-full h-28 sm:h-36 lg:h-44 object-cover opacity-60 group-hover:opacity-90 transition-opacity duration-500"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="absolute bottom-1.5 right-1.5 left-1.5 px-2 py-1 rounded-lg bg-black/60 backdrop-blur-sm">
+                  <p className="text-[9px] sm:text-[11px] text-white/80 font-medium truncate">{img.alt}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Vignette overlay - subtle darkening at edges */}
+        <div className="absolute inset-0" style={{
+          background: 'radial-gradient(ellipse 50% 70% at center, transparent 0%, var(--bg-0) 80%)',
+          zIndex: 9,
+        }} />
+      </div>
 
       {/* ── Content layer ── */}
       <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

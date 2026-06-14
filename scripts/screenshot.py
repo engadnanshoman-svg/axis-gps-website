@@ -41,7 +41,7 @@ with sync_playwright() as p:
     page_errors = []
     page.on('pageerror', lambda err: page_errors.append(str(err)))
     
-    page.goto('http://127.0.0.1:3002', timeout=30000, wait_until='networkidle')
+    page.goto('http://127.0.0.1:3002', timeout=60000, wait_until='domcontentloaded')
     # Wait for JS hydration and animations
     time.sleep(10)
     # Force nav to visible position (override Framer Motion animation)

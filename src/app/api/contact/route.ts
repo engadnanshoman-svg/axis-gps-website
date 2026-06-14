@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const TO_EMAILS = ['adnan@axis-gps.com', 'salame@axis-gps.com'];
+const TO_EMAILS = ['adnan@axis-gps.com'];
 
 function getResend() {
   const apiKey = process.env.RESEND_API_KEY;
