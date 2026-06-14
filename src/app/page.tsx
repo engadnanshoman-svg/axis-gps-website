@@ -231,8 +231,6 @@ const CUSTOMER_IMAGES = [
   { src: '/customers/customer-dsc-08.jpg', alt: 'شركاء النجاح - تقنيات Trimble في فلسطين' },
   { src: '/customers/customer-dsc-09.jpg', alt: 'شركاء النجاح - أجهزة NavVis الميدانية' },
   { src: '/customers/customer-dsc-10.jpg', alt: 'شركاء النجاح - مشاريع البنية التحتية' },
-  { src: '/customers/customer-dsc-11.jpg', alt: 'شركاء النجاح - عملاء القطاع الحكومي' },
-  { src: '/customers/customer-dsc-12.jpg', alt: 'شركاء النجاح - من وثق بأكسيس' },
   { src: '/customers/customer-dsc-13.jpg', alt: 'شركاء النجاح - شركاء النجاح' },
   { src: '/customers/customer-dsc-14.jpg', alt: 'شركاء النجاح - زبائن الشركة' },
 ]
@@ -2145,36 +2143,6 @@ function Documents() {
       category: 'السيرة الذاتية',
     },
     {
-      id: 'clients',
-      title: 'شركاء النجاح ومن وثق بنا',
-      description: 'قائمة شاملة بعملاء شركة اكسيس والمشاريع المنفذة',
-      icon: <Users className="w-6 h-6" />,
-      file: '/docs/clients.pdf',
-      color: 'from-[oklch(0.75_0.15_330)] to-[oklch(0.65_0.16_300)]',
-      borderColor: 'border-[oklch(0.75_0.15_330_/_0.3)]',
-      category: 'شركاء النجاح',
-    },
-    {
-      id: 'network-general',
-      title: 'شبكة المحطات الثابتة',
-      description: 'معلومات شبكة أكسيس للمحطات الثابتة المرجعية',
-      icon: <Globe className="w-6 h-6" />,
-      file: '/docs/network-general.pdf',
-      color: 'from-[oklch(0.80_0.10_160)] to-[oklch(0.72_0.14_180)]',
-      borderColor: 'border-[oklch(0.80_0.10_160_/_0.3)]',
-      category: 'شبكة المحطات',
-    },
-    {
-      id: 'network-complete',
-      title: 'أوراق اعتماد الشبكة',
-      description: 'الوثائق والأوراق الرسمية لاعتماد شبكة المحطات',
-      icon: <Award className="w-6 h-6" />,
-      file: '/docs/network-complete.pdf',
-      color: 'from-[oklch(0.60_0.18_30)] to-[oklch(0.55_0.14_50)]',
-      borderColor: 'border-[oklch(0.60_0.18_30_/_0.3)]',
-      category: 'أوراق الاعتماد',
-    },
-    {
       id: 'tech-support',
       title: 'الدعم الفني',
       description: 'وثائق الدعم الفني والخدمات المقدمة للعملاء',
@@ -2197,7 +2165,7 @@ function Documents() {
             تعرف اكثر <span className="gradient-text">علينا</span>
           </h2>
           <p className="text-[var(--t-7)] max-w-2xl mx-auto">
-            تصفح السيرة الذاتية للشركة ووثائق الاعتماد وشبكة المحطات وشركاء النجاح
+            تصفح السيرة الذاتية للشركة ووثائق الدعم الفني
           </p>
         </div>
 
@@ -2205,9 +2173,6 @@ function Documents() {
         {(() => {
           const categories = [
             { key: 'السيرة الذاتية', label: 'السيرة الذاتية', icon: <BookOpen className="w-7 h-7" /> },
-            { key: 'شركاء النجاح', label: 'شركاء النجاح ومن وثق بنا', icon: <Users className="w-7 h-7" /> },
-            { key: 'شبكة المحطات', label: 'شبكة المحطات', icon: <Globe className="w-7 h-7" /> },
-            { key: 'أوراق الاعتماد', label: 'أوراق اعتماد الشبكة', icon: <Award className="w-7 h-7" /> },
             { key: 'الدعم الفني', label: 'الدعم الفني', icon: <Cog className="w-7 h-7" /> },
           ]
           return categories.map((cat) => {
