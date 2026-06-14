@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const TO_EMAIL = 'adnan@axis-gps.com';
+// Use Gmail until axis-gps.com domain is verified in Resend
+const TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'eng.adnan.shoman@gmail.com';
 
 /* ── Resend (primary) ── */
 function getResend() {
