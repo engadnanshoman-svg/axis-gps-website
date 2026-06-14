@@ -10,8 +10,7 @@ import {
   Target, Zap, Shield, ArrowUpRight, Send, Star,
   Ruler, Compass, DraftingCompass, Factory, Calculator, BarChart3,
   Satellite, ScanLine, GraduationCap, Monitor, Radio, Gauge, MessageCircle,
-  FileText, BookOpen, Globe, Award, Eye, Lock, Download, Quote, MapPinned,
-  Sun, Moon
+  FileText, BookOpen, Globe, Award, Eye, Lock, Download, Quote, MapPinned
 } from 'lucide-react'
 
 /* ───────── dynamic map import (no SSR) ───────── */
@@ -93,7 +92,6 @@ function Section({ id, children, className = '' }: { id: string; children: React
 function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const { theme, toggle: toggleTheme } = useTheme()
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 50)
     window.addEventListener('scroll', h)
@@ -135,7 +133,7 @@ function Navbar() {
             </div>
           </a>
 
-          {/* Desktop Links + Theme Toggle */}
+          {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-1">
             {links.map(l => (
               <a
@@ -170,88 +168,10 @@ function Navbar() {
                 </a>
               ))}
             </div>
-            {/* Desktop Theme toggle - INLINE SVG for guaranteed visibility */}
-            <button
-              onClick={toggleTheme}
-              className="theme-toggle-btn flex items-center justify-center rounded-full cursor-pointer transition-all duration-300 hover:scale-110 shrink-0"
-              style={{
-                width: '48px',
-                height: '48px',
-                minWidth: '48px',
-                background: theme === 'dark' ? 'linear-gradient(135deg, #facc15, #f59e0b)' : 'linear-gradient(135deg, #1e293b, #0f172a)',
-                color: theme === 'dark' ? '#0f172a' : '#facc15',
-                border: '3px solid ' + (theme === 'dark' ? '#eab308' : '#475569'),
-                boxShadow: theme === 'dark'
-                  ? '0 0 20px rgba(250,204,21,0.6), 0 0 40px rgba(250,204,21,0.2)'
-                  : '0 0 20px rgba(30,41,59,0.4), 0 0 40px rgba(100,116,139,0.15)',
-                position: 'relative',
-                zIndex: 9999,
-                isolation: 'isolate',
-              }}
-              aria-label={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
-              title={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
-            >
-              {theme === 'dark' ? (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="5" />
-                  <line x1="12" y1="1" x2="12" y2="3" />
-                  <line x1="12" y1="21" x2="12" y2="23" />
-                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                  <line x1="1" y1="12" x2="3" y2="12" />
-                  <line x1="21" y1="12" x2="23" y2="12" />
-                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-                </svg>
-              ) : (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                </svg>
-              )}
-            </button>
           </div>
 
-          {/* Mobile: Theme toggle + Menu button */}
+          {/* Mobile: Menu button only (theme toggle is floating) */}
           <div className="flex md:hidden items-center gap-3">
-            {/* Mobile Theme toggle - INLINE SVG for guaranteed visibility */}
-            <button
-              onClick={toggleTheme}
-              className="theme-toggle-btn flex items-center justify-center rounded-full cursor-pointer transition-all duration-300 hover:scale-110 shrink-0"
-              style={{
-                width: '48px',
-                height: '48px',
-                minWidth: '48px',
-                background: theme === 'dark' ? 'linear-gradient(135deg, #facc15, #f59e0b)' : 'linear-gradient(135deg, #1e293b, #0f172a)',
-                color: theme === 'dark' ? '#0f172a' : '#facc15',
-                border: '3px solid ' + (theme === 'dark' ? '#eab308' : '#475569'),
-                boxShadow: theme === 'dark'
-                  ? '0 0 20px rgba(250,204,21,0.6), 0 0 40px rgba(250,204,21,0.2)'
-                  : '0 0 20px rgba(30,41,59,0.4), 0 0 40px rgba(100,116,139,0.15)',
-                position: 'relative',
-                zIndex: 9999,
-                isolation: 'isolate',
-              }}
-              aria-label={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
-              title={theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
-            >
-              {theme === 'dark' ? (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="5" />
-                  <line x1="12" y1="1" x2="12" y2="3" />
-                  <line x1="12" y1="21" x2="12" y2="23" />
-                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                  <line x1="1" y1="12" x2="3" y2="12" />
-                  <line x1="21" y1="12" x2="23" y2="12" />
-                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-                </svg>
-              ) : (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                </svg>
-              )}
-            </button>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="p-2 text-[var(--t-3)]"
@@ -284,29 +204,6 @@ function Navbar() {
                   {l.label}
                 </a>
               ))}
-              <button
-                onClick={() => { toggleTheme(); setMobileOpen(false) }}
-                className="flex items-center gap-2 w-full px-4 py-3 text-[oklch(0.65_0.02_250)] hover:text-[oklch(0.72_0.14_180)] rounded-lg hover:bg-[oklch(0.72_0.14_180_/_0.08)] transition-all"
-              >
-                {theme === 'dark' ? (
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="5" />
-                    <line x1="12" y1="1" x2="12" y2="3" />
-                    <line x1="12" y1="21" x2="12" y2="23" />
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                    <line x1="1" y1="12" x2="3" y2="12" />
-                    <line x1="21" y1="12" x2="23" y2="12" />
-                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-                  </svg>
-                ) : (
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                  </svg>
-                )}
-                {theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
-              </button>
               <a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
@@ -624,14 +521,14 @@ function Hero() {
       </AnimatePresence>
 
       {/* ── Customer showcase cinema screens ── */}
-      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 10 }}>
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 35 }}>
         {/* Right screen - scrolls up */}
         <div className="absolute top-0 right-0 bottom-0 overflow-hidden" style={{ width: '22%' }}>
           {/* Top/bottom fade */}
-          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
           {/* Inner edge fade toward center */}
-          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
+          <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
           <div className="cinema-scroll-right pr-2">
             {[...CUSTOMER_IMAGES, ...CUSTOMER_IMAGES, ...CUSTOMER_IMAGES].map((img, i) => (
               <div key={`r-${i}`} className="cinema-card relative group flex-shrink-0 mb-3">
@@ -656,10 +553,10 @@ function Hero() {
         {/* Left screen - scrolls down */}
         <div className="absolute top-0 left-0 bottom-0 overflow-hidden" style={{ width: '22%' }}>
           {/* Top/bottom fade */}
-          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
           {/* Inner edge fade toward center */}
-          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
+          <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
           <div className="cinema-scroll-left pl-2">
             {[...CUSTOMER_IMAGES_LEFT, ...CUSTOMER_IMAGES_LEFT, ...CUSTOMER_IMAGES_LEFT].map((img, i) => (
               <div key={`l-${i}`} className="cinema-card relative group flex-shrink-0 mb-3">
@@ -2889,15 +2786,15 @@ function FloatingThemeToggle() {
       onClick={toggleTheme}
       style={{
         position: 'fixed',
-        bottom: '24px',
-        right: '24px',
-        left: 'auto',
+        bottom: '28px',
+        left: '28px',
+        right: 'auto',
         top: 'auto',
         zIndex: 999999,
-        width: '56px',
-        height: '56px',
-        minWidth: '56px',
-        minHeight: '56px',
+        width: '60px',
+        height: '60px',
+        minWidth: '60px',
+        minHeight: '60px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -2910,17 +2807,16 @@ function FloatingThemeToggle() {
         color: theme === 'dark' ? '#0f172a' : '#facc15',
         border: theme === 'dark' ? '4px solid #eab308' : '4px solid #64748b',
         boxShadow: theme === 'dark'
-          ? '0 0 24px rgba(250,204,21,0.7), 0 0 48px rgba(250,204,21,0.3), 0 4px 12px rgba(0,0,0,0.4)'
-          : '0 0 24px rgba(30,41,59,0.5), 0 0 48px rgba(100,116,139,0.2), 0 4px 12px rgba(0,0,0,0.2)',
+          ? '0 0 30px rgba(250,204,21,0.8), 0 0 60px rgba(250,204,21,0.3), 0 4px 16px rgba(0,0,0,0.5)'
+          : '0 0 30px rgba(30,41,59,0.6), 0 0 60px rgba(100,116,139,0.3), 0 4px 16px rgba(0,0,0,0.3)',
         padding: '0',
         outline: 'none',
-        isolation: 'isolate',
       }}
       aria-label={theme === 'dark' ? 'تبديل إلى الوضع النهاري' : 'تبديل إلى الوضع الليلي'}
       title={theme === 'dark' ? '☀ الوضع النهاري' : '🌙 الوضع الليلي'}
     >
       {theme === 'dark' ? (
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" stroke="none">
           <circle cx="12" cy="12" r="5" />
           <rect x="11" y="1" width="2" height="4" rx="1" />
           <rect x="11" y="19" width="2" height="4" rx="1" />
@@ -2932,7 +2828,7 @@ function FloatingThemeToggle() {
           <rect x="17.8" y="4.2" width="3" height="2" rx="1" transform="rotate(45 18.3 5.2)" />
         </svg>
       ) : (
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" stroke="none">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
         </svg>
       )}
