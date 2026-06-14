@@ -2223,13 +2223,13 @@ function Documents() {
     },
     {
       id: 'clients',
-      title: 'زبائن الشركة',
+      title: 'شركاء النجاح ومن وثق بنا',
       description: 'قائمة شاملة بعملاء شركة اكسيس والمشاريع المنفذة',
       icon: <Users className="w-6 h-6" />,
       file: '/docs/clients.pdf',
       color: 'from-[oklch(0.75_0.15_330)] to-[oklch(0.65_0.16_300)]',
       borderColor: 'border-[oklch(0.75_0.15_330_/_0.3)]',
-      category: 'الزبائن',
+      category: 'شركاء النجاح',
     },
     {
       id: 'network-general',
@@ -2274,7 +2274,7 @@ function Documents() {
             تعرف اكثر <span className="gradient-text">علينا</span>
           </h2>
           <p className="text-[var(--t-7)] max-w-2xl mx-auto">
-            تصفح السيرة الذاتية للشركة ووثائق الاعتماد وشبكة المحطات وقائمة الزبائن
+            تصفح السيرة الذاتية للشركة ووثائق الاعتماد وشبكة المحطات وشركاء النجاح
           </p>
         </div>
 
@@ -2282,7 +2282,7 @@ function Documents() {
         {(() => {
           const categories = [
             { key: 'السيرة الذاتية', label: 'السيرة الذاتية', icon: <BookOpen className="w-7 h-7" /> },
-            { key: 'الزبائن', label: 'زبائن الشركة', icon: <Users className="w-7 h-7" /> },
+            { key: 'شركاء النجاح', label: 'شركاء النجاح ومن وثق بنا', icon: <Users className="w-7 h-7" /> },
             { key: 'شبكة المحطات', label: 'شبكة المحطات', icon: <Globe className="w-7 h-7" /> },
             { key: 'أوراق الاعتماد', label: 'أوراق اعتماد الشبكة', icon: <Award className="w-7 h-7" /> },
             { key: 'الدعم الفني', label: 'الدعم الفني', icon: <Cog className="w-7 h-7" /> },
