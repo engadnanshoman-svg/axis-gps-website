@@ -1507,6 +1507,178 @@ function Projects() {
   )
 }
 
+/* ───────── review form ───────── */
+function ReviewForm() {
+  const [hoverRating, setHoverRating] = useState(0)
+  const [selectedRating, setSelectedRating] = useState(0)
+  const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [formOpen, setFormOpen] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (selectedRating === 0) return
+    setLoading(true)
+
+    const form = e.currentTarget
+    const formData = new FormData(form)
+    const data = {
+      name: formData.get('review-name') as string,
+      company: formData.get('review-company') as string,
+      rating: selectedRating,
+      text: formData.get('review-text') as string,
+      type: 'review' as const,
+    }
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (res.ok) {
+        setSubmitted(true)
+        form.reset()
+        setSelectedRating(0)
+        setTimeout(() => { setSubmitted(false); setFormOpen(false) }, 4000)
+      }
+    } catch { /* silent */ } finally {
+      setLoading(false)
+    }
+  }
+
+  // Collapsed state: show inviting CTA
+  if (!formOpen && !submitted) {
+    return (
+      <div className="text-center">
+        <div className="flex items-center justify-center gap-2 mb-3">
+          <div className="flex gap-0.5">
+            {[1,2,3,4,5].map(i => (
+              <Star key={i} className="w-5 h-5 fill-[#FBBF24] text-[#FBBF24]" />
+            ))}
+          </div>
+        </div>
+        <h3 className="text-xl sm:text-2xl font-bold text-[var(--t-0)] mb-2">شاركنا رأيك</h3>
+        <p className="text-[var(--t-7)] text-sm mb-5 max-w-md mx-auto">
+          تجربتك معنا تهمّنا! شاركنا تقييمك وسيظهر رأيك هنا ليستفيد منه الآخرون
+        </p>
+        <button
+          onClick={() => setFormOpen(true)}
+          className="inline-flex items-center gap-2 px-7 py-3.5 bg-[oklch(0.72_0.14_180)] text-[oklch(0.13_0.02_250)] font-bold rounded-xl hover:bg-[oklch(0.75_0.15_180)] transition-all duration-300 glow-teal-sm text-sm"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-5 h-5"><path d="M12 5v14M5 12h14"/></svg>
+          أضف مشاركتك الآن
+        </button>
+      </div>
+    )
+  }
+
+  // Submitted state
+  if (submitted) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="text-center py-6"
+      >
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[oklch(0.72_0.14_180_/_0.15)] flex items-center justify-center">
+          <CheckCircle2 className="w-8 h-8 text-[oklch(0.72_0.14_180)]" />
+        </div>
+        <h3 className="text-xl font-bold text-[var(--t-0)] mb-2">شكراً لمشاركتك!</h3>
+        <p className="text-[var(--t-7)] text-sm">رأيك يهمنا وسيتم مراجعته وعرضه قريباً</p>
+      </motion.div>
+    )
+  }
+
+  // Open form state
+  return (
+    <motion.div
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: 'auto' }}
+      exit={{ opacity: 0, height: 0 }}
+    >
+      <div className="text-center mb-5">
+        <h3 className="text-xl font-bold text-[var(--t-0)] mb-1">أضف مشاركتك</h3>
+        <p className="text-[var(--t-7)] text-sm">شاركنا تقييمك لتجربتك مع اكسيس</p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-4">
+        {/* Star rating */}
+        <div className="text-center">
+          <label className="block text-sm text-[var(--t-6)] mb-3">تقييمك</label>
+          <div className="flex items-center justify-center gap-2">
+            {[1,2,3,4,5].map(i => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setSelectedRating(i)}
+                onMouseEnter={() => setHoverRating(i)}
+                onMouseLeave={() => setHoverRating(0)}
+                className="transition-transform duration-200 hover:scale-125 active:scale-95"
+              >
+                <Star className={`w-9 h-9 transition-colors duration-200 ${
+                  i <= (hoverRating || selectedRating)
+                    ? 'fill-[#FBBF24] text-[#FBBF24]'
+                    : 'text-[var(--t-10)]'
+                }`} />
+              </button>
+            ))}
+            {selectedRating > 0 && (
+              <span className="mr-2 text-[#FBBF24] font-bold text-lg">{selectedRating}.0</span>
+            )}
+          </div>
+        </div>
+
+        {/* Name & Company */}
+        <div className="grid sm:grid-cols-2 gap-3">
+          <input
+            name="review-name"
+            required
+            placeholder="اسمك"
+            className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] placeholder:text-[var(--t-10)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors text-sm"
+          />
+          <input
+            name="review-company"
+            placeholder="الشركة / المؤسسة (اختياري)"
+            className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] placeholder:text-[var(--t-10)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors text-sm"
+          />
+        </div>
+
+        {/* Review text */}
+        <textarea
+          name="review-text"
+          required
+          rows={3}
+          placeholder="اكتب مشاركتك وتقييمك هنا..."
+          className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] placeholder:text-[var(--t-10)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors resize-none text-sm"
+        />
+
+        {/* Actions */}
+        <div className="flex items-center gap-3 pt-1">
+          <button
+            type="submit"
+            disabled={selectedRating === 0 || loading}
+            className="flex-1 flex items-center justify-center gap-2 py-3 bg-[oklch(0.72_0.14_180)] text-[oklch(0.13_0.02_250)] font-bold rounded-xl hover:bg-[oklch(0.75_0.15_180)] transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed text-sm"
+          >
+            {loading ? (
+              <svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+            ) : (
+              <><Send className="w-4 h-4" /> أرسل مشاركتك</>
+            )}
+          </button>
+          <button
+            type="button"
+            onClick={() => { setFormOpen(false); setSelectedRating(0) }}
+            className="px-5 py-3 rounded-xl border border-[var(--b-1)] text-[var(--t-6)] hover:text-[var(--t-3)] hover:border-[var(--b-2)] transition-colors text-sm"
+          >
+            إلغاء
+          </button>
+        </div>
+      </form>
+    </motion.div>
+  )
+}
+
 /* ───────── testimonials ───────── */
 function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -1638,8 +1810,24 @@ function Testimonials() {
           </div>
         </div>
 
+        {/* Submit your review - Prominent CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative mt-12 p-6 sm:p-8 rounded-3xl border-2 border-dashed border-[oklch(0.72_0.14_180_/_0.3)] bg-[oklch(0.72_0.14_180_/_0.03)] overflow-hidden"
+        >
+          {/* Glow background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[oklch(0.72_0.14_180_/_0.04)] to-transparent" />
+          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-l from-transparent via-[oklch(0.72_0.14_180_/_0.5)] to-transparent" />
+
+          <div className="relative z-10">
+            <ReviewForm />
+          </div>
+        </motion.div>
+
         {/* All testimonials grid - small cards */}
-        <div className="grid md:grid-cols-3 gap-5">
+        <div className="grid md:grid-cols-3 gap-5 mt-10">
           {testimonials.map((t, i) => (
             <motion.div
               key={i}

@@ -36,9 +36,80 @@ async function sendViaNodemailer(htmlContent: string, subject: string) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { name, email, phone, service, message } = body;
+    const { name, email, phone, service, message, type, rating, company, text } = body;
 
-    // Validate required fields
+    // Handle review type
+    if (type === 'review') {
+      if (!name || !text || !rating) {
+        return NextResponse.json(
+          { error: 'الرجاء ملء جميع الحقول المطلوبة' },
+          { status: 400 }
+        );
+      }
+
+      const starsHtml = Array.from({ length: 5 }, (_, i) =>
+        i < rating ? '★' : '☆'
+      ).join('');
+
+      const reviewHtml = `
+        <div dir="rtl" style="font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: #f8fafc; border-radius: 12px;">
+          <div style="background: linear-gradient(135deg, #FBBF24, #F59E0B); padding: 24px; border-radius: 12px 12px 0 0; text-align: center;">
+            <h1 style="color: white; margin: 0; font-size: 22px;">⭐ مشاركة جديدة من شركاء النجاح</h1>
+          </div>
+          <div style="background: white; padding: 24px; border-radius: 0 0 12px 12px; border: 1px solid #e2e8f0;">
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-weight: bold; width: 120px;">الاسم</td>
+                <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #1e293b;">${name}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-weight: bold;">الشركة</td>
+                <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #1e293b;">${company || 'غير محدد'}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-weight: bold;">التقييم</td>
+                <td style="padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #F59E0B; font-size: 24px;">${starsHtml} (${rating}/5)</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px 0; color: #64748b; font-weight: bold; vertical-align: top;">المشاركة</td>
+                <td style="padding: 12px 0; color: #1e293b; line-height: 1.8;">${text}</td>
+              </tr>
+            </table>
+            <div style="margin-top: 20px; padding: 16px; background: #FFFBEB; border-radius: 8px; border-right: 4px solid #F59E0B;">
+              <p style="margin: 0; color: #92400E; font-size: 14px;">
+                تم إرسال هذه المشاركة من قسم "شركاء النجاح" على موقع اكسيس للحلول الهندسية
+              </p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const reviewSubject = `مشاركة جديدة من ${name} - تقييم ${rating}/5 ⭐`;
+
+      // Try Resend
+      const resend = getResend();
+      if (resend) {
+        const { error } = await resend.emails.send({
+          from: 'اكسيس للحلول الهندسية <onboarding@resend.dev>',
+          to: TO_EMAIL,
+          subject: reviewSubject,
+          html: reviewHtml,
+        });
+        if (error) console.error('Resend review error:', error);
+      } else {
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.log('⭐ NEW REVIEW SUBMISSION:');
+        console.log(`  Name: ${name}`);
+        console.log(`  Company: ${company || 'N/A'}`);
+        console.log(`  Rating: ${rating}/5`);
+        console.log(`  Text: ${text}`);
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      }
+
+      return NextResponse.json({ success: true, message: 'تم إرسال مشاركتك بنجاح' });
+    }
+
+    // Handle contact form type
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: 'الرجاء ملء جميع الحقول المطلوبة' },
