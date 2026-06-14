@@ -9,7 +9,8 @@ import {
   Target, Zap, Shield, ArrowUpRight, Send, Star,
   Ruler, Compass, DraftingCompass, Factory, Calculator, BarChart3,
   Satellite, ScanLine, GraduationCap, Monitor, Radio, Gauge, MessageCircle,
-  FileText, BookOpen, Globe, Award, Eye, Lock, Download, Quote, MapPinned
+  FileText, BookOpen, Globe, Award, Eye, Lock, Download, Quote, MapPinned,
+  Sun, Moon
 } from 'lucide-react'
 
 /* ───────── dynamic map import (no SSR) ───────── */
@@ -50,6 +51,25 @@ const SOCIALS = [
   )},
 ]
 
+/* ───────── theme hook ───────── */
+function useTheme() {
+  const [theme, setTheme] = React.useState<'dark' | 'light'>('dark')
+  useEffect(() => {
+    const saved = localStorage.getItem('axis-theme') as 'dark' | 'light' | null
+    if (saved) {
+      setTheme(saved)
+      document.documentElement.setAttribute('data-theme', saved)
+    }
+  }, [])
+  const toggle = () => {
+    const next = theme === 'dark' ? 'light' : 'dark'
+    setTheme(next)
+    localStorage.setItem('axis-theme', next)
+    document.documentElement.setAttribute('data-theme', next)
+  }
+  return { theme, toggle }
+}
+
 /* ───────── section wrapper ───────── */
 function Section({ id, children, className = '' }: { id: string; children: React.ReactNode; className?: string }) {
   const ref = useRef<HTMLElement>(null)
@@ -72,6 +92,7 @@ function Section({ id, children, className = '' }: { id: string; children: React
 function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { theme, toggle: toggleTheme } = useTheme()
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 50)
     window.addEventListener('scroll', h)
@@ -96,7 +117,7 @@ function Navbar() {
       transition={{ duration: 0.6 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-[oklch(0.18_0.02_250)]/90 backdrop-blur-xl border-b border-[oklch(0.30_0.03_250)] shadow-lg shadow-black/20'
+          ? 'bg-[var(--bg-1-90)] backdrop-blur-xl border-b border-[var(--b-1)] shadow-lg shadow-black/20'
           : 'bg-transparent'
       }`}
     >
@@ -109,7 +130,7 @@ function Navbar() {
             </div>
             <div className="hidden sm:block">
               <span className="text-lg font-bold gradient-text">اكسيس</span>
-              <span className="block text-[10px] text-[oklch(0.65_0.02_250)] tracking-wider">للحلول الهندسية المتقدمة</span>
+              <span className="block text-[10px] text-[var(--t-5)] tracking-wider">للحلول الهندسية المتقدمة</span>
             </div>
           </a>
 
@@ -119,7 +140,7 @@ function Navbar() {
               <a
                 key={l.href}
                 href={l.href}
-                className="px-4 py-2 text-sm text-[oklch(0.75_0.01_250)] hover:text-[oklch(0.72_0.14_180)] rounded-lg hover:bg-[oklch(0.72_0.14_180_/_0.08)] transition-all duration-300"
+                className="px-4 py-2 text-sm text-[var(--t-3)] hover:text-[oklch(0.72_0.14_180)] rounded-lg hover:bg-[var(--accent-bg-xs)] transition-all duration-300"
               >
                 <span className="flex items-center gap-1.5">
                   {l.icon}
@@ -134,7 +155,7 @@ function Navbar() {
               احصل على عرض
             </a>
             {/* Social icons */}
-            <div className="flex items-center gap-2 mr-3 border-r border-[oklch(0.30_0.03_250)] pr-3">
+            <div className="flex items-center gap-2 mr-3 border-r border-[var(--b-1)] pr-3">
               {SOCIALS.map(s => (
                 <a
                   key={s.name}
@@ -142,7 +163,7 @@ function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   title={s.name}
-                  className="text-[oklch(0.50_0.02_250)] hover:text-[oklch(0.72_0.14_180)] transition-colors duration-300"
+                  className="text-[var(--t-8)] hover:text-[oklch(0.72_0.14_180)] transition-colors duration-300"
                 >
                   {s.icon}
                 </a>
@@ -153,7 +174,7 @@ function Navbar() {
           {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 text-[oklch(0.75_0.01_250)]"
+            className="md:hidden p-2 text-[var(--t-3)]"
             aria-label="القائمة"
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -168,7 +189,7 @@ function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[oklch(0.18_0.02_250)]/95 backdrop-blur-xl border-t border-[oklch(0.30_0.03_250)] overflow-hidden"
+            className="md:hidden bg-[var(--bg-1-95)] backdrop-blur-xl border-t border-[var(--b-1)] overflow-hidden"
           >
             <div className="px-4 py-4 space-y-1">
               {links.map(l => (
@@ -176,12 +197,19 @@ function Navbar() {
                   key={l.href}
                   href={l.href}
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-2 px-4 py-3 text-[oklch(0.75_0.01_250)] hover:text-[oklch(0.72_0.14_180)] rounded-lg hover:bg-[oklch(0.72_0.14_180_/_0.08)] transition-all"
+                  className="flex items-center gap-2 px-4 py-3 text-[var(--t-3)] hover:text-[oklch(0.72_0.14_180)] rounded-lg hover:bg-[var(--accent-bg-xs)] transition-all"
                 >
                   {l.icon}
                   {l.label}
                 </a>
               ))}
+              <button
+                onClick={() => { toggleTheme(); setMobileOpen(false) }}
+                className="flex items-center gap-2 w-full px-4 py-3 text-[oklch(0.65_0.02_250)] hover:text-[oklch(0.72_0.14_180)] rounded-lg hover:bg-[oklch(0.72_0.14_180_/_0.08)] transition-all"
+              >
+                {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                {theme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي'}
+              </button>
               <a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
@@ -289,7 +317,7 @@ function Hero() {
               className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1"
               style={{ color: tech.color, zIndex: 20 }}
             >
-              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl bg-[oklch(0.22_0.02_250)]/80 backdrop-blur-sm border border-[oklch(0.30_0.03_250)]/50 flex items-center justify-center"
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl bg-[var(--bg-2-80)] backdrop-blur-sm border border-[var(--b-1)]/50 flex items-center justify-center"
                 style={{ boxShadow: `0 0 20px ${tech.color}33` }}
               >
                 {tech.icon}
@@ -465,7 +493,7 @@ function Hero() {
                       animate={{ rotate: -360 }}
                       transition={{ duration: 18 + i * 4, repeat: Infinity, ease: 'linear' }}
                     >
-                      <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-[oklch(0.22_0.02_250)]/60 backdrop-blur-sm border border-[oklch(0.30_0.03_250)]/30 flex items-center justify-center"
+                      <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-[var(--bg-2)]/60 backdrop-blur-sm border border-[var(--b-1)]/30 flex items-center justify-center"
                         style={{ boxShadow: `0 0 12px ${tech.color}22` }}
                       >
                         {React.cloneElement(tech.icon as React.ReactElement, { className: 'w-3.5 h-3.5 sm:w-4 sm:h-4' })}
@@ -508,7 +536,7 @@ function Hero() {
         >
           <span className="gradient-text">اكسيس</span>
           <br />
-          <span className="text-[oklch(0.90_0.005_250)]">للحلول الهندسية المتقدمة</span>
+          <span className="text-[var(--t-1)]">للحلول الهندسية المتقدمة</span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -516,7 +544,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={showContent ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-lg sm:text-xl text-[oklch(0.65_0.02_250)] max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-lg sm:text-xl text-[var(--t-5)] max-w-2xl mx-auto mb-10 leading-relaxed"
         >
           الشركة الرائدة في فلسطين في مجال تقنيات المساحة والجيوماتكس. الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و DJI.
           نقدم أحدث تقنيات GPS و RTK والمسح الضوئي وأنظمة مراقبة التحرك.
@@ -538,7 +566,7 @@ function Hero() {
           </a>
           <a
             href="#contact"
-            className="px-8 py-4 border border-[oklch(0.72_0.14_180_/_0.3)] text-[oklch(0.72_0.14_180)] font-semibold rounded-xl hover:bg-[oklch(0.72_0.14_180_/_0.1)] hover:border-[oklch(0.72_0.14_180_/_0.6)] transition-all duration-300"
+            className="px-8 py-4 border border-[oklch(0.72_0.14_180_/_0.3)] text-[oklch(0.72_0.14_180)] font-semibold rounded-xl hover:bg-[var(--accent-bg-sm)] hover:border-[var(--accent-border-lg)] transition-all duration-300"
           >
             تواصل معنا
           </a>
@@ -556,7 +584,7 @@ function Hero() {
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <ChevronDown className="w-6 h-6 text-[oklch(0.50_0.02_250)]" />
+          <ChevronDown className="w-6 h-6 text-[var(--t-8)]" />
         </motion.div>
       </motion.div>
     </section>
@@ -582,12 +610,12 @@ function About() {
               قيادة تقنيات المساحة <br />
               <span className="gradient-text">في فلسطين</span>
             </h2>
-            <p className="text-[oklch(0.65_0.02_250)] text-lg leading-relaxed mb-8">
+            <p className="text-[var(--t-5)] text-lg leading-relaxed mb-8">
               شركة اكسيس للحلول الهندسية المتقدمة (AXIS GPS & Surveying Instruments LTD) هي الشركة الرائدة والأكبر
               في فلسطين في مجال تقنيات وحلول المساحة والجيوماتكس والمعلومات الجغرافية. نحن الوكيل الحصري لشركات
               Trimble و NavVis و Spectra و Applanix و DJI و Kaarta العالمية، ونقدم أحدث التقنيات والحلول المتكاملة.
             </p>
-            <p className="text-[oklch(0.55_0.02_250)] leading-relaxed mb-8">
+            <p className="text-[var(--t-7)] leading-relaxed mb-8">
               منذ تأسيسها على يد المهندس سلامة عواودة، تعمل اكسيس في مجالات عديدة تشمل: المسح والجيوماتكس، أنظمة GIS،
               شبكة محطات VRS وخدمات تصحيح الموقع RTK، رسم الخرائط عالية الدقة HD Mapping، المسح المتنقل Mobile Mapping،
               المدن الذكية Smart City، الزراعة الدقيقة، أنظمة توجيه الآلات Machine Control، تقنيات البناء Construction Tech،
@@ -602,14 +630,14 @@ function About() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.15 }}
-                  className="flex items-start gap-4 p-4 rounded-xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.3)] transition-all duration-300"
+                  className="flex items-start gap-4 p-4 rounded-xl border border-[var(--b-1)] bg-[var(--bg-2)] hover:border-[var(--accent-border-sm)] transition-all duration-300"
                 >
                   <div className="p-3 rounded-lg bg-[oklch(0.72_0.14_180_/_0.1)] text-[oklch(0.72_0.14_180)] shrink-0">
                     {f.icon}
                   </div>
                   <div>
-                    <h3 className="font-semibold text-[oklch(0.90_0.005_250)] mb-1">{f.title}</h3>
-                    <p className="text-sm text-[oklch(0.55_0.02_250)]">{f.desc}</p>
+                    <h3 className="font-semibold text-[var(--t-1)] mb-1">{f.title}</h3>
+                    <p className="text-sm text-[var(--t-7)]">{f.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -635,28 +663,28 @@ function About() {
               <motion.div
                 animate={{ y: [-5, 5, -5] }}
                 transition={{ duration: 4, repeat: Infinity }}
-                className="absolute top-8 right-8 p-4 rounded-xl bg-[oklch(0.22_0.02_250)] border border-[oklch(0.30_0.03_250)] shadow-xl"
+                className="absolute top-8 right-8 p-4 rounded-xl bg-[var(--bg-2)] border border-[var(--b-1)] shadow-xl"
               >
                 <Building2 className="w-8 h-8 text-[oklch(0.72_0.14_180)]" />
               </motion.div>
               <motion.div
                 animate={{ y: [5, -5, 5] }}
                 transition={{ duration: 4, repeat: Infinity }}
-                className="absolute bottom-8 left-8 p-4 rounded-xl bg-[oklch(0.22_0.02_250)] border border-[oklch(0.30_0.03_250)] shadow-xl"
+                className="absolute bottom-8 left-8 p-4 rounded-xl bg-[var(--bg-2)] border border-[var(--b-1)] shadow-xl"
               >
                 <HardHat className="w-8 h-8 text-[oklch(0.65_0.16_200)]" />
               </motion.div>
               <motion.div
                 animate={{ y: [-3, 6, -3] }}
                 transition={{ duration: 5, repeat: Infinity }}
-                className="absolute top-1/2 left-0 -translate-y-1/2 p-4 rounded-xl bg-[oklch(0.22_0.02_250)] border border-[oklch(0.30_0.03_250)] shadow-xl"
+                className="absolute top-1/2 left-0 -translate-y-1/2 p-4 rounded-xl bg-[var(--bg-2)] border border-[var(--b-1)] shadow-xl"
               >
                 <Ruler className="w-8 h-8 text-[oklch(0.80_0.10_160)]" />
               </motion.div>
               <motion.div
                 animate={{ y: [3, -6, 3] }}
                 transition={{ duration: 5, repeat: Infinity }}
-                className="absolute top-1/2 right-0 -translate-y-1/2 p-4 rounded-xl bg-[oklch(0.22_0.02_250)] border border-[oklch(0.30_0.03_250)] shadow-xl"
+                className="absolute top-1/2 right-0 -translate-y-1/2 p-4 rounded-xl bg-[var(--bg-2)] border border-[var(--b-1)] shadow-xl"
               >
                 <Compass className="w-8 h-8 text-[oklch(0.60_0.18_30)]" />
               </motion.div>
@@ -730,6 +758,8 @@ function Services() {
         {
           name: 'Trimble', products: [
             { name: 'TDC6', img: 'https://images.ctfassets.net/1nvkn1423yot/6orejDEuOzl53rmdqD672d/4bfcf62e1b1ae383f8d035dddb4e30bd/geo-tdc6-productpage-fullbackgroundproducthero-800x960.png', datasheet: 'https://frontierprecision.com/wp-content/uploads/2025/01/Frontier-Precision-Trimble-TDC6-Data-Collector-Spec-Sheet.pdf' },
+            { name: 'TSC510', img: 'https://images.ctfassets.net/1nvkn1423yot/7CGBo90DVWQ74XWl2GVCX1/52bd3a78b77dbaa41808cdb8478e01f7/geo-product-tsc510-key-specs-image-720x720.jpg', datasheet: 'https://trl.trimble.com/docushare/dsweb/Get/Document-1081993/022650-002_TrimbleTSC510_InfoSheet_USL_0725_LR_SEC.pdf' },
+            { name: 'TSC7', img: 'https://images.ctfassets.net/1nvkn1423yot/7z792GpsBF8Oa5ayU5YOSE/8382e9b3141bf93c4b4bc49f74085adb/geo-tsc7-productpage-keyfeatures-720x720.jpg', datasheet: 'https://geonovus.ee/wp-content/uploads/pdf/Datasheet%20-%20Trimble%20TSC7.pdf' },
           ],
         },
       ],
@@ -749,6 +779,7 @@ function Services() {
             { name: 'LL500', img: 'https://sfile.chatglm.cn/images-ppt/4f53457e5907.png', datasheet: 'https://www.spectraprecision.com/_files/ugd/cd4160_34f59423c5414a86b74a0cd6abffa024.pdf' },
             { name: 'HV301', img: 'https://sfile.chatglm.cn/images-ppt/8c4c4d3b5ca7.jpg', datasheet: 'https://www.surveyinstrumentsales.com/PDFs/Brochures/Spectra-Precision-HV301-Brochure.pdf' },
             { name: 'DG613', img: 'https://sfile.chatglm.cn/images-ppt/dd80ee5d60b2.jpg', datasheet: 'https://www.spectraprecision.com/_files/ugd/cd4160_ec44bf9f0ad8480a953c0313ef78bf7c.pdf' },
+            { name: 'DSZ32X', img: 'https://sfile.chatglm.cn/images-ppt/443b31e2401c.jpg', datasheet: 'https://5.imimg.com/data5/SELLER/Doc/2021/3/LB/FP/JY/124692814/averex-auto-level.pdf' },
         ] },
       ],
     },
@@ -781,7 +812,7 @@ function Services() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
             أجهزة وخدمات <span className="gradient-text">المساحة والجيوماتكس</span>
           </h2>
-          <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
+          <p className="text-[var(--t-7)] max-w-2xl mx-auto">
             نقدم أحدث أجهزة المساحة والقياس من أبرز الشركات العالمية مع خدمات التدريب والدعم الفني المتكامل
           </p>
         </div>
@@ -794,7 +825,7 @@ function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="group relative rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500 overflow-hidden"
+              className="group relative rounded-2xl border border-[var(--b-1)] bg-[var(--bg-2)] hover:border-[var(--accent-border)] transition-all duration-500 overflow-hidden"
             >
               {/* Hover glow */}
               <div className="absolute top-0 right-0 w-40 h-40 bg-[oklch(0.72_0.14_180_/_0.05)] rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -806,8 +837,8 @@ function Services() {
                     {s.icon}
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold text-[oklch(0.90_0.005_250)] mb-1">{s.title}</h3>
-                    <p className="text-[oklch(0.55_0.02_250)] leading-relaxed text-sm">{s.desc}</p>
+                    <h3 className="text-xl font-bold text-[var(--t-1)] mb-1">{s.title}</h3>
+                    <p className="text-[var(--t-7)] leading-relaxed text-sm">{s.desc}</p>
                   </div>
                 </div>
 
@@ -821,7 +852,7 @@ function Services() {
                           href={typeof p === 'object' && p.datasheet ? p.datasheet : undefined}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group/product rounded-xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.18_0.02_250)] overflow-hidden hover:border-[oklch(0.72_0.14_180_/_0.3)] transition-all duration-300 hover:shadow-lg hover:shadow-[oklch(0.72_0.14_180_/_0.08)]"
+                          className="group/product rounded-xl border border-[var(--b-1)] bg-[var(--bg-1)] overflow-hidden hover:border-[var(--accent-border-sm)] transition-all duration-300 hover:shadow-lg hover:shadow-[oklch(0.72_0.14_180_/_0.08)]"
                         >
                           {/* Product image */}
                           <div className="relative aspect-[4/3] bg-gradient-to-b from-[oklch(0.25_0.02_250)] to-[oklch(0.18_0.02_250)] flex items-center justify-center p-4">
@@ -832,14 +863,14 @@ function Services() {
                                 className="max-h-full max-w-full object-contain drop-shadow-lg transition-transform duration-300 group-hover/product:scale-105"
                               />
                             ) : (
-                              <div className="text-[oklch(0.40_0.02_250)]">
+                              <div className="text-[var(--t-10)]">
                                 {b.name === 'Trimble' ? <Satellite className="w-10 h-10" /> : b.name === 'NavVis' ? <ScanLine className="w-10 h-10" /> : <Cog className="w-10 h-10" />}
                               </div>
                             )}
                           </div>
                           {/* Brand + product name */}
                           <div className="p-3">
-                            <span className={`inline-block px-2.5 py-0.5 rounded-md text-[10px] font-bold border mb-2 ${brandColors[b.name] || 'bg-[oklch(0.20_0.03_250)] border-[oklch(0.30_0.03_250)] text-[oklch(0.72_0.14_180)]'}`}>
+                            <span className={`inline-block px-2.5 py-0.5 rounded-md text-[10px] font-bold border mb-2 ${brandColors[b.name] || 'bg-[var(--bg-tab)] border-[var(--b-1)] text-[oklch(0.72_0.14_180)]'}`}>
                               {b.name}
                             </span>
                             <div className="flex items-center justify-between">
@@ -847,7 +878,7 @@ function Services() {
                                 {typeof p === 'object' ? p.name : p}
                               </span>
                               {typeof p === 'object' && p.datasheet && (
-                                <FileText className="w-3.5 h-3.5 text-[oklch(0.50_0.02_250)] group-hover/product:text-[oklch(0.72_0.14_180)] transition-colors" />
+                                <FileText className="w-3.5 h-3.5 text-[var(--t-8)] group-hover/product:text-[oklch(0.72_0.14_180)] transition-colors" />
                               )}
                             </div>
                           </div>
@@ -888,7 +919,7 @@ function Stats() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
-              className="relative p-6 sm:p-8 rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)]/80 backdrop-blur text-center group hover:border-[oklch(0.72_0.14_180_/_0.3)] transition-all duration-300"
+              className="relative p-6 sm:p-8 rounded-2xl border border-[var(--b-1)] bg-[var(--bg-2-80)] backdrop-blur text-center group hover:border-[var(--accent-border-sm)] transition-all duration-300"
             >
               <div className="mb-4 flex justify-center">
                 <div className="p-3 rounded-xl bg-[oklch(0.72_0.14_180_/_0.1)] text-[oklch(0.72_0.14_180)] group-hover:scale-110 transition-transform">
@@ -898,7 +929,7 @@ function Stats() {
               <div className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-2">
                 <Counter end={s.value} suffix={s.suffix} />
               </div>
-              <div className="text-[oklch(0.55_0.02_250)] text-sm">{s.label}</div>
+              <div className="text-[var(--t-7)] text-sm">{s.label}</div>
             </motion.div>
           ))}
         </div>
@@ -942,7 +973,7 @@ function Brands() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
             علامات تجارية <span className="gradient-text">عالمية رائدة</span>
           </h2>
-          <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
+          <p className="text-[var(--t-7)] max-w-2xl mx-auto">
             وكيل حصري في فلسطين لأبرز الشركات العالمية المتخصصة في أجهزة المساحة والجيوماتكس
           </p>
         </div>
@@ -955,7 +986,7 @@ function Brands() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
-              className="group relative rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] overflow-hidden hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500"
+              className="group relative rounded-2xl border border-[var(--b-1)] bg-[var(--bg-2)] overflow-hidden hover:border-[var(--accent-border)] transition-all duration-500"
             >
               {/* Brand header gradient */}
               <div className={`bg-gradient-to-l ${b.color} p-6 text-center`}>
@@ -970,7 +1001,7 @@ function Brands() {
                   {b.specialties.map((s, j) => (
                     <span
                       key={j}
-                      className="px-3 py-1.5 rounded-lg bg-[oklch(0.22_0.03_250)] text-[oklch(0.70_0.01_250)] text-xs border border-[oklch(0.30_0.03_250)] group-hover:border-[oklch(0.72_0.14_180_/_0.2)] transition-colors"
+                      className="px-3 py-1.5 rounded-lg bg-[var(--bg-input)] text-[var(--t-4)] text-xs border border-[var(--b-1)] group-hover:border-[var(--accent-border-xs)] transition-colors"
                     >
                       {s}
                     </span>
@@ -1143,7 +1174,7 @@ function Gallery() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
             أحدث <span className="gradient-text">فيديوهاتنا ومنشوراتنا</span>
           </h2>
-          <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
+          <p className="text-[var(--t-7)] max-w-2xl mx-auto">
             تابع أحدث أعمالنا وتقنياتنا في المساحة والجيوماتكس عبر منصاتنا المختلفة
           </p>
         </div>
@@ -1157,11 +1188,11 @@ function Gallery() {
               className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
                 activeTab === t.key
                   ? 'bg-[oklch(0.72_0.14_180)] text-[oklch(0.13_0.02_250)] shadow-lg shadow-[oklch(0.72_0.14_180_/_0.2)]'
-                  : 'bg-[oklch(0.20_0.03_250)] border border-[oklch(0.30_0.03_250)] text-[oklch(0.60_0.01_250)] hover:border-[oklch(0.72_0.14_180_/_0.3)] hover:text-[oklch(0.72_0.14_180)]'
+                  : 'bg-[var(--bg-tab)] border border-[var(--b-1)] text-[var(--t-6)] hover:border-[var(--accent-border-sm)] hover:text-[oklch(0.72_0.14_180)]'
               }`}
             >
               {t.label}
-              <span className={`mr-1.5 text-xs ${activeTab === t.key ? 'text-[oklch(0.13_0.02_250_/_0.6)]' : 'text-[oklch(0.40_0.02_250)]'}`}>({t.count})</span>
+              <span className={`mr-1.5 text-xs ${activeTab === t.key ? 'text-[oklch(0.13_0.02_250_/_0.6)]' : 'text-[var(--t-10)]'}`}>({t.count})</span>
             </button>
           ))}
         </div>
@@ -1183,7 +1214,7 @@ function Gallery() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: Math.min(i * 0.08, 0.4) }}
-                className="group relative rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] overflow-hidden hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500"
+                className="group relative rounded-2xl border border-[var(--b-1)] bg-[var(--bg-2)] overflow-hidden hover:border-[var(--accent-border)] transition-all duration-500"
               >
                 {item.type === 'video' && item.youtubeId && (
                   <>
@@ -1200,7 +1231,7 @@ function Gallery() {
                         </div>
                       </div>
                       {/* Category badge */}
-                      <span className="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-[oklch(0.18_0.02_250)]/80 backdrop-blur-sm text-[oklch(0.72_0.14_180)] text-[10px] font-semibold border border-[oklch(0.30_0.03_250)]">
+                      <span className="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-[var(--bg-1)]/80 backdrop-blur-sm text-[oklch(0.72_0.14_180)] text-[10px] font-semibold border border-[var(--b-1)]">
                         {item.category}
                       </span>
                       {/* YouTube badge */}
@@ -1210,7 +1241,7 @@ function Gallery() {
                       </span>
                     </div>
                     <div className="p-4">
-                      <h4 className="text-[oklch(0.90_0.005_250)] font-semibold text-sm leading-relaxed line-clamp-2">{item.title}</h4>
+                      <h4 className="text-[var(--t-1)] font-semibold text-sm leading-relaxed line-clamp-2">{item.title}</h4>
                     </div>
                   </>
                 )}
@@ -1233,13 +1264,13 @@ function Gallery() {
                               Facebook
                             </span>
                           )}
-                          <span className="px-2.5 py-1 rounded-lg bg-[oklch(0.22_0.03_250)] text-[oklch(0.50_0.02_250)] text-[10px] font-medium border border-[oklch(0.30_0.03_250)]">
+                          <span className="px-2.5 py-1 rounded-lg bg-[var(--bg-input)] text-[var(--t-8)] text-[10px] font-medium border border-[var(--b-1)]">
                             {item.category}
                           </span>
                         </div>
-                        <h4 className="text-[oklch(0.90_0.005_250)] font-semibold text-sm leading-relaxed">{item.title}</h4>
+                        <h4 className="text-[var(--t-1)] font-semibold text-sm leading-relaxed">{item.title}</h4>
                       </div>
-                      <div className="mt-4 flex items-center gap-1 text-[oklch(0.50_0.02_250)] text-xs group-hover:text-[oklch(0.72_0.14_180)] transition-colors">
+                      <div className="mt-4 flex items-center gap-1 text-[var(--t-8)] text-xs group-hover:text-[oklch(0.72_0.14_180)] transition-colors">
                         <span>عرض المنشور</span>
                         <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                       </div>
@@ -1341,7 +1372,7 @@ function Projects() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
             إنجازاتنا <span className="gradient-text">وشراكاتنا</span>
           </h2>
-          <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
+          <p className="text-[var(--t-7)] max-w-2xl mx-auto">
             نفخر بشراكاتنا مع المؤسسات الأكاديمية والدولية ومساهمتنا في تطوير قطاع المساحة والجيوماتكس في فلسطين
           </p>
         </div>
@@ -1354,7 +1385,7 @@ function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.12 }}
-              className="group relative p-6 sm:p-8 rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500 overflow-hidden"
+              className="group relative p-6 sm:p-8 rounded-2xl border border-[var(--b-1)] bg-[var(--bg-2)] hover:border-[var(--accent-border)] transition-all duration-500 overflow-hidden"
             >
               {/* Decorative corner accent */}
               <div className="absolute top-0 left-0 w-24 h-24 bg-[oklch(0.72_0.14_180_/_0.04)] rounded-br-full" />
@@ -1363,11 +1394,11 @@ function Projects() {
                 <span className="text-xs font-medium text-[oklch(0.72_0.14_180)] bg-[oklch(0.72_0.14_180_/_0.1)] px-3 py-1 rounded-full">
                   {p.category}
                 </span>
-                <h3 className="text-xl sm:text-2xl font-bold text-[oklch(0.90_0.005_250)] mt-4 mb-3">{p.title}</h3>
-                <p className="text-[oklch(0.55_0.02_250)] leading-relaxed mb-4">{p.desc}</p>
+                <h3 className="text-xl sm:text-2xl font-bold text-[var(--t-1)] mt-4 mb-3">{p.title}</h3>
+                <p className="text-[var(--t-7)] leading-relaxed mb-4">{p.desc}</p>
                 <div className="flex flex-wrap gap-2">
                   {p.tags.map((t, j) => (
-                    <span key={j} className="text-xs px-3 py-1 rounded-full border border-[oklch(0.30_0.03_250)] text-[oklch(0.55_0.02_250)]">
+                    <span key={j} className="text-xs px-3 py-1 rounded-full border border-[var(--b-1)] text-[var(--t-7)]">
                       {t}
                     </span>
                   ))}
@@ -1420,21 +1451,21 @@ function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
-              className="p-6 rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.3)] transition-all duration-300"
+              className="p-6 rounded-2xl border border-[var(--b-1)] bg-[var(--bg-2)] hover:border-[var(--accent-border-sm)] transition-all duration-300"
             >
               <div className="flex gap-1 mb-4">
                 {[...Array(5)].map((_, j) => (
                   <Star key={j} className="w-4 h-4 fill-[oklch(0.72_0.14_180)] text-[oklch(0.72_0.14_180)]" />
                 ))}
               </div>
-              <p className="text-[oklch(0.70_0.01_250)] leading-relaxed mb-6 text-sm">"{t.text}"</p>
+              <p className="text-[var(--t-4)] leading-relaxed mb-6 text-sm">"{t.text}"</p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-[oklch(0.72_0.14_180_/_0.15)] flex items-center justify-center text-[oklch(0.72_0.14_180)] font-bold text-sm">
                   {t.name.charAt(2)}
                 </div>
                 <div>
-                  <div className="font-semibold text-[oklch(0.90_0.005_250)] text-sm">{t.name}</div>
-                  <div className="text-[oklch(0.50_0.02_250)] text-xs">{t.role}</div>
+                  <div className="font-semibold text-[var(--t-1)] text-sm">{t.name}</div>
+                  <div className="text-[var(--t-8)] text-xs">{t.role}</div>
                 </div>
               </div>
             </motion.div>
@@ -1466,7 +1497,7 @@ function WhyUs() {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-6 leading-tight">
               لماذا تختار <span className="gradient-text">اكسيس؟</span>
             </h2>
-            <p className="text-[oklch(0.55_0.02_250)] leading-relaxed mb-8">
+            <p className="text-[var(--t-7)] leading-relaxed mb-8">
               نتميز بأننا الشركة الرائدة والأكبر في فلسطين في مجال أجهزة المساحة والجيوماتكس.
               وكالة حصرية لأكبر الشركات العالمية مع شبكة فروع واسعة وفريق متخصص يقدم أفضل الحلول والدعم لعملائنا.
             </p>
@@ -1481,7 +1512,7 @@ function WhyUs() {
                   className="flex items-start gap-3"
                 >
                   <CheckCircle2 className="w-5 h-5 text-[oklch(0.72_0.14_180)] shrink-0 mt-0.5" />
-                  <span className="text-[oklch(0.70_0.01_250)] text-sm">{r.text}</span>
+                  <span className="text-[var(--t-4)] text-sm">{r.text}</span>
                 </motion.div>
               ))}
             </div>
@@ -1498,7 +1529,7 @@ function WhyUs() {
                     <img src="/logo.png" alt="اكسيس" className="w-full h-full object-contain p-1" />
                   </div>
                   <div className="text-[oklch(0.72_0.14_180)] font-bold text-lg">اكسيس</div>
-                  <div className="text-[oklch(0.50_0.02_250)] text-xs">حلول هندسية متقدمة</div>
+                  <div className="text-[var(--t-8)] text-xs">حلول هندسية متقدمة</div>
                 </div>
               </div>
             </div>
@@ -1537,7 +1568,7 @@ function TeamCard({
       transition={{ delay: index * 0.1, duration: 0.5 }}
       className="flex flex-col items-center"
     >
-      <div className={`group relative ${cfg.rounded} border ${cfg.pad} bg-[oklch(0.25_0.03_250)] hover:bg-[oklch(0.28_0.035_250)] transition-all duration-500 ${member.border} text-center w-full ${cfg.maxW} ${
+      <div className={`group relative ${cfg.rounded} border ${cfg.pad} bg-[var(--bg-3)] hover:bg-[var(--bg-hover)] transition-all duration-500 ${member.border} text-center w-full ${cfg.maxW} ${
         size === 'founder' ? 'border-2 shadow-xl shadow-[oklch(0.72_0.14_180_/_0.1)] hover:shadow-2xl hover:shadow-[oklch(0.72_0.14_180_/_0.18)] bg-gradient-to-b from-[oklch(0.28_0.03_250)] to-[oklch(0.24_0.03_250)]' : ''
       }`}
       >
@@ -1572,8 +1603,8 @@ function TeamCard({
         </div>
 
         {/* Info */}
-        <h3 className={`text-[oklch(0.95_0.005_250)] font-bold ${cfg.text} mb-1 leading-tight`}>{member.name}</h3>
-        <p className={`text-[oklch(0.60_0.02_250)] ${cfg.roleText} leading-relaxed`}>{member.role}</p>
+        <h3 className={`text-[var(--t-0)] font-bold ${cfg.text} mb-1 leading-tight`}>{member.name}</h3>
+        <p className={`text-[var(--t-6)] ${cfg.roleText} leading-relaxed`}>{member.role}</p>
       </div>
     </motion.div>
   )
@@ -1692,7 +1723,7 @@ function Team() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
             الهيكل <span className="gradient-text">الإداري</span>
           </h2>
-          <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
+          <p className="text-[var(--t-7)] max-w-2xl mx-auto">
             هيكل إداري متكامل يضم نخبة من المهندسين والمتخصصين تحت قيادة متميزة
           </p>
         </div>
@@ -1746,8 +1777,8 @@ function Team() {
               <div className="flex flex-col items-center flex-[2]">
                 <div className="w-0.5 h-6 sm:h-8" style={{ background: 'linear-gradient(to bottom, oklch(0.72 0.14 180 / 0.2), oklch(0.55 0.12 250 / 0.1))' }} />
                 {/* Department group label */}
-                <div className="mb-3 px-4 py-1 rounded-full border border-[oklch(0.40_0.03_250)] bg-[oklch(0.22_0.025_250)]">
-                  <span className="text-[oklch(0.60_0.02_250)] text-[10px] sm:text-xs font-semibold">الأقسام الفنية</span>
+                <div className="mb-3 px-4 py-1 rounded-full border border-[var(--b-3)] bg-[var(--bg-2)]">
+                  <span className="text-[var(--t-6)] text-[10px] sm:text-xs font-semibold">الأقسام الفنية</span>
                 </div>
                 <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full">
                   {departments.map((member, i) => (
@@ -1766,9 +1797,9 @@ function Team() {
           viewport={{ once: true }}
           className="mt-14 text-center"
         >
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl border border-[oklch(0.40_0.03_250)] bg-[oklch(0.25_0.03_250)]">
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl border border-[var(--b-3)] bg-[var(--bg-3)]">
             <Users className="w-5 h-5 text-[oklch(0.72_0.14_180)]" />
-            <span className="text-[oklch(0.65_0.02_250)] text-sm">فريق متخصص يضم نخبة من المهندسين ذوي الكفاءات العالية</span>
+            <span className="text-[var(--t-5)] text-sm">فريق متخصص يضم نخبة من المهندسين ذوي الكفاءات العالية</span>
           </div>
         </motion.div>
       </div>
@@ -1807,7 +1838,7 @@ function Contact() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
             لنبدأ <span className="gradient-text">مشروعك القادم</span>
           </h2>
-          <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
+          <p className="text-[var(--t-7)] max-w-2xl mx-auto">
             تواصل معنا اليوم لمناقشة متطلبات مشروعك والحصول على استشارة مجانية من خبرائنا
           </p>
         </div>
@@ -1822,17 +1853,17 @@ function Contact() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="flex items-start gap-4 p-5 rounded-xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.3)] transition-all"
+                className="flex items-start gap-4 p-5 rounded-xl border border-[var(--b-1)] bg-[var(--bg-2)] hover:border-[var(--accent-border-sm)] transition-all"
               >
                 <div className="p-3 rounded-lg bg-[oklch(0.72_0.14_180_/_0.1)] text-[oklch(0.72_0.14_180)] shrink-0">
                   {c.icon}
                 </div>
                 <div>
-                  <div className="text-sm text-[oklch(0.50_0.02_250)]">{c.label}</div>
+                  <div className="text-sm text-[var(--t-8)]">{c.label}</div>
                   {c.href ? (
-                    <a href={c.href} target="_blank" rel="noopener noreferrer" className="text-[oklch(0.90_0.005_250)] font-medium mt-1 hover:text-[#25D366] transition-colors" dir="ltr">{c.value}</a>
+                    <a href={c.href} target="_blank" rel="noopener noreferrer" className="text-[var(--t-1)] font-medium mt-1 hover:text-[#25D366] transition-colors" dir="ltr">{c.value}</a>
                   ) : (
-                    <div className="text-[oklch(0.90_0.005_250)] font-medium mt-1" dir="ltr">{c.value}</div>
+                    <div className="text-[var(--t-1)] font-medium mt-1" dir="ltr">{c.value}</div>
                   )}
                 </div>
               </motion.div>
@@ -1843,7 +1874,7 @@ function Contact() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] overflow-hidden p-4 sm:p-5"
+              className="rounded-2xl border border-[var(--b-1)] bg-[var(--bg-2)] overflow-hidden p-4 sm:p-5"
             >
               <h4 className="text-[oklch(0.72_0.14_180)] font-semibold text-sm mb-4 flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
@@ -1859,39 +1890,39 @@ function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             onSubmit={handleSubmit}
-            className="lg:col-span-3 p-6 sm:p-8 rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)]"
+            className="lg:col-span-3 p-6 sm:p-8 rounded-2xl border border-[var(--b-1)] bg-[var(--bg-2)]"
           >
             <div className="grid sm:grid-cols-2 gap-4 mb-4">
               <div>
-                <label className="block text-sm text-[oklch(0.60_0.01_250)] mb-2">الاسم الكامل</label>
+                <label className="block text-sm text-[var(--t-6)] mb-2">الاسم الكامل</label>
                 <input
                   type="text"
                   placeholder="أدخل اسمك"
-                  className="w-full px-4 py-3 rounded-xl bg-[oklch(0.22_0.03_250)] border border-[oklch(0.30_0.03_250)] text-[oklch(0.90_0.005_250)] placeholder:text-[oklch(0.40_0.02_250)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] placeholder:text-[var(--t-10)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors"
                 />
               </div>
               <div>
-                <label className="block text-sm text-[oklch(0.60_0.01_250)] mb-2">البريد الإلكتروني</label>
+                <label className="block text-sm text-[var(--t-6)] mb-2">البريد الإلكتروني</label>
                 <input
                   type="email"
                   placeholder="example@email.com"
                   dir="ltr"
-                  className="w-full px-4 py-3 rounded-xl bg-[oklch(0.22_0.03_250)] border border-[oklch(0.30_0.03_250)] text-[oklch(0.90_0.005_250)] placeholder:text-[oklch(0.40_0.02_250)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] placeholder:text-[var(--t-10)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors"
                 />
               </div>
             </div>
             <div className="mb-4">
-              <label className="block text-sm text-[oklch(0.60_0.01_250)] mb-2">رقم الهاتف</label>
+              <label className="block text-sm text-[var(--t-6)] mb-2">رقم الهاتف</label>
               <input
                 type="tel"
                 placeholder="+966 XX XXX XXXX"
                 dir="ltr"
-                className="w-full px-4 py-3 rounded-xl bg-[oklch(0.22_0.03_250)] border border-[oklch(0.30_0.03_250)] text-[oklch(0.90_0.005_250)] placeholder:text-[oklch(0.40_0.02_250)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors"
+                className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] placeholder:text-[var(--t-10)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors"
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm text-[oklch(0.60_0.01_250)] mb-2">نوع الخدمة</label>
-              <select className="w-full px-4 py-3 rounded-xl bg-[oklch(0.22_0.03_250)] border border-[oklch(0.30_0.03_250)] text-[oklch(0.90_0.005_250)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors appearance-none">
+              <label className="block text-sm text-[var(--t-6)] mb-2">نوع الخدمة</label>
+              <select className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors appearance-none">
                 <option value="">اختر الخدمة المطلوبة</option>
                 <option value="gps">أجهزة GPS و RTK</option>
                 <option value="total-station">أجهزة التوتل ستيشن</option>
@@ -1902,11 +1933,11 @@ function Contact() {
               </select>
             </div>
             <div className="mb-6">
-              <label className="block text-sm text-[oklch(0.60_0.01_250)] mb-2">تفاصيل المشروع</label>
+              <label className="block text-sm text-[var(--t-6)] mb-2">تفاصيل المشروع</label>
               <textarea
                 rows={4}
                 placeholder="اكتب تفاصيل مشروعك هنا..."
-                className="w-full px-4 py-3 rounded-xl bg-[oklch(0.22_0.03_250)] border border-[oklch(0.30_0.03_250)] text-[oklch(0.90_0.005_250)] placeholder:text-[oklch(0.40_0.02_250)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors resize-none"
+                className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] placeholder:text-[var(--t-10)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors resize-none"
               />
             </div>
 
@@ -2007,7 +2038,7 @@ function Documents() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
             تعرف اكثر <span className="gradient-text">علينا</span>
           </h2>
-          <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
+          <p className="text-[var(--t-7)] max-w-2xl mx-auto">
             تصفح السيرة الذاتية للشركة ووثائق الاعتماد وشبكة المحطات وقائمة الزبائن
           </p>
         </div>
@@ -2030,7 +2061,7 @@ function Documents() {
                   <div className="w-10 h-10 rounded-xl bg-[oklch(0.72_0.14_180_/_0.15)] border border-[oklch(0.72_0.14_180_/_0.3)] flex items-center justify-center text-[oklch(0.72_0.14_180)]">
                     {cat.icon}
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-[oklch(0.95_0.005_250)]">{cat.label}</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold text-[var(--t-0)]">{cat.label}</h3>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {catDocs.map((doc, i) => (
@@ -2040,7 +2071,7 @@ function Documents() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.1, duration: 0.4 }}
-                      className={`group relative rounded-2xl border ${doc.borderColor} bg-[oklch(0.22_0.02_250)] hover:bg-[oklch(0.26_0.03_250)] transition-all duration-500 overflow-hidden hover:shadow-lg hover:shadow-[oklch(0.72_0.14_180_/_0.06)] cursor-pointer`}
+                      className={`group relative rounded-2xl border ${doc.borderColor} bg-[var(--bg-2)] hover:bg-[var(--bg-3)] transition-all duration-500 overflow-hidden hover:shadow-lg hover:shadow-[oklch(0.72_0.14_180_/_0.06)] cursor-pointer`}
                       onClick={() => setActiveDoc(doc.id)}
                       onContextMenu={(e) => e.preventDefault()}
                     >
@@ -2051,19 +2082,19 @@ function Documents() {
                         </div>
                         {/* Info */}
                         <div className="flex-1 min-w-0">
-                          <h4 className="text-[oklch(0.95_0.005_250)] font-bold text-sm sm:text-base mb-1 leading-tight">{doc.title}</h4>
-                          <p className="text-[oklch(0.50_0.02_250)] text-xs leading-relaxed line-clamp-2">{doc.description}</p>
+                          <h4 className="text-[var(--t-0)] font-bold text-sm sm:text-base mb-1 leading-tight">{doc.title}</h4>
+                          <p className="text-[var(--t-8)] text-xs leading-relaxed line-clamp-2">{doc.description}</p>
                         </div>
                         {/* View button */}
                         <div className="shrink-0 flex flex-col items-center gap-1">
                           <div className="w-10 h-10 rounded-full bg-[oklch(0.72_0.14_180_/_0.1)] group-hover:bg-[oklch(0.72_0.14_180)] flex items-center justify-center transition-all duration-300">
                             <Eye className="w-4 h-4 text-[oklch(0.72_0.14_180)] group-hover:text-[oklch(0.13_0.02_250)] transition-colors duration-300" />
                           </div>
-                          <span className="text-[9px] text-[oklch(0.45_0.02_250)] group-hover:text-[oklch(0.72_0.14_180)] transition-colors">مشاهدة</span>
+                          <span className="text-[9px] text-[var(--t-9)] group-hover:text-[oklch(0.72_0.14_180)] transition-colors">مشاهدة</span>
                         </div>
                         {/* Lock badge */}
                         <div className="absolute top-2 left-2 flex items-center gap-1 opacity-50">
-                          <Lock className="w-2.5 h-2.5 text-[oklch(0.50_0.02_250)]" />
+                          <Lock className="w-2.5 h-2.5 text-[var(--t-8)]" />
                         </div>
                       </div>
                     </motion.div>
@@ -2091,20 +2122,20 @@ function Documents() {
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.9, opacity: 0 }}
-                  className="relative w-full max-w-5xl h-[85vh] bg-[oklch(0.18_0.02_250)] rounded-2xl border border-[oklch(0.35_0.03_250)] overflow-hidden shadow-2xl"
+                  className="relative w-full max-w-5xl h-[85vh] bg-[var(--bg-1)] rounded-2xl border border-[var(--b-2)] overflow-hidden shadow-2xl"
                   onClick={(e) => e.stopPropagation()}
                   onContextMenu={(e) => e.preventDefault()}
                 >
                   {/* Modal header */}
-                  <div className="flex items-center justify-between px-5 py-3 border-b border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)]">
+                  <div className="flex items-center justify-between px-5 py-3 border-b border-[var(--b-1)] bg-[var(--bg-2)]">
                     <div className="flex items-center gap-3">
                       <Lock className="w-4 h-4 text-[oklch(0.72_0.14_180)]" />
-                      <span className="text-[oklch(0.80_0.005_250)] text-sm font-semibold">{doc.title}</span>
-                      <span className="text-[oklch(0.50_0.02_250)] text-xs">- مشاهدة فقط</span>
+                      <span className="text-[var(--t-2)] text-sm font-semibold">{doc.title}</span>
+                      <span className="text-[var(--t-8)] text-xs">- مشاهدة فقط</span>
                     </div>
                     <button
                       onClick={() => setActiveDoc(null)}
-                      className="w-8 h-8 rounded-lg bg-[oklch(0.30_0.03_250)] hover:bg-[oklch(0.40_0.04_250)] flex items-center justify-center text-[oklch(0.70_0.01_250)] transition-colors"
+                      className="w-8 h-8 rounded-lg bg-[oklch(0.30_0.03_250)] hover:bg-[oklch(0.40_0.04_250)] flex items-center justify-center text-[var(--t-4)] transition-colors"
                     >
                       <X className="w-4 h-4" />
                     </button>
@@ -2144,7 +2175,7 @@ function Documents() {
 /* ───────── footer ───────── */
 function Footer() {
   return (
-    <footer className="border-t border-[oklch(0.30_0.03_250)] bg-[oklch(0.11_0.02_250)]">
+    <footer className="border-t border-[var(--b-1)] bg-[var(--bg-0)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
@@ -2155,10 +2186,10 @@ function Footer() {
               </div>
               <div>
                 <span className="font-bold gradient-text">اكسيس</span>
-                <span className="block text-[10px] text-[oklch(0.50_0.02_250)]">للحلول الهندسية المتقدمة</span>
+                <span className="block text-[10px] text-[var(--t-8)]">للحلول الهندسية المتقدمة</span>
               </div>
             </div>
-            <p className="text-[oklch(0.50_0.02_250)] text-sm leading-relaxed mb-4">
+            <p className="text-[var(--t-8)] text-sm leading-relaxed mb-4">
               شريكك الموثوق لتقنيات المساحة والجيوماتكس - الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و DJI
             </p>
             {/* Footer Social Icons */}
@@ -2170,7 +2201,7 @@ function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   title={s.name}
-                  className="w-9 h-9 rounded-lg bg-[oklch(0.20_0.03_250)] border border-[oklch(0.30_0.03_250)] flex items-center justify-center text-[oklch(0.50_0.02_250)] hover:text-[oklch(0.72_0.14_180)] hover:border-[oklch(0.72_0.14_180_/_0.3)] transition-all duration-300"
+                  className="w-9 h-9 rounded-lg bg-[var(--bg-tab)] border border-[var(--b-1)] flex items-center justify-center text-[var(--t-8)] hover:text-[oklch(0.72_0.14_180)] hover:border-[var(--accent-border-sm)] transition-all duration-300"
                 >
                   {s.icon}
                 </a>
@@ -2180,10 +2211,10 @@ function Footer() {
 
           {/* Quick links */}
           <div>
-            <h4 className="text-[oklch(0.90_0.005_250)] font-semibold mb-4">روابط سريعة</h4>
+            <h4 className="text-[var(--t-1)] font-semibold mb-4">روابط سريعة</h4>
             <div className="space-y-2">
               {['الرئيسية', 'من نحن', 'خدماتنا', 'المعرض', 'تواصل معنا'].map((l, i) => (
-                <a key={i} href={`#${['hero', 'about', 'services', 'gallery', 'contact'][i]}`} className="block text-[oklch(0.50_0.02_250)] hover:text-[oklch(0.72_0.14_180)] text-sm transition-colors">
+                <a key={i} href={`#${['hero', 'about', 'services', 'gallery', 'contact'][i]}`} className="block text-[var(--t-8)] hover:text-[oklch(0.72_0.14_180)] text-sm transition-colors">
                   {l}
                 </a>
               ))}
@@ -2192,41 +2223,41 @@ function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-[oklch(0.90_0.005_250)] font-semibold mb-4">خدماتنا</h4>
+            <h4 className="text-[var(--t-1)] font-semibold mb-4">خدماتنا</h4>
             <div className="space-y-2">
               {['أجهزة GPS و GNSS', 'التوتل ستيشن', 'المسح الضوئي 3D', 'أنظمة GIS و VRS', 'ليزر وبناء', 'Axis Campus'].map((s, i) => (
-                <span key={i} className="block text-[oklch(0.50_0.02_250)] text-sm">{s}</span>
+                <span key={i} className="block text-[var(--t-8)] text-sm">{s}</span>
               ))}
             </div>
           </div>
 
           {/* Contact */}
           <div>
-            <h4 className="text-[oklch(0.90_0.005_250)] font-semibold mb-4">تواصل معنا</h4>
+            <h4 className="text-[var(--t-1)] font-semibold mb-4">تواصل معنا</h4>
             <div className="space-y-3">
-              <div className="flex items-center gap-2 text-[oklch(0.50_0.02_250)] text-sm">
+              <div className="flex items-center gap-2 text-[var(--t-8)] text-sm">
                 <Phone className="w-4 h-4 text-[oklch(0.72_0.14_180)]" />
                 <span dir="ltr">0594224497</span>
               </div>
-              <div className="flex items-center gap-2 text-[oklch(0.50_0.02_250)] text-sm">
+              <div className="flex items-center gap-2 text-[var(--t-8)] text-sm">
                 <Phone className="w-4 h-4 text-[oklch(0.72_0.14_180)]" />
                 <span dir="ltr">0595289999</span>
               </div>
-              <div className="flex items-center gap-2 text-[oklch(0.50_0.02_250)] text-sm">
+              <div className="flex items-center gap-2 text-[var(--t-8)] text-sm">
                 <Mail className="w-4 h-4 text-[oklch(0.72_0.14_180)]" />
                 <span dir="ltr">adnan@axis-gps.com</span>
               </div>
-              <div className="flex items-center gap-2 text-[oklch(0.50_0.02_250)] text-sm">
+              <div className="flex items-center gap-2 text-[var(--t-8)] text-sm">
                 <Mail className="w-4 h-4 text-[oklch(0.72_0.14_180)]" />
                 <span dir="ltr">salame@axis-gps.com</span>
               </div>
-              <div className="flex items-center gap-2 text-[oklch(0.50_0.02_250)] text-sm">
+              <div className="flex items-center gap-2 text-[var(--t-8)] text-sm">
                 <MessageCircle className="w-4 h-4 text-[#25D366]" />
                 <a href="https://wa.me/972525289999" target="_blank" rel="noopener noreferrer" className="hover:text-[oklch(0.72_0.14_180)] transition-colors">
                   <span dir="ltr">+972 52-528-9999</span>
                 </a>
               </div>
-              <div className="flex items-start gap-2 text-[oklch(0.50_0.02_250)] text-sm">
+              <div className="flex items-start gap-2 text-[var(--t-8)] text-sm">
                 <MapPin className="w-4 h-4 text-[oklch(0.72_0.14_180)] mt-0.5 shrink-0" />
                 <div className="space-y-1.5">
                   <a href="https://www.google.com/maps?q=32.7579702,35.3189103" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
@@ -2247,14 +2278,14 @@ function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 pt-8 border-t border-[oklch(0.30_0.03_250)] flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[oklch(0.40_0.02_250)] text-sm">
+        <div className="mt-10 pt-8 border-t border-[var(--b-1)] flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-[var(--t-10)] text-sm">
             جميع الحقوق محفوظة &copy; {new Date().getFullYear()} اكسيس للحلول الهندسية المتقدمة
           </p>
           <div className="flex items-center gap-4">
-            <a href="https://www.facebook.com/axisTRIMBLE" target="_blank" rel="noopener noreferrer" className="text-[oklch(0.40_0.02_250)] hover:text-[oklch(0.72_0.14_180)] text-xs transition-colors">Facebook</a>
-            <a href="https://www.youtube.com/@axisgpssurveyinginstrument8400" target="_blank" rel="noopener noreferrer" className="text-[oklch(0.40_0.02_250)] hover:text-[oklch(0.72_0.14_180)] text-xs transition-colors">YouTube</a>
-            <a href="https://www.instagram.com/axis.gps/" target="_blank" rel="noopener noreferrer" className="text-[oklch(0.40_0.02_250)] hover:text-[oklch(0.72_0.14_180)] text-xs transition-colors">Instagram</a>
+            <a href="https://www.facebook.com/axisTRIMBLE" target="_blank" rel="noopener noreferrer" className="text-[var(--t-10)] hover:text-[oklch(0.72_0.14_180)] text-xs transition-colors">Facebook</a>
+            <a href="https://www.youtube.com/@axisgpssurveyinginstrument8400" target="_blank" rel="noopener noreferrer" className="text-[var(--t-10)] hover:text-[oklch(0.72_0.14_180)] text-xs transition-colors">YouTube</a>
+            <a href="https://www.instagram.com/axis.gps/" target="_blank" rel="noopener noreferrer" className="text-[var(--t-10)] hover:text-[oklch(0.72_0.14_180)] text-xs transition-colors">Instagram</a>
           </div>
         </div>
       </div>
@@ -2334,7 +2365,7 @@ function Branches() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
             نصل <span className="gradient-text">إليك أينما كنت</span>
           </h2>
-          <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
+          <p className="text-[var(--t-7)] max-w-2xl mx-auto">
             أربعة فروع رئيسية تغطي جميع مناطق فلسطين لخدمتكم بأسرع وقت وأعلى جودة
           </p>
         </div>
@@ -2350,7 +2381,7 @@ function Branches() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.12 }}
-              className="group relative p-6 rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500 overflow-hidden text-right"
+              className="group relative p-6 rounded-2xl border border-[var(--b-1)] bg-[var(--bg-2)] hover:border-[var(--accent-border)] transition-all duration-500 overflow-hidden text-right"
             >
               {/* Color accent top */}
               <div className="absolute top-0 right-0 left-0 h-1 rounded-t-2xl" style={{ backgroundColor: b.color }} />
@@ -2362,9 +2393,9 @@ function Branches() {
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: `${b.color}15`, border: `1px solid ${b.color}30` }}>
                   <MapPin className="w-5 h-5" style={{ color: b.color }} />
                 </div>
-                <h3 className="text-lg font-bold text-[oklch(0.90_0.005_250)] mb-2">{b.name}</h3>
-                <p className="text-[oklch(0.55_0.02_250)] text-sm leading-relaxed mb-3">{b.address}</p>
-                <div className="flex items-center gap-2 text-[oklch(0.50_0.02_250)] text-xs">
+                <h3 className="text-lg font-bold text-[var(--t-1)] mb-2">{b.name}</h3>
+                <p className="text-[var(--t-7)] text-sm leading-relaxed mb-3">{b.address}</p>
+                <div className="flex items-center gap-2 text-[var(--t-8)] text-xs">
                   <Phone className="w-3.5 h-3.5" />
                   <span dir="ltr">{b.phone}</span>
                 </div>
@@ -2405,7 +2436,7 @@ function CEOMessage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative rounded-3xl border border-[oklch(0.72_0.14_180_/_0.2)] bg-[oklch(0.22_0.02_250)] p-8 sm:p-12"
+          className="relative rounded-3xl border border-[oklch(0.72_0.14_180_/_0.2)] bg-[var(--bg-2)] p-8 sm:p-12"
         >
           {/* Decorative quote marks */}
           <div className="absolute top-4 right-6 text-[oklch(0.72_0.14_180)] opacity-15">
@@ -2416,29 +2447,29 @@ function CEOMessage() {
           </div>
 
           <div className="relative space-y-5">
-            <p className="text-[oklch(0.80_0.01_250)] text-base sm:text-lg leading-loose">
+            <p className="text-[var(--t-2b)] text-base sm:text-lg leading-loose">
               خلال أكثر من عشرين عاماً من الزمان، نجحت شركة أكسيس في أن تصبح الشركة الأولى في فلسطين من خلال فروعها المنتشرة والتي تصل لكل المحافظات، والتي سهلت الوصول لكل من له علاقة بالمساحة من أفراد ومؤسسات أهلية وحكومية كالوزارات والبلديات والجامعات ومكاتب المساحة المرخصة والمساحين.
             </p>
-            <p className="text-[oklch(0.75_0.01_250)] text-base sm:text-lg leading-loose">
+            <p className="text-[var(--t-3)] text-base sm:text-lg leading-loose">
               تزايدت الطاقة الإنتاجية وصارت اكسيس دعامة قوية وأساسية في النهضة التكنولوجية والتقنية التي تشهدها فلسطين في عالم المساحة وخاصة مع بدء أعمال ومشاريع التسوية الوطنية في الأراضي الفلسطينية. لقد أعطت اكسيس دفعة قوية لعمليات المساحة والتسوية، وصارت مورّداً يعتمد عليه في تغذية التكنولوجيا الحديثة في عالم المساحة وتقنياتها وخصوصاً في تقنية GPS.
             </p>
-            <p className="text-[oklch(0.70_0.01_250)] text-base sm:text-lg leading-loose">
+            <p className="text-[var(--t-4)] text-base sm:text-lg leading-loose">
               حرصت إدارة شركة أكسيس على التجاوب السريع والفعال مع جهود الحكومة الفلسطينية في التنمية والتطور في مجال المساحة، بإعتبار أن مشروع التسوية هو مشروع وطني بامتياز يهدف إلى حفظ الأرض والتي هي حجر الأساس في مشروع الدولة المنتظر. وعليه استطاعت أكسيس أن توفر ما يزيد عن 85% من احتياجات البلديات والمساحين العاملين في مشروع التسوية بأفضل التقنيات وبأسرع وقت وبتواصل ودعم فني مستمر بشكل يومي ومباشر.
             </p>
 
             {/* Highlighted quote */}
             <div className="relative my-8 px-6 py-5 rounded-2xl bg-[oklch(0.72_0.14_180_/_0.08)] border border-[oklch(0.72_0.14_180_/_0.15)]">
               <Quote className="absolute top-3 right-3 w-5 h-5 text-[oklch(0.72_0.14_180)] opacity-30" />
-              <p className="text-[oklch(0.90_0.005_250)] text-lg sm:text-xl font-bold leading-relaxed">
+              <p className="text-[var(--t-1)] text-lg sm:text-xl font-bold leading-relaxed">
                 سوف تواصل شركة AXIS بالاستثمار للحفاظ على التميز في مجال المساحة وسوف تعمل على ترقية هذه المهنة في البلاد.
               </p>
             </div>
 
             {/* Signature */}
-            <div className="flex items-center justify-end gap-4 pt-4 border-t border-[oklch(0.30_0.03_250)]">
+            <div className="flex items-center justify-end gap-4 pt-4 border-t border-[var(--b-1)]">
               <div className="text-left">
-                <p className="text-[oklch(0.90_0.005_250)] font-bold text-base">المهندس سلامة عواودة</p>
-                <p className="text-[oklch(0.55_0.02_250)] text-sm">المدير العام — شركة أكسيس للحلول الهندسية المتقدمة</p>
+                <p className="text-[var(--t-1)] font-bold text-base">المهندس سلامة عواودة</p>
+                <p className="text-[var(--t-7)] text-sm">المدير العام — شركة أكسيس للحلول الهندسية المتقدمة</p>
               </div>
               <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)] flex items-center justify-center text-white font-bold text-xl shrink-0">
                 س
@@ -2529,7 +2560,7 @@ function SocialFeed() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
             أحدث <span className="gradient-text">أخبارنا ومنشوراتنا</span>
           </h2>
-          <p className="text-[oklch(0.55_0.02_250)] max-w-2xl mx-auto">
+          <p className="text-[var(--t-7)] max-w-2xl mx-auto">
             تابعونا على منصات التواصل الاجتماعي للحصول على آخر الأخبار والعروض والفيديوهات التعليمية
           </p>
         </div>
@@ -2543,7 +2574,7 @@ function SocialFeed() {
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
                 activePlatform === p
                   ? 'bg-[oklch(0.72_0.14_180)] text-[oklch(0.13_0.02_250)] shadow-lg shadow-[oklch(0.72_0.14_180_/_0.2)]'
-                  : 'bg-[oklch(0.20_0.03_250)] border border-[oklch(0.30_0.03_250)] text-[oklch(0.60_0.01_250)] hover:border-[oklch(0.72_0.14_180_/_0.3)] hover:text-[oklch(0.72_0.14_180)]'
+                  : 'bg-[var(--bg-tab)] border border-[var(--b-1)] text-[var(--t-6)] hover:border-[var(--accent-border-sm)] hover:text-[oklch(0.72_0.14_180)]'
               }`}
             >
               {p !== 'all' && platformConfig[p].icon}
@@ -2572,7 +2603,7 @@ function SocialFeed() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: Math.min(i * 0.08, 0.4) }}
-                className="group relative p-6 rounded-2xl border border-[oklch(0.30_0.03_250)] bg-[oklch(0.22_0.02_250)] hover:border-[oklch(0.72_0.14_180_/_0.4)] transition-all duration-500"
+                className="group relative p-6 rounded-2xl border border-[var(--b-1)] bg-[var(--bg-2)] hover:border-[var(--accent-border)] transition-all duration-500"
               >
                 {/* Platform badge */}
                 <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-gradient-to-l ${platformConfig[item.platform].color} text-white text-[10px] font-bold mb-4`}>
@@ -2580,9 +2611,9 @@ function SocialFeed() {
                   {platformConfig[item.platform].label}
                 </div>
                 
-                <h4 className="text-[oklch(0.90_0.005_250)] font-semibold text-sm leading-relaxed mb-4">{item.title}</h4>
+                <h4 className="text-[var(--t-1)] font-semibold text-sm leading-relaxed mb-4">{item.title}</h4>
                 
-                <div className="flex items-center gap-1 text-[oklch(0.50_0.02_250)] text-xs group-hover:text-[oklch(0.72_0.14_180)] transition-colors">
+                <div className="flex items-center gap-1 text-[var(--t-8)] text-xs group-hover:text-[oklch(0.72_0.14_180)] transition-colors">
                   <span>عرض المنشور</span>
                   <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
@@ -2599,7 +2630,7 @@ function SocialFeed() {
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-3 rounded-xl bg-[oklch(0.22_0.02_250)] border border-[oklch(0.30_0.03_250)] text-[oklch(0.65_0.01_250)] hover:border-[oklch(0.72_0.14_180_/_0.4)] hover:text-[oklch(0.72_0.14_180)] transition-all duration-300 text-sm font-medium"
+              className="flex items-center gap-2 px-5 py-3 rounded-xl bg-[var(--bg-2)] border border-[var(--b-1)] text-[var(--t-5)] hover:border-[var(--accent-border)] hover:text-[oklch(0.72_0.14_180)] transition-all duration-300 text-sm font-medium"
             >
               {s.icon}
               {s.name}
@@ -2618,24 +2649,6 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
-        {/* ── Quick Access: فروعنا floating bar ── */}
-        <div className="relative z-40 -mt-8">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.a
-              href="#branches"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 5, duration: 0.8 }}
-              className="group flex items-center justify-center gap-3 py-4 px-8 rounded-2xl bg-gradient-to-l from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)] text-[oklch(0.13_0.02_250)] font-bold text-lg shadow-xl shadow-[oklch(0.72_0.14_180_/_0.25)] hover:shadow-2xl hover:shadow-[oklch(0.72_0.14_180_/_0.35)] hover:scale-[1.02] transition-all duration-300"
-            >
-              <MapPinned className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
-              <span>فروعنا</span>
-              <span className="text-sm font-medium opacity-70">— 4 فروع تغطي فلسطين</span>
-              <ChevronDown className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
-            </motion.a>
-          </div>
-        </div>
-        <Branches />
         <About />
         <CEOMessage />
         <Stats />
@@ -2648,6 +2661,7 @@ export default function Home() {
         <Team />
         <Documents />
         <Testimonials />
+        <Branches />
         <Contact />
       </main>
       <Footer />
