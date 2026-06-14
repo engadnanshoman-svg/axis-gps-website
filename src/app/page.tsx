@@ -996,9 +996,8 @@ function Services() {
 function Stats() {
   const stats = [
     { value: 4, suffix: '', label: 'فروع في فلسطين', icon: <MapPin className="w-6 h-6" /> },
-    { value: 1000, suffix: '+', label: 'أكثر من عميل راضٍ', icon: <Users className="w-6 h-6" /> },
+    { value: 10000, suffix: '+', label: 'أكثر من عميل راضٍ', icon: <Users className="w-6 h-6" /> },
     { value: 20, suffix: '+', label: 'سنة خبرة', icon: <Wrench className="w-6 h-6" /> },
-    { value: 3, suffix: '', label: 'وكالات حصرية عالمية', icon: <Star className="w-6 h-6" /> },
   ]
 
   return (
