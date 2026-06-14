@@ -2787,8 +2787,8 @@ function FloatingThemeToggle() {
       style={{
         position: 'fixed',
         bottom: '28px',
-        left: '28px',
-        right: 'auto',
+        left: 'auto',
+        right: '28px',
         top: 'auto',
         zIndex: 999999,
         width: '60px',
