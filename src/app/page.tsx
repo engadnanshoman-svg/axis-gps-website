@@ -221,21 +221,20 @@ function Navbar() {
 
 /* ───────── customer cinema images ───────── */
 const CUSTOMER_IMAGES = [
-  { src: '/customers/website-1A.png', alt: 'شركاء النجاح - زبائن أكسيس في الضفة الغربية' },
-  { src: '/customers/website-2A.png', alt: 'شركاء النجاح - عملاء أكسيس في القدس' },
-  { src: '/customers/website-3A.png', alt: 'شركاء النجاح - مشاريع مسح في رام الله' },
-  { src: '/customers/website-4A.png', alt: 'شركاء النجاح - زبائن في الخليل' },
-  { src: '/customers/website-5A.png', alt: 'شركاء النجاح - فريق العمل الميداني' },
-  { src: '/customers/website-6A.png', alt: 'شركاء النجاح - خدمات المسح المتقدمة' },
-  { src: '/customers/website-7A.png', alt: 'شركاء النجاح - حلول GPS للمؤسسات' },
-  { src: '/customers/website-8A.png', alt: 'شركاء النجاح - تقنيات Trimble في فلسطين' },
-  { src: '/customers/website-9A.png', alt: 'شركاء النجاح - أجهزة NavVis الميدانية' },
-  { src: '/customers/website-10A.png', alt: 'شركاء النجاح - مشاريع البنية التحتية' },
-  { src: '/customers/website-11A.png', alt: 'شركاء النجاح - عملاء القطاع الحكومي' },
-  { src: '/customers/website-12A.png', alt: 'شركاء النجاح - شركاء في النجاح' },
-  { src: '/customers/website-pic.jpg', alt: 'شركاء النجاح - زبائن شركة أكسيس في فلسطين' },
-  { src: '/customers/trimble-fieldlink.jpg', alt: 'شركاء النجاح - أجهزة Trimble في الميدان' },
-  { src: '/customers/trimble-s9.jpg', alt: 'شركاء النجاح - محطة Trimble S9 للمسح الدقيق' },
+  { src: '/customers/customer-dsc-01.jpg', alt: 'شركاء النجاح - زبائن أكسيس في الضفة الغربية والقدس' },
+  { src: '/customers/customer-dsc-02.jpg', alt: 'شركاء النجاح - عملاء أكسيس في الميدان' },
+  { src: '/customers/customer-dsc-03.jpg', alt: 'شركاء النجاح - مشاريع مسح في فلسطين' },
+  { src: '/customers/customer-dsc-04.jpg', alt: 'شركاء النجاح - زبائن في رام الله والخليل' },
+  { src: '/customers/customer-dsc-05.jpg', alt: 'شركاء النجاح - فريق العمل الميداني' },
+  { src: '/customers/customer-dsc-06.jpg', alt: 'شركاء النجاح - خدمات المسح المتقدمة' },
+  { src: '/customers/customer-dsc-07.jpg', alt: 'شركاء النجاح - حلول GPS للمؤسسات' },
+  { src: '/customers/customer-dsc-08.jpg', alt: 'شركاء النجاح - تقنيات Trimble في فلسطين' },
+  { src: '/customers/customer-dsc-09.jpg', alt: 'شركاء النجاح - أجهزة NavVis الميدانية' },
+  { src: '/customers/customer-dsc-10.jpg', alt: 'شركاء النجاح - مشاريع البنية التحتية' },
+  { src: '/customers/customer-dsc-11.jpg', alt: 'شركاء النجاح - عملاء القطاع الحكومي' },
+  { src: '/customers/customer-dsc-12.jpg', alt: 'شركاء النجاح - من وثق بأكسيس' },
+  { src: '/customers/customer-dsc-13.jpg', alt: 'شركاء النجاح - شركاء النجاح' },
+  { src: '/customers/customer-dsc-14.jpg', alt: 'شركاء النجاح - زبائن الشركة' },
 ]
 
 const CUSTOMER_IMAGES_LEFT = [
