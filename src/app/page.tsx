@@ -222,16 +222,12 @@ function Navbar() {
 /* ───────── customer cinema images ───────── */
 const CUSTOMER_IMAGES = [
   { src: '/customers/customer-dsc-01.jpg', alt: 'شركاء النجاح - زبائن أكسيس في الضفة الغربية والقدس' },
-  { src: '/customers/customer-dsc-02.jpg', alt: 'شركاء النجاح - عملاء أكسيس في الميدان' },
   { src: '/customers/customer-dsc-03.jpg', alt: 'شركاء النجاح - مشاريع مسح في فلسطين' },
-  { src: '/customers/customer-dsc-04.jpg', alt: 'شركاء النجاح - زبائن في رام الله والخليل' },
   { src: '/customers/customer-dsc-05.jpg', alt: 'شركاء النجاح - فريق العمل الميداني' },
-  { src: '/customers/customer-dsc-06.jpg', alt: 'شركاء النجاح - خدمات المسح المتقدمة' },
   { src: '/customers/customer-dsc-07.jpg', alt: 'شركاء النجاح - حلول GPS للمؤسسات' },
   { src: '/customers/customer-dsc-08.jpg', alt: 'شركاء النجاح - تقنيات Trimble في فلسطين' },
   { src: '/customers/customer-dsc-09.jpg', alt: 'شركاء النجاح - أجهزة NavVis الميدانية' },
   { src: '/customers/customer-dsc-10.jpg', alt: 'شركاء النجاح - مشاريع البنية التحتية' },
-  { src: '/customers/customer-dsc-13.jpg', alt: 'شركاء النجاح - شركاء النجاح' },
   { src: '/customers/customer-dsc-14.jpg', alt: 'شركاء النجاح - زبائن الشركة' },
 ]
 
@@ -283,7 +279,7 @@ function Hero() {
     { name: 'NavVis', color: '#3B82F6' },
     { name: 'Spectra', color: '#06B6D4' },
     { name: 'Applanix', color: '#10B981' },
-    { name: 'DJI', color: '#F97316' },
+
     { name: 'Kaarta', color: '#8B5CF6' },
   ]
 
@@ -642,7 +638,7 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-lg sm:text-xl text-[var(--t-5)] max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          الشركة الرائدة في فلسطين في مجال تقنيات المساحة والجيوماتكس. الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و DJI.
+          الشركة الرائدة في فلسطين في مجال تقنيات المساحة والجيوماتكس. الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta.
           نقدم أحدث تقنيات GPS و RTK والمسح الضوئي وأنظمة مراقبة التحرك.
         </motion.p>
 
@@ -699,7 +695,7 @@ function Hero() {
 function About() {
   const features = [
     { icon: <Target className="w-6 h-6" />, title: 'رؤية واضحة', desc: 'الشركة الرائدة والأكبر في مجال تقنيات ووحلول المساحة والجيوماتكس والمعلومات الجغرافية في فلسطين' },
-    { icon: <Shield className="w-6 h-6" />, title: 'وكالات حصرية عالمية', desc: 'الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و DJI و Kaarta العالمية' },
+    { icon: <Shield className="w-6 h-6" />, title: 'وكالات حصرية عالمية', desc: 'الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta العالمية' },
     { icon: <Zap className="w-6 h-6" />, title: 'تقنيات متقدمة', desc: 'نوظف أحدث تقنيات GPS و RTK والمسح الضوئي 3D والواقع المعزز ورسم الخرائط عالية الدقة HD Mapping' },
   ]
 
@@ -717,7 +713,7 @@ function About() {
             <p className="text-[var(--t-5)] text-lg leading-relaxed mb-8">
               شركة اكسيس للحلول الهندسية المتقدمة (AXIS GPS & Surveying Instruments LTD) هي الشركة الرائدة والأكبر
               في فلسطين في مجال تقنيات وحلول المساحة والجيوماتكس والمعلومات الجغرافية. نحن الوكيل الحصري لشركات
-              Trimble و NavVis و Spectra و Applanix و DJI و Kaarta العالمية، ونقدم أحدث التقنيات والحلول المتكاملة.
+              Trimble و NavVis و Spectra و Applanix و Kaarta العالمية، ونقدم أحدث التقنيات والحلول المتكاملة.
             </p>
             <p className="text-[var(--t-7)] leading-relaxed mb-8">
               منذ تأسيسها على يد المهندس سلامة عواودة، تعمل اكسيس في مجالات عديدة تشمل: المسح والجيوماتكس، أنظمة GIS،
@@ -1233,7 +1229,7 @@ function Gallery() {
     {
       type: 'post' as const,
       platform: 'instagram' as const,
-      title: 'مسح رادار أرضي بالدرون Zond Aero 500 GPR',
+      title: 'مسح رادار أرضي Zond Aero 500 GPR',
       href: 'https://www.instagram.com/reel/DSB4QDaDwLW',
       category: 'مسح جيورادار',
     },
@@ -1251,13 +1247,7 @@ function Gallery() {
       href: 'https://www.facebook.com/axisTRIMBLE',
       category: 'مشاريع عملاء',
     },
-    {
-      type: 'post' as const,
-      platform: 'facebook' as const,
-      title: 'ورشة لجنة التسوية حول مفاهيم GNSS — اكسيس تقدم أجهزة GPS',
-      href: 'https://www.facebook.com/lwscps/posts/1427944703988935',
-      category: 'ورش عمل',
-    },
+
   ]
 
   const filtered = activeTab === 'all' ? mediaItems : mediaItems.filter(m => m.type === activeTab)
@@ -2013,7 +2003,7 @@ function Testimonials() {
 /* ───────── why us ───────── */
 function WhyUs() {
   const reasons = [
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و DJI و Kaarta' },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'أكثر من 20 سنة من الخبرة في قطاع أجهزة المساحة' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: '4 فروع رئيسية تغطي مختلف مناطق فلسطين' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'شراكة مع برنامج الأمم المتحدة الإنمائي UNDP' },
@@ -2827,7 +2817,7 @@ function Footer() {
               </div>
             </div>
             <p className="text-[var(--t-8)] text-sm leading-relaxed mb-4">
-              شريكك الموثوق لتقنيات المساحة والجيوماتكس - الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و DJI
+              شريكك الموثوق لتقنيات المساحة والجيوماتكس - الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta
             </p>
             {/* Footer Social Icons */}
             <div className="flex items-center gap-3">
@@ -3162,7 +3152,7 @@ function SocialFeed() {
     },
     {
       platform: 'instagram' as const,
-      title: 'مسح رادار أرضي بالدرون Zond Aero 500 GPR',
+      title: 'مسح رادار أرضي Zond Aero 500 GPR',
       href: 'https://www.instagram.com/reel/DSB4QDaDwLW',
       date: '2025',
     },
@@ -3172,12 +3162,7 @@ function SocialFeed() {
       href: 'https://www.instagram.com/reel/DXEuqvGD6Dw',
       date: '2025',
     },
-    {
-      platform: 'facebook' as const,
-      title: 'ورشة لجنة التسوية حول مفاهيم GNSS — اكسيس تقدم أجهزة GPS',
-      href: 'https://www.facebook.com/lwscps/posts/1427944703988935',
-      date: '2025',
-    },
+
   ]
 
   const filtered = activePlatform === 'all' ? feedItems : feedItems.filter(f => f.platform === activePlatform)

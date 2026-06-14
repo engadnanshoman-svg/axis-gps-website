@@ -1,6 +1,4 @@
-const { createRequire } = require('module');
-const req = createRequire(import.meta.url);
-const ZAI = req('/home/z/.bun/install/global/node_modules/z-ai-web-dev-sdk').default;
+const ZAI = require('/home/z/.bun/install/global/node_modules/z-ai-web-dev-sdk').default;
 const fs = require('fs');
 const path = require('path');
 
@@ -50,7 +48,7 @@ async function main() {
         success = true;
       } catch (e) {
         attempts++;
-        console.log(`${dscFile}: attempt ${attempts} failed - ${e.message?.substring(0, 60)}`);
+        console.log(`${dscFile}: attempt ${attempts} failed - ${String(e.message).substring(0, 80)}`);
         if (attempts < 3) {
           const delay = attempts * 15000;
           console.log(`  waiting ${delay/1000}s...`);
@@ -63,7 +61,6 @@ async function main() {
       console.log(`${dscFile}: FAILED after 3 attempts`);
     }
     
-    // Rate limit delay between requests
     await new Promise(r => setTimeout(r, 8000));
   }
 }
