@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import dynamic from 'next/dynamic'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import {
@@ -623,29 +624,29 @@ function Hero() {
       </AnimatePresence>
 
       {/* ── Customer showcase cinema screens ── */}
-      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 8 }}>
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 10 }}>
         {/* Right screen - scrolls up */}
-        <div className="absolute top-0 right-0 bottom-0 overflow-hidden" style={{ width: '28%' }}>
-          {/* Top/bottom fade only */}
-          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
+        <div className="absolute top-0 right-0 bottom-0 overflow-hidden" style={{ width: '22%' }}>
+          {/* Top/bottom fade */}
+          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
           {/* Inner edge fade toward center */}
-          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
-          <div className="cinema-scroll-right pr-3">
+          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
+          <div className="cinema-scroll-right pr-2">
             {[...CUSTOMER_IMAGES, ...CUSTOMER_IMAGES, ...CUSTOMER_IMAGES].map((img, i) => (
               <div key={`r-${i}`} className="cinema-card relative group flex-shrink-0 mb-3">
-                <div className="rounded-xl overflow-hidden border border-white/10"
-                  style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.4)' }}
+                <div className="rounded-lg overflow-hidden border border-white/15"
+                  style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.5), 0 0 8px rgba(13,148,136,0.15)' }}
                 >
                   <img
                     src={img.src}
                     alt={img.alt}
-                    className="w-full h-28 sm:h-36 lg:h-44 object-cover opacity-60 group-hover:opacity-90 transition-opacity duration-500"
+                    className="w-full h-28 sm:h-36 lg:h-44 object-cover opacity-75 group-hover:opacity-100 transition-opacity duration-500"
                     loading="lazy"
                   />
                 </div>
-                <div className="absolute bottom-1.5 right-1.5 left-1.5 px-2 py-1 rounded-lg bg-black/60 backdrop-blur-sm">
-                  <p className="text-[9px] sm:text-[11px] text-white/80 font-medium truncate">{img.alt}</p>
+                <div className="absolute bottom-1 right-1 left-1 px-2 py-1 rounded-md bg-black/70 backdrop-blur-sm">
+                  <p className="text-[8px] sm:text-[10px] text-white/90 font-medium truncate">{img.alt}</p>
                 </div>
               </div>
             ))}
@@ -653,38 +654,32 @@ function Hero() {
         </div>
 
         {/* Left screen - scrolls down */}
-        <div className="absolute top-0 left-0 bottom-0 overflow-hidden" style={{ width: '28%' }}>
-          {/* Top/bottom fade only */}
-          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
+        <div className="absolute top-0 left-0 bottom-0 overflow-hidden" style={{ width: '22%' }}>
+          {/* Top/bottom fade */}
+          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--bg-0)] to-transparent" style={{ zIndex: 3 }} />
           {/* Inner edge fade toward center */}
-          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
-          <div className="cinema-scroll-left pl-3">
+          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
+          <div className="cinema-scroll-left pl-2">
             {[...CUSTOMER_IMAGES_LEFT, ...CUSTOMER_IMAGES_LEFT, ...CUSTOMER_IMAGES_LEFT].map((img, i) => (
               <div key={`l-${i}`} className="cinema-card relative group flex-shrink-0 mb-3">
-                <div className="rounded-xl overflow-hidden border border-white/10"
-                  style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.4)' }}
+                <div className="rounded-lg overflow-hidden border border-white/15"
+                  style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.5), 0 0 8px rgba(13,148,136,0.15)' }}
                 >
                   <img
                     src={img.src}
                     alt={img.alt}
-                    className="w-full h-28 sm:h-36 lg:h-44 object-cover opacity-60 group-hover:opacity-90 transition-opacity duration-500"
+                    className="w-full h-28 sm:h-36 lg:h-44 object-cover opacity-75 group-hover:opacity-100 transition-opacity duration-500"
                     loading="lazy"
                   />
                 </div>
-                <div className="absolute bottom-1.5 right-1.5 left-1.5 px-2 py-1 rounded-lg bg-black/60 backdrop-blur-sm">
-                  <p className="text-[9px] sm:text-[11px] text-white/80 font-medium truncate">{img.alt}</p>
+                <div className="absolute bottom-1 right-1 left-1 px-2 py-1 rounded-md bg-black/70 backdrop-blur-sm">
+                  <p className="text-[8px] sm:text-[10px] text-white/90 font-medium truncate">{img.alt}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
-
-        {/* Vignette overlay - subtle darkening at edges */}
-        <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse 50% 70% at center, transparent 0%, var(--bg-0) 80%)',
-          zIndex: 9,
-        }} />
       </div>
 
       {/* ── Content layer ── */}
@@ -2882,10 +2877,76 @@ function SocialFeed() {
   )
 }
 
+/* ───────── floating theme toggle (PORTAL - rendered to document.body) ───────── */
+function FloatingThemeToggle() {
+  const { theme, toggle: toggleTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => { setMounted(true) }, [])
+  if (!mounted) return null
+
+  const toggleEl = (
+    <button
+      onClick={toggleTheme}
+      style={{
+        position: 'fixed',
+        bottom: '24px',
+        right: '24px',
+        left: 'auto',
+        top: 'auto',
+        zIndex: 999999,
+        width: '56px',
+        height: '56px',
+        minWidth: '56px',
+        minHeight: '56px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: '50%',
+        cursor: 'pointer',
+        transition: 'all 0.3s ease',
+        background: theme === 'dark'
+          ? 'linear-gradient(135deg, #facc15, #f59e0b)'
+          : 'linear-gradient(135deg, #1e293b, #0f172a)',
+        color: theme === 'dark' ? '#0f172a' : '#facc15',
+        border: theme === 'dark' ? '4px solid #eab308' : '4px solid #64748b',
+        boxShadow: theme === 'dark'
+          ? '0 0 24px rgba(250,204,21,0.7), 0 0 48px rgba(250,204,21,0.3), 0 4px 12px rgba(0,0,0,0.4)'
+          : '0 0 24px rgba(30,41,59,0.5), 0 0 48px rgba(100,116,139,0.2), 0 4px 12px rgba(0,0,0,0.2)',
+        padding: '0',
+        outline: 'none',
+        isolation: 'isolate',
+      }}
+      aria-label={theme === 'dark' ? 'تبديل إلى الوضع النهاري' : 'تبديل إلى الوضع الليلي'}
+      title={theme === 'dark' ? '☀ الوضع النهاري' : '🌙 الوضع الليلي'}
+    >
+      {theme === 'dark' ? (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+          <circle cx="12" cy="12" r="5" />
+          <rect x="11" y="1" width="2" height="4" rx="1" />
+          <rect x="11" y="19" width="2" height="4" rx="1" />
+          <rect x="1" y="11" width="4" height="2" rx="1" />
+          <rect x="19" y="11" width="4" height="2" rx="1" />
+          <rect x="4.2" y="4.2" width="2" height="3" rx="1" transform="rotate(45 5.2 5.7)" />
+          <rect x="17.8" y="16.8" width="2" height="3" rx="1" transform="rotate(45 18.8 18.3)" />
+          <rect x="4.2" y="16.8" width="3" height="2" rx="1" transform="rotate(45 5.7 17.8)" />
+          <rect x="17.8" y="4.2" width="3" height="2" rx="1" transform="rotate(45 18.3 5.2)" />
+        </svg>
+      ) : (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      )}
+    </button>
+  )
+
+  return createPortal(toggleEl, document.body)
+}
+
 /* ───────── main page ───────── */
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
+      <FloatingThemeToggle />
       <Navbar />
       <main className="flex-1">
         <Hero />
