@@ -502,7 +502,7 @@ html {
 .cinema-scroll-right {
   display: flex;
   flex-direction: column;
-  animation: cinema-scroll-up 70s linear infinite;
+  animation: cinema-scroll-up 120s linear infinite;
   gap: 10px;
   padding: 10px 6px;
 }
@@ -510,7 +510,7 @@ html {
 .cinema-scroll-left {
   display: flex;
   flex-direction: column;
-  animation: cinema-scroll-down 65s linear infinite;
+  animation: cinema-scroll-down 110s linear infinite;
   gap: 10px;
   padding: 10px 6px;
 }
@@ -586,29 +586,4 @@ html {
   opacity: 0.5;
 }
 
-/* Center showcase */
-.center-showcase-card {
-  animation: float-gentle 4s ease-in-out infinite;
-}
 
-.center-showcase-border {
-  background: conic-gradient(
-    from 0deg,
-    transparent 0%,
-    oklch(0.72 0.14 180 / 0.5) 10%,
-    transparent 20%,
-    transparent 50%,
-    oklch(0.72 0.14 180 / 0.3) 60%,
-    transparent 70%
-  );
-  animation: showcase-border-rotate 4s linear infinite;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  padding: 2px;
-}
-
-@property --showcase-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}

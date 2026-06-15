@@ -807,20 +807,12 @@ function useCustomerImages() {
     { src: '/customers/customer-dsc-13.jpg', alt: t('customers.dsc13') },
     { src: '/customers/customer-dsc-14.jpg', alt: t('customers.alt7') },
   ]
-  // ALL website images
+  // Website images (Hebrew text images REMOVED: A, C, E, F, H, J, K, L)
   const websiteImages = [
-    { src: '/customers/website-A.jpg', alt: t('customers.website1') },
     { src: '/customers/website-B.jpg', alt: t('customers.website2') },
-    { src: '/customers/website-C.jpg', alt: t('customers.website3') },
     { src: '/customers/website-D.jpg', alt: t('customers.website4') },
-    { src: '/customers/website-E.jpg', alt: t('customers.website5') },
-    { src: '/customers/website-F.jpg', alt: t('customers.website6') },
     { src: '/customers/website-G.jpg', alt: t('customers.website7') },
-    { src: '/customers/website-H.jpg', alt: t('customers.website8') },
     { src: '/customers/website-I.jpg', alt: t('customers.website9') },
-    { src: '/customers/website-J.jpg', alt: t('customers.website10') },
-    { src: '/customers/website-K.jpg', alt: t('customers.website11') },
-    { src: '/customers/website-L.jpg', alt: t('customers.website12') },
     { src: '/customers/website-pic.jpg', alt: t('customers.website1') },
     { src: '/customers/website-navvis-use-3.jpg', alt: t('customers.navvis6') },
     { src: '/customers/website-navvis-use-4.jpg', alt: t('customers.navvisInd') },
@@ -890,19 +882,12 @@ function useCustomerImagesLeft() {
     { src: '/customers/trimble-fieldlink.jpg', alt: t('customers.trimbleField') },
     { src: '/customers/gps-rover.jpg', alt: t('customers.gpsRover') },
   ]
+  // Website images (Hebrew text images REMOVED: A, C, E, F, H, J, K, L)
   const websiteImages = [
-    { src: '/customers/website-A.jpg', alt: t('customers.website1') },
     { src: '/customers/website-B.jpg', alt: t('customers.website2') },
-    { src: '/customers/website-C.jpg', alt: t('customers.website3') },
     { src: '/customers/website-D.jpg', alt: t('customers.website4') },
-    { src: '/customers/website-E.jpg', alt: t('customers.website5') },
-    { src: '/customers/website-F.jpg', alt: t('customers.website6') },
     { src: '/customers/website-G.jpg', alt: t('customers.website7') },
-    { src: '/customers/website-H.jpg', alt: t('customers.website8') },
     { src: '/customers/website-I.jpg', alt: t('customers.website9') },
-    { src: '/customers/website-J.jpg', alt: t('customers.website10') },
-    { src: '/customers/website-K.jpg', alt: t('customers.website11') },
-    { src: '/customers/website-L.jpg', alt: t('customers.website12') },
     { src: '/customers/website-pic.jpg', alt: t('customers.website1') },
     { src: '/customers/website-navvis-use-3.jpg', alt: t('customers.navvis6') },
     { src: '/customers/website-navvis-use-4.jpg', alt: t('customers.navvisInd') },
@@ -926,41 +911,14 @@ function useCustomerImagesLeft() {
   return mixedImages
 }
 
-/* ───────── center showcase images ───────── */
-function useCenterShowcase() {
-  const { t } = useLang()
-  return [
-    { src: '/customers/website-A.jpg', alt: t('customers.website1'), caption: t('customers.showcaseTitle') },
-    { src: '/customers/navvis-full-use-3.jpg', alt: t('customers.altL1'), caption: t('customers.navvis6') },
-    { src: '/customers/website-C.jpg', alt: t('customers.website3'), caption: t('customers.showcaseTitle') },
-    { src: '/customers/trimble-gnss.jpg', alt: t('customers.altL7'), caption: t('customers.trimbleS9') },
-    { src: '/customers/website-E.jpg', alt: t('customers.website5'), caption: t('customers.showcaseTitle') },
-    { src: '/customers/navvis-scanning.jpg', alt: t('customers.altL6'), caption: t('customers.navvisInd') },
-    { src: '/customers/website-G.jpg', alt: t('customers.website7'), caption: t('customers.showcaseTitle') },
-    { src: '/customers/customer-dsc-01.jpg', alt: t('customers.alt1'), caption: t('customers.dsc10') },
-    { src: '/customers/website-I.jpg', alt: t('customers.website9'), caption: t('customers.showcaseTitle') },
-    { src: '/customers/field-surveyor.jpg', alt: t('customers.altL5'), caption: t('customers.gpsRover') },
-    { src: '/customers/website-K.jpg', alt: t('customers.website11'), caption: t('customers.showcaseTitle') },
-    { src: '/customers/customer-dsc-05.jpg', alt: t('customers.alt3'), caption: t('customers.dsc12') },
-  ]
-}
+
 
 /* ───────── cinematic hero ───────── */
 function Hero() {
   const { t } = useLang()
   const CUSTOMER_IMAGES = useCustomerImages()
   const CUSTOMER_IMAGES_LEFT = useCustomerImagesLeft()
-  const CENTER_SHOWCASE = useCenterShowcase()
-  const [centerIdx, setCenterIdx] = useState(0)
   const [phase, setPhase] = useState<'converge' | 'merge' | 'reveal' | 'content'>('converge')
-
-  // Auto-rotate center showcase
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCenterIdx(prev => (prev + 1) % CENTER_SHOWCASE.length)
-    }, 3500)
-    return () => clearInterval(timer)
-  }, [CENTER_SHOWCASE.length])
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase('merge'), 2200)
@@ -1333,60 +1291,6 @@ function Hero() {
           </div>
         </div>
 
-        {/* ── Center floating showcase ── */}
-        <div className="absolute inset-x-0 bottom-8 sm:bottom-12 flex justify-center pointer-events-none" style={{ zIndex: 36 }}>
-          <div className="center-showcase-card relative w-56 sm:w-72 lg:w-80 rounded-2xl overflow-hidden"
-            style={{
-              boxShadow: '0 8px 40px rgba(13,148,136,0.3), 0 0 20px rgba(13,148,136,0.15), 0 0 60px rgba(13,148,136,0.08)',
-              border: '1px solid oklch(0.72 0.14 180 / 0.3)'
-            }}
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={centerIdx}
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 1.05, y: -10 }}
-                transition={{ duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
-                className="relative"
-              >
-                <img
-                  src={CENTER_SHOWCASE[centerIdx]?.src}
-                  alt={CENTER_SHOWCASE[centerIdx]?.alt}
-                  className="w-full h-36 sm:h-48 lg:h-56 object-cover"
-                />
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                {/* Caption */}
-                <div className="absolute bottom-0 inset-x-0 p-3 sm:p-4">
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="w-6 h-6 rounded-full bg-[oklch(0.72_0.14_180)] flex items-center justify-center">
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                    </div>
-                    <span className="text-[8px] sm:text-[10px] font-bold text-[oklch(0.72_0.14_180)] tracking-wider">{t('customers.cinemaCenter')}</span>
-                  </div>
-                  <p className="text-[9px] sm:text-xs text-white/90 font-semibold truncate">{CENTER_SHOWCASE[centerIdx]?.caption}</p>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-            {/* Progress dots */}
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 flex gap-1">
-              {CENTER_SHOWCASE.map((_, idx) => (
-                <div
-                  key={idx}
-                  className="w-1.5 h-1.5 rounded-full transition-all duration-300"
-                  style={{
-                    background: idx === centerIdx ? 'oklch(0.72 0.14 180)' : 'rgba(255,255,255,0.3)',
-                    boxShadow: idx === centerIdx ? '0 0 6px oklch(0.72 0.14 180)' : 'none',
-                    transform: idx === centerIdx ? 'scale(1.3)' : 'scale(1)'
-                  }}
-                />
-              ))}
-            </div>
-            {/* Animated border shimmer */}
-            <div className="absolute inset-0 rounded-2xl pointer-events-none center-showcase-border" />
-          </div>
-        </div>
       </div>
 
       {/* ── Content layer ── */}
