@@ -51,6 +51,379 @@ const SOCIALS = [
   )},
 ]
 
+/* ───────── i18n: translations & language context ───────── */
+type Lang = 'ar' | 'en'
+
+const TRANSLATIONS: Record<Lang, Record<string, string>> = {
+  ar: {
+    'nav.home': 'الرئيسية', 'nav.branches': 'فروعنا', 'nav.about': 'من نحن',
+    'nav.services': 'خدماتنا', 'nav.team': 'فريقنا', 'nav.documents': 'تعرف اكثر علينا',
+    'nav.gallery': 'المعرض', 'nav.contact': 'تواصل معنا', 'nav.getQuote': 'احصل على عرض',
+    'nav.logoAlt': 'اكسيس', 'nav.logoName': 'اكسيس', 'nav.logoTagline': 'للحلول الهندسية المتقدمة',
+    'nav.menuAria': 'القائمة',
+    'hero.logoAlt': 'شعار اكسيس', 'hero.brandName': 'اكسيس', 'hero.tagline': 'للحلول الهندسية المتقدمة',
+    'hero.subtitle': 'الشركة الرائدة في البلاد في مجال تقنيات المساحة والجيوماتكس. الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta. نقدم أحدث تقنيات GPS و RTK والمسح الضوئي وأنظمة مراقبة التحرك.',
+    'hero.ctaReview': 'شاركنا تجربتك — رأيك يهمنا',
+    'about.label': 'من نحن', 'about.heading': 'قيادة تقنيات المساحة', 'about.headingHighlight': 'في البلاد',
+    'about.paragraph1': 'شركة اكسيس للحلول الهندسية المتقدمة (AXIS GPS & Surveying Instruments LTD) هي الشركة الرائدة والأكبر في البلاد في مجال تقنيات وحلول المساحة والجيوماتكس والمعلومات الجغرافية. نحن الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta العالمية، ونقدم أحدث التقنيات والحلول المتكاملة.',
+    'about.paragraph2': 'منذ تأسيسها على يد المهندس سلامة عواودة، تعمل اكسيس في مجالات عديدة تشمل: المسح والجيوماتكس، أنظمة GIS، شبكة محطات VRS وخدمات تصحيح الموقع RTK، رسم الخرائط عالية الدقة HD Mapping، المسح المتنقل Mobile Mapping، المدن الذكية Smart City، الزراعة الدقيقة، أنظمة توجيه الآلات Machine Control، تقنيات البناء Construction Tech، حلول الرصد والمراقبة، والواقع المعزز. تمتلك الشركة أربعة فروع رئيسية في كفر كنا وكفر قاسم ورام الله والخليل، ومختبر ومعهد تدريب Axis Campus.',
+    'about.feature1Title': 'رؤية واضحة', 'about.feature1Desc': 'الشركة الرائدة والأكبر في مجال تقنيات ووحلول المساحة والجيوماتكس والمعلومات الجغرافية في البلاد',
+    'about.feature2Title': 'وكالات حصرية عالمية', 'about.feature2Desc': 'الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta العالمية',
+    'about.feature3Title': 'تقنيات متقدمة', 'about.feature3Desc': 'نوظف أحدث تقنيات GPS و RTK والمسح الضوئي 3D والواقع المعزز ورسم الخرائط عالية الدقة HD Mapping',
+    'services.label': 'خدماتنا', 'services.heading': 'أجهزة وخدمات المساحة والجيوماتكس',
+    'services.subheading': 'نقدم أحدث أجهزة المساحة والقياس من أبرز الشركات العالمية مع خدمات التدريب والدعم الفني المتكامل',
+    'services.gpsTitle': 'أجهزة GPS و GNSS', 'services.gpsDesc': 'مستقبلات GNSS وهوائيات ومكونات OEM عالية الدقة للمسح الميداني والقياسات الجيوديسية',
+    'services.totalStationTitle': 'أجهزة التوتل ستيشن', 'services.totalStationDesc': 'أحدث أجهزة التوتل ستيشن وكالات القياس لقياسات المساحة الدقيقة في المشاريع الهندسية',
+    'services.scanningTitle': 'المسح الضوئي 3D والواقع المعزز', 'services.scanningDesc': 'ماسحات ضوئية متنقلة وثابتة مع حلول الواقع المعزز للنمذجة المتقدمة وتحويل الواقع إلى CAD',
+    'services.gisTitle': 'أنظمة GIS و VRS', 'services.gisDesc': 'حلول نظم المعلومات الجغرافية وشبكة محطات VRS لخدمات تصحيح الموقع RTK والخرائط الرقمية المتكاملة',
+    'services.monitoringTitle': 'رصد ومراقبة وتوجيه آليات', 'services.monitoringDesc': 'أنظمة مراقبة تحرك ورصد هبوط مع SITECH لتوجيه الآليات الثقيلة Machine Control في مشاريع البناء',
+    'services.laserTitle': 'مستويات ليزر وبناء', 'services.laserDesc': 'مستويات ليزر دوارة ومائلة وخطية وأنابيب وأجهزة قياس مسافة ليزرية لجميع أعمال البناء والطرق والصرف',
+    'services.softwareTitle': 'برمجيات ومعالجة بيانات', 'services.softwareDesc': 'برمجيات Trimble Business Center و TBC لمعالجة بيانات المسح وتحويلها إلى نماذج ومخططات هندسية دقيقة',
+    'services.campusTitle': 'Axis Campus للتدريب', 'services.campusDesc': 'معهد Axis Campus المتخصص في التدريب المهني وورش العمل ودورات اعتماد المحترفين مع مختبر ودعم فني',
+    'stats.branches': 'فروع في البلاد', 'stats.clients': 'أكثر من عميل راضٍ', 'stats.years': 'سنة خبرة',
+    'brands.label': 'شراكاتنا', 'brands.heading': 'علامات تجارية عالمية رائدة',
+    'brands.subheading': 'وكيل حصري في البلاد لأبرز الشركات العالمية المتخصصة في أجهزة المساحة والجيوماتكس',
+    'brands.trimbleDesc': 'رائد عالمي في تقنيات المسح والبنية التحتية', 'brands.navvisDesc': 'قائد تقنيات المسح المتنقل والنمذجة ثلاثية الأبعاد',
+    'brands.spectraDesc': 'حلول مسح عالية الدقة للمساحين والمقاولين', 'brands.specialties': 'التخصصات',
+    'brands.trimbleSpec1': 'أجهزة ليزر', 'brands.trimbleSpec2': 'برامج المسح',
+    'brands.navvisSpec1': 'مسح متنقل', 'brands.navvisSpec2': 'ماسحات داخلية', 'brands.navvisSpec3': 'نمذجة 3D', 'brands.navvisSpec4': 'خرائط رقمية',
+    'brands.spectraSpec1': 'توتل ستيشن', 'brands.spectraSpec2': 'مستويات ليزر', 'brands.spectraSpec3': 'جمع بيانات',
+    'brands.exclusiveAgent': 'الوكيل الحصري في البلاد',
+    'gallery.label': 'معرض الوسائط', 'gallery.heading': 'أحدث فيديوهاتنا',
+    'gallery.subheading': 'تابع أحدث أعمالنا وتقنياتنا في المساحة والجيوماتكس عبر منصاتنا المختلفة',
+    'gallery.tabAll': 'الكل', 'gallery.tabVideos': 'فيديوهات',
+    'gallery.categoryLaser': 'مسح ليزري', 'gallery.categoryMobile': 'مسح متنقل',
+    'gallery.category3dModeling': 'نمذجة ثلاثية الأبعاد', 'gallery.categoryDataCollection': 'جمع بيانات',
+    'gallery.youtubeCta': 'زوروا قناتنا على يوتيوب — 105+ فيديو',
+    'projects.label': 'مشاريعنا', 'projects.heading': 'إنجازاتنا وشراكاتنا',
+    'projects.subheading': 'نفخر بشراكاتنا مع المؤسسات الأكاديمية والدولية ومساهمتنا في تطوير قطاع المساحة والجيوماتكس في البلاد',
+    'projects.proj1Title': 'مختبر GIS والمساحة - جامعة الخليل', 'projects.proj1Category': 'التعليم الأكاديمي',
+    'projects.proj1Desc': 'إنشاء مختبر نظم المعلومات الجغرافية والمساحة في كلية المهن والعلوم التطبيقية بجامعة الخليل بالتعاون مع AXIS-GPS',
+    'projects.proj1Tag1': 'أجهزة مساحة', 'projects.proj1Tag2': 'جامعة الخليل',
+    'projects.proj2Title': 'دعم جامعة البوليتكنك', 'projects.proj2Category': 'المسؤولية المجتمعية',
+    'projects.proj2Desc': 'تبرع بأجهزة مساحة حديثة ودعم صندوق الطالب الكريم لصالح جامعة البوليتكنك لتعزيز التخصصات الهندسية',
+    'projects.proj2Tag1': 'تبرع', 'projects.proj2Tag2': 'أجهزة مساحة', 'projects.proj2Tag3': 'البوليتكنك',
+    'projects.proj3Title': 'الشراكة مع UNDP', 'projects.proj3Category': 'مشاريع دولية',
+    'projects.proj3Desc': 'التعاون مع برنامج الأمم المتحدة الإنمائي في مشاريع المسح والخرائط ونظم المعلومات الجغرافية في البلاد',
+    'projects.proj3Tag1': 'خرائط رقمية',
+    'projects.proj4Title': 'افتتاح فرع الخليل', 'projects.proj4Category': 'توسع الشركة',
+    'projects.proj4Desc': 'افتتاح الفرع الرابع لشركة اكسيس في الخليل تحت رعاية أحمد سعيد بيوض التميمي لتوسيع نطاق الخدمات في المنطقة',
+    'projects.proj4Tag1': 'فرع جديد', 'projects.proj4Tag2': 'الخليل', 'projects.proj4Tag3': 'توسع',
+    'review.shareYourOpinion': 'شاركنا رأيك', 'review.ctaDesc': 'تجربتك معنا تهمّنا! شاركنا تقييمك وسيظهر رأيك هنا ليستفيد منه الآخرون',
+    'review.addNow': 'أضف مشاركتك الآن', 'review.submittedTitle': 'تم إرسال مشاركتك بنجاح!',
+    'review.submittedDesc': 'شكراً لك! مشاركتك ظهرت الآن في قسم شركاء النجاح ويمكن للجميع رؤيتها',
+    'review.formTitle': 'أضف مشاركتك', 'review.formDesc': 'شاركنا تقييمك لتجربتك مع اكسيس',
+    'review.ratingLabel': 'تقييمك', 'review.namePlaceholder': 'اسمك', 'review.companyPlaceholder': 'الشركة / المؤسسة (اختياري)',
+    'review.textPlaceholder': 'اكتب مشاركتك وتقييمك هنا...', 'review.submit': 'أرسل مشاركتك', 'review.cancel': 'إلغاء',
+    'review.errorSubmit': 'حدث خطأ أثناء إرسال المشاركة، حاول مرة أخرى',
+    'review.errorConnection': 'تعذر الاتصال بالخادم، تأكد من اتصالك بالإنترنت وحاول مرة أخرى',
+    'testimonials.label': 'مشاركة شركاء النجاح', 'testimonials.heading': 'رأيك يهمنا',
+    'testimonials.subheading': 'نفتخر بثقة شركائنا وعملائنا ونسعى دائماً لتحقيق رضاهم وتجاوز توقعاتهم',
+    'testimonials.seed1Name': 'م. عدنان يوسف شومان', 'testimonials.seed1Role': 'المدير التنفيذي لشركة اكسيس',
+    'testimonials.seed1Text': 'منذ الإطلاقة كانت أكسيس رائدة في مجال التقنيات والحلول الهندسية المتقدمة، وسنستمر في تقديم أحدث التقنيات وأفضل الخدمات لعملائنا في كل مكان.',
+    'testimonials.seed2Name': 'م. سجى مسالمة', 'testimonials.seed2Role': 'فريق اكسيس - فرع الخليل',
+    'testimonials.seed2Text': 'فريق اكسيس يعمل بشغف لتوفير حلول مسح متكاملة وموثوقة تلبي احتياجات عملائنا بأعلى معايير الجودة والدقة.',
+    'testimonials.seed3Name': 'م. أنس أبو حديد', 'testimonials.seed3Role': 'مدير فرع الخليل - شركة اكسيس',
+    'testimonials.seed3Text': 'نلتزم في اكسيس بتقديم أحدث التقنيات وأفضل الخدمات لعملائنا، ونسعى دائماً لتجاوز توقعاتهم.',
+    'testimonials.seed4Name': 'أحمد سعيد بيوض التميمي', 'testimonials.seed4Role': 'رئيس مجلس أمناء جامعة البوليتكنك',
+    'testimonials.seed4Text': 'نشيد بدور شركة اكسيس في إرفاد قطاع المساحة والجيوماتكس بالتقنيات الحديثة ودعم المؤسسات الأكاديمية.',
+    'whyUs.label': 'لماذا اكسيس', 'whyUs.heading': 'لماذا تختار اكسيس؟',
+    'whyUs.paragraph': 'نتميز بأننا الشركة الرائدة والأكبر في البلاد في مجال أجهزة المساحة والجيوماتكس. وكالة حصرية لأكبر الشركات العالمية مع شبكة فروع واسعة وفريق متخصص يقدم أفضل الحلول والدعم لعملائنا.',
+    'whyUs.reason1': 'الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta',
+    'whyUs.reason2': 'أكثر من 20 سنة من الخبرة في قطاع أجهزة المساحة', 'whyUs.reason3': '4 فروع رئيسية في جميع أنحاء البلاد',
+    'whyUs.reason4': 'شراكة مع برنامج الأمم المتحدة الإنمائي UNDP', 'whyUs.reason5': 'تعاون مع جامعات محلية (البوليتكنك، النجاح، الخليل)',
+    'whyUs.reason6': 'دعم فني متواصل وخدمة ما بعد البيع', 'whyUs.logoAlt': 'اكسيس', 'whyUs.logoName': 'اكسيس', 'whyUs.logoTagline': 'حلول هندسية متقدمة',
+    'team.label': 'فريق العمل', 'team.heading': 'الهيكل الإداري',
+    'team.subheading': 'هيكل إداري متكامل يضم نخبة من المهندسين والمتخصصين تحت قيادة متميزة',
+    'team.deptLabel': 'الأقسام الفنية', 'team.ctaText': 'فريق متخصص يضم نخبة من المهندسين ذوي الكفاءات العالية',
+    'team.badgeFounder': 'المؤسس', 'team.badgeExecutive': 'المدير التنفيذي', 'team.badgeBranch': 'مدير فرع', 'team.badgeAccounting': 'محاسبة',
+    'team.member1Name': 'المهندس سلامة العواودة', 'team.member1Role': 'المدير العام',
+    'team.member2Name': 'المهندس عدنان شومان', 'team.member2Role': 'المدير التنفيذي - الضفة الغربية',
+    'team.member3Name': 'السيدة ولاء البكري', 'team.member3Role': 'قسم المحاسبة',
+    'team.member4Name': 'المهندس أنس أبو حديد', 'team.member4Role': 'مدير فرع الخليل',
+    'team.member5Name': 'المهندسة ألاء أبو خلف', 'team.member5Role': 'قسم الرسم والمسح الضوئي',
+    'team.member6Name': 'المهندسة سجى مسالمة', 'team.member6Role': 'قسم الرسم والدعم الفني',
+    'team.member7Name': 'المهندس وعد وهدان', 'team.member7Role': 'قسم الدعم الفني',
+    'team.member8Name': 'المهندس حاتم عيدة', 'team.member8Role': 'قسم الرسم',
+    'contact.label': 'تواصل معنا', 'contact.heading': 'لنبدأ مشروعك القادم',
+    'contact.subheading': 'تواصل معنا مباشرة عبر قنوات التواصل الاجتماعي أو أرسل لنا تفاصيل مشروعك',
+    'contact.whatsappName': 'واتساب', 'contact.whatsappDesc': 'تواصل معنا فوراً عبر واتساب', 'contact.whatsappBadge': 'الأسرع',
+    'contact.messengerName': 'ماسنجر', 'contact.messengerDesc': 'أرسل لنا رسالة عبر ماسنجر',
+    'contact.instagramName': 'انستغرام', 'contact.instagramDesc': 'تابعنا وتواصل معنا على انستغرام',
+    'contact.openApp': 'افتح', 'contact.phoneLabel': 'هاتف', 'contact.emailLabel': 'بريد إلكتروني',
+    'contact.mapTitle': 'مواقع فروعنا على الخريطة', 'contact.formTitle': 'أو أرسل لنا تفاصيل مشروعك',
+    'contact.nameLabel': 'الاسم الكامل', 'contact.namePlaceholder': 'أدخل اسمك', 'contact.emailLabel': 'البريد الإلكتروني',
+    'contact.phoneFormLabel': 'رقم الهاتف', 'contact.serviceLabel': 'نوع الخدمة', 'contact.servicePlaceholder': 'اختر الخدمة المطلوبة',
+    'contact.serviceGps': 'أجهزة GPS و RTK', 'contact.serviceTotalStation': 'أجهزة التوتل ستيشن',
+    'contact.service3dScanning': 'المسح الضوئي ثلاثي الأبعاد', 'contact.serviceGis': 'أنظمة GIS والخرائط',
+    'contact.serviceMonitoring': 'أنظمة مراقبة التحرك', 'contact.serviceTraining': 'التدريب والدعم الفني',
+    'contact.projectDetailsLabel': 'تفاصيل المشروع', 'contact.projectDetailsPlaceholder': 'اكتب تفاصيل مشروعك هنا...',
+    'contact.submitSuccess': 'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً', 'contact.sending': 'جاري الإرسال...',
+    'contact.sendMessage': 'إرسال الرسالة', 'contact.errorSend': 'حدث خطأ في الإرسال', 'contact.errorUnexpected': 'حدث خطأ غير متوقع',
+    'contact.whatsappMsg': 'مرحباً، أود الاستفسار عن خدمات اكسيس للحلول الهندسية',
+    'docs.label': 'من نحن', 'docs.heading': 'تعرف اكثر علينا', 'docs.subheading': 'تصفح السيرة الذاتية للشركة ووثائق الدعم الفني',
+    'docs.cvTitle': 'السيرة الذاتية', 'docs.cvDesc': 'السيرة الذاتية لشركة اكسيس للحلول الهندسية المتقدمة',
+    'docs.cvCategory': 'السيرة الذاتية', 'docs.techSupportTitle': 'الدعم الفني', 'docs.techSupportDesc': 'وثائق الدعم الفني والخدمات المقدمة للعملاء',
+    'docs.techSupportCategory': 'الدعم الفني', 'docs.view': 'مشاهدة', 'docs.viewOnly': 'مشاهدة فقط',
+    'branches.label': 'فروعنا', 'branches.heading': 'نصل إليك أينما كنت',
+    'branches.subheading': 'أربعة فروع رئيسية في جميع أنحاء البلاد، لخدمتكم بأسرع وقت وأعلى جودة',
+    'branches.mainBranch': 'الفرع الرئيسي', 'branches.mainBranchAddress': 'المنطقة الصناعية تسيفوريت',
+    'branches.northBranch': 'فرع الشمال', 'branches.northBranchAddress': 'كفر قاسم - شارع علي بن أبي طالب 2',
+    'branches.ramallahBranch': 'فرع رام الله', 'branches.ramallahAddress': 'رام الله - شارع الإرسال قرب السفينة',
+    'branches.hebronBranch': 'فرع الخليل', 'branches.hebronAddress': 'الخليل - برج العز ط5 شارع عين سارة',
+    'branches.viewOnMap': 'عرض على الخريطة',
+    'ceo.label': 'كلمة المدير العام', 'ceo.heading': 'رسالة المهندس سلامة عواودة',
+    'ceo.paragraph1': 'خلال أكثر من عشرين عاماً من الزمان، نجحت شركة أكسيس في أن تصبح الشركة الأولى في البلاد من خلال فروعها المنتشرة والتي تصل لكل المحافظات، والتي سهلت الوصول لكل من له علاقة بالمساحة من أفراد ومؤسسات أهلية وحكومية كالوزارات والبلديات والجامعات ومكاتب المساحة المرخصة والمساحين.',
+    'ceo.paragraph2': 'تزايدت الطاقة الإنتاجية وصارت اكسيس دعامة قوية وأساسية في النهضة التكنولوجية والتقنية التي تشهدها البلاد في عالم المساحة وخاصة مع بدء أعمال ومشاريع التسوية الوطنية. لقد أعطت اكسيس دفعة قوية لعمليات المساحة والتسوية، وصارت مورّداً يعتمد عليه في تغذية التكنولوجيا الحديثة في عالم المساحة وتقنياتها وخصوصاً في تقنية GPS.',
+    'ceo.paragraph3': 'حرصت إدارة شركة أكسيس على التجاوب السريع والفعال مع جهود الحكومة في التنمية والتطور في مجال المساحة، بإعتبار أن مشروع التسوية هو مشروع وطني بامتياز يهدف إلى حفظ الأرض والتي هي حجر الأساس في مشروع الدولة المنتظر. وعليه استطاعت أكسيس أن توفر ما يزيد عن 85% من احتياجات البلديات والمساحين العاملين في مشروع التسوية بأفضل التقنيات وبأسرع وقت وبتواصل ودعم فني مستمر بشكل يومي ومباشر.',
+    'ceo.highlight': 'سوف تواصل شركة AXIS بالاستثمار للحفاظ على التميز في مجال المساحة وسوف تعمل على ترقية هذه المهنة في البلاد.',
+    'ceo.signatureName': 'المهندس سلامة عواودة', 'ceo.signatureRole': 'المدير العام — شركة أكسيس للحلول الهندسية المتقدمة',
+    'socialFeed.label': 'تابعنا', 'socialFeed.heading': 'أحدث أخبارنا ومنشوراتنا',
+    'socialFeed.subheading': 'تابعونا على منصات التواصل الاجتماعي للحصول على آخر الأخبار والعروض والفيديوهات التعليمية',
+    'socialFeed.filterAll': 'الكل', 'socialFeed.viewPost': 'عرض المنشور',
+    'socialFeed.item1Title': '5 نقرات فقط… 90 ثانية من المعالجة… و19 كم من خطوط الكهرباء',
+    'socialFeed.item2Title': 'تعاون جمعية إعادة الإطار المعماري × اكسيس × جامعة القدس',
+    'socialFeed.item3Title': 'Trimble MX60 — مسح متنقل متقدم مع تصوير عالي الدقة',
+    'socialFeed.item4Title': 'EINSTAR 2 — ماسح ضوئي لاسلكي دقيق ومحمول',
+    'socialFeed.item5Title': 'اكسيس للحلول الهندسية — الوكيل الحصري لـ Trimble و NavVis',
+    'footer.logoAlt': 'اكسيس', 'footer.logoName': 'اكسيس', 'footer.logoTagline': 'للحلول الهندسية المتقدمة',
+    'footer.desc': 'شريكك الموثوق لتقنيات المساحة والجيوماتكس - الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta',
+    'footer.quickLinks': 'روابط سريعة', 'footer.linkHome': 'الرئيسية', 'footer.linkAbout': 'من نحن',
+    'footer.linkServices': 'خدماتنا', 'footer.linkGallery': 'المعرض', 'footer.linkContact': 'تواصل معنا',
+    'footer.servicesTitle': 'خدماتنا', 'footer.serviceGps': 'أجهزة GPS و GNSS', 'footer.serviceTotalStation': 'التوتل ستيشن',
+    'footer.service3dScanning': 'المسح الضوئي 3D', 'footer.serviceGisVrs': 'أنظمة GIS و VRS', 'footer.serviceLaser': 'ليزر وبناء',
+    'footer.contactTitle': 'تواصل معنا',
+    'footer.mainBranch': 'الفرع الرئيسي: المنطقة الصناعية تسيفوريت',
+    'footer.northBranch': 'فرع الشمال: كفر قاسم شارع علي بن أبي طالب',
+    'footer.ramallahBranch': 'فرع رام الله: شارع الإرسال قرب السفينة',
+    'footer.hebronBranch': 'فرع الخليل: شارع عين سارة مقابل ستاد الحسين', 'footer.copyright': 'جميع الحقوق محفوظة',
+    'theme.autoDark': '🌙 تلقائي - ليلي', 'theme.autoLight': '☀️ تلقائي - نهاري',
+    'theme.dark': '🌙 وضع ليلي', 'theme.light': '☀️ وضع نهاري', 'theme.returnAuto': '🔄 تلقائي',
+    'theme.ariaDark': 'تبديل إلى الوضع النهاري', 'theme.ariaLight': 'تبديل إلى الوضع الليلي',
+    'whatsapp.title': 'تواصل معنا عبر واتساب',
+    'customers.alt1': 'شركاء النجاح - زبائن أكسيس في الضفة الغربية والقدس',
+    'customers.alt2': 'شركاء النجاح - مشاريع مسح في البلاد', 'customers.alt3': 'شركاء النجاح - فريق العمل الميداني',
+    'customers.alt4': 'شركاء النجاح - حلول GPS للمؤسسات', 'customers.alt5': 'شركاء النجاح - تقنيات Trimble في البلاد',
+    'customers.alt6': 'شركاء النجاح - أجهزة NavVis الميدانية', 'customers.alt7': 'شركاء النجاح - زبائن الشركة',
+    'customers.altL1': 'من وثق بنا - مسح ميداني بأجهزة NavVis', 'customers.altL2': 'من وثق بنا - فريق المسح في الميدان',
+    'customers.altL3': 'من وثق بنا - مسح ثلاثي الأبعاد', 'customers.altL4': 'من وثق بنا - تقنية NavVis المتقدمة',
+    'customers.altL5': 'من وثق بنا - مسح ميداني بأجهزة Trimble', 'customers.altL6': 'من وثق بنا - مسح ضوئي ثلاثي الأبعاد',
+    'customers.altL7': 'من وثق بنا - جهاز GNSS Trimble', 'customers.altL8': 'من وثق بنا - مسح صناعي متقدم',
+    'customers.altL9': 'من وثق بنا - مسح موقع إنشائي', 'customers.altL10': 'من وثق بنا - جهاز GPS Rover',
+    'customers.altL11': 'من وثق بنا - أنظمة التحكم بالآلات الثقيلة', 'customers.altL12': 'من وثق بنا - نماذج ثلاثية الأبعاد',
+  },
+  en: {
+    'nav.home': 'Home', 'nav.branches': 'Our Branches', 'nav.about': 'About Us',
+    'nav.services': 'Our Services', 'nav.team': 'Our Team', 'nav.documents': 'Learn More About Us',
+    'nav.gallery': 'Gallery', 'nav.contact': 'Contact Us', 'nav.getQuote': 'Get a Quote',
+    'nav.logoAlt': 'Axis', 'nav.logoName': 'Axis', 'nav.logoTagline': 'Advanced Engineering Solutions',
+    'nav.menuAria': 'Menu',
+    'hero.logoAlt': 'Axis Logo', 'hero.brandName': 'Axis', 'hero.tagline': 'Advanced Engineering Solutions',
+    'hero.subtitle': 'The leading company in the country in surveying and geomatics technologies. Exclusive agent for Trimble, NavVis, Spectra, Applanix, and Kaarta. We offer the latest GPS, RTK, laser scanning, and movement monitoring technologies.',
+    'hero.ctaReview': 'Share Your Experience — Your Opinion Matters',
+    'about.label': 'About Us', 'about.heading': 'Leading Surveying Technologies', 'about.headingHighlight': 'in the Country',
+    'about.paragraph1': 'Axis Advanced Engineering Solutions (AXIS GPS & Surveying Instruments LTD) is the leading and largest company in the country in the field of surveying, geomatics, and geographic information technologies. We are the exclusive agent for Trimble, NavVis, Spectra, Applanix, and Kaarta, and provide the latest integrated technologies and solutions.',
+    'about.paragraph2': 'Since its founding by Engineer Salameh Awawdeh, Axis has operated in numerous fields including: Surveying & Geomatics, GIS Systems, VRS Station Network and RTK Position Correction Services, HD Mapping, Mobile Mapping, Smart City, Precision Agriculture, Machine Control Systems, Construction Tech, Monitoring & Surveillance Solutions, and Augmented Reality. The company has four main branches in Kafr Kanna, Kafr Qasim, Ramallah, and Hebron, and the Axis Campus training lab and institute.',
+    'about.feature1Title': 'Clear Vision', 'about.feature1Desc': 'The leading and largest company in surveying, geomatics, and geographic information technologies in the country',
+    'about.feature2Title': 'Global Exclusive Agencies', 'about.feature2Desc': 'Exclusive agent for Trimble, NavVis, Spectra, Applanix, and Kaarta',
+    'about.feature3Title': 'Advanced Technologies', 'about.feature3Desc': 'We employ the latest GPS, RTK, 3D laser scanning, augmented reality, and HD Mapping technologies',
+    'services.label': 'Our Services', 'services.heading': 'Surveying & Geomatics Devices and Services',
+    'services.subheading': 'We offer the latest surveying and measurement devices from leading global companies with integrated training and technical support services',
+    'services.gpsTitle': 'GPS & GNSS Devices', 'services.gpsDesc': 'High-precision GNSS receivers, antennas, and OEM components for field surveying and geodetic measurements',
+    'services.totalStationTitle': 'Total Station Devices', 'services.totalStationDesc': 'Latest total stations and measurement agencies for precise surveying measurements in engineering projects',
+    'services.scanningTitle': '3D Laser Scanning & Augmented Reality', 'services.scanningDesc': 'Mobile and stationary laser scanners with augmented reality solutions for advanced modeling and reality-to-CAD conversion',
+    'services.gisTitle': 'GIS & VRS Systems', 'services.gisDesc': 'Geographic information system solutions and VRS station network for RTK position correction services and integrated digital maps',
+    'services.monitoringTitle': 'Monitoring, Surveillance & Machine Guidance', 'services.monitoringDesc': 'Movement monitoring and subsidence detection systems with SITECH for heavy machinery Machine Control in construction projects',
+    'services.laserTitle': 'Laser Levels & Construction', 'services.laserDesc': 'Rotary, sloping, line, and pipe laser levels and laser distance measuring devices for all construction, road, and drainage works',
+    'services.softwareTitle': 'Software & Data Processing', 'services.softwareDesc': 'Trimble Business Center and TBC software for processing survey data and converting it into precise engineering models and plans',
+    'services.campusTitle': 'Axis Campus for Training', 'services.campusDesc': 'Axis Campus institute specializing in professional training, workshops, and professional certification courses with lab and technical support',
+    'stats.branches': 'Branches in the Country', 'stats.clients': 'More Than Satisfied Clients', 'stats.years': 'Years of Experience',
+    'brands.label': 'Our Partnerships', 'brands.heading': 'Leading Global Brands',
+    'brands.subheading': 'Exclusive agent in the country for the most prominent global companies specializing in surveying and geomatics devices',
+    'brands.trimbleDesc': 'Global leader in surveying and infrastructure technologies', 'brands.navvisDesc': 'Leader in mobile scanning and 3D modeling technologies',
+    'brands.spectraDesc': 'High-precision surveying solutions for surveyors and contractors', 'brands.specialties': 'Specialties',
+    'brands.trimbleSpec1': 'Laser Devices', 'brands.trimbleSpec2': 'Surveying Software',
+    'brands.navvisSpec1': 'Mobile Scanning', 'brands.navvisSpec2': 'Indoor Scanners', 'brands.navvisSpec3': '3D Modeling', 'brands.navvisSpec4': 'Digital Maps',
+    'brands.spectraSpec1': 'Total Station', 'brands.spectraSpec2': 'Laser Levels', 'brands.spectraSpec3': 'Data Collection',
+    'brands.exclusiveAgent': 'Exclusive Agent in the Country',
+    'gallery.label': 'Media Gallery', 'gallery.heading': 'Our Latest Videos',
+    'gallery.subheading': 'Follow our latest work and technologies in surveying and geomatics across our different platforms',
+    'gallery.tabAll': 'All', 'gallery.tabVideos': 'Videos',
+    'gallery.categoryLaser': 'Laser Scanning', 'gallery.categoryMobile': 'Mobile Scanning',
+    'gallery.category3dModeling': '3D Modeling', 'gallery.categoryDataCollection': 'Data Collection',
+    'gallery.youtubeCta': 'Visit Our YouTube Channel — 105+ Videos',
+    'projects.label': 'Our Projects', 'projects.heading': 'Our Achievements & Partnerships',
+    'projects.subheading': 'We are proud of our partnerships with academic and international institutions and our contribution to developing the surveying and geomatics sector in the country',
+    'projects.proj1Title': 'GIS & Surveying Lab - Hebron University', 'projects.proj1Category': 'Academic Education',
+    'projects.proj1Desc': 'Establishing a GIS and Surveying Lab at the College of Applied Sciences and Professions at Hebron University in collaboration with AXIS-GPS',
+    'projects.proj1Tag1': 'Surveying Devices', 'projects.proj1Tag2': 'Hebron University',
+    'projects.proj2Title': 'Supporting Palestine Polytechnic University', 'projects.proj2Category': 'Social Responsibility',
+    'projects.proj2Desc': 'Donating modern surveying devices and supporting the Al-Kareem Student Fund for Palestine Polytechnic University to enhance engineering disciplines',
+    'projects.proj2Tag1': 'Donation', 'projects.proj2Tag2': 'Surveying Devices', 'projects.proj2Tag3': 'Polytechnic',
+    'projects.proj3Title': 'Partnership with UNDP', 'projects.proj3Category': 'International Projects',
+    'projects.proj3Desc': 'Collaboration with the United Nations Development Programme on surveying, mapping, and GIS projects in the country',
+    'projects.proj3Tag1': 'Digital Maps',
+    'projects.proj4Title': 'Opening of Hebron Branch', 'projects.proj4Category': 'Company Expansion',
+    'projects.proj4Desc': 'Opening the fourth branch of Axis in Hebron under the patronage of Ahmad Saeed Bayoud Al-Tamimi to expand service coverage in the region',
+    'projects.proj4Tag1': 'New Branch', 'projects.proj4Tag2': 'Hebron', 'projects.proj4Tag3': 'Expansion',
+    'review.shareYourOpinion': 'Share Your Opinion', 'review.ctaDesc': 'Your experience matters to us! Share your rating and your opinion will appear here for others to benefit',
+    'review.addNow': 'Add Your Review Now', 'review.submittedTitle': 'Your Review Has Been Submitted Successfully!',
+    'review.submittedDesc': 'Thank you! Your review now appears in the Success Partners section and everyone can see it',
+    'review.formTitle': 'Add Your Review', 'review.formDesc': 'Share your rating of your experience with Axis',
+    'review.ratingLabel': 'Your Rating', 'review.namePlaceholder': 'Your Name', 'review.companyPlaceholder': 'Company / Organization (Optional)',
+    'review.textPlaceholder': 'Write your review and rating here...', 'review.submit': 'Submit Your Review', 'review.cancel': 'Cancel',
+    'review.errorSubmit': 'An error occurred while submitting your review, please try again',
+    'review.errorConnection': 'Unable to connect to the server, check your internet connection and try again',
+    'testimonials.label': 'Success Partners\\\' Reviews', 'testimonials.heading': 'Your Opinion Matters',
+    'testimonials.subheading': 'We are proud of the trust of our partners and clients and always strive to achieve their satisfaction and exceed their expectations',
+    'testimonials.seed1Name': 'Eng. Adnan Yousef Shouman', 'testimonials.seed1Role': 'CEO of Axis',
+    'testimonials.seed1Text': 'Since its launch, Axis has been a pioneer in advanced engineering technologies and solutions, and we will continue to provide the latest technologies and best services to our clients everywhere.',
+    'testimonials.seed2Name': 'Eng. Saja Musallam', 'testimonials.seed2Role': 'Axis Team - Hebron Branch',
+    'testimonials.seed2Text': 'The Axis team works passionately to provide integrated and reliable surveying solutions that meet our clients\\\' needs with the highest standards of quality and precision.',
+    'testimonials.seed3Name': 'Eng. Anas Abu Hadid', 'testimonials.seed3Role': 'Hebron Branch Manager - Axis',
+    'testimonials.seed3Text': 'At Axis, we are committed to providing the latest technologies and best services to our clients, and we always strive to exceed their expectations.',
+    'testimonials.seed4Name': 'Ahmad Saeed Bayoud Al-Tamimi', 'testimonials.seed4Role': 'Chairman of the Board of Trustees of Palestine Polytechnic University',
+    'testimonials.seed4Text': 'We commend Axis\\\'s role in supplying the surveying and geomatics sector with modern technologies and supporting academic institutions.',
+    'whyUs.label': 'Why Axis', 'whyUs.heading': 'Why Choose Axis?',
+    'whyUs.paragraph': 'We stand out as the leading and largest company in the country in surveying and geomatics devices. Exclusive agency for the largest global companies with a wide branch network and a specialized team providing the best solutions and support to our clients.',
+    'whyUs.reason1': 'Exclusive agent for Trimble, NavVis, Spectra, Applanix, and Kaarta',
+    'whyUs.reason2': 'Over 20 years of experience in the surveying devices sector', 'whyUs.reason3': '4 main branches across the country',
+    'whyUs.reason4': 'Partnership with UNDP', 'whyUs.reason5': 'Collaboration with local universities (PPU, Najah, Hebron)',
+    'whyUs.reason6': 'Continuous technical support and after-sales service', 'whyUs.logoAlt': 'Axis', 'whyUs.logoName': 'Axis', 'whyUs.logoTagline': 'Advanced Engineering Solutions',
+    'team.label': 'Our Team', 'team.heading': 'Management Structure',
+    'team.subheading': 'An integrated management structure comprising an elite of engineers and specialists under distinguished leadership',
+    'team.deptLabel': 'Technical Departments', 'team.ctaText': 'A specialized team comprising elite engineers with high competencies',
+    'team.badgeFounder': 'Founder', 'team.badgeExecutive': 'CEO', 'team.badgeBranch': 'Branch Manager', 'team.badgeAccounting': 'Accounting',
+    'team.member1Name': 'Eng. Salameh Awawdeh', 'team.member1Role': 'General Manager',
+    'team.member2Name': 'Eng. Adnan Shouman', 'team.member2Role': 'CEO - West Bank',
+    'team.member3Name': 'Ms. Walaa Al-Bakri', 'team.member3Role': 'Accounting Department',
+    'team.member4Name': 'Eng. Anas Abu Hadid', 'team.member4Role': 'Hebron Branch Manager',
+    'team.member5Name': 'Eng. Alaa Abu Khalf', 'team.member5Role': 'Drafting & Laser Scanning Department',
+    'team.member6Name': 'Eng. Saja Musallam', 'team.member6Role': 'Drafting & Technical Support Department',
+    'team.member7Name': 'Eng. Wa\\\'ad Wahdan', 'team.member7Role': 'Technical Support Department',
+    'team.member8Name': 'Eng. Hatem Eida', 'team.member8Role': 'Drafting Department',
+    'contact.label': 'Contact Us', 'contact.heading': 'Let\'s Start Your Next Project',
+    'contact.subheading': 'Contact us directly via social media or send us your project details',
+    'contact.whatsappName': 'WhatsApp', 'contact.whatsappDesc': 'Contact us instantly via WhatsApp', 'contact.whatsappBadge': 'Fastest',
+    'contact.messengerName': 'Messenger', 'contact.messengerDesc': 'Send us a message via Messenger',
+    'contact.instagramName': 'Instagram', 'contact.instagramDesc': 'Follow and contact us on Instagram',
+    'contact.openApp': 'Open', 'contact.phoneLabel': 'Phone', 'contact.emailLabel': 'Email',
+    'contact.mapTitle': 'Our Branch Locations on the Map', 'contact.formTitle': 'Or Send Us Your Project Details',
+    'contact.nameLabel': 'Full Name', 'contact.namePlaceholder': 'Enter your name', 'contact.emailLabel': 'Email Address',
+    'contact.phoneFormLabel': 'Phone Number', 'contact.serviceLabel': 'Service Type', 'contact.servicePlaceholder': 'Select the required service',
+    'contact.serviceGps': 'GPS & RTK Devices', 'contact.serviceTotalStation': 'Total Station Devices',
+    'contact.service3dScanning': '3D Laser Scanning', 'contact.serviceGis': 'GIS & Mapping Systems',
+    'contact.serviceMonitoring': 'Movement Monitoring Systems', 'contact.serviceTraining': 'Training & Technical Support',
+    'contact.projectDetailsLabel': 'Project Details', 'contact.projectDetailsPlaceholder': 'Write your project details here...',
+    'contact.submitSuccess': 'Your message has been sent successfully! We will contact you soon', 'contact.sending': 'Sending...',
+    'contact.sendMessage': 'Send Message', 'contact.errorSend': 'An error occurred while sending', 'contact.errorUnexpected': 'An unexpected error occurred',
+    'contact.whatsappMsg': 'Hello, I would like to inquire about Axis engineering solutions services',
+    'docs.label': 'About Us', 'docs.heading': 'Learn More About Us', 'docs.subheading': 'Browse the company\'s CV and technical support documents',
+    'docs.cvTitle': 'Company CV', 'docs.cvDesc': 'Company CV for Axis Advanced Engineering Solutions',
+    'docs.cvCategory': 'Company CV', 'docs.techSupportTitle': 'Technical Support', 'docs.techSupportDesc': 'Technical support documents and services provided to clients',
+    'docs.techSupportCategory': 'Technical Support', 'docs.view': 'View', 'docs.viewOnly': 'View Only',
+    'branches.label': 'Our Branches', 'branches.heading': 'We Reach You Wherever You Are',
+    'branches.subheading': 'Four main branches across the country, serving you as quickly as possible with the highest quality',
+    'branches.mainBranch': 'Main Branch', 'branches.mainBranchAddress': 'Tzippori Industrial Zone',
+    'branches.northBranch': 'Northern Branch', 'branches.northBranchAddress': 'Kafr Qasim - Ali Bin Abi Talib St. 2',
+    'branches.ramallahBranch': 'Ramallah Branch', 'branches.ramallahAddress': 'Ramallah - Al-Irsal St. near The Ship',
+    'branches.hebronBranch': 'Hebron Branch', 'branches.hebronAddress': 'Hebron - Al-Izz Tower 5th Floor, Ein Sara St.',
+    'branches.viewOnMap': 'View on Map',
+    'ceo.label': 'General Manager\'s Message', 'ceo.heading': 'Message from Eng. Salameh Awawdeh',
+    'ceo.paragraph1': 'Over more than twenty years, Axis has succeeded in becoming the premier company in the country through its widespread branches reaching all governorates, which facilitated access for everyone involved in surveying — individuals, civil and governmental institutions such as ministries, municipalities, universities, licensed surveying offices, and surveyors.',
+    'ceo.paragraph2': 'Productive capacity has increased and Axis has become a strong and fundamental pillar in the technological and technical renaissance the country is witnessing in the surveying world, especially with the start of national settlement projects. Axis has given a strong boost to surveying and settlement operations, becoming a reliable supplier of modern technology in the surveying world and its technologies, particularly GPS technology.',
+    'ceo.paragraph3': 'Axis management has been keen to respond quickly and effectively to government efforts in development and progress in the surveying field, considering the settlement project as a truly national project aimed at preserving the land, which is the cornerstone of the anticipated state project. Accordingly, Axis has been able to provide more than 85% of the needs of municipalities and surveyors working on the settlement project with the best technologies, in the fastest time, and with continuous daily and direct technical support.',
+    'ceo.highlight': 'AXIS will continue to invest in maintaining excellence in the surveying field and will work to advance this profession in the country.',
+    'ceo.signatureName': 'Eng. Salameh Awawdeh', 'ceo.signatureRole': 'General Manager — Axis Advanced Engineering Solutions',
+    'socialFeed.label': 'Follow Us', 'socialFeed.heading': 'Our Latest News & Posts',
+    'socialFeed.subheading': 'Follow us on social media for the latest news, offers, and educational videos',
+    'socialFeed.filterAll': 'All', 'socialFeed.viewPost': 'View Post',
+    'socialFeed.item1Title': 'Only 5 clicks… 90 seconds of processing… and 19 km of power lines',
+    'socialFeed.item2Title': 'Collaboration of the Architectural Frame Restoration Association × Axis × Al-Quds University',
+    'socialFeed.item3Title': 'Trimble MX60 — Advanced mobile scanning with high-resolution imaging',
+    'socialFeed.item4Title': 'EINSTAR 2 — Accurate and portable wireless scanner',
+    'socialFeed.item5Title': 'Axis Engineering Solutions — Exclusive Agent for Trimble and NavVis',
+    'footer.logoAlt': 'Axis', 'footer.logoName': 'Axis', 'footer.logoTagline': 'Advanced Engineering Solutions',
+    'footer.desc': 'Your trusted partner for surveying and geomatics technologies - Exclusive agent for Trimble, NavVis, Spectra, Applanix, and Kaarta',
+    'footer.quickLinks': 'Quick Links', 'footer.linkHome': 'Home', 'footer.linkAbout': 'About Us',
+    'footer.linkServices': 'Our Services', 'footer.linkGallery': 'Gallery', 'footer.linkContact': 'Contact Us',
+    'footer.servicesTitle': 'Our Services', 'footer.serviceGps': 'GPS & GNSS Devices', 'footer.serviceTotalStation': 'Total Station',
+    'footer.service3dScanning': '3D Laser Scanning', 'footer.serviceGisVrs': 'GIS & VRS Systems', 'footer.serviceLaser': 'Laser & Construction',
+    'footer.contactTitle': 'Contact Us',
+    'footer.mainBranch': 'Main Branch: Tzippori Industrial Zone',
+    'footer.northBranch': 'Northern Branch: Kafr Qasim, Ali Bin Abi Talib St.',
+    'footer.ramallahBranch': 'Ramallah Branch: Al-Irsal St. near The Ship',
+    'footer.hebronBranch': 'Hebron Branch: Ein Sara St. opposite Al-Hussein Stadium', 'footer.copyright': 'All Rights Reserved',
+    'theme.autoDark': '🌙 Auto - Dark', 'theme.autoLight': '☀️ Auto - Light',
+    'theme.dark': '🌙 Dark Mode', 'theme.light': '☀️ Light Mode', 'theme.returnAuto': '🔄 Auto',
+    'theme.ariaDark': 'Switch to Light Mode', 'theme.ariaLight': 'Switch to Dark Mode',
+    'whatsapp.title': 'Contact Us via WhatsApp',
+    'customers.alt1': 'Success Partners - Axis Clients in the West Bank and Jerusalem',
+    'customers.alt2': 'Success Partners - Survey Projects in the Country', 'customers.alt3': 'Success Partners - Field Work Team',
+    'customers.alt4': 'Success Partners - GPS Solutions for Organizations', 'customers.alt5': 'Success Partners - Trimble Technologies in the Country',
+    'customers.alt6': 'Success Partners - NavVis Field Devices', 'customers.alt7': 'Success Partners - Company Clients',
+    'customers.altL1': 'Those Who Trusted Us - NavVis Field Survey', 'customers.altL2': 'Those Who Trusted Us - Survey Team in the Field',
+    'customers.altL3': 'Those Who Trusted Us - 3D Scanning', 'customers.altL4': 'Those Who Trusted Us - Advanced NavVis Technology',
+    'customers.altL5': 'Those Who Trusted Us - Trimble Field Survey', 'customers.altL6': 'Those Who Trusted Us - 3D Photogrammetric Scanning',
+    'customers.altL7': 'Those Who Trusted Us - Trimble GNSS Device', 'customers.altL8': 'Those Who Trusted Us - Advanced Industrial Scanning',
+    'customers.altL9': 'Those Who Trusted Us - Construction Site Survey', 'customers.altL10': 'Those Who Trusted Us - GPS Rover Device',
+    'customers.altL11': 'Those Who Trusted Us - Heavy Machinery Control Systems', 'customers.altL12': 'Those Who Trusted Us - 3D Models',
+  },
+}
+
+import { createContext as _createContext, useContext as _useContext } from 'react'
+
+const LangContext = _createContext<{
+  lang: Lang
+  setLang: (l: Lang) => void
+  t: (key: string) => string
+  dir: 'rtl' | 'ltr'
+}>({
+  lang: 'ar',
+  setLang: () => {},
+  t: (key: string) => key,
+  dir: 'rtl',
+})
+
+function useLang() {
+  return _useContext(LangContext)
+}
+
+function LangProvider({ children }: { children: React.ReactNode }) {
+  const [lang, setLangState] = useState<Lang>('ar')
+
+  useEffect(() => {
+    const saved = localStorage.getItem('axis-lang') as Lang | null
+    if (saved === 'ar' || saved === 'en') {
+      setLangState(saved)
+    }
+  }, [])
+
+  const setLang = (l: Lang) => {
+    setLangState(l)
+    localStorage.setItem('axis-lang', l)
+    document.documentElement.setAttribute('lang', l)
+    document.documentElement.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr')
+  }
+
+  useEffect(() => {
+    document.documentElement.setAttribute('lang', lang)
+    document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr')
+  }, [lang])
+
+  const t = (key: string): string => {
+    return TRANSLATIONS[lang]?.[key] ?? TRANSLATIONS.ar[key] ?? key
+  }
+
+  const dir = lang === 'ar' ? 'rtl' as const : 'ltr' as const
+
+  return (
+    <LangContext.Provider value={{ lang, setLang, t, dir }}>
+      {children}
+    </LangContext.Provider>
+  )
+}
+
 /* ───────── theme hook (auto + manual) ───────── */
 function useTheme() {
   const [theme, setTheme] = React.useState<'dark' | 'light'>('dark')
@@ -135,8 +508,46 @@ function Section({ id, children, className = '' }: { id: string; children: React
   )
 }
 
+/* ───────── language toggle components ───────── */
+function LangToggle() {
+  const { lang, setLang } = useLang()
+  return (
+    <button
+      onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
+      className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[var(--b-1)] bg-[var(--bg-2)] text-[var(--t-5)] hover:border-[oklch(0.72_0.14_180)] hover:text-[oklch(0.72_0.14_180)] transition-all duration-300 text-xs font-bold"
+      title={lang === 'ar' ? 'Switch to English' : 'التبديل للعربية'}
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M2 12h20"/>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+      </svg>
+      <span>{lang === 'ar' ? 'EN' : 'عربي'}</span>
+    </button>
+  )
+}
+
+function LangToggleMobile() {
+  const { lang, setLang } = useLang()
+  return (
+    <button
+      onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
+      className="p-2 text-[var(--t-5)] hover:text-[oklch(0.72_0.14_180)] border border-[var(--b-1)] rounded-lg text-xs font-bold flex items-center gap-1"
+      title={lang === 'ar' ? 'EN' : 'عربي'}
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M2 12h20"/>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+      </svg>
+      {lang === 'ar' ? 'EN' : 'عربي'}
+    </button>
+  )
+}
+
 /* ───────── nav ───────── */
 function Navbar() {
+  const { t } = useLang()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   useEffect(() => {
@@ -146,14 +557,14 @@ function Navbar() {
   }, [])
 
   const links = [
-    { href: '#hero', label: 'الرئيسية', icon: undefined },
-    { href: '#branches', label: 'فروعنا', icon: <MapPinned className="w-4 h-4" /> },
-    { href: '#about', label: 'من نحن', icon: undefined },
-    { href: '#services', label: 'خدماتنا', icon: undefined },
-    { href: '#team', label: 'فريقنا', icon: undefined },
-    { href: '#documents', label: 'تعرف اكثر علينا', icon: undefined },
-    { href: '#gallery', label: 'المعرض', icon: undefined },
-    { href: '#contact', label: 'تواصل معنا', icon: undefined },
+    { href: '#hero', label: t('nav.home'), icon: undefined },
+    { href: '#branches', label: t('nav.branches'), icon: <MapPinned className="w-4 h-4" /> },
+    { href: '#about', label: t('nav.about'), icon: undefined },
+    { href: '#services', label: t('nav.services'), icon: undefined },
+    { href: '#team', label: t('nav.team'), icon: undefined },
+    { href: '#documents', label: t('nav.documents'), icon: undefined },
+    { href: '#gallery', label: t('nav.gallery'), icon: undefined },
+    { href: '#contact', label: t('nav.contact'), icon: undefined },
   ]
 
   return (
@@ -175,8 +586,8 @@ function Navbar() {
               <img src="/logo.png" alt="اكسيس" className="w-full h-full object-contain" />
             </div>
             <div className="hidden sm:block">
-              <span className="text-lg font-bold gradient-text">اكسيس</span>
-              <span className="block text-[10px] text-[var(--t-5)] tracking-wider">للحلول الهندسية المتقدمة</span>
+              <span className="text-lg font-bold gradient-text">{t('nav.logoName')}</span>
+              <span className="block text-[10px] text-[var(--t-5)] tracking-wider">{t('nav.logoTagline')}</span>
             </div>
           </a>
 
@@ -196,39 +607,14 @@ function Navbar() {
             ))}
             <a
               href="#contact"
-              className="mr-2 px-5 py-2.5 bg-[oklch(0.72_0.14_180)] text-[oklch(0.13_0.02_250)] text-sm font-semibold rounded-lg hover:bg-[oklch(0.75_0.15_180)] transition-all duration-300 glow-teal-sm"
+              className="ms-2 px-5 py-2.5 bg-[oklch(0.72_0.14_180)] text-[oklch(0.13_0.02_250)] text-sm font-semibold rounded-lg hover:bg-[oklch(0.75_0.15_180)] transition-all duration-300 glow-teal-sm"
             >
-              احصل على عرض
+              {t('nav.getQuote')}
             </a>
             {/* Language toggle */}
-            <button
-              onClick={() => {
-                const html = document.documentElement
-                const currentLang = html.getAttribute('lang')
-                const currentDir = html.getAttribute('dir')
-                if (currentLang === 'ar') {
-                  html.setAttribute('lang', 'en')
-                  html.setAttribute('dir', 'ltr')
-                  localStorage.setItem('axis-lang', 'en')
-                } else {
-                  html.setAttribute('lang', 'ar')
-                  html.setAttribute('dir', 'rtl')
-                  localStorage.setItem('axis-lang', 'ar')
-                }
-                window.location.reload()
-              }}
-              className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[var(--b-1)] bg-[var(--bg-2)] text-[var(--t-5)] hover:border-[oklch(0.72_0.14_180)] hover:text-[oklch(0.72_0.14_180)] transition-all duration-300 text-xs font-bold"
-              title="Switch to English / التبديل للعربية"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M2 12h20"/>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-              </svg>
-              <span>EN</span>
-            </button>
+            <LangToggle />
             {/* Social icons */}
-            <div className="flex items-center gap-2 mr-3 border-r border-[var(--b-1)] pr-3">
+            <div className="flex items-center gap-2 ms-3 border-s border-[var(--b-1)] ps-3">
               {SOCIALS.map(s => (
                 <a
                   key={s.name}
@@ -246,35 +632,11 @@ function Navbar() {
 
           {/* Mobile: Menu + Language buttons */}
           <div className="flex md:hidden items-center gap-2">
-            <button
-              onClick={() => {
-                const html = document.documentElement
-                const currentLang = html.getAttribute('lang')
-                if (currentLang === 'ar') {
-                  html.setAttribute('lang', 'en')
-                  html.setAttribute('dir', 'ltr')
-                  localStorage.setItem('axis-lang', 'en')
-                } else {
-                  html.setAttribute('lang', 'ar')
-                  html.setAttribute('dir', 'rtl')
-                  localStorage.setItem('axis-lang', 'ar')
-                }
-                window.location.reload()
-              }}
-              className="p-2 text-[var(--t-5)] hover:text-[oklch(0.72_0.14_180)] border border-[var(--b-1)] rounded-lg text-xs font-bold flex items-center gap-1"
-              title="EN / عربي"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M2 12h20"/>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-              </svg>
-              EN
-            </button>
+            <LangToggleMobile />
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="p-2 text-[var(--t-3)]"
-              aria-label="القائمة"
+              aria-label={t('nav.menuAria')}
             >
               {mobileOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -308,7 +670,7 @@ function Navbar() {
                 onClick={() => setMobileOpen(false)}
                 className="block mt-2 px-4 py-3 bg-[oklch(0.72_0.14_180)] text-[oklch(0.13_0.02_250)] text-center font-semibold rounded-lg"
               >
-                احصل على عرض
+                {t('nav.getQuote')}
               </a>
             </div>
           </motion.div>
@@ -319,33 +681,42 @@ function Navbar() {
 }
 
 /* ───────── customer cinema images ───────── */
-const CUSTOMER_IMAGES = [
-  { src: '/customers/customer-dsc-01.jpg', alt: 'شركاء النجاح - زبائن أكسيس في الضفة الغربية والقدس' },
-  { src: '/customers/customer-dsc-03.jpg', alt: 'شركاء النجاح - مشاريع مسح في البلاد' },
-  { src: '/customers/customer-dsc-05.jpg', alt: 'شركاء النجاح - فريق العمل الميداني' },
-  { src: '/customers/customer-dsc-07.jpg', alt: 'شركاء النجاح - حلول GPS للمؤسسات' },
-  { src: '/customers/customer-dsc-08.jpg', alt: 'شركاء النجاح - تقنيات Trimble في البلاد' },
-  { src: '/customers/customer-dsc-09.jpg', alt: 'شركاء النجاح - أجهزة NavVis الميدانية' },
-  { src: '/customers/customer-dsc-14.jpg', alt: 'شركاء النجاح - زبائن الشركة' },
-]
+function useCustomerImages() {
+  const { t } = useLang()
+  return [
+    { src: '/customers/customer-dsc-01.jpg', alt: t('customers.alt1') },
+    { src: '/customers/customer-dsc-03.jpg', alt: t('customers.alt2') },
+    { src: '/customers/customer-dsc-05.jpg', alt: t('customers.alt3') },
+    { src: '/customers/customer-dsc-07.jpg', alt: t('customers.alt4') },
+    { src: '/customers/customer-dsc-08.jpg', alt: t('customers.alt5') },
+    { src: '/customers/customer-dsc-09.jpg', alt: t('customers.alt6') },
+    { src: '/customers/customer-dsc-14.jpg', alt: t('customers.alt7') },
+  ]
+}
 
-const CUSTOMER_IMAGES_LEFT = [
-  { src: '/customers/navvis-full-use-3.jpg', alt: 'من وثق بنا - مسح ميداني بأجهزة NavVis' },
-  { src: '/customers/navvis-full-use-4.jpg', alt: 'من وثق بنا - فريق المسح في الميدان' },
-  { src: '/customers/navvis-full-use-5.jpg', alt: 'من وثق بنا - مسح ثلاثي الأبعاد' },
-  { src: '/customers/navvis-full-use-6.jpg', alt: 'من وثق بنا - تقنية NavVis المتقدمة' },
-  { src: '/customers/field-surveyor.jpg', alt: 'من وثق بنا - مسح ميداني بأجهزة Trimble' },
-  { src: '/customers/navvis-scanning.jpg', alt: 'من وثق بنا - مسح ضوئي ثلاثي الأبعاد' },
-  { src: '/customers/trimble-gnss.jpg', alt: 'من وثق بنا - جهاز GNSS Trimble' },
-  { src: '/customers/navvis-industrial.jpg', alt: 'من وثق بنا - مسح صناعي متقدم' },
-  { src: '/customers/surveyor-site.jpg', alt: 'من وثق بنا - مسح موقع إنشائي' },
-  { src: '/customers/gps-rover.jpg', alt: 'من وثق بنا - جهاز GPS Rover' },
-  { src: '/customers/cat-excavator.jpg', alt: 'من وثق بنا - أنظمة التحكم بالآلات الثقيلة' },
-  { src: '/customers/navvis-screen.jpg', alt: 'من وثق بنا - نماذج ثلاثية الأبعاد' },
-]
+function useCustomerImagesLeft() {
+  const { t } = useLang()
+  return [
+    { src: '/customers/navvis-full-use-3.jpg', alt: t('customers.altL1') },
+    { src: '/customers/navvis-full-use-4.jpg', alt: t('customers.altL2') },
+    { src: '/customers/navvis-full-use-5.jpg', alt: t('customers.altL3') },
+    { src: '/customers/navvis-full-use-6.jpg', alt: t('customers.altL4') },
+    { src: '/customers/field-surveyor.jpg', alt: t('customers.altL5') },
+    { src: '/customers/navvis-scanning.jpg', alt: t('customers.altL6') },
+    { src: '/customers/trimble-gnss.jpg', alt: t('customers.altL7') },
+    { src: '/customers/navvis-industrial.jpg', alt: t('customers.altL8') },
+    { src: '/customers/surveyor-site.jpg', alt: t('customers.altL9') },
+    { src: '/customers/gps-rover.jpg', alt: t('customers.altL10') },
+    { src: '/customers/cat-excavator.jpg', alt: t('customers.altL11') },
+    { src: '/customers/navvis-screen.jpg', alt: t('customers.altL12') },
+  ]
+}
 
 /* ───────── cinematic hero ───────── */
 function Hero() {
+  const { t } = useLang()
+  const CUSTOMER_IMAGES = useCustomerImages()
+  const CUSTOMER_IMAGES_LEFT = useCustomerImagesLeft()
   const [phase, setPhase] = useState<'converge' | 'merge' | 'reveal' | 'content'>('converge')
 
   useEffect(() => {
@@ -713,7 +1084,7 @@ function Hero() {
           <div className="w-28 h-28 sm:w-40 sm:h-40 mx-auto rounded-2xl overflow-hidden animate-pulse-glow"
             style={{ boxShadow: '0 0 40px oklch(0.72 0.14 180 / 0.5), 0 0 80px oklch(0.72 0.14 180 / 0.2), 0 0 120px oklch(0.72 0.14 180 / 0.1)' }}
           >
-            <img src="/logo.png" alt="شعار اكسيس" className="w-full h-full object-contain p-2 sm:p-3" />
+            <img src="/logo.png" alt={t('hero.logoAlt')} className="w-full h-full object-contain p-2 sm:p-3" />
           </div>
         </motion.div>
 
@@ -724,9 +1095,9 @@ function Hero() {
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight"
         >
-          <span className="gradient-text">اكسيس</span>
+          <span className="gradient-text">{t('hero.brandName')}</span>
           <br />
-          <span className="text-[var(--t-1)]">للحلول الهندسية المتقدمة</span>
+          <span className="text-[var(--t-1)]">{t('hero.tagline')}</span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -736,8 +1107,7 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-lg sm:text-xl text-[var(--t-5)] max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          الشركة الرائدة في البلاد في مجال تقنيات المساحة والجيوماتكس. الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta.
-          نقدم أحدث تقنيات GPS و RTK والمسح الضوئي وأنظمة مراقبة التحرك.
+          {t('hero.subtitle')}
         </motion.p>
 
         {/* CTA buttons */}
@@ -764,7 +1134,7 @@ function Hero() {
               <span className="relative flex items-center justify-center w-9 h-9">
                 <Star className="w-6 h-6 fill-[oklch(0.13_0.02_250)] text-[oklch(0.13_0.02_250)] group-hover:rotate-[72deg] transition-transform duration-500" />
               </span>
-              شاركنا تجربتك — رأيك يهمنا
+{t('hero.ctaReview')}
               <MessageCircle className="w-5 h-5 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
             </span>
           </a>
@@ -791,10 +1161,11 @@ function Hero() {
 
 /* ───────── about ───────── */
 function About() {
+  const { t } = useLang()
   const features = [
-    { icon: <Target className="w-6 h-6" />, title: 'رؤية واضحة', desc: 'الشركة الرائدة والأكبر في مجال تقنيات ووحلول المساحة والجيوماتكس والمعلومات الجغرافية في البلاد' },
-    { icon: <Shield className="w-6 h-6" />, title: 'وكالات حصرية عالمية', desc: 'الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta العالمية' },
-    { icon: <Zap className="w-6 h-6" />, title: 'تقنيات متقدمة', desc: 'نوظف أحدث تقنيات GPS و RTK والمسح الضوئي 3D والواقع المعزز ورسم الخرائط عالية الدقة HD Mapping' },
+    { icon: <Target className="w-6 h-6" />, title: t('about.feature1Title'), desc: t('about.feature1Desc') },
+    { icon: <Shield className="w-6 h-6" />, title: t('about.feature2Title'), desc: t('about.feature2Desc') },
+    { icon: <Zap className="w-6 h-6" />, title: t('about.feature3Title'), desc: t('about.feature3Desc') },
   ]
 
   return (
@@ -803,22 +1174,16 @@ function About() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Text side */}
           <div>
-            <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">من نحن</span>
+            <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('about.label')}</span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-6 leading-tight">
-              قيادة تقنيات المساحة <br />
-              <span className="gradient-text">في البلاد</span>
+              {t('about.heading')} <br />
+              <span className="gradient-text">{t('about.headingHighlight')}</span>
             </h2>
             <p className="text-[var(--t-5)] text-lg leading-relaxed mb-8">
-              شركة اكسيس للحلول الهندسية المتقدمة (AXIS GPS & Surveying Instruments LTD) هي الشركة الرائدة والأكبر
-              في البلاد في مجال تقنيات وحلول المساحة والجيوماتكس والمعلومات الجغرافية. نحن الوكيل الحصري لشركات
-              Trimble و NavVis و Spectra و Applanix و Kaarta العالمية، ونقدم أحدث التقنيات والحلول المتكاملة.
+              {t('about.paragraph1')}
             </p>
             <p className="text-[var(--t-7)] leading-relaxed mb-8">
-              منذ تأسيسها على يد المهندس سلامة عواودة، تعمل اكسيس في مجالات عديدة تشمل: المسح والجيوماتكس، أنظمة GIS،
-              شبكة محطات VRS وخدمات تصحيح الموقع RTK، رسم الخرائط عالية الدقة HD Mapping، المسح المتنقل Mobile Mapping،
-              المدن الذكية Smart City، الزراعة الدقيقة، أنظمة توجيه الآلات Machine Control، تقنيات البناء Construction Tech،
-              حلول الرصد والمراقبة، والواقع المعزز. تمتلك الشركة أربعة فروع رئيسية في كفر كنا وكفر قاسم
-              ورام الله والخليل، ومختبر ومعهد تدريب Axis Campus.
+              {t('about.paragraph2')}
             </p>
             <div className="space-y-4">
               {features.map((f, i) => (
@@ -896,11 +1261,12 @@ function About() {
 
 /* ───────── services ───────── */
 function Services() {
+  const { t } = useLang()
   const services = [
     {
       icon: <Satellite className="w-7 h-7" />,
-      title: 'أجهزة GPS و GNSS',
-      desc: 'مستقبلات GNSS وهوائيات ومكونات OEM عالية الدقة للمسح الميداني والقياسات الجيوديسية',
+      title: t('services.gpsTitle'),
+      desc: t('services.gpsDesc'),
       brands: [
         {
           name: 'Trimble', products: [
@@ -918,8 +1284,8 @@ function Services() {
     },
     {
       icon: <DraftingCompass className="w-7 h-7" />,
-      title: 'أجهزة التوتل ستيشن',
-      desc: 'أحدث أجهزة التوتل ستيشن وكالات القياس لقياسات المساحة الدقيقة في المشاريع الهندسية',
+      title: t('services.totalStationTitle'),
+      desc: t('services.totalStationDesc'),
       brands: [
         {
           name: 'Trimble', products: [
@@ -932,8 +1298,8 @@ function Services() {
     },
     {
       icon: <ScanLine className="w-7 h-7" />,
-      title: 'المسح الضوئي 3D والواقع المعزز',
-      desc: 'ماسحات ضوئية متنقلة وثابتة مع حلول الواقع المعزز للنمذجة المتقدمة وتحويل الواقع إلى CAD',
+      title: t('services.scanningTitle'),
+      desc: t('services.scanningDesc'),
       brands: [
         {
           name: 'NavVis', products: [
@@ -950,8 +1316,8 @@ function Services() {
     },
     {
       icon: <Monitor className="w-7 h-7" />,
-      title: 'أنظمة GIS و VRS',
-      desc: 'حلول نظم المعلومات الجغرافية وشبكة محطات VRS لخدمات تصحيح الموقع RTK والخرائط الرقمية المتكاملة',
+      title: t('services.gisTitle'),
+      desc: t('services.gisDesc'),
       brands: [
         {
           name: 'Trimble', products: [
@@ -964,14 +1330,14 @@ function Services() {
     },
     {
       icon: <Radio className="w-7 h-7" />,
-      title: 'رصد ومراقبة وتوجيه آليات',
-      desc: 'أنظمة مراقبة تحرك ورصد هبوط مع SITECH لتوجيه الآليات الثقيلة Machine Control في مشاريع البناء',
+      title: t('services.monitoringTitle'),
+      desc: t('services.monitoringDesc'),
       brands: [],
     },
     {
       icon: <Gauge className="w-7 h-7" />,
-      title: 'مستويات ليزر وبناء',
-      desc: 'مستويات ليزر دوارة ومائلة وخطية وأنابيب وأجهزة قياس مسافة ليزرية لجميع أعمال البناء والطرق والصرف',
+      title: t('services.laserTitle'),
+      desc: t('services.laserDesc'),
       brands: [
         { name: 'Spectra', products: [
             { name: 'LL500', img: 'https://sfile.chatglm.cn/images-ppt/4f53457e5907.png', datasheet: 'https://www.spectraprecision.com/_files/ugd/cd4160_34f59423c5414a86b74a0cd6abffa024.pdf' },
@@ -983,14 +1349,14 @@ function Services() {
     },
     {
       icon: <Calculator className="w-7 h-7" />,
-      title: 'برمجيات ومعالجة بيانات',
-      desc: 'برمجيات Trimble Business Center و TBC لمعالجة بيانات المسح وتحويلها إلى نماذج ومخططات هندسية دقيقة',
+      title: t('services.softwareTitle'),
+      desc: t('services.softwareDesc'),
       brands: [],
     },
     {
       icon: <GraduationCap className="w-7 h-7" />,
-      title: 'Axis Campus للتدريب',
-      desc: 'معهد Axis Campus المتخصص في التدريب المهني وورش العمل ودورات اعتماد المحترفين مع مختبر ودعم فني',
+      title: t('services.campusTitle'),
+      desc: t('services.campusDesc'),
       brands: [],
     },
   ]
@@ -1096,6 +1462,7 @@ function Services() {
 
 /* ───────── stats ───────── */
 function Stats() {
+  const { t } = useLang()
   const stats = [
     { value: 4, suffix: '', label: 'فروع في البلاد', icon: <MapPin className="w-6 h-6" /> },
     { value: 10000, suffix: '+', label: 'أكثر من عميل راضٍ', icon: <Users className="w-6 h-6" /> },
@@ -1137,6 +1504,7 @@ function Stats() {
 
 /* ───────── brands ───────── */
 function Brands() {
+  const { t } = useLang()
   const brands = [
     {
       name: 'Trimble',
@@ -1150,14 +1518,14 @@ function Brands() {
       desc: 'قائد تقنيات المسح المتنقل والنمذجة ثلاثية الأبعاد',
       color: 'from-[#0057B8] to-[#003F8A]',
       textColor: 'text-white',
-      specialties: ['مسح متنقل', 'ماسحات داخلية', 'نمذجة 3D', 'خرائط رقمية'],
+      specialties: [t('brands.navvisSpec1'), 'ماسحات داخلية', 'نمذجة 3D', t('projects.proj3Tag1')],
     },
     {
       name: 'Spectra',
       desc: 'حلول مسح عالية الدقة للمساحين والمقاولين',
       color: 'from-[#FFFFFF] to-[#E8F0FE]',
       textColor: 'text-[#0057B8]',
-      specialties: ['RTK / GPS', 'توتل ستيشن', 'مستويات ليزر', 'جمع بيانات'],
+      specialties: ['RTK / GPS', 'توتل ستيشن', t('brands.spectraSpec2'), t('brands.spectraSpec3')],
     },
   ]
 
@@ -1166,7 +1534,7 @@ function Brands() {
       <div className="absolute inset-0 grid-pattern opacity-10" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">شراكاتنا</span>
+          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('brands.label')}</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
             علامات تجارية <span className="gradient-text">عالمية رائدة</span>
           </h2>
@@ -1193,7 +1561,7 @@ function Brands() {
 
               {/* Specialties */}
               <div className="p-6">
-                <h4 className="text-[oklch(0.72_0.14_180)] font-semibold text-sm mb-3">التخصصات</h4>
+                <h4 className="text-[oklch(0.72_0.14_180)] font-semibold text-sm mb-3">{t('brands.specialties')}</h4>
                 <div className="flex flex-wrap gap-2">
                   {b.specialties.map((s, j) => (
                     <span
@@ -1205,7 +1573,7 @@ function Brands() {
                   ))}
                 </div>
                 <div className="mt-4 flex items-center gap-1 text-[oklch(0.72_0.14_180)] text-sm font-medium">
-                  <span>الوكيل الحصري في البلاد</span>
+                  <span>{t('brands.exclusiveAgent')}</span>
                   <CheckCircle2 className="w-4 h-4" />
                 </div>
               </div>
@@ -1219,6 +1587,7 @@ function Brands() {
 
 /* ───────── gallery ───────── */
 function Gallery() {
+  const { t } = useLang()
   const [activeTab, setActiveTab] = useState<'all' | 'video'>('all')
   const [lightboxVideo, setLightboxVideo] = useState<string | null>(null)
 
@@ -1237,7 +1606,7 @@ function Gallery() {
       title: 'NavVis MLX – Redefining Handheld Reality Capture',
       youtubeId: '-IDRr44-6RA',
       thumb: 'https://i.ytimg.com/vi/-IDRr44-6RA/hqdefault.jpg',
-      category: 'مسح متنقل',
+      category: t('brands.navvisSpec1'),
     },
     {
       type: 'video' as const,
@@ -1285,7 +1654,7 @@ function Gallery() {
       title: 'Trimble TDC6 Data Collector',
       youtubeId: 'r3wwTRqF0SA',
       thumb: 'https://i.ytimg.com/vi/r3wwTRqF0SA/hqdefault.jpg',
-      category: 'جمع بيانات',
+      category: t('brands.spectraSpec3'),
     },
     {
       type: 'video' as const,
@@ -1293,7 +1662,7 @@ function Gallery() {
       title: 'Trimble TDC600 Handheld',
       youtubeId: 'IBpddj4MPCs',
       thumb: 'https://i.ytimg.com/vi/IBpddj4MPCs/hqdefault.jpg',
-      category: 'جمع بيانات',
+      category: t('brands.spectraSpec3'),
     },
     {
       type: 'video' as const,
@@ -1301,7 +1670,7 @@ function Gallery() {
       title: 'NavVis VLX – From Reality to CAD in Hours',
       youtubeId: 'LgmeF3BZO4Y',
       thumb: 'https://i.ytimg.com/vi/LgmeF3BZO4Y/hqdefault.jpg',
-      category: 'مسح متنقل',
+      category: t('brands.navvisSpec1'),
     },
 
 
@@ -1319,7 +1688,7 @@ function Gallery() {
       <div className="absolute inset-0 grid-pattern opacity-10" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">معرض الوسائط</span>
+          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('gallery.label')}</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
             أحدث <span className="gradient-text">فيديوهاتنا</span>
           </h2>
@@ -1456,30 +1825,31 @@ function Gallery() {
 
 /* ───────── projects ───────── */
 function Projects() {
+  const { t } = useLang()
   const projects = [
     {
-      title: 'مختبر GIS والمساحة - جامعة الخليل',
+      title: t('projects.proj1Title'),
       category: 'التعليم الأكاديمي',
-      desc: 'إنشاء مختبر نظم المعلومات الجغرافية والمساحة في كلية المهن والعلوم التطبيقية بجامعة الخليل بالتعاون مع AXIS-GPS',
+      desc: t('projects.proj1Desc'),
       tags: ['GIS', 'أجهزة مساحة', 'جامعة الخليل'],
     },
     {
-      title: 'دعم جامعة البوليتكنك',
+      title: t('projects.proj2Title'),
       category: 'المسؤولية المجتمعية',
-      desc: 'تبرع بأجهزة مساحة حديثة ودعم صندوق الطالب الكريم لصالح جامعة البوليتكنك لتعزيز التخصصات الهندسية',
+      desc: t('projects.proj2Desc'),
       tags: ['تبرع', 'أجهزة مساحة', 'البوليتكنك'],
     },
     {
-      title: 'الشراكة مع UNDP',
+      title: t('projects.proj3Title'),
       category: 'مشاريع دولية',
-      desc: 'التعاون مع برنامج الأمم المتحدة الإنمائي في مشاريع المسح والخرائط ونظم المعلومات الجغرافية في البلاد',
-      tags: ['UNDP', 'GIS', 'خرائط رقمية'],
+      desc: t('projects.proj3Desc'),
+      tags: ['UNDP', 'GIS', t('projects.proj3Tag1')],
     },
     {
-      title: 'افتتاح فرع الخليل',
-      category: 'توسع الشركة',
-      desc: 'افتتاح الفرع الرابع لشركة اكسيس في الخليل تحت رعاية أحمد سعيد بيوض التميمي لتوسيع نطاق الخدمات في المنطقة',
-      tags: ['فرع جديد', 'الخليل', 'توسع'],
+      title: t('projects.proj4Title'),
+      category: t('projects.proj4Category'),
+      desc: t('projects.proj4Desc'),
+      tags: ['فرع جديد', t('projects.proj4Tag2'), 'توسع'],
     },
   ]
 
@@ -1487,7 +1857,7 @@ function Projects() {
     <Section id="projects" className="py-20 sm:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">مشاريعنا</span>
+          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('projects.label')}</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
             إنجازاتنا <span className="gradient-text">وشراكاتنا</span>
           </h2>
@@ -1569,10 +1939,10 @@ function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
         onSubmitted?.()
         setTimeout(() => { setSubmitted(false); setFormOpen(false) }, 8000)
       } else {
-        setErrorMsg(result.error || 'حدث خطأ أثناء إرسال المشاركة، حاول مرة أخرى')
+        setErrorMsg(result.error || t('review.errorSubmit'))
       }
     } catch {
-      setErrorMsg('تعذر الاتصال بالخادم، تأكد من اتصالك بالإنترنت وحاول مرة أخرى')
+      setErrorMsg(t('review.errorConnection'))
     } finally {
       setLoading(false)
     }
@@ -1659,7 +2029,7 @@ function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
         <div className="w-20 h-20 mx-auto mb-5 rounded-full bg-gradient-to-br from-[oklch(0.72_0.14_180_/_0.2)] to-[#FBBF24/0.2] flex items-center justify-center">
           <CheckCircle2 className="w-10 h-10 text-[oklch(0.72_0.14_180)]" />
         </div>
-        <h3 className="text-2xl font-bold text-[var(--t-0)] mb-3">تم إرسال مشاركتك بنجاح!</h3>
+        <h3 className="text-2xl font-bold text-[var(--t-0)] mb-3">{t('review.submittedTitle')}</h3>
         <p className="text-[var(--t-7)] text-base leading-relaxed max-w-md mx-auto">
           شكراً لك! مشاركتك ظهرت الآن في قسم شركاء النجاح ويمكن للجميع رؤيتها
         </p>
@@ -1675,14 +2045,14 @@ function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
       exit={{ opacity: 0, height: 0 }}
     >
       <div className="text-center mb-5">
-        <h3 className="text-xl font-bold text-[var(--t-0)] mb-1">أضف مشاركتك</h3>
+        <h3 className="text-xl font-bold text-[var(--t-0)] mb-1">{t('review.formTitle')}</h3>
         <p className="text-[var(--t-7)] text-sm">شاركنا تقييمك لتجربتك مع اكسيس</p>
       </div>
 
       <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-4">
         {/* Star rating */}
         <div className="text-center">
-          <label className="block text-sm text-[var(--t-6)] mb-3">تقييمك</label>
+          <label className="block text-sm text-[var(--t-6)] mb-3">{t('review.ratingLabel')}</label>
           <div className="flex items-center justify-center gap-2">
             {[1,2,3,4,5].map(i => (
               <button
@@ -1797,6 +2167,7 @@ function getInitials(name: string): string {
 
 /* ───────── testimonials ───────── */
 function Testimonials() {
+  const { t } = useLang()
   const [activeIndex, setActiveIndex] = useState(0)
   const [dbTestimonials, setDbTestimonials] = useState<TestimonialData[]>([])
   const [loading, setLoading] = useState(true)
@@ -1805,8 +2176,8 @@ function Testimonials() {
   const seedTestimonials: TestimonialData[] = [
     {
       id: 'seed-1',
-      name: 'م. عدنان يوسف شومان',
-      role: 'المدير التنفيذي لشركة اكسيس',
+      name: t('testimonials.seed1Name'),
+      role: t('testimonials.seed1Role'),
       text: 'منذ الإطلاقة كانت أكسيس رائدة في مجال التقنيات والحلول الهندسية المتقدمة، كان الحلم كبير والطموح عظيم، ومع الإصرار والمتابعة والكفاح تحقق الحلم وأنجزنا الطموح، وكنا رواداً في مجالنا لنشكل نموذجاً فريداً في البلاد.',
       rating: 5,
       initials: 'ع ش',
@@ -1814,8 +2185,8 @@ function Testimonials() {
     },
     {
       id: 'seed-2',
-      name: 'م. سجى مسالمة',
-      role: 'فريق اكسيس - فرع الخليل',
+      name: t('testimonials.seed2Name'),
+      role: t('testimonials.seed2Role'),
       text: 'فريق اكسيس يعمل بشغف لتوفير حلول مسح متكاملة تلبي احتياجات المشاريع المختلفة، من أجهزة GPS إلى أنظمة المراقبة المتقدمة.',
       rating: 5,
       initials: 'سجى',
@@ -1823,8 +2194,8 @@ function Testimonials() {
     },
     {
       id: 'seed-3',
-      name: 'م. أنس أبو حديد',
-      role: 'مدير فرع الخليل - شركة اكسيس',
+      name: t('testimonials.seed3Name'),
+      role: t('testimonials.seed3Role'),
       text: 'نلتزم في اكسيس بتقديم أحدث التقنيات وأفضل الخدمات لعملائنا في قطاع المساحة والجيوماتكس، ونسعى دائماً لتجاوز توقعاتهم.',
       rating: 5,
       initials: 'أنس',
@@ -1832,8 +2203,8 @@ function Testimonials() {
     },
     {
       id: 'seed-4',
-      name: 'أحمد سعيد بيوض التميمي',
-      role: 'رئيس مجلس أمناء جامعة البوليتكنك',
+      name: t('testimonials.seed4Name'),
+      role: t('testimonials.seed4Role'),
       text: 'نشيد بدور شركة اكسيس في إرفاد قطاع المساحة والجيوماتكس بأحدث التقنيات الحديثة من خلال مبادراتها وخبراتها المهنية للمساحين والمهندسين.',
       rating: 5,
       initials: 'أحمد',
@@ -1885,7 +2256,7 @@ function Testimonials() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-14">
-          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">مشاركة شركاء النجاح</span>
+          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('testimonials.label')}</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-3">
             رأيك <span className="gradient-text">يهمنا</span>
           </h2>
@@ -2045,13 +2416,14 @@ function Testimonials() {
 
 /* ───────── why us ───────── */
 function WhyUs() {
+  const { t } = useLang()
   const reasons = [
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta' },
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'أكثر من 20 سنة من الخبرة في قطاع أجهزة المساحة' },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: t('whyUs.reason1') },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: t('whyUs.reason2') },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: '4 فروع رئيسية تغطي جميع أنحاء البلاد' },
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'شراكة مع برنامج الأمم المتحدة الإنمائي UNDP' },
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'تعاون مع جامعات محلية (البوليتكنك، النجاح، الخليل)' },
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'دعم فني متواصل وخدمة ما بعد البيع' },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: t('whyUs.reason4') },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: t('whyUs.reason5') },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: t('whyUs.reason6') },
   ]
 
   return (
@@ -2060,7 +2432,7 @@ function WhyUs() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">لماذا اكسيس</span>
+            <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('whyUs.label')}</span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-6 leading-tight">
               لماذا تختار <span className="gradient-text">اكسيس؟</span>
             </h2>
@@ -2191,10 +2563,11 @@ function TreeLine({ type }: { type: 'vertical' | 'horizontal' | 'branch-down' })
 
 /* ───────── team ───────── */
 function Team() {
+  const { t } = useLang()
   const teamMembers = [
     {
-      name: 'المهندس سلامة العواودة',
-      role: 'المدير العام',
+      name: t('team.member1Name'),
+      role: t('team.member1Role'),
       initials: 'س ع',
       photo: '/team/salame.jpg',
       gradient: 'from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)]',
@@ -2203,8 +2576,8 @@ function Team() {
       badge: 'المؤسس',
     },
     {
-      name: 'المهندس عدنان شومان',
-      role: 'المدير التنفيذي - الضفة الغربية',
+      name: t('team.member2Name'),
+      role: t('team.member2Role'),
       initials: 'ع ش',
       photo: '/team/adnan.jpg',
       gradient: 'from-[oklch(0.65_0.16_200)] to-[oklch(0.55_0.12_250)]',
@@ -2213,8 +2586,8 @@ function Team() {
       badge: 'تنفيذي',
     },
     {
-      name: 'السيدة ولاء البكري',
-      role: 'قسم المحاسبة',
+      name: t('team.member3Name'),
+      role: t('team.member3Role'),
       initials: 'و ب',
       photo: '/team/walaa.jpg',
       gradient: 'from-[oklch(0.70_0.12_90)] to-[oklch(0.60_0.14_60)]',
@@ -2223,8 +2596,8 @@ function Team() {
       badge: 'محاسبة',
     },
     {
-      name: 'المهندس أنس أبو حديد',
-      role: 'مدير فرع الخليل',
+      name: t('team.member4Name'),
+      role: t('team.member4Role'),
       initials: 'أ ح',
       photo: '/team/anas.jpg',
       gradient: 'from-[oklch(0.60_0.18_30)] to-[oklch(0.55_0.14_50)]',
@@ -2233,8 +2606,8 @@ function Team() {
       badge: 'فرع',
     },
     {
-      name: 'المهندسة ألاء أبو خلف',
-      role: 'قسم الرسم والمسح الضوئي',
+      name: t('team.member5Name'),
+      role: t('team.member5Role'),
       initials: 'أ خ',
       photo: '/team/alaa.jpg',
       gradient: 'from-[oklch(0.75_0.15_330)] to-[oklch(0.65_0.16_300)]',
@@ -2243,8 +2616,8 @@ function Team() {
       badge: '',
     },
     {
-      name: 'المهندسة سجى مسالمة',
-      role: 'قسم الرسم والدعم الفني',
+      name: t('team.member6Name'),
+      role: t('team.member6Role'),
       initials: 'س م',
       photo: '/team/saja_new.jpg',
       gradient: 'from-[oklch(0.80_0.10_160)] to-[oklch(0.72_0.14_180)]',
@@ -2253,8 +2626,8 @@ function Team() {
       badge: '',
     },
     {
-      name: 'المهندس وعد وهدان',
-      role: 'قسم الدعم الفني',
+      name: t('team.member7Name'),
+      role: t('team.member7Role'),
       initials: 'و و',
       photo: '/team/waad.jpg',
       gradient: 'from-[oklch(0.55_0.12_250)] to-[oklch(0.65_0.16_200)]',
@@ -2263,8 +2636,8 @@ function Team() {
       badge: '',
     },
     {
-      name: 'المهندس حاتم عيدة',
-      role: 'قسم الرسم',
+      name: t('team.member8Name'),
+      role: t('team.member8Role'),
       initials: 'ح ع',
       photo: '/team/hatem.jpg',
       gradient: 'from-[oklch(0.50_0.15_150)] to-[oklch(0.72_0.14_180)]',
@@ -2286,7 +2659,7 @@ function Team() {
       <div className="absolute bottom-1/4 right-0 w-72 h-72 bg-[oklch(0.65_0.16_200_/_0.08)] rounded-full blur-3xl" />
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">فريق العمل</span>
+          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('team.label')}</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
             الهيكل <span className="gradient-text">الإداري</span>
           </h2>
@@ -2345,7 +2718,7 @@ function Team() {
                 <div className="w-0.5 h-6 sm:h-8" style={{ background: 'linear-gradient(to bottom, oklch(0.72 0.14 180 / 0.2), oklch(0.55 0.12 250 / 0.1))' }} />
                 {/* Department group label */}
                 <div className="mb-3 px-4 py-1 rounded-full border border-[var(--b-3)] bg-[var(--bg-2)]">
-                  <span className="text-[var(--t-6)] text-[10px] sm:text-xs font-semibold">الأقسام الفنية</span>
+                  <span className="text-[var(--t-6)] text-[10px] sm:text-xs font-semibold">{t('team.deptLabel')}</span>
                 </div>
                 <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full">
                   {departments.map((member, i) => (
@@ -2376,6 +2749,7 @@ function Team() {
 
 /* ───────── contact ───────── */
 function Contact() {
+  const { t } = useLang()
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -2405,14 +2779,14 @@ function Contact() {
       const result = await res.json()
 
       if (!res.ok) {
-        throw new Error(result.error || 'حدث خطأ في الإرسال')
+        throw new Error(result.error || t('contact.errorSend'))
       }
 
       setSubmitted(true)
       form.reset()
       setTimeout(() => setSubmitted(false), 5000)
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'حدث خطأ غير متوقع'
+      const message = err instanceof Error ? err.message : t('contact.errorUnexpected')
       setError(message)
     } finally {
       setLoading(false)
@@ -2420,7 +2794,7 @@ function Contact() {
   }
 
   /* WhatsApp chat URL with pre-filled message */
-  const whatsappMsg = encodeURIComponent('مرحباً، أود الاستفسار عن خدمات اكسيس للحلول الهندسية')
+  const whatsappMsg = encodeURIComponent(t('contact.whatsappMsg'))
   const whatsappUrl = `https://wa.me/972525289999?text=${whatsappMsg}`
   const messengerUrl = 'https://m.me/axisTRIMBLE'
   const instagramUrl = 'https://www.instagram.com/axis.gps/'
@@ -2433,7 +2807,7 @@ function Contact() {
       color: '#25D366',
       hoverColor: '#20BD5A',
       icon: <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>,
-      desc: 'تواصل معنا فوراً عبر واتساب',
+      desc: t('contact.whatsappDesc'),
       badge: 'الأسرع',
     },
     {
@@ -2443,7 +2817,7 @@ function Contact() {
       color: '#0084FF',
       hoverColor: '#0070E0',
       icon: <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8"><path d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.2 5.42 3.15 7.15.16.14.26.34.27.56l.05 1.74c.02.57.61.94 1.14.72l1.94-.8c.16-.07.34-.09.51-.05.88.24 1.82.37 2.79.37 5.64 0 10-4.13 10-9.7C22 6.13 17.64 2 12 2zm5.89 7.54l-2.83 4.48c-.45.71-1.39.89-2.07.39l-2.25-1.69a.75.75 0 00-.9 0l-3.04 2.31c-.41.31-.94-.2-.67-.64l2.83-4.48c.45-.71 1.39-.89 2.07-.39l2.25 1.69a.75.75 0 00.9 0l3.04-2.31c.41-.31.94.2.67.64z"/></svg>,
-      desc: 'أرسل لنا رسالة عبر ماسنجر',
+      desc: t('contact.messengerDesc'),
       badge: null,
     },
     {
@@ -2453,7 +2827,7 @@ function Contact() {
       color: '#E1306C',
       hoverColor: '#C1255E',
       icon: <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>,
-      desc: 'تابعنا وتواصل معنا على انستغرام',
+      desc: t('contact.instagramDesc'),
       badge: null,
     },
   ]
@@ -2470,7 +2844,7 @@ function Contact() {
       <div className="absolute inset-0 grid-pattern opacity-10" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">تواصل معنا</span>
+          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('contact.label')}</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
             لنبدأ <span className="gradient-text">مشروعك القادم</span>
           </h2>
@@ -2676,28 +3050,29 @@ function Contact() {
 
 /* ───────── documents / resources ───────── */
 function Documents() {
+  const { t } = useLang()
   const [activeDoc, setActiveDoc] = useState<string | null>(null)
 
   const docs = [
     {
       id: 'cv',
-      title: 'السيرة الذاتية',
-      description: 'السيرة الذاتية لشركة اكسيس للحلول الهندسية المتقدمة',
+      title: t('docs.cvTitle'),
+      description: t('docs.cvDesc'),
       icon: <BookOpen className="w-6 h-6" />,
       file: '/docs/cv-2025.pdf',
       color: 'from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)]',
       borderColor: 'border-[oklch(0.72_0.14_180_/_0.3)]',
-      category: 'السيرة الذاتية',
+      category: t('docs.cvTitle'),
     },
     {
       id: 'tech-support',
-      title: 'الدعم الفني',
-      description: 'وثائق الدعم الفني والخدمات المقدمة للعملاء',
+      title: t('docs.techSupportTitle'),
+      description: t('docs.techSupportDesc'),
       icon: <Cog className="w-6 h-6" />,
       file: '/docs/technical-support.pdf',
       color: 'from-[oklch(0.55_0.12_250)] to-[oklch(0.65_0.16_200)]',
       borderColor: 'border-[oklch(0.55_0.12_250_/_0.3)]',
-      category: 'الدعم الفني',
+      category: t('docs.techSupportTitle'),
     },
   ]
 
@@ -2707,7 +3082,7 @@ function Documents() {
       <div className="absolute bottom-0 right-1/3 w-80 h-80 bg-[oklch(0.65_0.16_200_/_0.04)] rounded-full blur-3xl" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">من نحن</span>
+          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('docs.label')}</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
             تعرف اكثر <span className="gradient-text">علينا</span>
           </h2>
@@ -2719,8 +3094,8 @@ function Documents() {
         {/* Document cards - grouped by category */}
         {(() => {
           const categories = [
-            { key: 'السيرة الذاتية', label: 'السيرة الذاتية', icon: <BookOpen className="w-7 h-7" /> },
-            { key: 'الدعم الفني', label: 'الدعم الفني', icon: <Cog className="w-7 h-7" /> },
+            { key: t('docs.cvTitle'), label: t('docs.cvTitle'), icon: <BookOpen className="w-7 h-7" /> },
+            { key: t('docs.techSupportTitle'), label: t('docs.techSupportTitle'), icon: <Cog className="w-7 h-7" /> },
           ]
           return categories.map((cat) => {
             const catDocs = docs.filter(d => d.category === cat.key)
@@ -2844,6 +3219,7 @@ function Documents() {
 
 /* ───────── footer ───────── */
 function Footer() {
+  const { t } = useLang()
   return (
     <footer className="border-t border-[var(--b-1)] bg-[var(--bg-0)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -2881,7 +3257,7 @@ function Footer() {
 
           {/* Quick links */}
           <div>
-            <h4 className="text-[var(--t-1)] font-semibold mb-4">روابط سريعة</h4>
+            <h4 className="text-[var(--t-1)] font-semibold mb-4">{t('footer.quickLinks')}</h4>
             <div className="space-y-2">
               {['الرئيسية', 'من نحن', 'خدماتنا', 'المعرض', 'تواصل معنا'].map((l, i) => (
                 <a key={i} href={`#${['hero', 'about', 'services', 'gallery', 'contact'][i]}`} className="block text-[var(--t-8)] hover:text-[oklch(0.72_0.14_180)] text-sm transition-colors">
@@ -2895,7 +3271,7 @@ function Footer() {
           <div>
             <h4 className="text-[var(--t-1)] font-semibold mb-4">خدماتنا</h4>
             <div className="space-y-2">
-              {['أجهزة GPS و GNSS', 'التوتل ستيشن', 'المسح الضوئي 3D', 'أنظمة GIS و VRS', 'ليزر وبناء', 'Axis Campus'].map((s, i) => (
+              {[t('footer.serviceGps'), t('footer.serviceTotalStation'), t('footer.service3dScanning'), t('footer.serviceGisVrs'), t('footer.serviceLaser'), 'Axis Campus'].map((s, i) => (
                 <span key={i} className="block text-[var(--t-8)] text-sm">{s}</span>
               ))}
             </div>
@@ -2965,6 +3341,7 @@ function Footer() {
 
 /* ───────── floating whatsapp ───────── */
 function FloatingWhatsApp() {
+  const { t } = useLang()
   const [pulse, setPulse] = useState(true)
   useEffect(() => {
     const t = setTimeout(() => setPulse(false), 5000)
@@ -2988,10 +3365,11 @@ function FloatingWhatsApp() {
 
 /* ───────── branches quick section ───────── */
 function Branches() {
+  const { t } = useLang()
   const branches = [
     {
       name: 'الفرع الرئيسي',
-      address: 'المنطقة الصناعية تسيفوريت',
+      address: t('branches.mainBranchAddress'),
       phone: '04-6419995',
       lat: 32.7579702,
       lng: 35.3189103,
@@ -2999,7 +3377,7 @@ function Branches() {
     },
     {
       name: 'فرع الشمال',
-      address: 'كفر قاسم - شارع علي بن أبي طالب 2',
+      address: t('branches.northBranchAddress'),
       phone: '0595289999',
       lat: 32.11146,
       lng: 34.96504,
@@ -3007,7 +3385,7 @@ function Branches() {
     },
     {
       name: 'فرع رام الله',
-      address: 'رام الله - شارع الإرسال قرب السفينة',
+      address: t('branches.ramallahAddress'),
       phone: '02-2950149',
       lat: 31.92730,
       lng: 35.20910,
@@ -3015,7 +3393,7 @@ function Branches() {
     },
     {
       name: 'فرع الخليل',
-      address: 'الخليل - برج العز ط5 شارع عين سارة',
+      address: t('branches.hebronAddress'),
       phone: '0594224498',
       lat: 31.537372,
       lng: 35.0987544,
@@ -3051,7 +3429,7 @@ function Branches() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.12 }}
-              className="group relative p-6 rounded-2xl border border-[var(--b-1)] bg-[var(--bg-2)] hover:border-[var(--accent-border)] transition-all duration-500 overflow-hidden text-right"
+              className="group relative p-6 rounded-2xl border border-[var(--b-1)] bg-[var(--bg-2)] hover:border-[var(--accent-border)] transition-all duration-500 overflow-hidden text-start"
             >
               {/* Color accent top */}
               <div className="absolute top-0 right-0 left-0 h-1 rounded-t-2xl" style={{ backgroundColor: b.color }} />
@@ -3070,7 +3448,7 @@ function Branches() {
                   <span dir="ltr">{b.phone}</span>
                 </div>
                 <div className="mt-3 flex items-center gap-1 text-[oklch(0.72_0.14_180)] text-xs font-medium group-hover:gap-2 transition-all">
-                  <span>عرض على الخريطة</span>
+                  <span>{t('branches.viewOnMap')}</span>
                   <ArrowUpRight className="w-3 h-3" />
                 </div>
               </div>
@@ -3084,6 +3462,7 @@ function Branches() {
 
 /* ───────── CEO message / quote ───────── */
 function CEOMessage() {
+  const { t } = useLang()
   return (
     <Section id="ceo-message" className="py-20 sm:py-28 relative overflow-hidden">
       {/* Background accent */}
@@ -3137,7 +3516,7 @@ function CEOMessage() {
 
             {/* Signature */}
             <div className="flex items-center justify-end gap-4 pt-4 border-t border-[var(--b-1)]">
-              <div className="text-left">
+              <div className="text-start">
                 <p className="text-[var(--t-1)] font-bold text-base">المهندس سلامة عواودة</p>
                 <p className="text-[var(--t-7)] text-sm">المدير العام — شركة أكسيس للحلول الهندسية المتقدمة</p>
               </div>
@@ -3154,36 +3533,37 @@ function CEOMessage() {
 
 /* ───────── social media feed ───────── */
 function SocialFeed() {
+  const { t } = useLang()
   const [activePlatform, setActivePlatform] = useState<'all' | 'instagram' | 'facebook' | 'youtube'>('all')
 
   const feedItems = [
     {
       platform: 'instagram' as const,
-      title: '5 نقرات فقط… 90 ثانية من المعالجة… و19 كم من خطوط الكهرباء',
+      title: t('socialFeed.item1Title'),
       href: 'https://www.instagram.com/reel/DWT8YQpAN7S',
       date: '2026',
     },
     {
       platform: 'instagram' as const,
-      title: 'تعاون جمعية إعادة الإطار المعماري × اكسيس × جامعة القدس',
+      title: t('socialFeed.item2Title'),
       href: 'https://www.instagram.com/reel/DRMsbnIjOJS',
       date: '2026',
     },
     {
       platform: 'instagram' as const,
-      title: 'Trimble MX60 — مسح متنقل متقدم مع تصوير عالي الدقة',
+      title: t('socialFeed.item3Title'),
       href: 'https://www.instagram.com/reel/DY2iAOfCVBo',
       date: '2026',
     },
     {
       platform: 'instagram' as const,
-      title: 'EINSTAR 2 — ماسح ضوئي لاسلكي دقيق ومحمول',
+      title: t('socialFeed.item4Title'),
       href: 'https://www.instagram.com/reel/DX_G65rKvhH',
       date: '2026',
     },
     {
       platform: 'facebook' as const,
-      title: 'اكسيس للحلول الهندسية — الوكيل الحصري لـ Trimble و NavVis',
+      title: t('socialFeed.item5Title'),
       href: 'https://www.facebook.com/axisTRIMBLE',
       date: '2026',
     },
@@ -3214,7 +3594,7 @@ function SocialFeed() {
       <div className="absolute inset-0 grid-pattern opacity-10" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">تابعنا</span>
+          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('socialFeed.label')}</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
             أحدث <span className="gradient-text">أخبارنا ومنشوراتنا</span>
           </h2>
@@ -3272,7 +3652,7 @@ function SocialFeed() {
                 <h4 className="text-[var(--t-1)] font-semibold text-sm leading-relaxed mb-4">{item.title}</h4>
                 
                 <div className="flex items-center gap-1 text-[var(--t-8)] text-xs group-hover:text-[oklch(0.72_0.14_180)] transition-colors">
-                  <span>عرض المنشور</span>
+                  <span>{t('socialFeed.viewPost')}</span>
                   <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
               </motion.a>
@@ -3302,6 +3682,7 @@ function SocialFeed() {
 
 /* ───────── floating theme toggle (PORTAL - rendered to document.body) ───────── */
 function FloatingThemeToggle() {
+  const { t } = useLang()
   const { theme, toggle: toggleTheme, autoMode, setAuto } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [showTooltip, setShowTooltip] = useState(false)
@@ -3314,14 +3695,14 @@ function FloatingThemeToggle() {
       {showTooltip && (
         <div className="absolute bottom-full right-0 mb-2 px-3 py-1.5 rounded-lg bg-[var(--bg-2)] border border-[var(--b-1)] text-[var(--t-2)] text-xs whitespace-nowrap shadow-lg">
           {autoMode
-            ? (theme === 'dark' ? '🌙 تلقائي - ليلي (اضغط للتغيير)' : '☀️ تلقائي - نهاري (اضغط للتغيير)')
-            : (theme === 'dark' ? '🌙 وضع ليلي (اضغط للتغيير)' : '☀️ وضع نهاري (اضغط للتغيير)')
+            ? (theme === 'dark' ? t('theme.autoDark') : t('theme.autoLight'))
+            : (theme === 'dark' ? t('theme.dark') : t('theme.light'))
           }
           <button
             onClick={(e) => { e.stopPropagation(); setAuto() }}
             className="block mt-1 text-[oklch(0.72_0.14_180)] hover:underline"
           >
-            {autoMode ? '' : '🔄 العودة للتلقائي'}
+            {autoMode ? '' : t('theme.returnAuto')}
           </button>
         </div>
       )}
@@ -3335,7 +3716,7 @@ function FloatingThemeToggle() {
             ? '0 0 20px rgba(250,204,21,0.4), 0 4px 12px rgba(0,0,0,0.4)'
             : '0 0 20px rgba(30,41,59,0.3), 0 4px 12px rgba(0,0,0,0.15)',
         }}
-        aria-label={theme === 'dark' ? 'تبديل إلى الوضع النهاري' : 'تبديل إلى الوضع الليلي'}
+        aria-label={theme === 'dark' ? t('theme.ariaDark') : t('theme.ariaLight')}
       >
         {/* Background */}
         <div className="absolute inset-0 transition-all duration-500" style={{
@@ -3384,6 +3765,7 @@ function FloatingThemeToggle() {
 /* ───────── main page ───────── */
 export default function Home() {
   return (
+    <LangProvider>
     <div className="min-h-screen flex flex-col">
       <FloatingThemeToggle />
       <Navbar />
@@ -3407,5 +3789,6 @@ export default function Home() {
       <Footer />
       <FloatingWhatsApp />
     </div>
+    </LangProvider>
   )
 }
