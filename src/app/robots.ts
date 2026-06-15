@@ -7,7 +7,16 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: '*',
         allow: '/',
       },
+      {
+        userAgent: 'Googlebot',
+        allow: '/',
+      },
+      {
+        userAgent: 'Bingbot',
+        allow: '/',
+      },
     ],
     sitemap: 'https://axis-gps.com/sitemap.xml',
+    host: 'https://axis-gps.com',
   }
 }
