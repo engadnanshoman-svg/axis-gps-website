@@ -11,10 +11,19 @@ export const metadata: Metadata = {
     "اكسيس", "AXIS GPS", "أجهزة المساحة", "GPS", "RTK", "GIS", "جيوماتكس",
     "Trimble", "NavVis", "Spectra", "Applanix", "Kaarta", "VRS",
     "توتل ستيشن", "مسح ضوئي", "ليزر", "Machine Control",
+    "مساحة", "مسح أرضي", "أجهزة قياس", "جهاز GPS", "مستقبل GNSS",
+    "مسح ثلاثي الأبعاد", "رسم خرائط", "خرائط رقمية", "مدن ذكية",
+    "مراقبة تحرك", "توجيه آليات", "زراعة دقيقة", "واقع معزز",
+    "كفر كنا", "كفر قاسم", "رام الله", "الخليل", "فلسطين",
+    "أجهزة مساحة رام الله", "أجهزة مساحة الخليل", "أجهزة GPS فلسطين",
+    "Trimble فلسطين", "NavVis الشرق الأوسط",
     "surveying instruments", "3D laser scanning", "total station",
     "surveying equipment", "GNSS receiver", "laser scanner",
     "mobile mapping", "GPS survey", "land surveying", "geomatics",
     "axis gps surveying", "axis surveying instruments",
+    "GPS Palestine", "surveying equipment Ramallah", "GPS Hebron",
+    "Trimble dealer Palestine", "NavVis Middle East",
+    "RTK correction service", "VRS network",
   ],
   authors: [{ name: "اكسيس للحلول الهندسية المتقدمة", url: "https://axis-gps.com" }],
   creator: "AXIS GPS & Surveying Instruments",
@@ -33,6 +42,9 @@ export const metadata: Metadata = {
       { url: "/logo.png", sizes: "192x192" },
     ],
     apple: "/logo.png",
+    other: [
+      { url: "/manifest.json", rel: "manifest" },
+    ],
   },
   openGraph: {
     title: "اكسيس | لأجهزة المساحة والجيوماتكس - AXIS GPS",
@@ -75,6 +87,13 @@ export const metadata: Metadata = {
     email: true,
     address: true,
   },
+  other: {
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'black-translucent',
+    'apple-mobile-web-app-title': 'اكسيس AXIS GPS',
+    'mobile-web-app-capable': 'yes',
+    'theme-color': '#0B1120',
+  },
 };
 
 export default function RootLayout({
@@ -92,6 +111,11 @@ export default function RootLayout({
     logo: 'https://axis-gps.com/logo.png',
     description: 'الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta - أحدث أجهزة GPS و RTK والمسح الضوئي ثلاثي الأبعاد و VRS',
     foundingDate: '2004',
+    founder: {
+      '@type': 'Person',
+      name: 'سلامة عواودة',
+      jobTitle: 'Founder',
+    },
     telephone: ['+972-4-641-9995', '+972-52-528-9999'],
     email: 'info@axis-gps.com',
     address: [
@@ -184,8 +208,12 @@ export default function RootLayout({
     url: 'https://axis-gps.com',
     inLanguage: ['ar', 'en'],
     potentialAction: {
-      '@type': 'ReadAction',
-      target: 'https://axis-gps.com',
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://axis-gps.com/?q={search_term_string}',
+      },
+      'query-input': 'required name=search_term_string',
     },
   };
 
@@ -199,6 +227,96 @@ export default function RootLayout({
         position: 1,
         name: 'الرئيسية',
         item: 'https://axis-gps.com',
+      },
+    ],
+  };
+
+  // Structured data: Service (JSON-LD) - for rich service results
+  const serviceJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'أجهزة وخدمات المساحة والجيوماتكس',
+    provider: {
+      '@type': 'Organization',
+      name: 'اكسيس للحلول الهندسية المتقدمة',
+    },
+    description: 'أحدث أجهزة GPS و GNSS و RTK والمسح الضوئي ثلاثي الأبعاد وأنظمة GIS و VRS ومراقبة التحرك وتوجيه الآلات والليزر وبرمجيات المعالجة',
+    serviceType: 'Surveying Equipment & Geomatics Solutions',
+    areaServed: [
+      { '@type': 'Place', name: 'فلسطين' },
+      { '@type': 'Place', name: 'رام الله' },
+      { '@type': 'Place', name: 'الخليل' },
+      { '@type': 'Place', name: 'كفر كنا' },
+      { '@type': 'Place', name: 'كفر قاسم' },
+    ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'أجهزة وخدمات المساحة',
+      itemListElement: [
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'أجهزة GPS و GNSS' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'أجهزة التوتل ستيشن' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'المسح الضوئي 3D' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'أنظمة GIS و VRS' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'رصد ومراقبة وتوجيه آليات' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'مستويات ليزر وبناء' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'برمجيات ومعالجة بيانات' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'تدريب Axis Campus' } },
+      ],
+    },
+  };
+
+  // Structured data: FAQPage (JSON-LD) - for rich FAQ snippets on Google
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'ما هي شركة اكسيس للحلول الهندسية المتقدمة؟',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'شركة اكسيس هي الشركة الرائدة والأكبر في البلاد في مجال تقنيات وحلول المساحة والجيوماتكس والمعلومات الجغرافية. الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta العالمية. تمتلك 4 فروع رئيسية في كفر كنا وكفر قاسم ورام الله والخليل.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'ما هي العلامات التجارية التي تتعامل معها اكسيس؟',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'اكسيس هي الوكيل الحصري لشركات Trimble و NavVis و Spectra Precision و Applanix و Kaarta. تشمل منتجاتها أجهزة GPS و GNSS والتوتل ستيشن والماسحات الضوئية وأنظمة GIS و VRS وبرمجيات المعالجة.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'أين توجد فروع اكسيس؟',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'لدى اكسيس 4 فروع رئيسية: الفرع الرئيسي في تسيفوريت (كفر كنا)، فرع كفر قاسم، فرع رام الله، وفرع الخليل. كما يوجد مختبر ومعهد تدريب Axis Campus.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'ما هي خدمات شبكة VRS من اكسيس؟',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'شبكة VRS من اكسيس توفر خدمات تصحيح الموقع RTK في الوقت الحقيقي، مما يتيح للمساحين والمهندسين الحصول على دقة سنتمترية باستخدام أجهزة GPS و GNSS. الخدمة متوفرة في جميع مناطق البلاد.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'هل تقدم اكسيس خدمات تدريب على الأجهزة؟',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'نعم، تقدم اكسيس تدريباً مهنياً متخصصاً عبر معهد Axis Campus الذي يوفر ورش عمل ودورات اعتماد محترفين على أجهزة Trimble و NavVis وغيرها، مع مختبر مجهز ودعم فني متكامل.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'كيف يمكنني التواصل مع اكسيس؟',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'يمكنك التواصل مع اكسيس عبر الهاتف: 04-641-9995 أو واتساب: 052-528-9999 أو البريد الإلكتروني: info@axis-gps.com. كما يمكنك زيارة أي من الفروع الأربعة في كفر كنا وكفر قاسم ورام الله والخليل.',
+        },
       },
     ],
   };
@@ -234,6 +352,14 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
 
         {/* Theme init script: auto-detect based on time + system preference */}
