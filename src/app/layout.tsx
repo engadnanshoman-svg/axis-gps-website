@@ -362,6 +362,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
 
+        {/* Google Search Console Verification */}
+        <meta name="google-site-verification" content="v9dNdjaArbsrV4g4j9J8U9c1RSSvIa0KeYf5SP0E-fM" />
+
         {/* Theme init script: auto-detect based on time + system preference */}
         <script
           dangerouslySetInnerHTML={{

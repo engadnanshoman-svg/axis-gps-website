@@ -214,6 +214,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'customers.client7': 'شركاء النجاح - فريق اكسيس الميداني',
     'customers.client8': 'شركاء النجاح - عملاء يثقون بأكسيس',
     'customers.client9': 'شركاء النجاح - أحدث تقنيات المساحة',
+    'customers.clientAlt': 'شركاء النجاح - عملاء اكسيس للحلول الهندسية',
     'customers.cinemaTitle': '★ شركاء النجاح ★',
     'customers.cinemaTitleLeft': '★ من وثق بنا ★',
     'customers.altL1': 'من وثق بنا - مسح ميداني بأجهزة NavVis', 'customers.altL2': 'من وثق بنا - فريق المسح في الميدان',
@@ -397,6 +398,7 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'customers.client7': 'Success Partners - Axis Field Team',
     'customers.client8': 'Success Partners - Clients Who Trust Axis',
     'customers.client9': 'Success Partners - Latest Surveying Technologies',
+    'customers.clientAlt': 'Success Partners - Axis Engineering Solutions Clients',
     'customers.cinemaTitle': '★ Success Partners ★',
     'customers.cinemaTitleLeft': '★ Those Who Trusted Us ★',
     'customers.altL1': 'Those Who Trusted Us - NavVis Field Survey', 'customers.altL2': 'Those Who Trusted Us - Survey Team in the Field',
@@ -750,48 +752,61 @@ function Navbar() {
 }
 
 /* ───────── customer cinema images ───────── */
+const CLIENT_IMAGE_COUNT = 54
+
 function useCustomerImages() {
   const { t } = useLang()
-  return [
-    { src: '/customers/client-01.jpg', alt: t('customers.client1') },
-    { src: '/customers/client-02.jpg', alt: t('customers.client2') },
-    { src: '/customers/client-03.jpg', alt: t('customers.client3') },
-    { src: '/customers/client-04.jpg', alt: t('customers.client4') },
-    { src: '/customers/client-05.jpg', alt: t('customers.client5') },
-    { src: '/customers/client-06.jpg', alt: t('customers.client6') },
-    { src: '/customers/client-07.jpg', alt: t('customers.client7') },
-    { src: '/customers/client-08.jpg', alt: t('customers.client8') },
-    { src: '/customers/client-09.jpg', alt: t('customers.client9') },
+  // Generate all client images dynamically (client-01 through client-54)
+  const clientImages = Array.from({ length: CLIENT_IMAGE_COUNT }, (_, i) => {
+    const num = String(i + 1).padStart(2, '0')
+    return { src: `/customers/client-${num}.jpg`, alt: t('customers.clientAlt') }
+  })
+  // Mix in some existing customer images for variety
+  const mixedImages = [
+    clientImages[0], clientImages[5], clientImages[10], clientImages[15],
     { src: '/customers/customer-dsc-01.jpg', alt: t('customers.alt1') },
+    clientImages[20], clientImages[25], clientImages[30],
     { src: '/customers/customer-dsc-03.jpg', alt: t('customers.alt2') },
+    clientImages[35], clientImages[40], clientImages[45],
     { src: '/customers/customer-dsc-05.jpg', alt: t('customers.alt3') },
+    clientImages[50],
     { src: '/customers/customer-dsc-07.jpg', alt: t('customers.alt4') },
+    clientImages[3], clientImages[8], clientImages[13],
     { src: '/customers/customer-dsc-08.jpg', alt: t('customers.alt5') },
+    clientImages[18], clientImages[23], clientImages[28],
     { src: '/customers/customer-dsc-09.jpg', alt: t('customers.alt6') },
+    clientImages[33], clientImages[38], clientImages[43],
     { src: '/customers/customer-dsc-14.jpg', alt: t('customers.alt7') },
-  ]
+    clientImages[48], clientImages[53],
+  ].filter(Boolean)
+  return mixedImages
 }
 
 function useCustomerImagesLeft() {
   const { t } = useLang()
+  const clientImages = Array.from({ length: CLIENT_IMAGE_COUNT }, (_, i) => {
+    const num = String(i + 1).padStart(2, '0')
+    return { src: `/customers/client-${num}.jpg`, alt: t('customers.clientAlt') }
+  })
   return [
-    { src: '/customers/client-06.jpg', alt: t('customers.client6') },
-    { src: '/customers/client-08.jpg', alt: t('customers.client8') },
+    clientImages[1], clientImages[6], clientImages[11], clientImages[16],
     { src: '/customers/navvis-full-use-3.jpg', alt: t('customers.altL1') },
+    clientImages[21], clientImages[26], clientImages[31],
     { src: '/customers/navvis-full-use-4.jpg', alt: t('customers.altL2') },
+    clientImages[36], clientImages[41], clientImages[46],
     { src: '/customers/navvis-full-use-5.jpg', alt: t('customers.altL3') },
-    { src: '/customers/navvis-full-use-6.jpg', alt: t('customers.altL4') },
+    clientImages[51], clientImages[4], clientImages[9],
     { src: '/customers/field-surveyor.jpg', alt: t('customers.altL5') },
+    clientImages[14], clientImages[19], clientImages[24],
     { src: '/customers/navvis-scanning.jpg', alt: t('customers.altL6') },
+    clientImages[29], clientImages[34], clientImages[39],
     { src: '/customers/trimble-gnss.jpg', alt: t('customers.altL7') },
-    { src: '/customers/navvis-industrial.jpg', alt: t('customers.altL8') },
+    clientImages[44], clientImages[49],
     { src: '/customers/surveyor-site.jpg', alt: t('customers.altL9') },
-    { src: '/customers/gps-rover.jpg', alt: t('customers.altL10') },
+    clientImages[2], clientImages[7],
     { src: '/customers/cat-excavator.jpg', alt: t('customers.altL11') },
-    { src: '/customers/navvis-screen.jpg', alt: t('customers.altL12') },
-    { src: '/customers/client-01.jpg', alt: t('customers.client1') },
-    { src: '/customers/client-03.jpg', alt: t('customers.client3') },
-  ]
+    clientImages[12], clientImages[17],
+  ].filter(Boolean)
 }
 
 /* ───────── cinematic hero ───────── */
