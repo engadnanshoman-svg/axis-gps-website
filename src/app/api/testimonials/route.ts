@@ -3,13 +3,37 @@ import path from 'path'
 import fs from 'fs'
 
 // Use better-sqlite3 for direct SQLite access
-const DB_PATH = path.join(process.cwd(), 'db', 'custom.db')
+// On Vercel, /tmp is the only writable directory
+const IS_VERCEL = !!process.env.VERCEL
+const DB_DIR = IS_VERCEL ? '/tmp' : path.join(process.cwd(), 'db')
+const DB_PATH = path.join(DB_DIR, 'custom.db')
 
 function getDb() {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const Database = require('better-sqlite3')
+
+  // Ensure directory exists
+  if (!fs.existsSync(DB_DIR)) {
+    fs.mkdirSync(DB_DIR, { recursive: true })
+  }
+
   const db = new Database(DB_PATH)
   db.pragma('journal_mode = WAL')
+
+  // Auto-create table if not exists (for fresh /tmp on Vercel)
+  db.prepare(`
+    CREATE TABLE IF NOT EXISTS Testimonial (
+      id TEXT PRIMARY KEY,
+      name TEXT NOT NULL,
+      company TEXT,
+      text TEXT NOT NULL,
+      rating INTEGER NOT NULL,
+      approved INTEGER DEFAULT 1,
+      createdAt TEXT NOT NULL,
+      updatedAt TEXT NOT NULL
+    )
+  `).run()
+
   return db
 }
 

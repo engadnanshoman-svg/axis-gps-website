@@ -222,10 +222,10 @@ function Navbar() {
 /* ───────── customer cinema images ───────── */
 const CUSTOMER_IMAGES = [
   { src: '/customers/customer-dsc-01.jpg', alt: 'شركاء النجاح - زبائن أكسيس في الضفة الغربية والقدس' },
-  { src: '/customers/customer-dsc-03.jpg', alt: 'شركاء النجاح - مشاريع مسح في فلسطين' },
+  { src: '/customers/customer-dsc-03.jpg', alt: 'شركاء النجاح - مشاريع مسح في البلاد' },
   { src: '/customers/customer-dsc-05.jpg', alt: 'شركاء النجاح - فريق العمل الميداني' },
   { src: '/customers/customer-dsc-07.jpg', alt: 'شركاء النجاح - حلول GPS للمؤسسات' },
-  { src: '/customers/customer-dsc-08.jpg', alt: 'شركاء النجاح - تقنيات Trimble في فلسطين' },
+  { src: '/customers/customer-dsc-08.jpg', alt: 'شركاء النجاح - تقنيات Trimble في البلاد' },
   { src: '/customers/customer-dsc-09.jpg', alt: 'شركاء النجاح - أجهزة NavVis الميدانية' },
   { src: '/customers/customer-dsc-14.jpg', alt: 'شركاء النجاح - زبائن الشركة' },
 ]
@@ -637,7 +637,7 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-lg sm:text-xl text-[var(--t-5)] max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          الشركة الرائدة في فلسطين في مجال تقنيات المساحة والجيوماتكس. الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta.
+          الشركة الرائدة في البلاد في مجال تقنيات المساحة والجيوماتكس. الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta.
           نقدم أحدث تقنيات GPS و RTK والمسح الضوئي وأنظمة مراقبة التحرك.
         </motion.p>
 
@@ -693,7 +693,7 @@ function Hero() {
 /* ───────── about ───────── */
 function About() {
   const features = [
-    { icon: <Target className="w-6 h-6" />, title: 'رؤية واضحة', desc: 'الشركة الرائدة والأكبر في مجال تقنيات ووحلول المساحة والجيوماتكس والمعلومات الجغرافية في فلسطين' },
+    { icon: <Target className="w-6 h-6" />, title: 'رؤية واضحة', desc: 'الشركة الرائدة والأكبر في مجال تقنيات ووحلول المساحة والجيوماتكس والمعلومات الجغرافية في البلاد' },
     { icon: <Shield className="w-6 h-6" />, title: 'وكالات حصرية عالمية', desc: 'الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta العالمية' },
     { icon: <Zap className="w-6 h-6" />, title: 'تقنيات متقدمة', desc: 'نوظف أحدث تقنيات GPS و RTK والمسح الضوئي 3D والواقع المعزز ورسم الخرائط عالية الدقة HD Mapping' },
   ]
@@ -707,11 +707,11 @@ function About() {
             <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">من نحن</span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-6 leading-tight">
               قيادة تقنيات المساحة <br />
-              <span className="gradient-text">في فلسطين</span>
+              <span className="gradient-text">في البلاد</span>
             </h2>
             <p className="text-[var(--t-5)] text-lg leading-relaxed mb-8">
               شركة اكسيس للحلول الهندسية المتقدمة (AXIS GPS & Surveying Instruments LTD) هي الشركة الرائدة والأكبر
-              في فلسطين في مجال تقنيات وحلول المساحة والجيوماتكس والمعلومات الجغرافية. نحن الوكيل الحصري لشركات
+              في البلاد في مجال تقنيات وحلول المساحة والجيوماتكس والمعلومات الجغرافية. نحن الوكيل الحصري لشركات
               Trimble و NavVis و Spectra و Applanix و Kaarta العالمية، ونقدم أحدث التقنيات والحلول المتكاملة.
             </p>
             <p className="text-[var(--t-7)] leading-relaxed mb-8">
@@ -998,7 +998,7 @@ function Services() {
 /* ───────── stats ───────── */
 function Stats() {
   const stats = [
-    { value: 4, suffix: '', label: 'فروع في فلسطين', icon: <MapPin className="w-6 h-6" /> },
+    { value: 4, suffix: '', label: 'فروع في البلاد', icon: <MapPin className="w-6 h-6" /> },
     { value: 10000, suffix: '+', label: 'أكثر من عميل راضٍ', icon: <Users className="w-6 h-6" /> },
     { value: 20, suffix: '+', label: 'سنة خبرة', icon: <Wrench className="w-6 h-6" /> },
   ]
@@ -1072,7 +1072,7 @@ function Brands() {
             علامات تجارية <span className="gradient-text">عالمية رائدة</span>
           </h2>
           <p className="text-[var(--t-7)] max-w-2xl mx-auto">
-            وكيل حصري في فلسطين لأبرز الشركات العالمية المتخصصة في أجهزة المساحة والجيوماتكس
+            وكيل حصري في البلاد لأبرز الشركات العالمية المتخصصة في أجهزة المساحة والجيوماتكس
           </p>
         </div>
 
@@ -1106,7 +1106,7 @@ function Brands() {
                   ))}
                 </div>
                 <div className="mt-4 flex items-center gap-1 text-[oklch(0.72_0.14_180)] text-sm font-medium">
-                  <span>الوكيل الحصري في فلسطين</span>
+                  <span>الوكيل الحصري في البلاد</span>
                   <CheckCircle2 className="w-4 h-4" />
                 </div>
               </div>
@@ -1365,15 +1365,15 @@ function Projects() {
       tags: ['GIS', 'أجهزة مساحة', 'جامعة الخليل'],
     },
     {
-      title: 'دعم جامعة البوليتكنك فلسطين',
+      title: 'دعم جامعة البوليتكنك',
       category: 'المسؤولية المجتمعية',
-      desc: 'تبرع بأجهزة مساحة حديثة ودعم صندوق الطالب الكريم لصالح جامعة البوليتكنك فلسطين لتعزيز التخصصات الهندسية',
+      desc: 'تبرع بأجهزة مساحة حديثة ودعم صندوق الطالب الكريم لصالح جامعة البوليتكنك لتعزيز التخصصات الهندسية',
       tags: ['تبرع', 'أجهزة مساحة', 'البوليتكنك'],
     },
     {
       title: 'الشراكة مع UNDP',
       category: 'مشاريع دولية',
-      desc: 'التعاون مع برنامج الأمم المتحدة الإنمائي في مشاريع المسح والخرائط ونظم المعلومات الجغرافية في فلسطين',
+      desc: 'التعاون مع برنامج الأمم المتحدة الإنمائي في مشاريع المسح والخرائط ونظم المعلومات الجغرافية في البلاد',
       tags: ['UNDP', 'GIS', 'خرائط رقمية'],
     },
     {
@@ -1393,7 +1393,7 @@ function Projects() {
             إنجازاتنا <span className="gradient-text">وشراكاتنا</span>
           </h2>
           <p className="text-[var(--t-7)] max-w-2xl mx-auto">
-            نفخر بشراكاتنا مع المؤسسات الأكاديمية والدولية ومساهمتنا في تطوير قطاع المساحة والجيوماتكس في فلسطين
+            نفخر بشراكاتنا مع المؤسسات الأكاديمية والدولية ومساهمتنا في تطوير قطاع المساحة والجيوماتكس في البلاد
           </p>
         </div>
 
@@ -1439,11 +1439,13 @@ function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [formOpen, setFormOpen] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (selectedRating === 0) return
     setLoading(true)
+    setErrorMsg('')
 
     const form = e.currentTarget
     const formData = new FormData(form)
@@ -1460,14 +1462,19 @@ function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       })
+      const result = await res.json()
       if (res.ok) {
         setSubmitted(true)
         form.reset()
         setSelectedRating(0)
         onSubmitted?.()
-        setTimeout(() => { setSubmitted(false); setFormOpen(false) }, 4000)
+        setTimeout(() => { setSubmitted(false); setFormOpen(false) }, 8000)
+      } else {
+        setErrorMsg(result.error || 'حدث خطأ أثناء إرسال المشاركة، حاول مرة أخرى')
       }
-    } catch { /* silent */ } finally {
+    } catch {
+      setErrorMsg('تعذر الاتصال بالخادم، تأكد من اتصالك بالإنترنت وحاول مرة أخرى')
+    } finally {
       setLoading(false)
     }
   }
@@ -1548,13 +1555,15 @@ function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="text-center py-6"
+        className="text-center py-8"
       >
-        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[oklch(0.72_0.14_180_/_0.15)] flex items-center justify-center">
-          <CheckCircle2 className="w-8 h-8 text-[oklch(0.72_0.14_180)]" />
+        <div className="w-20 h-20 mx-auto mb-5 rounded-full bg-gradient-to-br from-[oklch(0.72_0.14_180_/_0.2)] to-[#FBBF24/0.2] flex items-center justify-center">
+          <CheckCircle2 className="w-10 h-10 text-[oklch(0.72_0.14_180)]" />
         </div>
-        <h3 className="text-xl font-bold text-[var(--t-0)] mb-2">شكراً لمشاركتك!</h3>
-        <p className="text-[var(--t-7)] text-sm">رأيك يهمنا وسيتم مراجعته وعرضه قريباً</p>
+        <h3 className="text-2xl font-bold text-[var(--t-0)] mb-3">تم إرسال مشاركتك بنجاح!</h3>
+        <p className="text-[var(--t-7)] text-base leading-relaxed max-w-md mx-auto">
+          شكراً لك! مشاركتك ظهرت الآن في قسم شركاء النجاح ويمكن للجميع رؤيتها
+        </p>
       </motion.div>
     )
   }
@@ -1621,6 +1630,14 @@ function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
           placeholder="اكتب مشاركتك وتقييمك هنا..."
           className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] placeholder:text-[var(--t-10)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors resize-none text-sm"
         />
+
+        {/* Error message */}
+        {errorMsg && (
+          <div className="flex items-center gap-2 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+            <X className="w-4 h-4 flex-shrink-0" />
+            <span>{errorMsg}</span>
+          </div>
+        )}
 
         {/* Actions */}
         <div className="flex items-center gap-3 pt-1">
@@ -1932,9 +1949,9 @@ function WhyUs() {
   const reasons = [
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'أكثر من 20 سنة من الخبرة في قطاع أجهزة المساحة' },
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: '4 فروع رئيسية تغطي مختلف مناطق فلسطين' },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: '4 فروع رئيسية تغطي مختلف أنحاء البلاد' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'شراكة مع برنامج الأمم المتحدة الإنمائي UNDP' },
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'تعاون مع جامعات فلسطينية (البوليتكنك، النجاح، الخليل)' },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: 'تعاون مع جامعات محلية (البوليتكنك، النجاح، الخليل)' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'دعم فني متواصل وخدمة ما بعد البيع' },
   ]
 
@@ -1949,7 +1966,7 @@ function WhyUs() {
               لماذا تختار <span className="gradient-text">اكسيس؟</span>
             </h2>
             <p className="text-[var(--t-7)] leading-relaxed mb-8">
-              نتميز بأننا الشركة الرائدة والأكبر في فلسطين في مجال أجهزة المساحة والجيوماتكس.
+              نتميز بأننا الشركة الرائدة والأكبر في البلاد في مجال أجهزة المساحة والجيوماتكس.
               وكالة حصرية لأكبر الشركات العالمية مع شبكة فروع واسعة وفريق متخصص يقدم أفضل الحلول والدعم لعملائنا.
             </p>
             <div className="grid sm:grid-cols-2 gap-4">
@@ -3002,13 +3019,13 @@ function CEOMessage() {
 
           <div className="relative space-y-5">
             <p className="text-[var(--t-2b)] text-base sm:text-lg leading-loose">
-              خلال أكثر من عشرين عاماً من الزمان، نجحت شركة أكسيس في أن تصبح الشركة الأولى في فلسطين من خلال فروعها المنتشرة والتي تصل لكل المحافظات، والتي سهلت الوصول لكل من له علاقة بالمساحة من أفراد ومؤسسات أهلية وحكومية كالوزارات والبلديات والجامعات ومكاتب المساحة المرخصة والمساحين.
+              خلال أكثر من عشرين عاماً من الزمان، نجحت شركة أكسيس في أن تصبح الشركة الأولى في البلاد من خلال فروعها المنتشرة والتي تصل لكل المحافظات، والتي سهلت الوصول لكل من له علاقة بالمساحة من أفراد ومؤسسات أهلية وحكومية كالوزارات والبلديات والجامعات ومكاتب المساحة المرخصة والمساحين.
             </p>
             <p className="text-[var(--t-3)] text-base sm:text-lg leading-loose">
-              تزايدت الطاقة الإنتاجية وصارت اكسيس دعامة قوية وأساسية في النهضة التكنولوجية والتقنية التي تشهدها فلسطين في عالم المساحة وخاصة مع بدء أعمال ومشاريع التسوية الوطنية في الأراضي الفلسطينية. لقد أعطت اكسيس دفعة قوية لعمليات المساحة والتسوية، وصارت مورّداً يعتمد عليه في تغذية التكنولوجيا الحديثة في عالم المساحة وتقنياتها وخصوصاً في تقنية GPS.
+              تزايدت الطاقة الإنتاجية وصارت اكسيس دعامة قوية وأساسية في النهضة التكنولوجية والتقنية التي تشهدها البلاد في عالم المساحة وخاصة مع بدء أعمال ومشاريع التسوية الوطنية. لقد أعطت اكسيس دفعة قوية لعمليات المساحة والتسوية، وصارت مورّداً يعتمد عليه في تغذية التكنولوجيا الحديثة في عالم المساحة وتقنياتها وخصوصاً في تقنية GPS.
             </p>
             <p className="text-[var(--t-4)] text-base sm:text-lg leading-loose">
-              حرصت إدارة شركة أكسيس على التجاوب السريع والفعال مع جهود الحكومة الفلسطينية في التنمية والتطور في مجال المساحة، بإعتبار أن مشروع التسوية هو مشروع وطني بامتياز يهدف إلى حفظ الأرض والتي هي حجر الأساس في مشروع الدولة المنتظر. وعليه استطاعت أكسيس أن توفر ما يزيد عن 85% من احتياجات البلديات والمساحين العاملين في مشروع التسوية بأفضل التقنيات وبأسرع وقت وبتواصل ودعم فني مستمر بشكل يومي ومباشر.
+              حرصت إدارة شركة أكسيس على التجاوب السريع والفعال مع جهود الحكومة في التنمية والتطور في مجال المساحة، بإعتبار أن مشروع التسوية هو مشروع وطني بامتياز يهدف إلى حفظ الأرض والتي هي حجر الأساس في مشروع الدولة المنتظر. وعليه استطاعت أكسيس أن توفر ما يزيد عن 85% من احتياجات البلديات والمساحين العاملين في مشروع التسوية بأفضل التقنيات وبأسرع وقت وبتواصل ودعم فني مستمر بشكل يومي ومباشر.
             </p>
 
             {/* Highlighted quote */}
