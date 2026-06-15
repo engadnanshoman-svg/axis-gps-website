@@ -223,6 +223,21 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'customers.altL7': 'من وثق بنا - جهاز GNSS Trimble', 'customers.altL8': 'من وثق بنا - مسح صناعي متقدم',
     'customers.altL9': 'من وثق بنا - مسح موقع إنشائي', 'customers.altL10': 'من وثق بنا - جهاز GPS Rover',
     'customers.altL11': 'من وثق بنا - أنظمة التحكم بالآلات الثقيلة', 'customers.altL12': 'من وثق بنا - نماذج ثلاثية الأبعاد',
+    'customers.dsc2': 'شركاء النجاح - مسح طبوغرافي متقدم', 'customers.dsc4': 'شركاء النجاح - أجهزة مسح دقيقة',
+    'customers.dsc6': 'شركاء النجاح - مشاريع بنية تحتية', 'customers.dsc10': 'شركاء النجاح - حلول هندسية متكاملة',
+    'customers.dsc11': 'شركاء النجاح - تقنيات LASER', 'customers.dsc12': 'شركاء النجاح - مسح معماري', 'customers.dsc13': 'شركاء النجاح - فريق فني متخصص',
+    'customers.website1': 'شركاء النجاح - مشاريع اكسيس الميدانية', 'customers.website2': 'شركاء النجاح - تقنيات المسح الحديثة',
+    'customers.website3': 'شركاء النجاح - أجهزة Trimble المتقدمة', 'customers.website4': 'شركاء النجاح - مسح GNSS دقيق',
+    'customers.website5': 'شركاء النجاح - حلول NavVis', 'customers.website6': 'شركاء النجاح - مشاريع البنية التحتية',
+    'customers.website7': 'شركاء النجاح - أحدث التجهيزات', 'customers.website8': 'شركاء النجاح - خدمات ما بعد البيع',
+    'customers.website9': 'شركاء النجاح - تدريب ودعم فني', 'customers.website10': 'شركاء النجاح - شراكات طويلة الأمد',
+    'customers.website11': 'شركاء النجاح - مسح ثلاثي الأبعاد', 'customers.website12': 'شركاء النجاح - حلول مخصصة',
+    'customers.navvisInd': 'شركاء النجاح - مسح صناعي NavVis', 'customers.navvisScreen': 'شركاء النجاح - شاشة عرض NavVis',
+    'customers.navvisTeam': 'شركاء النجاح - فريق NavVis', 'customers.navvis6': 'شركاء النجاح - NavVis في الميدان',
+    'customers.trimbleS9': 'شركاء النجاح - جهاز Trimble S9', 'customers.trimbleTripod': 'شركاء النجاح - tripod Trimble',
+    'customers.trimbleField': 'شركاء النجاح - Trimble Field Link', 'customers.gpsRover': 'شركاء النجاح - GPS Rover',
+    'customers.showcaseTitle': 'عرض مميز', 'customers.clientCount': 'أكثر من 54 عميل يثقون بنا',
+    'customers.cinemaCenter': '★ شركاؤنا في كل مكان ★',
     'services.headingPrefix': 'أجهزة وخدمات', 'services.headingHighlight': 'المساحة والجيوماتكس',
     'brands.headingPrefix': 'علامات تجارية', 'brands.headingHighlight': 'عالمية رائدة',
     'gallery.headingPrefix': 'أحدث', 'gallery.headingHighlight': 'فيديوهاتنا',
@@ -407,6 +422,21 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'customers.altL7': 'Those Who Trusted Us - Trimble GNSS Device', 'customers.altL8': 'Those Who Trusted Us - Advanced Industrial Scanning',
     'customers.altL9': 'Those Who Trusted Us - Construction Site Survey', 'customers.altL10': 'Those Who Trusted Us - GPS Rover Device',
     'customers.altL11': 'Those Who Trusted Us - Heavy Machinery Control Systems', 'customers.altL12': 'Those Who Trusted Us - 3D Models',
+    'customers.dsc2': 'Success Partners - Advanced Topographic Survey', 'customers.dsc4': 'Success Partners - Precision Survey Instruments',
+    'customers.dsc6': 'Success Partners - Infrastructure Projects', 'customers.dsc10': 'Success Partners - Integrated Engineering Solutions',
+    'customers.dsc11': 'Success Partners - LASER Technologies', 'customers.dsc12': 'Success Partners - Architectural Scanning', 'customers.dsc13': 'Success Partners - Specialized Technical Team',
+    'customers.website1': 'Success Partners - Axis Field Projects', 'customers.website2': 'Success Partners - Modern Survey Technologies',
+    'customers.website3': 'Success Partners - Advanced Trimble Devices', 'customers.website4': 'Success Partners - Precise GNSS Surveying',
+    'customers.website5': 'Success Partners - NavVis Solutions', 'customers.website6': 'Success Partners - Infrastructure Projects',
+    'customers.website7': 'Success Partners - Latest Equipment', 'customers.website8': 'Success Partners - After-Sales Services',
+    'customers.website9': 'Success Partners - Training & Technical Support', 'customers.website10': 'Success Partners - Long-Term Partnerships',
+    'customers.website11': 'Success Partners - 3D Scanning', 'customers.website12': 'Success Partners - Custom Solutions',
+    'customers.navvisInd': 'Success Partners - NavVis Industrial Scanning', 'customers.navvisScreen': 'Success Partners - NavVis Display Screen',
+    'customers.navvisTeam': 'Success Partners - NavVis Team', 'customers.navvis6': 'Success Partners - NavVis in the Field',
+    'customers.trimbleS9': 'Success Partners - Trimble S9 Device', 'customers.trimbleTripod': 'Success Partners - Trimble Tripod',
+    'customers.trimbleField': 'Success Partners - Trimble Field Link', 'customers.gpsRover': 'Success Partners - GPS Rover',
+    'customers.showcaseTitle': 'Featured Showcase', 'customers.clientCount': 'Over 54 Clients Trust Us',
+    'customers.cinemaCenter': '★ Our Partners Everywhere ★',
     'services.headingPrefix': 'Devices & Services', 'services.headingHighlight': 'Surveying & Geomatics',
     'brands.headingPrefix': 'Leading Global', 'brands.headingHighlight': 'Brands',
     'gallery.headingPrefix': 'Our Latest', 'gallery.headingHighlight': 'Videos',
@@ -756,29 +786,81 @@ const CLIENT_IMAGE_COUNT = 54
 
 function useCustomerImages() {
   const { t } = useLang()
-  // Generate all client images dynamically (client-01 through client-54)
   const clientImages = Array.from({ length: CLIENT_IMAGE_COUNT }, (_, i) => {
     const num = String(i + 1).padStart(2, '0')
     return { src: `/customers/client-${num}.jpg`, alt: t('customers.clientAlt') }
   })
-  // Mix in some existing customer images for variety
-  const mixedImages = [
-    clientImages[0], clientImages[5], clientImages[10], clientImages[15],
+  // ALL customer-dsc images
+  const dscImages = [
     { src: '/customers/customer-dsc-01.jpg', alt: t('customers.alt1') },
-    clientImages[20], clientImages[25], clientImages[30],
+    { src: '/customers/customer-dsc-02.jpg', alt: t('customers.dsc2') },
     { src: '/customers/customer-dsc-03.jpg', alt: t('customers.alt2') },
-    clientImages[35], clientImages[40], clientImages[45],
+    { src: '/customers/customer-dsc-04.jpg', alt: t('customers.dsc4') },
     { src: '/customers/customer-dsc-05.jpg', alt: t('customers.alt3') },
-    clientImages[50],
+    { src: '/customers/customer-dsc-06.jpg', alt: t('customers.dsc6') },
     { src: '/customers/customer-dsc-07.jpg', alt: t('customers.alt4') },
-    clientImages[3], clientImages[8], clientImages[13],
     { src: '/customers/customer-dsc-08.jpg', alt: t('customers.alt5') },
-    clientImages[18], clientImages[23], clientImages[28],
     { src: '/customers/customer-dsc-09.jpg', alt: t('customers.alt6') },
-    clientImages[33], clientImages[38], clientImages[43],
+    { src: '/customers/customer-dsc-10.jpg', alt: t('customers.dsc10') },
+    { src: '/customers/customer-dsc-11.jpg', alt: t('customers.dsc11') },
+    { src: '/customers/customer-dsc-12.jpg', alt: t('customers.dsc12') },
+    { src: '/customers/customer-dsc-13.jpg', alt: t('customers.dsc13') },
     { src: '/customers/customer-dsc-14.jpg', alt: t('customers.alt7') },
-    clientImages[48], clientImages[53],
-  ].filter(Boolean)
+  ]
+  // ALL website images
+  const websiteImages = [
+    { src: '/customers/website-A.jpg', alt: t('customers.website1') },
+    { src: '/customers/website-B.jpg', alt: t('customers.website2') },
+    { src: '/customers/website-C.jpg', alt: t('customers.website3') },
+    { src: '/customers/website-D.jpg', alt: t('customers.website4') },
+    { src: '/customers/website-E.jpg', alt: t('customers.website5') },
+    { src: '/customers/website-F.jpg', alt: t('customers.website6') },
+    { src: '/customers/website-G.jpg', alt: t('customers.website7') },
+    { src: '/customers/website-H.jpg', alt: t('customers.website8') },
+    { src: '/customers/website-I.jpg', alt: t('customers.website9') },
+    { src: '/customers/website-J.jpg', alt: t('customers.website10') },
+    { src: '/customers/website-K.jpg', alt: t('customers.website11') },
+    { src: '/customers/website-L.jpg', alt: t('customers.website12') },
+    { src: '/customers/website-pic.jpg', alt: t('customers.website1') },
+    { src: '/customers/website-navvis-use-3.jpg', alt: t('customers.navvis6') },
+    { src: '/customers/website-navvis-use-4.jpg', alt: t('customers.navvisInd') },
+    { src: '/customers/website-navvis-use-5.jpg', alt: t('customers.navvisScreen') },
+    { src: '/customers/website-navvis-use-6.jpg', alt: t('customers.navvisTeam') },
+    { src: '/customers/website-1A.png', alt: t('customers.website3') },
+    { src: '/customers/website-2A.png', alt: t('customers.website4') },
+    { src: '/customers/website-3A.png', alt: t('customers.website5') },
+    { src: '/customers/website-4A.png', alt: t('customers.website6') },
+    { src: '/customers/website-5A.png', alt: t('customers.website7') },
+    { src: '/customers/website-6A.png', alt: t('customers.website8') },
+    { src: '/customers/website-7A.png', alt: t('customers.website9') },
+    { src: '/customers/website-8A.png', alt: t('customers.website10') },
+    { src: '/customers/website-9A.png', alt: t('customers.website11') },
+    { src: '/customers/website-10A.png', alt: t('customers.website12') },
+    { src: '/customers/website-11A.png', alt: t('customers.website1') },
+    { src: '/customers/website-12A.png', alt: t('customers.website2') },
+  ]
+  // Equipment images
+  const equipmentImages = [
+    { src: '/customers/trimble-s9.jpg', alt: t('customers.trimbleS9') },
+    { src: '/customers/trimble-tripod.jpg', alt: t('customers.trimbleTripod') },
+    { src: '/customers/trimble-fieldlink.jpg', alt: t('customers.trimbleField') },
+    { src: '/customers/gps-rover.jpg', alt: t('customers.gpsRover') },
+  ]
+  // Interleave: client + dsc + website + equipment for rich variety
+  const mixedImages: { src: string; alt: string }[] = []
+  const allSpecial = [...dscImages, ...websiteImages, ...equipmentImages]
+  let specialIdx = 0
+  for (let i = 0; i < clientImages.length; i++) {
+    mixedImages.push(clientImages[i])
+    // Insert a special image every 2 client images
+    if (i % 2 === 1 && specialIdx < allSpecial.length) {
+      mixedImages.push(allSpecial[specialIdx++])
+    }
+  }
+  // Append any remaining special images
+  while (specialIdx < allSpecial.length) {
+    mixedImages.push(allSpecial[specialIdx++])
+  }
   return mixedImages
 }
 
@@ -788,25 +870,79 @@ function useCustomerImagesLeft() {
     const num = String(i + 1).padStart(2, '0')
     return { src: `/customers/client-${num}.jpg`, alt: t('customers.clientAlt') }
   })
-  return [
-    clientImages[1], clientImages[6], clientImages[11], clientImages[16],
+  const navvisImages = [
     { src: '/customers/navvis-full-use-3.jpg', alt: t('customers.altL1') },
-    clientImages[21], clientImages[26], clientImages[31],
     { src: '/customers/navvis-full-use-4.jpg', alt: t('customers.altL2') },
-    clientImages[36], clientImages[41], clientImages[46],
     { src: '/customers/navvis-full-use-5.jpg', alt: t('customers.altL3') },
-    clientImages[51], clientImages[4], clientImages[9],
-    { src: '/customers/field-surveyor.jpg', alt: t('customers.altL5') },
-    clientImages[14], clientImages[19], clientImages[24],
+    { src: '/customers/navvis-full-use-6.jpg', alt: t('customers.navvis6') },
     { src: '/customers/navvis-scanning.jpg', alt: t('customers.altL6') },
-    clientImages[29], clientImages[34], clientImages[39],
-    { src: '/customers/trimble-gnss.jpg', alt: t('customers.altL7') },
-    clientImages[44], clientImages[49],
+    { src: '/customers/navvis-industrial.jpg', alt: t('customers.navvisInd') },
+    { src: '/customers/navvis-screen.jpg', alt: t('customers.navvisScreen') },
+    { src: '/customers/navvis-team.jpg', alt: t('customers.navvisTeam') },
+  ]
+  const fieldImages = [
+    { src: '/customers/field-surveyor.jpg', alt: t('customers.altL5') },
     { src: '/customers/surveyor-site.jpg', alt: t('customers.altL9') },
-    clientImages[2], clientImages[7],
     { src: '/customers/cat-excavator.jpg', alt: t('customers.altL11') },
-    clientImages[12], clientImages[17],
-  ].filter(Boolean)
+    { src: '/customers/trimble-gnss.jpg', alt: t('customers.altL7') },
+    { src: '/customers/trimble-s9.jpg', alt: t('customers.trimbleS9') },
+    { src: '/customers/trimble-tripod.jpg', alt: t('customers.trimbleTripod') },
+    { src: '/customers/trimble-fieldlink.jpg', alt: t('customers.trimbleField') },
+    { src: '/customers/gps-rover.jpg', alt: t('customers.gpsRover') },
+  ]
+  const websiteImages = [
+    { src: '/customers/website-A.jpg', alt: t('customers.website1') },
+    { src: '/customers/website-B.jpg', alt: t('customers.website2') },
+    { src: '/customers/website-C.jpg', alt: t('customers.website3') },
+    { src: '/customers/website-D.jpg', alt: t('customers.website4') },
+    { src: '/customers/website-E.jpg', alt: t('customers.website5') },
+    { src: '/customers/website-F.jpg', alt: t('customers.website6') },
+    { src: '/customers/website-G.jpg', alt: t('customers.website7') },
+    { src: '/customers/website-H.jpg', alt: t('customers.website8') },
+    { src: '/customers/website-I.jpg', alt: t('customers.website9') },
+    { src: '/customers/website-J.jpg', alt: t('customers.website10') },
+    { src: '/customers/website-K.jpg', alt: t('customers.website11') },
+    { src: '/customers/website-L.jpg', alt: t('customers.website12') },
+    { src: '/customers/website-pic.jpg', alt: t('customers.website1') },
+    { src: '/customers/website-navvis-use-3.jpg', alt: t('customers.navvis6') },
+    { src: '/customers/website-navvis-use-4.jpg', alt: t('customers.navvisInd') },
+    { src: '/customers/website-navvis-use-5.jpg', alt: t('customers.navvisScreen') },
+    { src: '/customers/website-navvis-use-6.jpg', alt: t('customers.navvisTeam') },
+  ]
+  // Reverse client order for left side variety
+  const reversedClients = [...clientImages].reverse()
+  const allSpecial = [...navvisImages, ...fieldImages, ...websiteImages]
+  const mixedImages: { src: string; alt: string }[] = []
+  let specialIdx = 0
+  for (let i = 0; i < reversedClients.length; i++) {
+    mixedImages.push(reversedClients[i])
+    if (i % 2 === 0 && specialIdx < allSpecial.length) {
+      mixedImages.push(allSpecial[specialIdx++])
+    }
+  }
+  while (specialIdx < allSpecial.length) {
+    mixedImages.push(allSpecial[specialIdx++])
+  }
+  return mixedImages
+}
+
+/* ───────── center showcase images ───────── */
+function useCenterShowcase() {
+  const { t } = useLang()
+  return [
+    { src: '/customers/website-A.jpg', alt: t('customers.website1'), caption: t('customers.showcaseTitle') },
+    { src: '/customers/navvis-full-use-3.jpg', alt: t('customers.altL1'), caption: t('customers.navvis6') },
+    { src: '/customers/website-C.jpg', alt: t('customers.website3'), caption: t('customers.showcaseTitle') },
+    { src: '/customers/trimble-gnss.jpg', alt: t('customers.altL7'), caption: t('customers.trimbleS9') },
+    { src: '/customers/website-E.jpg', alt: t('customers.website5'), caption: t('customers.showcaseTitle') },
+    { src: '/customers/navvis-scanning.jpg', alt: t('customers.altL6'), caption: t('customers.navvisInd') },
+    { src: '/customers/website-G.jpg', alt: t('customers.website7'), caption: t('customers.showcaseTitle') },
+    { src: '/customers/customer-dsc-01.jpg', alt: t('customers.alt1'), caption: t('customers.dsc10') },
+    { src: '/customers/website-I.jpg', alt: t('customers.website9'), caption: t('customers.showcaseTitle') },
+    { src: '/customers/field-surveyor.jpg', alt: t('customers.altL5'), caption: t('customers.gpsRover') },
+    { src: '/customers/website-K.jpg', alt: t('customers.website11'), caption: t('customers.showcaseTitle') },
+    { src: '/customers/customer-dsc-05.jpg', alt: t('customers.alt3'), caption: t('customers.dsc12') },
+  ]
 }
 
 /* ───────── cinematic hero ───────── */
@@ -814,7 +950,17 @@ function Hero() {
   const { t } = useLang()
   const CUSTOMER_IMAGES = useCustomerImages()
   const CUSTOMER_IMAGES_LEFT = useCustomerImagesLeft()
+  const CENTER_SHOWCASE = useCenterShowcase()
+  const [centerIdx, setCenterIdx] = useState(0)
   const [phase, setPhase] = useState<'converge' | 'merge' | 'reveal' | 'content'>('converge')
+
+  // Auto-rotate center showcase
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCenterIdx(prev => (prev + 1) % CENTER_SHOWCASE.length)
+    }, 3500)
+    return () => clearInterval(timer)
+  }, [CENTER_SHOWCASE.length])
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase('merge'), 2200)
@@ -1096,6 +1242,14 @@ function Hero() {
 
       {/* ── Customer showcase cinema screens ── */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 35 }}>
+        {/* ── Film strip decorations ── */}
+        <div className="absolute top-0 right-[22%] bottom-0 w-3 pointer-events-none" style={{ zIndex: 6 }}>
+          <div className="absolute inset-0" style={{ background: 'repeating-linear-gradient(180deg, oklch(0.72 0.14 180 / 0.15) 0px, oklch(0.72 0.14 180 / 0.15) 2px, transparent 2px, transparent 16px)' }} />
+        </div>
+        <div className="absolute top-0 left-[22%] bottom-0 w-3 pointer-events-none" style={{ zIndex: 6 }}>
+          <div className="absolute inset-0" style={{ background: 'repeating-linear-gradient(180deg, oklch(0.72 0.14 180 / 0.15) 0px, oklch(0.72 0.14 180 / 0.15) 2px, transparent 2px, transparent 16px)' }} />
+        </div>
+
         {/* Right screen - scrolls up */}
         <div className="absolute top-0 right-0 bottom-0 overflow-hidden" style={{ width: '22%' }}>
           {/* Top/bottom fade */}
@@ -1107,18 +1261,24 @@ function Hero() {
           <div className="absolute inset-y-0 left-0 w-[2px]" style={{ zIndex: 4, background: 'linear-gradient(180deg, transparent 5%, oklch(0.72 0.14 180 / 0.6) 20%, oklch(0.72 0.14 180 / 0.3) 50%, oklch(0.72 0.14 180 / 0.6) 80%, transparent 95%)' }} />
           {/* Cinema title */}
           <div className="absolute top-3 inset-x-0 text-center" style={{ zIndex: 5 }}>
-            <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] uppercase text-[oklch(0.72_0.14_180_/_0.7)]">{t('customers.cinemaTitle')}</span>
+            <span className="cinema-title-glow text-[9px] sm:text-[10px] font-bold tracking-[0.2em] uppercase text-[oklch(0.72_0.14_180_/_0.8)]">{t('customers.cinemaTitle')}</span>
           </div>
-          <div className="cinema-scroll-right pr-2">
+          {/* Client count badge */}
+          <div className="absolute top-9 inset-x-0 text-center" style={{ zIndex: 5 }}>
+            <span className="inline-block px-2 py-0.5 rounded-full bg-[oklch(0.72_0.14_180_/_0.2)] border border-[oklch(0.72_0.14_180_/_0.3)] text-[7px] sm:text-[8px] text-[oklch(0.72_0.14_180_/_0.9)] font-bold">{t('customers.clientCount')}</span>
+          </div>
+          <div className="cinema-scroll-right pr-2 pt-16">
             {[...CUSTOMER_IMAGES, ...CUSTOMER_IMAGES, ...CUSTOMER_IMAGES].map((img, i) => (
               <div key={`r-${i}`} className="cinema-card relative group flex-shrink-0">
+                {/* Shimmer effect on cards */}
+                <div className="absolute inset-0 rounded-xl z-10 pointer-events-none cinema-shimmer-layer" />
                 <div className="rounded-xl overflow-hidden border border-white/10 group-hover:border-[oklch(0.72_0.14_180_/_0.5)] transition-all duration-500"
-                  style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.5), 0 0 8px rgba(13,148,136,0.15)', animation: 'cinema-glow-pulse 4s ease-in-out infinite', animationDelay: `${(i % 6) * 0.7}s` }}
+                  style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.5), 0 0 8px rgba(13,148,136,0.15)', animation: 'cinema-glow-pulse 4s ease-in-out infinite', animationDelay: `${(i % 8) * 0.5}s` }}
                 >
                   <img
                     src={img.src}
                     alt={img.alt}
-                    className="w-full h-28 sm:h-36 lg:h-44 object-cover opacity-55 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
+                    className="w-full h-28 sm:h-36 lg:h-44 object-cover opacity-55 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110"
                     loading="lazy"
                   />
                   <div className="cinema-overlay" />
@@ -1126,7 +1286,7 @@ function Hero() {
                 <div className="cinema-badge">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                 </div>
-                <div className="absolute bottom-1 right-1 left-1 px-2 py-1 rounded-lg bg-black/85 backdrop-blur-md border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                <div className="absolute bottom-1 right-1 left-1 px-2 py-1 rounded-lg bg-black/85 backdrop-blur-md border border-[oklch(0.72_0.14_180_/_0.3)] opacity-0 group-hover:opacity-100 transition-opacity duration-400">
                   <p className="text-[7px] sm:text-[9px] text-white/95 font-semibold truncate">{img.alt}</p>
                 </div>
               </div>
@@ -1145,18 +1305,19 @@ function Hero() {
           <div className="absolute inset-y-0 right-0 w-[2px]" style={{ zIndex: 4, background: 'linear-gradient(180deg, transparent 5%, oklch(0.72 0.14 180 / 0.6) 20%, oklch(0.72 0.14 180 / 0.3) 50%, oklch(0.72 0.14 180 / 0.6) 80%, transparent 95%)' }} />
           {/* Cinema title */}
           <div className="absolute top-3 inset-x-0 text-center" style={{ zIndex: 5 }}>
-            <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] uppercase text-[oklch(0.72_0.14_180_/_0.7)]">{t('customers.cinemaTitleLeft')}</span>
+            <span className="cinema-title-glow text-[9px] sm:text-[10px] font-bold tracking-[0.2em] uppercase text-[oklch(0.72_0.14_180_/_0.8)]">{t('customers.cinemaTitleLeft')}</span>
           </div>
-          <div className="cinema-scroll-left pl-2">
+          <div className="cinema-scroll-left pl-2 pt-10">
             {[...CUSTOMER_IMAGES_LEFT, ...CUSTOMER_IMAGES_LEFT, ...CUSTOMER_IMAGES_LEFT].map((img, i) => (
               <div key={`l-${i}`} className="cinema-card relative group flex-shrink-0">
+                <div className="absolute inset-0 rounded-xl z-10 pointer-events-none cinema-shimmer-layer" />
                 <div className="rounded-xl overflow-hidden border border-white/10 group-hover:border-[oklch(0.72_0.14_180_/_0.5)] transition-all duration-500"
-                  style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.5), 0 0 8px rgba(13,148,136,0.15)', animation: 'cinema-glow-pulse 4s ease-in-out infinite', animationDelay: `${(i % 6) * 1.0}s` }}
+                  style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.5), 0 0 8px rgba(13,148,136,0.15)', animation: 'cinema-glow-pulse 4s ease-in-out infinite', animationDelay: `${(i % 8) * 0.6}s` }}
                 >
                   <img
                     src={img.src}
                     alt={img.alt}
-                    className="w-full h-28 sm:h-36 lg:h-44 object-cover opacity-55 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
+                    className="w-full h-28 sm:h-36 lg:h-44 object-cover opacity-55 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110"
                     loading="lazy"
                   />
                   <div className="cinema-overlay" />
@@ -1164,11 +1325,66 @@ function Hero() {
                 <div className="cinema-badge">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                 </div>
-                <div className="absolute bottom-1 right-1 left-1 px-2 py-1 rounded-lg bg-black/85 backdrop-blur-md border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                <div className="absolute bottom-1 right-1 left-1 px-2 py-1 rounded-lg bg-black/85 backdrop-blur-md border border-[oklch(0.72_0.14_180_/_0.3)] opacity-0 group-hover:opacity-100 transition-opacity duration-400">
                   <p className="text-[7px] sm:text-[9px] text-white/95 font-semibold truncate">{img.alt}</p>
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* ── Center floating showcase ── */}
+        <div className="absolute inset-x-0 bottom-8 sm:bottom-12 flex justify-center pointer-events-none" style={{ zIndex: 36 }}>
+          <div className="center-showcase-card relative w-56 sm:w-72 lg:w-80 rounded-2xl overflow-hidden"
+            style={{
+              boxShadow: '0 8px 40px rgba(13,148,136,0.3), 0 0 20px rgba(13,148,136,0.15), 0 0 60px rgba(13,148,136,0.08)',
+              border: '1px solid oklch(0.72 0.14 180 / 0.3)'
+            }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={centerIdx}
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 1.05, y: -10 }}
+                transition={{ duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+                className="relative"
+              >
+                <img
+                  src={CENTER_SHOWCASE[centerIdx]?.src}
+                  alt={CENTER_SHOWCASE[centerIdx]?.alt}
+                  className="w-full h-36 sm:h-48 lg:h-56 object-cover"
+                />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                {/* Caption */}
+                <div className="absolute bottom-0 inset-x-0 p-3 sm:p-4">
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className="w-6 h-6 rounded-full bg-[oklch(0.72_0.14_180)] flex items-center justify-center">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <span className="text-[8px] sm:text-[10px] font-bold text-[oklch(0.72_0.14_180)] tracking-wider">{t('customers.cinemaCenter')}</span>
+                  </div>
+                  <p className="text-[9px] sm:text-xs text-white/90 font-semibold truncate">{CENTER_SHOWCASE[centerIdx]?.caption}</p>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+            {/* Progress dots */}
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 flex gap-1">
+              {CENTER_SHOWCASE.map((_, idx) => (
+                <div
+                  key={idx}
+                  className="w-1.5 h-1.5 rounded-full transition-all duration-300"
+                  style={{
+                    background: idx === centerIdx ? 'oklch(0.72 0.14 180)' : 'rgba(255,255,255,0.3)',
+                    boxShadow: idx === centerIdx ? '0 0 6px oklch(0.72 0.14 180)' : 'none',
+                    transform: idx === centerIdx ? 'scale(1.3)' : 'scale(1)'
+                  }}
+                />
+              ))}
+            </div>
+            {/* Animated border shimmer */}
+            <div className="absolute inset-0 rounded-2xl pointer-events-none center-showcase-border" />
           </div>
         </div>
       </div>

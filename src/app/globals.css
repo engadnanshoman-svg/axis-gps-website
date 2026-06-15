@@ -475,10 +475,34 @@ html {
   100% { background-position: 200% 0; }
 }
 
+@keyframes cinema-title-glow-anim {
+  0%, 100% { text-shadow: 0 0 8px oklch(0.72 0.14 180 / 0.3); }
+  50% { text-shadow: 0 0 20px oklch(0.72 0.14 180 / 0.6), 0 0 40px oklch(0.72 0.14 180 / 0.2); }
+}
+
+@keyframes showcase-border-rotate {
+  0% { --showcase-angle: 0deg; }
+  100% { --showcase-angle: 360deg; }
+}
+
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.cinema-title-glow {
+  animation: cinema-title-glow-anim 3s ease-in-out infinite;
+}
+
 .cinema-scroll-right {
   display: flex;
   flex-direction: column;
-  animation: cinema-scroll-up 55s linear infinite;
+  animation: cinema-scroll-up 70s linear infinite;
   gap: 10px;
   padding: 10px 6px;
 }
@@ -486,7 +510,7 @@ html {
 .cinema-scroll-left {
   display: flex;
   flex-direction: column;
-  animation: cinema-scroll-down 50s linear infinite;
+  animation: cinema-scroll-down 65s linear infinite;
   gap: 10px;
   padding: 10px 6px;
 }
@@ -502,7 +526,7 @@ html {
 }
 
 .cinema-card:hover {
-  transform: scale(1.06) translateX(-4px);
+  transform: scale(1.08) translateX(-4px);
   z-index: 10;
 }
 
@@ -513,7 +537,7 @@ html {
 .cinema-card .cinema-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.7) 100%);
+  background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.7) 100%);
   opacity: 0;
   transition: opacity 0.4s ease;
   border-radius: inherit;
@@ -543,4 +567,48 @@ html {
 .cinema-card:hover .cinema-badge {
   opacity: 1;
   transform: scale(1);
+}
+
+.cinema-shimmer-layer {
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    oklch(0.72 0.14 180 / 0.06) 45%,
+    oklch(0.72 0.14 180 / 0.12) 50%,
+    oklch(0.72 0.14 180 / 0.06) 55%,
+    transparent 75%
+  );
+  background-size: 200% 100%;
+  animation: cinema-shimmer 4s ease-in-out infinite;
+}
+
+.cinema-card:hover .cinema-shimmer-layer {
+  opacity: 0.5;
+}
+
+/* Center showcase */
+.center-showcase-card {
+  animation: float-gentle 4s ease-in-out infinite;
+}
+
+.center-showcase-border {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    oklch(0.72 0.14 180 / 0.5) 10%,
+    transparent 20%,
+    transparent 50%,
+    oklch(0.72 0.14 180 / 0.3) 60%,
+    transparent 70%
+  );
+  animation: showcase-border-rotate 4s linear infinite;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  padding: 2px;
+}
+
+@property --showcase-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
 }
