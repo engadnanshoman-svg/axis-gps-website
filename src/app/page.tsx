@@ -51,23 +51,70 @@ const SOCIALS = [
   )},
 ]
 
-/* ───────── theme hook ───────── */
+/* ───────── theme hook (auto + manual) ───────── */
 function useTheme() {
   const [theme, setTheme] = React.useState<'dark' | 'light'>('dark')
+  const [autoMode, setAutoMode] = React.useState(true)
+  const mountedRef = React.useRef(false)
+
+  // Get auto-detected theme based on system preference or time
+  const getAutoTheme = (): 'dark' | 'light' => {
+    if (typeof window === 'undefined') return 'dark'
+    try {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      if (prefersDark !== undefined) return prefersDark ? 'dark' : 'light'
+    } catch {}
+    // Fallback: time-based (6am-6pm = light, 6pm-6am = dark)
+    const hour = new Date().getHours()
+    return (hour >= 6 && hour < 18) ? 'light' : 'dark'
+  }
+
   useEffect(() => {
-    const saved = localStorage.getItem('axis-theme') as 'dark' | 'light' | null
-    if (saved) {
-      setTheme(saved)
+    const saved = localStorage.getItem('axis-theme-mode') as 'dark' | 'light' | 'auto' | null
+    if (saved && saved !== 'auto') {
+      setAutoMode(false)
+      setTheme(saved as 'dark' | 'light')
       document.documentElement.setAttribute('data-theme', saved)
+    } else {
+      // Auto mode
+      setAutoMode(true)
+      const autoTheme = getAutoTheme()
+      setTheme(autoTheme)
+      document.documentElement.setAttribute('data-theme', autoTheme)
     }
+    mountedRef.current = true
   }, [])
+
+  // Listen for system preference changes in auto mode
+  useEffect(() => {
+    if (!autoMode) return
+    const mq = window.matchMedia('(prefers-color-scheme: dark)')
+    const handler = (e: MediaQueryListEvent) => {
+      const newTheme = e.matches ? 'dark' : 'light'
+      setTheme(newTheme)
+      document.documentElement.setAttribute('data-theme', newTheme)
+    }
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [autoMode])
+
   const toggle = () => {
     const next = theme === 'dark' ? 'light' : 'dark'
+    setAutoMode(false)
     setTheme(next)
-    localStorage.setItem('axis-theme', next)
+    localStorage.setItem('axis-theme-mode', next)
     document.documentElement.setAttribute('data-theme', next)
   }
-  return { theme, toggle }
+
+  const setAuto = () => {
+    setAutoMode(true)
+    localStorage.removeItem('axis-theme-mode')
+    const autoTheme = getAutoTheme()
+    setTheme(autoTheme)
+    document.documentElement.setAttribute('data-theme', autoTheme)
+  }
+
+  return { theme, toggle, autoMode, setAuto }
 }
 
 /* ───────── section wrapper ───────── */
@@ -153,6 +200,33 @@ function Navbar() {
             >
               احصل على عرض
             </a>
+            {/* Language toggle */}
+            <button
+              onClick={() => {
+                const html = document.documentElement
+                const currentLang = html.getAttribute('lang')
+                const currentDir = html.getAttribute('dir')
+                if (currentLang === 'ar') {
+                  html.setAttribute('lang', 'en')
+                  html.setAttribute('dir', 'ltr')
+                  localStorage.setItem('axis-lang', 'en')
+                } else {
+                  html.setAttribute('lang', 'ar')
+                  html.setAttribute('dir', 'rtl')
+                  localStorage.setItem('axis-lang', 'ar')
+                }
+                window.location.reload()
+              }}
+              className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[var(--b-1)] bg-[var(--bg-2)] text-[var(--t-5)] hover:border-[oklch(0.72_0.14_180)] hover:text-[oklch(0.72_0.14_180)] transition-all duration-300 text-xs font-bold"
+              title="Switch to English / التبديل للعربية"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M2 12h20"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+              <span>EN</span>
+            </button>
             {/* Social icons */}
             <div className="flex items-center gap-2 mr-3 border-r border-[var(--b-1)] pr-3">
               {SOCIALS.map(s => (
@@ -170,8 +244,33 @@ function Navbar() {
             </div>
           </div>
 
-          {/* Mobile: Menu button only (theme toggle is floating) */}
-          <div className="flex md:hidden items-center gap-3">
+          {/* Mobile: Menu + Language buttons */}
+          <div className="flex md:hidden items-center gap-2">
+            <button
+              onClick={() => {
+                const html = document.documentElement
+                const currentLang = html.getAttribute('lang')
+                if (currentLang === 'ar') {
+                  html.setAttribute('lang', 'en')
+                  html.setAttribute('dir', 'ltr')
+                  localStorage.setItem('axis-lang', 'en')
+                } else {
+                  html.setAttribute('lang', 'ar')
+                  html.setAttribute('dir', 'rtl')
+                  localStorage.setItem('axis-lang', 'ar')
+                }
+                window.location.reload()
+              }}
+              className="p-2 text-[var(--t-5)] hover:text-[oklch(0.72_0.14_180)] border border-[var(--b-1)] rounded-lg text-xs font-bold flex items-center gap-1"
+              title="EN / عربي"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M2 12h20"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+              EN
+            </button>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="p-2 text-[var(--t-3)]"
@@ -1949,7 +2048,7 @@ function WhyUs() {
   const reasons = [
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'أكثر من 20 سنة من الخبرة في قطاع أجهزة المساحة' },
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: '4 فروع رئيسية تغطي مختلف أنحاء البلاد' },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: '4 فروع رئيسية في جميع أنحاء البلاد' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'شراكة مع برنامج الأمم المتحدة الإنمائي UNDP' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'تعاون مع جامعات محلية (البوليتكنك، النجاح، الخليل)' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'دعم فني متواصل وخدمة ما بعد البيع' },
@@ -2837,7 +2936,7 @@ function Footer() {
                   <a href="https://www.google.com/maps?q=32.11146,34.96504" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
                     فرع الشمال: كفر قاسم شارع علي بن أبي طالب ↗
                   </a>
-                  <a href="https://www.google.com/maps?q=31.92730,35.20910" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
+                  <a href="https://www.google.com/maps?q=31.8652474,35.2287424" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
                     فرع رام الله: شارع الإرسال قرب السفينة ↗
                   </a>
                   <a href="https://www.google.com/maps?q=31.537372,35.0987544" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
@@ -2937,7 +3036,7 @@ function Branches() {
             نصل <span className="gradient-text">إليك أينما كنت</span>
           </h2>
           <p className="text-[var(--t-7)] max-w-2xl mx-auto">
-            أربعة فروع رئيسية تغطي في جميع أنحاء البلاد، لخدمتكم بأسرع وقت وأعلى جودة
+            أربعة فروع رئيسية في جميع أنحاء البلاد، لخدمتكم بأسرع وقت وأعلى جودة
           </p>
         </div>
 
@@ -3173,63 +3272,80 @@ function SocialFeed() {
 
 /* ───────── floating theme toggle (PORTAL - rendered to document.body) ───────── */
 function FloatingThemeToggle() {
-  const { theme, toggle: toggleTheme } = useTheme()
+  const { theme, toggle: toggleTheme, autoMode, setAuto } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const [showTooltip, setShowTooltip] = useState(false)
   useEffect(() => { setMounted(true) }, [])
   if (!mounted) return null
 
   const toggleEl = (
-    <button
-      onClick={toggleTheme}
-      style={{
-        position: 'fixed',
-        bottom: '28px',
-        left: 'auto',
-        right: '28px',
-        top: 'auto',
-        zIndex: 999999,
-        width: '60px',
-        height: '60px',
-        minWidth: '60px',
-        minHeight: '60px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: '50%',
-        cursor: 'pointer',
-        transition: 'all 0.3s ease',
-        background: theme === 'dark'
-          ? 'linear-gradient(135deg, #facc15, #f59e0b)'
-          : 'linear-gradient(135deg, #1e293b, #0f172a)',
-        color: theme === 'dark' ? '#0f172a' : '#facc15',
-        border: theme === 'dark' ? '4px solid #eab308' : '4px solid #64748b',
-        boxShadow: theme === 'dark'
-          ? '0 0 30px rgba(250,204,21,0.8), 0 0 60px rgba(250,204,21,0.3), 0 4px 16px rgba(0,0,0,0.5)'
-          : '0 0 30px rgba(30,41,59,0.6), 0 0 60px rgba(100,116,139,0.3), 0 4px 16px rgba(0,0,0,0.3)',
-        padding: '0',
-        outline: 'none',
-      }}
-      aria-label={theme === 'dark' ? 'تبديل إلى الوضع النهاري' : 'تبديل إلى الوضع الليلي'}
-      title={theme === 'dark' ? '☀ الوضع النهاري' : '🌙 الوضع الليلي'}
-    >
-      {theme === 'dark' ? (
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-          <circle cx="12" cy="12" r="5" />
-          <rect x="11" y="1" width="2" height="4" rx="1" />
-          <rect x="11" y="19" width="2" height="4" rx="1" />
-          <rect x="1" y="11" width="4" height="2" rx="1" />
-          <rect x="19" y="11" width="4" height="2" rx="1" />
-          <rect x="4.2" y="4.2" width="2" height="3" rx="1" transform="rotate(45 5.2 5.7)" />
-          <rect x="17.8" y="16.8" width="2" height="3" rx="1" transform="rotate(45 18.8 18.3)" />
-          <rect x="4.2" y="16.8" width="3" height="2" rx="1" transform="rotate(45 5.7 17.8)" />
-          <rect x="17.8" y="4.2" width="3" height="2" rx="1" transform="rotate(45 18.3 5.2)" />
-        </svg>
-      ) : (
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-        </svg>
+    <div className="fixed bottom-6 right-6 z-[999999] flex flex-col items-center gap-2">
+      {/* Tooltip */}
+      {showTooltip && (
+        <div className="absolute bottom-full right-0 mb-2 px-3 py-1.5 rounded-lg bg-[var(--bg-2)] border border-[var(--b-1)] text-[var(--t-2)] text-xs whitespace-nowrap shadow-lg">
+          {autoMode
+            ? (theme === 'dark' ? '🌙 تلقائي - ليلي (اضغط للتغيير)' : '☀️ تلقائي - نهاري (اضغط للتغيير)')
+            : (theme === 'dark' ? '🌙 وضع ليلي (اضغط للتغيير)' : '☀️ وضع نهاري (اضغط للتغيير)')
+          }
+          <button
+            onClick={(e) => { e.stopPropagation(); setAuto() }}
+            className="block mt-1 text-[oklch(0.72_0.14_180)] hover:underline"
+          >
+            {autoMode ? '' : '🔄 العودة للتلقائي'}
+          </button>
+        </div>
       )}
-    </button>
+      <button
+        onClick={toggleTheme}
+        onMouseEnter={() => setShowTooltip(true)}
+        onMouseLeave={() => setShowTooltip(false)}
+        className="group relative w-14 h-14 rounded-2xl cursor-pointer transition-all duration-500 overflow-hidden"
+        style={{
+          boxShadow: theme === 'dark'
+            ? '0 0 20px rgba(250,204,21,0.4), 0 4px 12px rgba(0,0,0,0.4)'
+            : '0 0 20px rgba(30,41,59,0.3), 0 4px 12px rgba(0,0,0,0.15)',
+        }}
+        aria-label={theme === 'dark' ? 'تبديل إلى الوضع النهاري' : 'تبديل إلى الوضع الليلي'}
+      >
+        {/* Background */}
+        <div className="absolute inset-0 transition-all duration-500" style={{
+          background: theme === 'dark'
+            ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)'
+            : 'linear-gradient(135deg, #87CEEB 0%, #FFD700 50%, #FF8C00 100%)',
+        }} />
+        {/* Stars (dark mode) */}
+        <div className="absolute inset-0 transition-opacity duration-500" style={{ opacity: theme === 'dark' ? 1 : 0 }}>
+          <div className="absolute w-1 h-1 bg-white rounded-full" style={{ top: '20%', left: '25%', opacity: 0.8 }} />
+          <div className="absolute w-0.5 h-0.5 bg-white rounded-full" style={{ top: '35%', left: '70%', opacity: 0.6 }} />
+          <div className="absolute w-1 h-1 bg-white rounded-full" style={{ top: '15%', left: '55%', opacity: 0.7 }} />
+          <div className="absolute w-0.5 h-0.5 bg-white rounded-full" style={{ top: '55%', left: '30%', opacity: 0.5 }} />
+        </div>
+        {/* Auto indicator dot */}
+        {autoMode && (
+          <div className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[oklch(0.72_0.14_180)] animate-pulse" />
+        )}
+        {/* Icon */}
+        <div className="absolute inset-0 flex items-center justify-center transition-all duration-500">
+          {theme === 'dark' ? (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FBBF24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          ) : (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#FF8C00" stroke="#FF8C00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/>
+              <line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+          )}
+        </div>
+      </button>
+    </div>
   )
 
   return createPortal(toggleEl, document.body)
