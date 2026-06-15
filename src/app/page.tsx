@@ -205,6 +205,17 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'customers.alt2': 'شركاء النجاح - مشاريع مسح في البلاد', 'customers.alt3': 'شركاء النجاح - فريق العمل الميداني',
     'customers.alt4': 'شركاء النجاح - حلول GPS للمؤسسات', 'customers.alt5': 'شركاء النجاح - تقنيات Trimble في البلاد',
     'customers.alt6': 'شركاء النجاح - أجهزة NavVis الميدانية', 'customers.alt7': 'شركاء النجاح - زبائن الشركة',
+    'customers.client1': 'شركاء النجاح - أجهزة Trimble مع عملائنا',
+    'customers.client2': 'شركاء النجاح - مسح ميداني مع فريق اكسيس',
+    'customers.client3': 'شركاء النجاح - تقنيات GPS المتقدمة',
+    'customers.client4': 'شركاء النجاح - أجهزة المساحة في المشاريع',
+    'customers.client5': 'شركاء النجاح - حلول المسح المتكاملة',
+    'customers.client6': 'شركاء النجاح - مشاريع NavVis في البلاد',
+    'customers.client7': 'شركاء النجاح - فريق اكسيس الميداني',
+    'customers.client8': 'شركاء النجاح - عملاء يثقون بأكسيس',
+    'customers.client9': 'شركاء النجاح - أحدث تقنيات المساحة',
+    'customers.cinemaTitle': '★ شركاء النجاح ★',
+    'customers.cinemaTitleLeft': '★ من وثق بنا ★',
     'customers.altL1': 'من وثق بنا - مسح ميداني بأجهزة NavVis', 'customers.altL2': 'من وثق بنا - فريق المسح في الميدان',
     'customers.altL3': 'من وثق بنا - مسح ثلاثي الأبعاد', 'customers.altL4': 'من وثق بنا - تقنية NavVis المتقدمة',
     'customers.altL5': 'من وثق بنا - مسح ميداني بأجهزة Trimble', 'customers.altL6': 'من وثق بنا - مسح ضوئي ثلاثي الأبعاد',
@@ -377,6 +388,17 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'customers.alt2': 'Success Partners - Survey Projects in the Country', 'customers.alt3': 'Success Partners - Field Work Team',
     'customers.alt4': 'Success Partners - GPS Solutions for Organizations', 'customers.alt5': 'Success Partners - Trimble Technologies in the Country',
     'customers.alt6': 'Success Partners - NavVis Field Devices', 'customers.alt7': 'Success Partners - Company Clients',
+    'customers.client1': 'Success Partners - Trimble Devices with Our Clients',
+    'customers.client2': 'Success Partners - Field Survey with Axis Team',
+    'customers.client3': 'Success Partners - Advanced GPS Technologies',
+    'customers.client4': 'Success Partners - Surveying Equipment in Projects',
+    'customers.client5': 'Success Partners - Integrated Survey Solutions',
+    'customers.client6': 'Success Partners - NavVis Projects in the Country',
+    'customers.client7': 'Success Partners - Axis Field Team',
+    'customers.client8': 'Success Partners - Clients Who Trust Axis',
+    'customers.client9': 'Success Partners - Latest Surveying Technologies',
+    'customers.cinemaTitle': '★ Success Partners ★',
+    'customers.cinemaTitleLeft': '★ Those Who Trusted Us ★',
     'customers.altL1': 'Those Who Trusted Us - NavVis Field Survey', 'customers.altL2': 'Those Who Trusted Us - Survey Team in the Field',
     'customers.altL3': 'Those Who Trusted Us - 3D Scanning', 'customers.altL4': 'Those Who Trusted Us - Advanced NavVis Technology',
     'customers.altL5': 'Those Who Trusted Us - Trimble Field Survey', 'customers.altL6': 'Those Who Trusted Us - 3D Photogrammetric Scanning',
@@ -731,6 +753,15 @@ function Navbar() {
 function useCustomerImages() {
   const { t } = useLang()
   return [
+    { src: '/customers/client-01.jpg', alt: t('customers.client1') },
+    { src: '/customers/client-02.jpg', alt: t('customers.client2') },
+    { src: '/customers/client-03.jpg', alt: t('customers.client3') },
+    { src: '/customers/client-04.jpg', alt: t('customers.client4') },
+    { src: '/customers/client-05.jpg', alt: t('customers.client5') },
+    { src: '/customers/client-06.jpg', alt: t('customers.client6') },
+    { src: '/customers/client-07.jpg', alt: t('customers.client7') },
+    { src: '/customers/client-08.jpg', alt: t('customers.client8') },
+    { src: '/customers/client-09.jpg', alt: t('customers.client9') },
     { src: '/customers/customer-dsc-01.jpg', alt: t('customers.alt1') },
     { src: '/customers/customer-dsc-03.jpg', alt: t('customers.alt2') },
     { src: '/customers/customer-dsc-05.jpg', alt: t('customers.alt3') },
@@ -744,6 +775,8 @@ function useCustomerImages() {
 function useCustomerImagesLeft() {
   const { t } = useLang()
   return [
+    { src: '/customers/client-06.jpg', alt: t('customers.client6') },
+    { src: '/customers/client-08.jpg', alt: t('customers.client8') },
     { src: '/customers/navvis-full-use-3.jpg', alt: t('customers.altL1') },
     { src: '/customers/navvis-full-use-4.jpg', alt: t('customers.altL2') },
     { src: '/customers/navvis-full-use-5.jpg', alt: t('customers.altL3') },
@@ -756,6 +789,8 @@ function useCustomerImagesLeft() {
     { src: '/customers/gps-rover.jpg', alt: t('customers.altL10') },
     { src: '/customers/cat-excavator.jpg', alt: t('customers.altL11') },
     { src: '/customers/navvis-screen.jpg', alt: t('customers.altL12') },
+    { src: '/customers/client-01.jpg', alt: t('customers.client1') },
+    { src: '/customers/client-03.jpg', alt: t('customers.client3') },
   ]
 }
 
@@ -1047,33 +1082,37 @@ function Hero() {
       {/* ── Customer showcase cinema screens ── */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 35 }}>
         {/* Right screen - scrolls up */}
-        <div className="absolute top-0 right-0 bottom-0 overflow-hidden" style={{ width: '24%' }}>
+        <div className="absolute top-0 right-0 bottom-0 overflow-hidden" style={{ width: '22%' }}>
           {/* Top/bottom fade */}
-          <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[var(--bg-0)] via-[var(--bg-0)]/60 to-transparent" style={{ zIndex: 3 }} />
-          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[var(--bg-0)] via-[var(--bg-0)]/60 to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--bg-0)] via-[var(--bg-0)]/70 to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--bg-0)] via-[var(--bg-0)]/70 to-transparent" style={{ zIndex: 3 }} />
           {/* Inner edge fade toward center */}
-          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
-          {/* Decorative cinema edge line */}
-          <div className="absolute inset-y-0 left-0 w-[2px]" style={{ zIndex: 4, background: 'linear-gradient(180deg, transparent, oklch(0.72 0.14 180 / 0.5), oklch(0.72 0.14 180 / 0.3), oklch(0.72 0.14 180 / 0.5), transparent)' }} />
+          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
+          {/* Decorative cinema edge line - glowing */}
+          <div className="absolute inset-y-0 left-0 w-[2px]" style={{ zIndex: 4, background: 'linear-gradient(180deg, transparent 5%, oklch(0.72 0.14 180 / 0.6) 20%, oklch(0.72 0.14 180 / 0.3) 50%, oklch(0.72 0.14 180 / 0.6) 80%, transparent 95%)' }} />
+          {/* Cinema title */}
+          <div className="absolute top-3 inset-x-0 text-center" style={{ zIndex: 5 }}>
+            <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] uppercase text-[oklch(0.72_0.14_180_/_0.7)]">{t('customers.cinemaTitle')}</span>
+          </div>
           <div className="cinema-scroll-right pr-2">
             {[...CUSTOMER_IMAGES, ...CUSTOMER_IMAGES, ...CUSTOMER_IMAGES].map((img, i) => (
               <div key={`r-${i}`} className="cinema-card relative group flex-shrink-0">
-                <div className="rounded-xl overflow-hidden border border-white/10 group-hover:border-[oklch(0.72_0.14_180_/_0.4)]"
-                  style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.4), 0 0 6px rgba(13,148,136,0.1)', animation: 'cinema-glow-pulse 4s ease-in-out infinite', animationDelay: `${(i % 5) * 0.8}s` }}
+                <div className="rounded-xl overflow-hidden border border-white/10 group-hover:border-[oklch(0.72_0.14_180_/_0.5)] transition-all duration-500"
+                  style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.5), 0 0 8px rgba(13,148,136,0.15)', animation: 'cinema-glow-pulse 4s ease-in-out infinite', animationDelay: `${(i % 6) * 0.7}s` }}
                 >
                   <img
                     src={img.src}
                     alt={img.alt}
-                    className="w-full h-32 sm:h-40 lg:h-48 object-cover opacity-60 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
+                    className="w-full h-28 sm:h-36 lg:h-44 object-cover opacity-55 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
                     loading="lazy"
                   />
                   <div className="cinema-overlay" />
                 </div>
                 <div className="cinema-badge">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                 </div>
-                <div className="absolute bottom-1.5 right-1.5 left-1.5 px-2 py-1 rounded-lg bg-black/80 backdrop-blur-md border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-400">
-                  <p className="text-[8px] sm:text-[10px] text-white/95 font-semibold truncate">{img.alt}</p>
+                <div className="absolute bottom-1 right-1 left-1 px-2 py-1 rounded-lg bg-black/85 backdrop-blur-md border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                  <p className="text-[7px] sm:text-[9px] text-white/95 font-semibold truncate">{img.alt}</p>
                 </div>
               </div>
             ))}
@@ -1081,33 +1120,37 @@ function Hero() {
         </div>
 
         {/* Left screen - scrolls down */}
-        <div className="absolute top-0 left-0 bottom-0 overflow-hidden" style={{ width: '24%' }}>
+        <div className="absolute top-0 left-0 bottom-0 overflow-hidden" style={{ width: '22%' }}>
           {/* Top/bottom fade */}
-          <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[var(--bg-0)] via-[var(--bg-0)]/60 to-transparent" style={{ zIndex: 3 }} />
-          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[var(--bg-0)] via-[var(--bg-0)]/60 to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--bg-0)] via-[var(--bg-0)]/70 to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--bg-0)] via-[var(--bg-0)]/70 to-transparent" style={{ zIndex: 3 }} />
           {/* Inner edge fade toward center */}
-          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
-          {/* Decorative cinema edge line */}
-          <div className="absolute inset-y-0 right-0 w-[2px]" style={{ zIndex: 4, background: 'linear-gradient(180deg, transparent, oklch(0.72 0.14 180 / 0.5), oklch(0.72 0.14 180 / 0.3), oklch(0.72 0.14 180 / 0.5), transparent)' }} />
+          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
+          {/* Decorative cinema edge line - glowing */}
+          <div className="absolute inset-y-0 right-0 w-[2px]" style={{ zIndex: 4, background: 'linear-gradient(180deg, transparent 5%, oklch(0.72 0.14 180 / 0.6) 20%, oklch(0.72 0.14 180 / 0.3) 50%, oklch(0.72 0.14 180 / 0.6) 80%, transparent 95%)' }} />
+          {/* Cinema title */}
+          <div className="absolute top-3 inset-x-0 text-center" style={{ zIndex: 5 }}>
+            <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] uppercase text-[oklch(0.72_0.14_180_/_0.7)]">{t('customers.cinemaTitleLeft')}</span>
+          </div>
           <div className="cinema-scroll-left pl-2">
             {[...CUSTOMER_IMAGES_LEFT, ...CUSTOMER_IMAGES_LEFT, ...CUSTOMER_IMAGES_LEFT].map((img, i) => (
               <div key={`l-${i}`} className="cinema-card relative group flex-shrink-0">
-                <div className="rounded-xl overflow-hidden border border-white/10 group-hover:border-[oklch(0.72_0.14_180_/_0.4)]"
-                  style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.4), 0 0 6px rgba(13,148,136,0.1)', animation: 'cinema-glow-pulse 4s ease-in-out infinite', animationDelay: `${(i % 5) * 1.2}s` }}
+                <div className="rounded-xl overflow-hidden border border-white/10 group-hover:border-[oklch(0.72_0.14_180_/_0.5)] transition-all duration-500"
+                  style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.5), 0 0 8px rgba(13,148,136,0.15)', animation: 'cinema-glow-pulse 4s ease-in-out infinite', animationDelay: `${(i % 6) * 1.0}s` }}
                 >
                   <img
                     src={img.src}
                     alt={img.alt}
-                    className="w-full h-32 sm:h-40 lg:h-48 object-cover opacity-60 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
+                    className="w-full h-28 sm:h-36 lg:h-44 object-cover opacity-55 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
                     loading="lazy"
                   />
                   <div className="cinema-overlay" />
                 </div>
                 <div className="cinema-badge">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                 </div>
-                <div className="absolute bottom-1.5 right-1.5 left-1.5 px-2 py-1 rounded-lg bg-black/80 backdrop-blur-md border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-400">
-                  <p className="text-[8px] sm:text-[10px] text-white/95 font-semibold truncate">{img.alt}</p>
+                <div className="absolute bottom-1 right-1 left-1 px-2 py-1 rounded-lg bg-black/85 backdrop-blur-md border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                  <p className="text-[7px] sm:text-[9px] text-white/95 font-semibold truncate">{img.alt}</p>
                 </div>
               </div>
             ))}
