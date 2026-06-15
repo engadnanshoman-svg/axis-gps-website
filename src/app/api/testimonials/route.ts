@@ -4,7 +4,7 @@ import fs from 'fs'
 
 const IS_VERCEL = !!process.env.VERCEL
 
-// KV storage helpers for Vercel
+// ── Vercel KV helpers (persistent cloud storage) ──
 function getKv() {
   try {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -39,8 +39,31 @@ async function saveKvTestimonials(testimonials: any[]): Promise<boolean> {
   }
 }
 
-// SQLite helpers for local development
+// ── JSON file helpers (for local & Vercel /tmp) ──
 const DB_DIR = IS_VERCEL ? '/tmp' : path.join(process.cwd(), 'db')
+const JSON_PATH = path.join(DB_DIR, 'testimonials.json')
+
+function readJsonTestimonials(): any[] {
+  try {
+    if (fs.existsSync(JSON_PATH)) {
+      const data = fs.readFileSync(JSON_PATH, 'utf-8')
+      const parsed = JSON.parse(data)
+      return Array.isArray(parsed) ? parsed : []
+    }
+  } catch { /* empty */ }
+  return []
+}
+
+function writeJsonTestimonials(testimonials: any[]): void {
+  try {
+    if (!fs.existsSync(DB_DIR)) {
+      fs.mkdirSync(DB_DIR, { recursive: true })
+    }
+    fs.writeFileSync(JSON_PATH, JSON.stringify(testimonials, null, 2), 'utf-8')
+  } catch { /* empty */ }
+}
+
+// ── SQLite helpers (for local development) ──
 const DB_PATH = path.join(DB_DIR, 'custom.db')
 
 function getDb() {
@@ -80,34 +103,42 @@ export async function GET() {
     let testimonials: any[] = []
 
     if (IS_VERCEL) {
-      // On Vercel: use KV (persistent) + fallback to SQLite /tmp
+      // Priority 1: Try Vercel KV (persistent cloud storage)
       const kvTestimonials = await getKvTestimonials()
       if (kvTestimonials.length > 0) {
         testimonials = kvTestimonials.filter((t: any) => t.approved === 1 || t.approved === true)
       } else {
-        // Fallback: try SQLite /tmp (may have data from before KV migration)
-        try {
-          const db = getDb()
-          testimonials = db.prepare(
-            'SELECT * FROM Testimonial WHERE approved = 1 ORDER BY createdAt DESC'
-          ).all()
-          db.close()
-
-          // Migrate to KV for persistence
-          if (testimonials.length > 0) {
-            await saveKvTestimonials(testimonials)
-          }
-        } catch {
-          // No SQLite data either
+        // Priority 2: Try JSON file in /tmp
+        const jsonTestimonials = readJsonTestimonials()
+        if (jsonTestimonials.length > 0) {
+          testimonials = jsonTestimonials.filter((t: any) => t.approved === 1 || t.approved === true)
+          // Try to migrate to KV for persistence
+          await saveKvTestimonials(jsonTestimonials)
+        } else {
+          // Priority 3: Try SQLite /tmp (legacy)
+          try {
+            const db = getDb()
+            testimonials = db.prepare(
+              'SELECT * FROM Testimonial WHERE approved = 1 ORDER BY createdAt DESC'
+            ).all()
+            db.close()
+            // Migrate to KV and JSON
+            if (testimonials.length > 0) {
+              await saveKvTestimonials(testimonials)
+              writeJsonTestimonials(testimonials)
+            }
+          } catch { /* empty */ }
         }
       }
     } else {
       // Local: use SQLite
-      const db = getDb()
-      testimonials = db.prepare(
-        'SELECT * FROM Testimonial WHERE approved = 1 ORDER BY createdAt DESC'
-      ).all()
-      db.close()
+      try {
+        const db = getDb()
+        testimonials = db.prepare(
+          'SELECT * FROM Testimonial WHERE approved = 1 ORDER BY createdAt DESC'
+        ).all()
+        db.close()
+      } catch { /* empty */ }
     }
 
     // Sort by date descending
@@ -159,21 +190,30 @@ export async function POST(req: NextRequest) {
     }
 
     if (IS_VERCEL) {
-      // On Vercel: save to KV (persistent)
-      const existing = await getKvTestimonials()
-      existing.push(testimonial)
-      await saveKvTestimonials(existing)
+      // Save to all available storage methods for maximum reliability
 
-      // Also save to /tmp SQLite as backup
+      // 1. Vercel KV (persistent cloud)
+      try {
+        const existing = await getKvTestimonials()
+        existing.push(testimonial)
+        await saveKvTestimonials(existing)
+      } catch { /* KV not available yet */ }
+
+      // 2. JSON file in /tmp
+      try {
+        const existing = readJsonTestimonials()
+        existing.push(testimonial)
+        writeJsonTestimonials(existing)
+      } catch { /* JSON write failed */ }
+
+      // 3. SQLite /tmp (legacy backup)
       try {
         const db = getDb()
         db.prepare(
           'INSERT INTO Testimonial (id, name, company, text, rating, approved, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
         ).run(id, name, company || null, text, rating, 1, now, now)
         db.close()
-      } catch {
-        // Non-critical backup
-      }
+      } catch { /* SQLite failed */ }
     } else {
       // Local: save to SQLite
       const db = getDb()
