@@ -2048,7 +2048,7 @@ function WhyUs() {
   const reasons = [
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'أكثر من 20 سنة من الخبرة في قطاع أجهزة المساحة' },
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: '4 فروع رئيسية في جميع أنحاء البلاد' },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: '4 فروع رئيسية تغطي جميع أنحاء البلاد' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'شراكة مع برنامج الأمم المتحدة الإنمائي UNDP' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'تعاون مع جامعات محلية (البوليتكنك، النجاح، الخليل)' },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: 'دعم فني متواصل وخدمة ما بعد البيع' },
@@ -3036,7 +3036,7 @@ function Branches() {
             نصل <span className="gradient-text">إليك أينما كنت</span>
           </h2>
           <p className="text-[var(--t-7)] max-w-2xl mx-auto">
-            أربعة فروع رئيسية في جميع أنحاء البلاد، لخدمتكم بأسرع وقت وأعلى جودة
+            أربعة فروع رئيسية تغطي جميع أنحاء البلاد، لخدمتكم بأسرع وقت وأعلى جودة
           </p>
         </div>
 
@@ -3154,9 +3154,39 @@ function CEOMessage() {
 
 /* ───────── social media feed ───────── */
 function SocialFeed() {
-  const [activePlatform, setActivePlatform] = useState<'all' | 'youtube'>('all')
+  const [activePlatform, setActivePlatform] = useState<'all' | 'instagram' | 'facebook' | 'youtube'>('all')
 
   const feedItems = [
+    {
+      platform: 'instagram' as const,
+      title: '5 نقرات فقط… 90 ثانية من المعالجة… و19 كم من خطوط الكهرباء',
+      href: 'https://www.instagram.com/reel/DWT8YQpAN7S',
+      date: '2026',
+    },
+    {
+      platform: 'instagram' as const,
+      title: 'تعاون جمعية إعادة الإطار المعماري × اكسيس × جامعة القدس',
+      href: 'https://www.instagram.com/reel/DRMsbnIjOJS',
+      date: '2026',
+    },
+    {
+      platform: 'instagram' as const,
+      title: 'Trimble MX60 — مسح متنقل متقدم مع تصوير عالي الدقة',
+      href: 'https://www.instagram.com/reel/DY2iAOfCVBo',
+      date: '2026',
+    },
+    {
+      platform: 'instagram' as const,
+      title: 'EINSTAR 2 — ماسح ضوئي لاسلكي دقيق ومحمول',
+      href: 'https://www.instagram.com/reel/DX_G65rKvhH',
+      date: '2026',
+    },
+    {
+      platform: 'facebook' as const,
+      title: 'اكسيس للحلول الهندسية — الوكيل الحصري لـ Trimble و NavVis',
+      href: 'https://www.facebook.com/axisTRIMBLE',
+      date: '2026',
+    },
     {
       platform: 'youtube' as const,
       title: '3D Laser Scanning the Nablus Court of Appeal',
@@ -3186,7 +3216,7 @@ function SocialFeed() {
         <div className="text-center mb-14">
           <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">تابعنا</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
-            أحدث <span className="gradient-text">فيديوهاتنا</span>
+            أحدث <span className="gradient-text">أخبارنا ومنشوراتنا</span>
           </h2>
           <p className="text-[var(--t-7)] max-w-2xl mx-auto">
             تابعونا على منصات التواصل الاجتماعي للحصول على آخر الأخبار والعروض والفيديوهات التعليمية
@@ -3195,7 +3225,7 @@ function SocialFeed() {
 
         {/* Platform filter */}
         <div className="flex items-center justify-center gap-3 mb-10">
-          {(['all', 'youtube'] as const).map(p => (
+          {(['all', 'instagram', 'facebook', 'youtube'] as const).map(p => (
             <button
               key={p}
               onClick={() => setActivePlatform(p)}
