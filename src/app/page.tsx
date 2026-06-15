@@ -3662,46 +3662,103 @@ function SocialFeed() {
   const [activePlatform, setActivePlatform] = useState<'all' | 'instagram' | 'facebook' | 'youtube'>('all')
 
   const feedItems = [
+    // Instagram posts
     {
       platform: 'instagram' as const,
-      title: t('socialFeed.item1Title'),
-      href: 'https://www.instagram.com/reel/DWT8YQpAN7S',
+      title: 'من الميدان... مشاركة مميزة من المهندس أحمد دعباس أثناء العمل باستخدام جهاز Trimble R980',
+      href: 'https://www.instagram.com/axis.gps/',
       date: '2026',
     },
     {
       platform: 'instagram' as const,
-      title: t('socialFeed.item2Title'),
-      href: 'https://www.instagram.com/reel/DRMsbnIjOJS',
+      title: 'في البيئات المعقدة، لا مجال للتقدير والمجازفة... أكسيس تقدم لك الحقيقة الرقمية الموثوقة',
+      href: 'https://www.instagram.com/axis.gps/',
       date: '2026',
     },
     {
       platform: 'instagram' as const,
-      title: t('socialFeed.item3Title'),
-      href: 'https://www.instagram.com/reel/DY2iAOfCVBo',
+      title: 'إعداد المحطة أصبح أسرع وأذكى مع Auto-Resection in Trimble Access',
+      href: 'https://www.instagram.com/axis.gps/',
       date: '2026',
     },
     {
       platform: 'instagram' as const,
-      title: t('socialFeed.item4Title'),
-      href: 'https://www.instagram.com/reel/DX_G65rKvhH',
+      title: 'تقنيات المسح الليزري لم تعد تقتصر على التوثيق فقط… بل أصبحت أداة هندسية متكاملة',
+      href: 'https://www.instagram.com/axis.gps/',
+      date: '2026',
+    },
+    {
+      platform: 'instagram' as const,
+      title: 'عُقد لقاء في جامعة القدس – فرع رام الله، جمع شركة أكسيس مع طلاب الهندسة المعمارية',
+      href: 'https://www.instagram.com/p/DYMDE8sF6cu',
+      date: '2026',
+    },
+    {
+      platform: 'instagram' as const,
+      title: 'Reframing Architects Cooperative × AXIS GPS × Al-Quds University',
+      href: 'https://www.instagram.com/p/DYIVKBDiDkf',
+      date: '2026',
+    },
+    // Facebook posts
+    {
+      platform: 'facebook' as const,
+      title: 'ألف مبارك لشركة جمان هوم في رام الله على انضمام جهاز المسح ثلاثي الأبعاد Trimble X9',
+      href: 'https://www.facebook.com/291397367620687',
       date: '2026',
     },
     {
       platform: 'facebook' as const,
-      title: t('socialFeed.item5Title'),
+      title: 'AXIS - Trimble Harrier 68i جمع بيانات LiDAR والتصوير في رحلة واحدة!',
       href: 'https://www.facebook.com/axisTRIMBLE',
+      date: '2025',
+    },
+    {
+      platform: 'facebook' as const,
+      title: 'مجموعة أكسيس - شريكك في الحلول الهندسية المتقدمة',
+      href: 'https://www.facebook.com/groups/1254042372448873',
+      date: '2025',
+    },
+    // YouTube videos
+    {
+      platform: 'youtube' as const,
+      title: 'Spot Meets Trimble X7 — مسح ليزري ثلاثي الأبعاد ذاتي القيادة',
+      href: 'https://www.youtube.com/watch?v=GOxT2vQnnaE',
       date: '2026',
     },
     {
       platform: 'youtube' as const,
-      title: '3D Laser Scanning the Nablus Court of Appeal',
+      title: 'From Point Cloud to Digital Terrain Models — تقنيات المسح المتقدمة',
+      href: 'https://www.youtube.com/watch?v=5NWINk0x28w',
+      date: '2026',
+    },
+    {
+      platform: 'youtube' as const,
+      title: '3D Laser Scanning the Nablus Court of Appeal — مسح محكمة نابلس',
       href: 'https://www.youtube.com/watch?v=XgBOGJzBn5g',
+      date: '2026',
+    },
+    {
+      platform: 'youtube' as const,
+      title: 'NavVis VLX3 — مسح ليزري ثلاثي الأبعاد سريع ودقيق في أي مكان',
+      href: 'https://www.youtube.com/watch?v=TOZkZdhxvZk',
       date: '2025',
     },
     {
       platform: 'youtube' as const,
-      title: 'NavVis MLX – Redefining Handheld Reality Capture',
+      title: 'NavVis MLX — إعادة تعريف الالتقاط اليدوي للواقع',
       href: 'https://www.youtube.com/watch?v=-IDRr44-6RA',
+      date: '2025',
+    },
+    {
+      platform: 'youtube' as const,
+      title: 'Trimble X9 — مسح أسرع وأبعد وأفضل!',
+      href: 'https://www.youtube.com/watch?v=avsXvZd-yyo',
+      date: '2025',
+    },
+    {
+      platform: 'youtube' as const,
+      title: 'كيف يساهم المسح ثلاثي الأبعاد في تطوير مشاريع الطرق السريعة',
+      href: 'https://www.youtube.com/watch?v=4zVSO8YZpto',
       date: '2025',
     },
   ]
