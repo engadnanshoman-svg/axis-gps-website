@@ -474,16 +474,17 @@ function useTheme() {
 
   useEffect(() => {
     const saved = localStorage.getItem('axis-theme-mode') as 'dark' | 'light' | 'auto' | null
-    if (saved && saved !== 'auto') {
-      setAutoMode(false)
-      setTheme(saved as 'dark' | 'light')
-      document.documentElement.setAttribute('data-theme', saved)
-    } else {
+    if (saved === 'auto' || saved === null) {
       // Auto mode
       setAutoMode(true)
       const autoTheme = getAutoTheme()
       setTheme(autoTheme)
       document.documentElement.setAttribute('data-theme', autoTheme)
+    } else {
+      // Manual mode — respect user's choice
+      setAutoMode(false)
+      setTheme(saved as 'dark' | 'light')
+      document.documentElement.setAttribute('data-theme', saved)
     }
     mountedRef.current = true
   }, [])
@@ -501,6 +502,22 @@ function useTheme() {
     return () => mq.removeEventListener('change', handler)
   }, [autoMode])
 
+  // In auto mode, check every minute if theme should change (time-based fallback)
+  useEffect(() => {
+    if (!autoMode) return
+    const interval = setInterval(() => {
+      const autoTheme = getAutoTheme()
+      setTheme(prev => {
+        if (prev !== autoTheme) {
+          document.documentElement.setAttribute('data-theme', autoTheme)
+          return autoTheme
+        }
+        return prev
+      })
+    }, 60000) // Check every minute
+    return () => clearInterval(interval)
+  }, [autoMode])
+
   const toggle = () => {
     const next = theme === 'dark' ? 'light' : 'dark'
     setAutoMode(false)
@@ -511,7 +528,7 @@ function useTheme() {
 
   const setAuto = () => {
     setAutoMode(true)
-    localStorage.removeItem('axis-theme-mode')
+    localStorage.setItem('axis-theme-mode', 'auto')
     const autoTheme = getAutoTheme()
     setTheme(autoTheme)
     document.documentElement.setAttribute('data-theme', autoTheme)

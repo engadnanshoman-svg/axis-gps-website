@@ -369,9 +369,7 @@ export default function RootLayout({
               (function() {
                 try {
                   var saved = localStorage.getItem('axis-theme-mode');
-                  if (saved && saved !== 'auto') {
-                    document.documentElement.setAttribute('data-theme', saved);
-                  } else {
+                  if (saved === 'auto' || saved === null) {
                     var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
                     if (prefersDark !== undefined) {
                       document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
@@ -379,6 +377,8 @@ export default function RootLayout({
                       var hour = new Date().getHours();
                       document.documentElement.setAttribute('data-theme', (hour >= 6 && hour < 18) ? 'light' : 'dark');
                     }
+                  } else {
+                    document.documentElement.setAttribute('data-theme', saved);
                   }
                 } catch(e) {}
               })();
