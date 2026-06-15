@@ -1200,94 +1200,118 @@ function Hero() {
 
       {/* ── Customer showcase cinema screens ── */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 35 }}>
-        {/* ── Film strip decorations ── */}
-        <div className="absolute top-0 right-[22%] bottom-0 w-3 pointer-events-none" style={{ zIndex: 6 }}>
-          <div className="absolute inset-0" style={{ background: 'repeating-linear-gradient(180deg, oklch(0.72 0.14 180 / 0.15) 0px, oklch(0.72 0.14 180 / 0.15) 2px, transparent 2px, transparent 16px)' }} />
+        {/* ── Film strip decorations with sprocket holes ── */}
+        <div className="absolute top-0 right-[22%] bottom-0 w-4 pointer-events-none" style={{ zIndex: 6 }}>
+          <div className="absolute inset-0" style={{ background: 'repeating-linear-gradient(180deg, oklch(0.72 0.14 180 / 0.08) 0px, oklch(0.72 0.14 180 / 0.08) 2px, transparent 2px, transparent 20px)' }} />
+          {/* Sprocket holes */}
+          <div className="absolute inset-y-0 left-0 w-full flex flex-col justify-evenly py-4" style={{ zIndex: 7 }}>
+            {Array.from({ length: 20 }).map((_, si) => (
+              <div key={`sr-${si}`} className="cinema-sprocket mx-auto" style={{ animationDelay: `${si * 0.3}s` }} />
+            ))}
+          </div>
         </div>
-        <div className="absolute top-0 left-[22%] bottom-0 w-3 pointer-events-none" style={{ zIndex: 6 }}>
-          <div className="absolute inset-0" style={{ background: 'repeating-linear-gradient(180deg, oklch(0.72 0.14 180 / 0.15) 0px, oklch(0.72 0.14 180 / 0.15) 2px, transparent 2px, transparent 16px)' }} />
+        <div className="absolute top-0 left-[22%] bottom-0 w-4 pointer-events-none" style={{ zIndex: 6 }}>
+          <div className="absolute inset-0" style={{ background: 'repeating-linear-gradient(180deg, oklch(0.72 0.14 180 / 0.08) 0px, oklch(0.72 0.14 180 / 0.08) 2px, transparent 2px, transparent 20px)' }} />
+          <div className="absolute inset-y-0 left-0 w-full flex flex-col justify-evenly py-4" style={{ zIndex: 7 }}>
+            {Array.from({ length: 20 }).map((_, si) => (
+              <div key={`sl-${si}`} className="cinema-sprocket mx-auto" style={{ animationDelay: `${si * 0.3 + 0.15}s` }} />
+            ))}
+          </div>
         </div>
 
         {/* Right screen - scrolls up */}
         <div className="absolute top-0 right-0 bottom-0 overflow-hidden" style={{ width: '22%' }}>
           {/* Top/bottom fade */}
-          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--bg-0)] via-[var(--bg-0)]/70 to-transparent" style={{ zIndex: 3 }} />
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--bg-0)] via-[var(--bg-0)]/70 to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[var(--bg-0)] via-[var(--bg-0)]/80 to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[var(--bg-0)] via-[var(--bg-0)]/80 to-transparent" style={{ zIndex: 3 }} />
           {/* Inner edge fade toward center */}
-          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
-          {/* Decorative cinema edge line - glowing */}
-          <div className="absolute inset-y-0 left-0 w-[2px]" style={{ zIndex: 4, background: 'linear-gradient(180deg, transparent 5%, oklch(0.72 0.14 180 / 0.6) 20%, oklch(0.72 0.14 180 / 0.3) 50%, oklch(0.72 0.14 180 / 0.6) 80%, transparent 95%)' }} />
+          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
+          {/* Decorative cinema edge line - flowing glow */}
+          <div className="absolute inset-y-0 left-0 w-[2px] cinema-edge-line" style={{ zIndex: 4 }} />
           {/* Cinema title */}
           <div className="absolute top-3 inset-x-0 text-center" style={{ zIndex: 5 }}>
-            <span className="cinema-title-glow text-[9px] sm:text-[10px] font-bold tracking-[0.2em] uppercase text-[oklch(0.72_0.14_180_/_0.8)]">{t('customers.cinemaTitle')}</span>
+            <span className="cinema-title-glow text-[9px] sm:text-[11px] font-bold tracking-[0.25em] uppercase text-[oklch(0.72_0.14_180_/_0.9)]">{t('customers.cinemaTitle')}</span>
           </div>
           {/* Client count badge */}
-          <div className="absolute top-9 inset-x-0 text-center" style={{ zIndex: 5 }}>
-            <span className="inline-block px-2 py-0.5 rounded-full bg-[oklch(0.72_0.14_180_/_0.2)] border border-[oklch(0.72_0.14_180_/_0.3)] text-[7px] sm:text-[8px] text-[oklch(0.72_0.14_180_/_0.9)] font-bold">{t('customers.clientCount')}</span>
+          <div className="absolute top-9 sm:top-10 inset-x-0 text-center" style={{ zIndex: 5 }}>
+            <span className="inline-block px-3 py-1 rounded-full bg-[oklch(0.72_0.14_180_/_0.15)] border border-[oklch(0.72_0.14_180_/_0.25)] text-[7px] sm:text-[8px] text-[oklch(0.72_0.14_180_/_0.95)] font-bold backdrop-blur-sm">{t('customers.clientCount')}</span>
           </div>
           <div className="cinema-scroll-right pr-2 pt-16">
-            {[...CUSTOMER_IMAGES, ...CUSTOMER_IMAGES, ...CUSTOMER_IMAGES].map((img, i) => (
-              <div key={`r-${i}`} className="cinema-card relative group flex-shrink-0">
-                {/* Shimmer effect on cards */}
-                <div className="absolute inset-0 rounded-xl z-10 pointer-events-none cinema-shimmer-layer" />
-                <div className="rounded-xl overflow-hidden border border-white/10 group-hover:border-[oklch(0.72_0.14_180_/_0.5)] transition-all duration-500"
-                  style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.5), 0 0 8px rgba(13,148,136,0.15)', animation: 'cinema-glow-pulse 4s ease-in-out infinite', animationDelay: `${(i % 8) * 0.5}s` }}
-                >
-                  <img
-                    src={img.src}
-                    alt={img.alt}
-                    className="w-full h-28 sm:h-36 lg:h-44 object-cover opacity-55 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                  <div className="cinema-overlay" />
+            {[...CUSTOMER_IMAGES, ...CUSTOMER_IMAGES, ...CUSTOMER_IMAGES].map((img, i) => {
+              const isTall = i % 5 === 0
+              const isWide = i % 5 === 2
+              return (
+                <div key={`r-${i}`} className={`cinema-card relative group flex-shrink-0 ${isTall ? 'cinema-card-tall' : ''}`}>
+                  {/* Shimmer effect */}
+                  <div className="absolute inset-0 rounded-xl z-10 pointer-events-none cinema-shimmer-layer" />
+                  {/* Corner decorations */}
+                  <div className="cinema-corner-tl" />
+                  <div className="cinema-corner-br" />
+                  <div className={`rounded-xl overflow-hidden border border-white/10 group-hover:border-[oklch(0.72_0.14_180_/_0.5)] cinema-border-glow transition-all duration-600 ${isWide ? 'border-l-2 border-l-[oklch(0.72_0.14_180_/_0.15)]' : ''}`}
+                    style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.5), 0 0 8px rgba(13,148,136,0.12)', animation: 'cinema-glow-pulse 5s ease-in-out infinite', animationDelay: `${(i % 10) * 0.5}s` }}
+                  >
+                    <img
+                      src={img.src}
+                      alt={img.alt}
+                      className={`w-full object-cover opacity-50 group-hover:opacity-100 transition-all duration-600 group-hover:scale-110 ${isTall ? 'h-36 sm:h-48 lg:h-56' : isWide ? 'h-24 sm:h-32 lg:h-40' : 'h-28 sm:h-36 lg:h-44'}`}
+                      loading="lazy"
+                    />
+                    <div className="cinema-overlay" />
+                  </div>
+                  <div className="cinema-badge">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  </div>
+                  <div className="absolute bottom-1 right-1 left-1 px-2 py-1.5 rounded-lg bg-black/90 backdrop-blur-md border border-[oklch(0.72_0.14_180_/_0.25)] opacity-0 group-hover:opacity-100 transition-all duration-400 cinema-text-reveal">
+                    <p className="text-[7px] sm:text-[9px] text-white/95 font-semibold truncate">{img.alt}</p>
+                  </div>
                 </div>
-                <div className="cinema-badge">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                </div>
-                <div className="absolute bottom-1 right-1 left-1 px-2 py-1 rounded-lg bg-black/85 backdrop-blur-md border border-[oklch(0.72_0.14_180_/_0.3)] opacity-0 group-hover:opacity-100 transition-opacity duration-400">
-                  <p className="text-[7px] sm:text-[9px] text-white/95 font-semibold truncate">{img.alt}</p>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
 
         {/* Left screen - scrolls down */}
         <div className="absolute top-0 left-0 bottom-0 overflow-hidden" style={{ width: '22%' }}>
           {/* Top/bottom fade */}
-          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[var(--bg-0)] via-[var(--bg-0)]/70 to-transparent" style={{ zIndex: 3 }} />
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--bg-0)] via-[var(--bg-0)]/70 to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[var(--bg-0)] via-[var(--bg-0)]/80 to-transparent" style={{ zIndex: 3 }} />
+          <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[var(--bg-0)] via-[var(--bg-0)]/80 to-transparent" style={{ zIndex: 3 }} />
           {/* Inner edge fade toward center */}
-          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
-          {/* Decorative cinema edge line - glowing */}
-          <div className="absolute inset-y-0 right-0 w-[2px]" style={{ zIndex: 4, background: 'linear-gradient(180deg, transparent 5%, oklch(0.72 0.14 180 / 0.6) 20%, oklch(0.72 0.14 180 / 0.3) 50%, oklch(0.72 0.14 180 / 0.6) 80%, transparent 95%)' }} />
+          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-transparent to-[var(--bg-0)]" style={{ zIndex: 3 }} />
+          {/* Decorative cinema edge line - flowing glow */}
+          <div className="absolute inset-y-0 right-0 w-[2px] cinema-edge-line" style={{ zIndex: 4 }} />
           {/* Cinema title */}
           <div className="absolute top-3 inset-x-0 text-center" style={{ zIndex: 5 }}>
-            <span className="cinema-title-glow text-[9px] sm:text-[10px] font-bold tracking-[0.2em] uppercase text-[oklch(0.72_0.14_180_/_0.8)]">{t('customers.cinemaTitleLeft')}</span>
+            <span className="cinema-title-glow text-[9px] sm:text-[11px] font-bold tracking-[0.25em] uppercase text-[oklch(0.72_0.14_180_/_0.9)]">{t('customers.cinemaTitleLeft')}</span>
           </div>
           <div className="cinema-scroll-left pl-2 pt-10">
-            {[...CUSTOMER_IMAGES_LEFT, ...CUSTOMER_IMAGES_LEFT, ...CUSTOMER_IMAGES_LEFT].map((img, i) => (
-              <div key={`l-${i}`} className="cinema-card relative group flex-shrink-0">
-                <div className="absolute inset-0 rounded-xl z-10 pointer-events-none cinema-shimmer-layer" />
-                <div className="rounded-xl overflow-hidden border border-white/10 group-hover:border-[oklch(0.72_0.14_180_/_0.5)] transition-all duration-500"
-                  style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.5), 0 0 8px rgba(13,148,136,0.15)', animation: 'cinema-glow-pulse 4s ease-in-out infinite', animationDelay: `${(i % 8) * 0.6}s` }}
-                >
-                  <img
-                    src={img.src}
-                    alt={img.alt}
-                    className="w-full h-28 sm:h-36 lg:h-44 object-cover opacity-55 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                  <div className="cinema-overlay" />
+            {[...CUSTOMER_IMAGES_LEFT, ...CUSTOMER_IMAGES_LEFT, ...CUSTOMER_IMAGES_LEFT].map((img, i) => {
+              const isTall = i % 5 === 1
+              const isWide = i % 5 === 3
+              return (
+                <div key={`l-${i}`} className={`cinema-card relative group flex-shrink-0 ${isTall ? 'cinema-card-tall' : ''}`}>
+                  <div className="absolute inset-0 rounded-xl z-10 pointer-events-none cinema-shimmer-layer" />
+                  <div className="cinema-corner-tl" />
+                  <div className="cinema-corner-br" />
+                  <div className={`rounded-xl overflow-hidden border border-white/10 group-hover:border-[oklch(0.72_0.14_180_/_0.5)] cinema-border-glow transition-all duration-600 ${isWide ? 'border-r-2 border-r-[oklch(0.72_0.14_180_/_0.15)]' : ''}`}
+                    style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.5), 0 0 8px rgba(13,148,136,0.12)', animation: 'cinema-glow-pulse 5s ease-in-out infinite', animationDelay: `${(i % 10) * 0.6}s` }}
+                  >
+                    <img
+                      src={img.src}
+                      alt={img.alt}
+                      className={`w-full object-cover opacity-50 group-hover:opacity-100 transition-all duration-600 group-hover:scale-110 ${isTall ? 'h-36 sm:h-48 lg:h-56' : isWide ? 'h-24 sm:h-32 lg:h-40' : 'h-28 sm:h-36 lg:h-44'}`}
+                      loading="lazy"
+                    />
+                    <div className="cinema-overlay" />
+                  </div>
+                  <div className="cinema-badge">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  </div>
+                  <div className="absolute bottom-1 right-1 left-1 px-2 py-1.5 rounded-lg bg-black/90 backdrop-blur-md border border-[oklch(0.72_0.14_180_/_0.25)] opacity-0 group-hover:opacity-100 transition-all duration-400 cinema-text-reveal">
+                    <p className="text-[7px] sm:text-[9px] text-white/95 font-semibold truncate">{img.alt}</p>
+                  </div>
                 </div>
-                <div className="cinema-badge">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                </div>
-                <div className="absolute bottom-1 right-1 left-1 px-2 py-1 rounded-lg bg-black/85 backdrop-blur-md border border-[oklch(0.72_0.14_180_/_0.3)] opacity-0 group-hover:opacity-100 transition-opacity duration-400">
-                  <p className="text-[7px] sm:text-[9px] text-white/95 font-semibold truncate">{img.alt}</p>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
 

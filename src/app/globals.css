@@ -466,8 +466,8 @@ html {
 }
 
 @keyframes cinema-glow-pulse {
-  0%, 100% { box-shadow: 0 4px 20px rgba(13,148,136,0.2), 0 0 4px rgba(13,148,136,0.1); }
-  50% { box-shadow: 0 4px 30px rgba(13,148,136,0.4), 0 0 12px rgba(13,148,136,0.2); }
+  0%, 100% { box-shadow: 0 4px 20px rgba(13,148,136,0.15), 0 0 4px rgba(13,148,136,0.08); }
+  50% { box-shadow: 0 4px 30px rgba(13,148,136,0.35), 0 0 16px rgba(13,148,136,0.15); }
 }
 
 @keyframes cinema-shimmer {
@@ -477,22 +477,38 @@ html {
 
 @keyframes cinema-title-glow-anim {
   0%, 100% { text-shadow: 0 0 8px oklch(0.72 0.14 180 / 0.3); }
-  50% { text-shadow: 0 0 20px oklch(0.72 0.14 180 / 0.6), 0 0 40px oklch(0.72 0.14 180 / 0.2); }
+  50% { text-shadow: 0 0 24px oklch(0.72 0.14 180 / 0.7), 0 0 48px oklch(0.72 0.14 180 / 0.25); }
 }
 
-@keyframes showcase-border-rotate {
-  0% { --showcase-angle: 0deg; }
-  100% { --showcase-angle: 360deg; }
+@keyframes cinema-edge-flow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 200%; }
 }
 
-@keyframes float-gentle {
+@keyframes cinema-float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
+  50% { transform: translateY(-3px); }
 }
 
 @keyframes sparkle {
   0%, 100% { opacity: 0; transform: scale(0); }
   50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes cinema-badge-bounce {
+  0% { transform: scale(0.5) rotate(-30deg); }
+  60% { transform: scale(1.15) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes cinema-reveal-text {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cinema-border-glow {
+  0%, 100% { border-color: oklch(0.72 0.14 180 / 0.15); }
+  50% { border-color: oklch(0.72 0.14 180 / 0.45); }
 }
 
 .cinema-title-glow {
@@ -502,17 +518,17 @@ html {
 .cinema-scroll-right {
   display: flex;
   flex-direction: column;
-  animation: cinema-scroll-up 120s linear infinite;
-  gap: 10px;
-  padding: 10px 6px;
+  animation: cinema-scroll-up 160s linear infinite;
+  gap: 12px;
+  padding: 12px 8px;
 }
 
 .cinema-scroll-left {
   display: flex;
   flex-direction: column;
-  animation: cinema-scroll-down 110s linear infinite;
-  gap: 10px;
-  padding: 10px 6px;
+  animation: cinema-scroll-down 150s linear infinite;
+  gap: 12px;
+  padding: 12px 8px;
 }
 
 .cinema-scroll-right:hover,
@@ -521,12 +537,12 @@ html {
 }
 
 .cinema-card {
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease, box-shadow 0.4s ease;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
   position: relative;
 }
 
 .cinema-card:hover {
-  transform: scale(1.08) translateX(-4px);
+  transform: scale(1.1) translateX(-6px);
   z-index: 10;
 }
 
@@ -537,9 +553,9 @@ html {
 .cinema-card .cinema-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.7) 100%);
+  background: linear-gradient(180deg, transparent 25%, rgba(0,0,0,0.75) 100%);
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.5s ease;
   border-radius: inherit;
 }
 
@@ -549,10 +565,10 @@ html {
 
 .cinema-card .cinema-badge {
   position: absolute;
-  top: 6px;
-  right: 6px;
-  width: 28px;
-  height: 28px;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
   background: oklch(0.72 0.14 180);
   border-radius: 50%;
   display: flex;
@@ -560,30 +576,118 @@ html {
   justify-content: center;
   opacity: 0;
   transform: scale(0.5);
-  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 2px 8px rgba(13,148,136,0.5);
+  transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 2px 10px rgba(13,148,136,0.6);
 }
 
 .cinema-card:hover .cinema-badge {
   opacity: 1;
-  transform: scale(1);
+  animation: cinema-badge-bounce 0.5s ease-out forwards;
 }
 
 .cinema-shimmer-layer {
   background: linear-gradient(
     110deg,
     transparent 25%,
-    oklch(0.72 0.14 180 / 0.06) 45%,
-    oklch(0.72 0.14 180 / 0.12) 50%,
-    oklch(0.72 0.14 180 / 0.06) 55%,
+    oklch(0.72 0.14 180 / 0.04) 42%,
+    oklch(0.72 0.14 180 / 0.1) 50%,
+    oklch(0.72 0.14 180 / 0.04) 58%,
     transparent 75%
   );
-  background-size: 200% 100%;
-  animation: cinema-shimmer 4s ease-in-out infinite;
+  background-size: 250% 100%;
+  animation: cinema-shimmer 5s ease-in-out infinite;
 }
 
 .cinema-card:hover .cinema-shimmer-layer {
-  opacity: 0.5;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    oklch(0.72 0.14 180 / 0.08) 40%,
+    oklch(0.72 0.14 180 / 0.18) 50%,
+    oklch(0.72 0.14 180 / 0.08) 60%,
+    transparent 80%
+  );
+  background-size: 250% 100%;
+}
+
+/* Card corner decorations */
+.cinema-corner-tl, .cinema-corner-br {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: oklch(0.72 0.14 180 / 0.4);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.cinema-corner-tl {
+  top: 4px;
+  left: 4px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+  border-top-left-radius: 4px;
+}
+
+.cinema-corner-br {
+  bottom: 4px;
+  right: 4px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  border-bottom-right-radius: 4px;
+}
+
+.cinema-card:hover .cinema-corner-tl,
+.cinema-card:hover .cinema-corner-br {
+  opacity: 1;
+}
+
+/* Edge glow animation */
+.cinema-edge-line {
+  background: linear-gradient(180deg, 
+    transparent 5%, 
+    oklch(0.72 0.14 180 / 0.5) 15%, 
+    oklch(0.72 0.14 180 / 0.2) 35%,
+    oklch(0.72 0.14 180 / 0.7) 50%,
+    oklch(0.72 0.14 180 / 0.2) 65%,
+    oklch(0.72 0.14 180 / 0.5) 85%,
+    transparent 95%
+  );
+  background-size: 100% 200%;
+  animation: cinema-edge-flow 6s linear infinite;
+}
+
+/* Film strip sprocket holes */
+.cinema-sprocket {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: oklch(0.72 0.14 180 / 0.2);
+  border: 1px solid oklch(0.72 0.14 180 / 0.15);
+}
+
+/* Alternating card sizes */
+.cinema-card-tall img {
+  height: 140% !important;
+}
+
+/* Hover text reveal */
+.cinema-card .cinema-text-reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+}
+
+.cinema-card:hover .cinema-text-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Card border glow animation */
+.cinema-border-glow {
+  animation: cinema-border-glow 3s ease-in-out infinite;
 }
 
 
