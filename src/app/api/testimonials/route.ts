@@ -2,9 +2,44 @@ import { NextRequest, NextResponse } from 'next/server'
 import path from 'path'
 import fs from 'fs'
 
-// Use better-sqlite3 for direct SQLite access
-// On Vercel, /tmp is the only writable directory
 const IS_VERCEL = !!process.env.VERCEL
+
+// KV storage helpers for Vercel
+function getKv() {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { kv } = require('@vercel/kv')
+    return kv
+  } catch {
+    return null
+  }
+}
+
+const KV_KEY = 'axis:testimonials'
+
+async function getKvTestimonials(): Promise<any[]> {
+  const kv = getKv()
+  if (!kv) return []
+  try {
+    const data = await kv.get<any[]>(KV_KEY)
+    return Array.isArray(data) ? data : []
+  } catch {
+    return []
+  }
+}
+
+async function saveKvTestimonials(testimonials: any[]): Promise<boolean> {
+  const kv = getKv()
+  if (!kv) return false
+  try {
+    await kv.set(KV_KEY, testimonials)
+    return true
+  } catch {
+    return false
+  }
+}
+
+// SQLite helpers for local development
 const DB_DIR = IS_VERCEL ? '/tmp' : path.join(process.cwd(), 'db')
 const DB_PATH = path.join(DB_DIR, 'custom.db')
 
@@ -12,7 +47,6 @@ function getDb() {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const Database = require('better-sqlite3')
 
-  // Ensure directory exists
   if (!fs.existsSync(DB_DIR)) {
     fs.mkdirSync(DB_DIR, { recursive: true })
   }
@@ -20,7 +54,6 @@ function getDb() {
   const db = new Database(DB_PATH)
   db.pragma('journal_mode = WAL')
 
-  // Auto-create table if not exists (for fresh /tmp on Vercel)
   db.prepare(`
     CREATE TABLE IF NOT EXISTS Testimonial (
       id TEXT PRIMARY KEY,
@@ -37,7 +70,6 @@ function getDb() {
   return db
 }
 
-// Generate a simple unique ID
 function generateId(): string {
   return Date.now().toString(36) + Math.random().toString(36).substr(2, 9)
 }
@@ -45,11 +77,44 @@ function generateId(): string {
 /* ── GET: Fetch approved testimonials ── */
 export async function GET() {
   try {
-    const db = getDb()
-    const testimonials = db.prepare(
-      'SELECT * FROM Testimonial WHERE approved = 1 ORDER BY createdAt DESC'
-    ).all()
-    db.close()
+    let testimonials: any[] = []
+
+    if (IS_VERCEL) {
+      // On Vercel: use KV (persistent) + fallback to SQLite /tmp
+      const kvTestimonials = await getKvTestimonials()
+      if (kvTestimonials.length > 0) {
+        testimonials = kvTestimonials.filter((t: any) => t.approved === 1 || t.approved === true)
+      } else {
+        // Fallback: try SQLite /tmp (may have data from before KV migration)
+        try {
+          const db = getDb()
+          testimonials = db.prepare(
+            'SELECT * FROM Testimonial WHERE approved = 1 ORDER BY createdAt DESC'
+          ).all()
+          db.close()
+
+          // Migrate to KV for persistence
+          if (testimonials.length > 0) {
+            await saveKvTestimonials(testimonials)
+          }
+        } catch {
+          // No SQLite data either
+        }
+      }
+    } else {
+      // Local: use SQLite
+      const db = getDb()
+      testimonials = db.prepare(
+        'SELECT * FROM Testimonial WHERE approved = 1 ORDER BY createdAt DESC'
+      ).all()
+      db.close()
+    }
+
+    // Sort by date descending
+    testimonials.sort((a: any, b: any) =>
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    )
+
     return NextResponse.json({ testimonials })
   } catch (error) {
     console.error('Error fetching testimonials:', error)
@@ -82,14 +147,43 @@ export async function POST(req: NextRequest) {
 
     const id = generateId()
     const now = new Date().toISOString()
+    const testimonial = {
+      id,
+      name,
+      company: company || null,
+      text,
+      rating,
+      approved: 1,
+      createdAt: now,
+      updatedAt: now,
+    }
 
-    const db = getDb()
-    db.prepare(
-      'INSERT INTO Testimonial (id, name, company, text, rating, approved, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
-    ).run(id, name, company || null, text, rating, 1, now, now) // Auto-approve for now
-    db.close()
+    if (IS_VERCEL) {
+      // On Vercel: save to KV (persistent)
+      const existing = await getKvTestimonials()
+      existing.push(testimonial)
+      await saveKvTestimonials(existing)
 
-    // Also send email notification
+      // Also save to /tmp SQLite as backup
+      try {
+        const db = getDb()
+        db.prepare(
+          'INSERT INTO Testimonial (id, name, company, text, rating, approved, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+        ).run(id, name, company || null, text, rating, 1, now, now)
+        db.close()
+      } catch {
+        // Non-critical backup
+      }
+    } else {
+      // Local: save to SQLite
+      const db = getDb()
+      db.prepare(
+        'INSERT INTO Testimonial (id, name, company, text, rating, approved, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+      ).run(id, name, company || null, text, rating, 1, now, now)
+      db.close()
+    }
+
+    // Send email notification
     try {
       const TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'eng.adnan.shoman@gmail.com'
       function getResend() {
@@ -147,7 +241,6 @@ export async function POST(req: NextRequest) {
       }
     } catch (emailError) {
       console.error('Email notification failed (non-critical):', emailError)
-      // Don't fail the whole request if email fails
     }
 
     return NextResponse.json({

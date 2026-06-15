@@ -211,6 +211,21 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'customers.altL7': 'من وثق بنا - جهاز GNSS Trimble', 'customers.altL8': 'من وثق بنا - مسح صناعي متقدم',
     'customers.altL9': 'من وثق بنا - مسح موقع إنشائي', 'customers.altL10': 'من وثق بنا - جهاز GPS Rover',
     'customers.altL11': 'من وثق بنا - أنظمة التحكم بالآلات الثقيلة', 'customers.altL12': 'من وثق بنا - نماذج ثلاثية الأبعاد',
+    'services.headingPrefix': 'أجهزة وخدمات', 'services.headingHighlight': 'المساحة والجيوماتكس',
+    'brands.headingPrefix': 'علامات تجارية', 'brands.headingHighlight': 'عالمية رائدة',
+    'gallery.headingPrefix': 'أحدث', 'gallery.headingHighlight': 'فيديوهاتنا',
+    'projects.headingPrefix': 'إنجازاتنا', 'projects.headingHighlight': 'وشراكاتنا',
+    'testimonials.headingPrefix': 'رأيك', 'testimonials.headingHighlight': 'يهمنا',
+    'whyUs.headingPrefix': 'لماذا تختار', 'whyUs.headingHighlight': 'اكسيس؟',
+    'team.headingPrefix': 'الهيكل', 'team.headingHighlight': 'الإداري',
+    'contact.headingPrefix': 'لنبدأ', 'contact.headingHighlight': 'مشروعك القادم',
+    'branches.headingPrefix': 'نصل', 'branches.headingHighlight': 'إليك أينما كنت',
+    'ceo.headingPrefix': 'رسالة', 'ceo.headingHighlight': 'المهندس سلامة عواودة',
+    'socialFeed.headingPrefix': 'أحدث', 'socialFeed.headingHighlight': 'أخبارنا ومنشوراتنا',
+    'docs.headingPrefix': 'تعرف اكثر', 'docs.headingHighlight': 'علينا',
+    'review.shareOpinionPrefix': 'شاركنا', 'review.shareOpinionHighlight': 'رأيك',
+    'team.badgeFounder': 'المؤسس', 'team.badgeExecutive': 'المدير التنفيذي', 'team.badgeBranch': 'مدير فرع', 'team.badgeAccounting': 'محاسبة',
+    'testimonials.testimonialAria': 'شهادة',
   },
   en: {
     'nav.home': 'Home', 'nav.branches': 'Our Branches', 'nav.about': 'About Us',
@@ -368,6 +383,21 @@ const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'customers.altL7': 'Those Who Trusted Us - Trimble GNSS Device', 'customers.altL8': 'Those Who Trusted Us - Advanced Industrial Scanning',
     'customers.altL9': 'Those Who Trusted Us - Construction Site Survey', 'customers.altL10': 'Those Who Trusted Us - GPS Rover Device',
     'customers.altL11': 'Those Who Trusted Us - Heavy Machinery Control Systems', 'customers.altL12': 'Those Who Trusted Us - 3D Models',
+    'services.headingPrefix': 'Devices & Services', 'services.headingHighlight': 'Surveying & Geomatics',
+    'brands.headingPrefix': 'Leading Global', 'brands.headingHighlight': 'Brands',
+    'gallery.headingPrefix': 'Our Latest', 'gallery.headingHighlight': 'Videos',
+    'projects.headingPrefix': 'Our Achievements', 'projects.headingHighlight': '& Partnerships',
+    'testimonials.headingPrefix': 'Your Opinion', 'testimonials.headingHighlight': 'Matters',
+    'whyUs.headingPrefix': 'Why Choose', 'whyUs.headingHighlight': 'Axis?',
+    'team.headingPrefix': 'Management', 'team.headingHighlight': 'Structure',
+    'contact.headingPrefix': "Let's Start", 'contact.headingHighlight': 'Your Next Project',
+    'branches.headingPrefix': 'We Reach', 'branches.headingHighlight': 'You Wherever You Are',
+    'ceo.headingPrefix': 'Message from', 'ceo.headingHighlight': 'Eng. Salameh Awawdeh',
+    'socialFeed.headingPrefix': 'Our Latest', 'socialFeed.headingHighlight': 'News & Posts',
+    'docs.headingPrefix': 'Learn More', 'docs.headingHighlight': 'About Us',
+    'review.shareOpinionPrefix': 'Share Your', 'review.shareOpinionHighlight': 'Opinion',
+    'team.badgeFounder': 'Founder', 'team.badgeExecutive': 'CEO', 'team.badgeBranch': 'Branch Manager', 'team.badgeAccounting': 'Accounting',
+    'testimonials.testimonialAria': 'Testimonial',
   },
 }
 
@@ -583,7 +613,7 @@ function Navbar() {
           {/* Logo */}
           <a href="#hero" className="flex items-center gap-3 group shrink-0">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg overflow-hidden glow-teal-sm transition-all duration-300 group-hover:scale-110">
-              <img src="/logo.png" alt="اكسيس" className="w-full h-full object-contain" />
+              <img src="/logo.png" alt={t('nav.logoAlt')} className="w-full h-full object-contain" />
             </div>
             <div className="hidden sm:block">
               <span className="text-lg font-bold gradient-text">{t('nav.logoName')}</span>
@@ -1372,12 +1402,12 @@ function Services() {
       <div className="absolute inset-0 grid-pattern opacity-10" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">خدماتنا</span>
+          <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('services.label')}</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
-            أجهزة وخدمات <span className="gradient-text">المساحة والجيوماتكس</span>
+            {t('services.headingPrefix')} <span className="gradient-text">{t('services.headingHighlight')}</span>
           </h2>
           <p className="text-[var(--t-7)] max-w-2xl mx-auto">
-            نقدم أحدث أجهزة المساحة والقياس من أبرز الشركات العالمية مع خدمات التدريب والدعم الفني المتكامل
+            {t('services.subheading')}
           </p>
         </div>
 
@@ -1464,9 +1494,9 @@ function Services() {
 function Stats() {
   const { t } = useLang()
   const stats = [
-    { value: 4, suffix: '', label: 'فروع في البلاد', icon: <MapPin className="w-6 h-6" /> },
-    { value: 10000, suffix: '+', label: 'أكثر من عميل راضٍ', icon: <Users className="w-6 h-6" /> },
-    { value: 20, suffix: '+', label: 'سنة خبرة', icon: <Wrench className="w-6 h-6" /> },
+    { value: 4, suffix: '', label: t('stats.branches'), icon: <MapPin className="w-6 h-6" /> },
+    { value: 10000, suffix: '+', label: t('stats.clients'), icon: <Users className="w-6 h-6" /> },
+    { value: 20, suffix: '+', label: t('stats.years'), icon: <Wrench className="w-6 h-6" /> },
   ]
 
   return (
@@ -1508,24 +1538,24 @@ function Brands() {
   const brands = [
     {
       name: 'Trimble',
-      desc: 'رائد عالمي في تقنيات المسح والبنية التحتية',
+      desc: t('brands.trimbleDesc'),
       color: 'from-[#FFC72C] to-[#E5B300]',
       textColor: 'text-[#1a1a1a]',
-      specialties: ['GPS / GNSS', 'Total Station', 'أجهزة ليزر', 'برامج المسح'],
+      specialties: ['GPS / GNSS', 'Total Station', t('brands.trimbleSpec1'), t('brands.trimbleSpec2')],
     },
     {
       name: 'NavVis',
-      desc: 'قائد تقنيات المسح المتنقل والنمذجة ثلاثية الأبعاد',
+      desc: t('brands.navvisDesc'),
       color: 'from-[#0057B8] to-[#003F8A]',
       textColor: 'text-white',
-      specialties: [t('brands.navvisSpec1'), 'ماسحات داخلية', 'نمذجة 3D', t('projects.proj3Tag1')],
+      specialties: [t('brands.navvisSpec1'), t('brands.navvisSpec2'), t('brands.navvisSpec3'), t('projects.proj3Tag1')],
     },
     {
       name: 'Spectra',
-      desc: 'حلول مسح عالية الدقة للمساحين والمقاولين',
+      desc: t('brands.spectraDesc'),
       color: 'from-[#FFFFFF] to-[#E8F0FE]',
       textColor: 'text-[#0057B8]',
-      specialties: ['RTK / GPS', 'توتل ستيشن', t('brands.spectraSpec2'), t('brands.spectraSpec3')],
+      specialties: ['RTK / GPS', t('brands.spectraSpec1'), t('brands.spectraSpec2'), t('brands.spectraSpec3')],
     },
   ]
 
@@ -1536,10 +1566,10 @@ function Brands() {
         <div className="text-center mb-16">
           <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('brands.label')}</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
-            علامات تجارية <span className="gradient-text">عالمية رائدة</span>
+            {t('brands.headingPrefix')} <span className="gradient-text">{t('brands.headingHighlight')}</span>
           </h2>
           <p className="text-[var(--t-7)] max-w-2xl mx-auto">
-            وكيل حصري في البلاد لأبرز الشركات العالمية المتخصصة في أجهزة المساحة والجيوماتكس
+            {t('brands.subheading')}
           </p>
         </div>
 
@@ -1598,7 +1628,7 @@ function Gallery() {
       title: '3D Laser Scanning the Nablus Court of Appeal',
       youtubeId: 'XgBOGJzBn5g',
       thumb: 'https://i.ytimg.com/vi/XgBOGJzBn5g/hqdefault.jpg',
-      category: 'مسح ليزري',
+      category: t('gallery.categoryLaser'),
     },
     {
       type: 'video' as const,
@@ -1614,7 +1644,7 @@ function Gallery() {
       title: 'NavVis VLX3 – Fast & Accurate 3D Laser Scanning',
       youtubeId: 'TOZkZdhxvZk',
       thumb: 'https://i.ytimg.com/vi/TOZkZdhxvZk/hqdefault.jpg',
-      category: 'مسح ليزري',
+      category: t('gallery.categoryLaser'),
     },
     {
       type: 'video' as const,
@@ -1646,7 +1676,7 @@ function Gallery() {
       title: 'From Point Cloud to Digital Terrain Models',
       youtubeId: '5NWINk0x28w',
       thumb: 'https://i.ytimg.com/vi/5NWINk0x28w/hqdefault.jpg',
-      category: 'نمذجة ثلاثية الأبعاد',
+      category: t('gallery.category3dModeling'),
     },
     {
       type: 'video' as const,
@@ -1679,8 +1709,8 @@ function Gallery() {
   const filtered = activeTab === 'all' ? mediaItems : mediaItems.filter(m => m.type === activeTab)
 
   const tabs = [
-    { key: 'all' as const, label: 'الكل', count: mediaItems.length },
-    { key: 'video' as const, label: 'فيديوهات', count: mediaItems.filter(m => m.type === 'video').length },
+    { key: 'all' as const, label: t('gallery.tabAll'), count: mediaItems.length },
+    { key: 'video' as const, label: t('gallery.tabVideos'), count: mediaItems.filter(m => m.type === 'video').length },
   ]
 
   return (
@@ -1690,10 +1720,10 @@ function Gallery() {
         <div className="text-center mb-12">
           <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('gallery.label')}</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
-            أحدث <span className="gradient-text">فيديوهاتنا</span>
+            {t('gallery.headingPrefix')} <span className="gradient-text">{t('gallery.headingHighlight')}</span>
           </h2>
           <p className="text-[var(--t-7)] max-w-2xl mx-auto">
-            تابع أحدث أعمالنا وتقنياتنا في المساحة والجيوماتكس عبر منصاتنا المختلفة
+            {t('gallery.subheading')}
           </p>
         </div>
 
@@ -1779,7 +1809,7 @@ function Gallery() {
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#FF0000]/10 border border-[#FF0000]/20 text-[#FF0000] font-semibold text-sm hover:bg-[#FF0000]/20 transition-all duration-300"
           >
             <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            زوروا قناتنا على يوتيوب — 105+ فيديو
+            {t('gallery.youtubeCta')}
           </a>
         </div>
       </div>
@@ -1829,19 +1859,19 @@ function Projects() {
   const projects = [
     {
       title: t('projects.proj1Title'),
-      category: 'التعليم الأكاديمي',
+      category: t('projects.proj1Category'),
       desc: t('projects.proj1Desc'),
-      tags: ['GIS', 'أجهزة مساحة', 'جامعة الخليل'],
+      tags: ['GIS', t('projects.proj1Tag1'), t('projects.proj1Tag2')],
     },
     {
       title: t('projects.proj2Title'),
-      category: 'المسؤولية المجتمعية',
+      category: t('projects.proj2Category'),
       desc: t('projects.proj2Desc'),
-      tags: ['تبرع', 'أجهزة مساحة', 'البوليتكنك'],
+      tags: [t('projects.proj2Tag1'), t('projects.proj1Tag1'), t('projects.proj2Tag3')],
     },
     {
       title: t('projects.proj3Title'),
-      category: 'مشاريع دولية',
+      category: t('projects.proj3Category'),
       desc: t('projects.proj3Desc'),
       tags: ['UNDP', 'GIS', t('projects.proj3Tag1')],
     },
@@ -1849,7 +1879,7 @@ function Projects() {
       title: t('projects.proj4Title'),
       category: t('projects.proj4Category'),
       desc: t('projects.proj4Desc'),
-      tags: ['فرع جديد', t('projects.proj4Tag2'), 'توسع'],
+      tags: [t('projects.proj4Tag1'), t('projects.proj4Tag2'), t('projects.proj4Tag3')],
     },
   ]
 
@@ -1859,10 +1889,10 @@ function Projects() {
         <div className="text-center mb-16">
           <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('projects.label')}</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
-            إنجازاتنا <span className="gradient-text">وشراكاتنا</span>
+            {t('projects.headingPrefix')} <span className="gradient-text">{t('projects.headingHighlight')}</span>
           </h2>
           <p className="text-[var(--t-7)] max-w-2xl mx-auto">
-            نفخر بشراكاتنا مع المؤسسات الأكاديمية والدولية ومساهمتنا في تطوير قطاع المساحة والجيوماتكس في البلاد
+            {t('projects.subheading')}
           </p>
         </div>
 
@@ -1903,6 +1933,7 @@ function Projects() {
 
 /* ───────── review form ───────── */
 function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
+  const { t } = useLang()
   const [hoverRating, setHoverRating] = useState(0)
   const [selectedRating, setSelectedRating] = useState(0)
   const [submitted, setSubmitted] = useState(false)
@@ -1983,10 +2014,10 @@ function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
         </motion.div>
 
         <h3 className="text-2xl sm:text-3xl font-bold text-[var(--t-0)] mb-2">
-          شاركنا <span className="gradient-text">رأيك</span>
+          {t('review.shareOpinionPrefix')} <span className="gradient-text">{t('review.shareOpinionHighlight')}</span>
         </h3>
         <p className="text-[var(--t-6)] text-sm mb-6 max-w-lg mx-auto leading-relaxed">
-          تجربتك معنا تهمّنا! شاركنا تقييمك وسيظهر رأيك هنا ليستفيد منه الآخرون
+          {t('review.ctaDesc')}
         </p>
 
         {/* Modern CTA button with gradient ring */}
@@ -2010,7 +2041,7 @@ function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
                 <path d="M12 5v14M5 12h14" />
               </svg>
             </span>
-            أضف مشاركتك الآن
+            {t('review.addNow')}
             <MessageCircle className="w-5 h-5 opacity-70 group-hover:opacity-100 group-hover:rotate-12 transition-all duration-300" />
           </span>
         </motion.button>
@@ -2031,7 +2062,7 @@ function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
         </div>
         <h3 className="text-2xl font-bold text-[var(--t-0)] mb-3">{t('review.submittedTitle')}</h3>
         <p className="text-[var(--t-7)] text-base leading-relaxed max-w-md mx-auto">
-          شكراً لك! مشاركتك ظهرت الآن في قسم شركاء النجاح ويمكن للجميع رؤيتها
+          {t('review.submittedDesc')}
         </p>
       </motion.div>
     )
@@ -2046,7 +2077,7 @@ function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
     >
       <div className="text-center mb-5">
         <h3 className="text-xl font-bold text-[var(--t-0)] mb-1">{t('review.formTitle')}</h3>
-        <p className="text-[var(--t-7)] text-sm">شاركنا تقييمك لتجربتك مع اكسيس</p>
+        <p className="text-[var(--t-7)] text-sm">{t('review.formDesc')}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-4">
@@ -2081,12 +2112,12 @@ function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
           <input
             name="review-name"
             required
-            placeholder="اسمك"
+            placeholder={t('review.namePlaceholder')}
             className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] placeholder:text-[var(--t-10)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors text-sm"
           />
           <input
             name="review-company"
-            placeholder="الشركة / المؤسسة (اختياري)"
+            placeholder={t('review.companyPlaceholder')}
             className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] placeholder:text-[var(--t-10)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors text-sm"
           />
         </div>
@@ -2096,7 +2127,7 @@ function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
           name="review-text"
           required
           rows={3}
-          placeholder="اكتب مشاركتك وتقييمك هنا..."
+          placeholder={t('review.textPlaceholder')}
           className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] placeholder:text-[var(--t-10)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors resize-none text-sm"
         />
 
@@ -2118,7 +2149,7 @@ function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
             {loading ? (
               <svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
             ) : (
-              <><Send className="w-4 h-4" /> أرسل مشاركتك</>
+              <><Send className="w-4 h-4" /> {t('review.submit')}</>
             )}
           </button>
           <button
@@ -2126,7 +2157,7 @@ function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
             onClick={() => { setFormOpen(false); setSelectedRating(0) }}
             className="px-5 py-3 rounded-xl border border-[var(--b-1)] text-[var(--t-6)] hover:text-[var(--t-3)] hover:border-[var(--b-2)] transition-colors text-sm"
           >
-            إلغاء
+            {t('review.cancel')}
           </button>
         </div>
       </form>
@@ -2258,10 +2289,10 @@ function Testimonials() {
         <div className="text-center mb-14">
           <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('testimonials.label')}</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-3">
-            رأيك <span className="gradient-text">يهمنا</span>
+            {t('testimonials.headingPrefix')} <span className="gradient-text">{t('testimonials.headingHighlight')}</span>
           </h2>
           <p className="text-[var(--t-7)] max-w-xl mx-auto text-sm">
-            نفتخر بثقة شركائنا وعملائنا ونسعى دائماً لتحقيق رضاهم وتجاوز توقعاتهم
+            {t('testimonials.subheading')}
           </p>
         </div>
 
@@ -2420,7 +2451,7 @@ function WhyUs() {
   const reasons = [
     { icon: <CheckCircle2 className="w-5 h-5" />, text: t('whyUs.reason1') },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: t('whyUs.reason2') },
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: '4 فروع رئيسية تغطي جميع أنحاء البلاد' },
+    { icon: <CheckCircle2 className="w-5 h-5" />, text: t('whyUs.reason3') },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: t('whyUs.reason4') },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: t('whyUs.reason5') },
     { icon: <CheckCircle2 className="w-5 h-5" />, text: t('whyUs.reason6') },
@@ -2434,7 +2465,7 @@ function WhyUs() {
           <div>
             <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('whyUs.label')}</span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-6 leading-tight">
-              لماذا تختار <span className="gradient-text">اكسيس؟</span>
+              {t('whyUs.headingPrefix')} <span className="gradient-text">{t('whyUs.headingHighlight')}</span>
             </h2>
             <p className="text-[var(--t-7)] leading-relaxed mb-8">
               نتميز بأننا الشركة الرائدة والأكبر في البلاد في مجال أجهزة المساحة والجيوماتكس.
@@ -2491,6 +2522,7 @@ function TeamCard({
   index: number
   showLine?: 'top' | 'bottom' | 'both'
 }) {
+  const { t } = useLang()
   const sizeConfig = {
     founder: { avatar: 'w-32 h-32 sm:w-40 sm:h-40', text: 'text-xl sm:text-2xl', roleText: 'text-base sm:text-lg', pad: 'p-7 sm:p-9', maxW: 'max-w-md', rounded: 'rounded-3xl', ring: 'ring-4', initialsText: 'text-4xl sm:text-5xl' },
     executive: { avatar: 'w-24 h-24 sm:w-28 sm:h-28', text: 'text-base sm:text-lg', roleText: 'text-sm sm:text-base', pad: 'p-5 sm:p-6', maxW: 'max-w-xs', rounded: 'rounded-2xl', ring: 'ring-2', initialsText: 'text-2xl sm:text-3xl' },
@@ -2524,7 +2556,7 @@ function TeamCard({
         )}
         {member.badge && size !== 'founder' && (
           <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[10px] font-bold bg-gradient-to-l from-[oklch(0.65_0.16_200)] to-[oklch(0.55_0.12_250)] text-[oklch(0.97_0.005_250)] shadow-md whitespace-nowrap">
-            {member.badge === 'تنفيذي' ? 'المدير التنفيذي' : member.badge === 'فرع' ? 'مدير فرع' : member.badge}
+            {t('team.badge' + member.badge)}
           </span>
         )}
 
@@ -2573,7 +2605,7 @@ function Team() {
       gradient: 'from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)]',
       border: 'border-[oklch(0.72_0.14_180_/_0.3)]',
       glow: 'shadow-[oklch(0.72_0.14_180_/_0.15)]',
-      badge: 'المؤسس',
+      badge: 'Founder',
     },
     {
       name: t('team.member2Name'),
@@ -2583,7 +2615,7 @@ function Team() {
       gradient: 'from-[oklch(0.65_0.16_200)] to-[oklch(0.55_0.12_250)]',
       border: 'border-[oklch(0.65_0.16_200_/_0.3)]',
       glow: 'shadow-[oklch(0.65_0.16_200_/_0.15)]',
-      badge: 'تنفيذي',
+      badge: 'Executive',
     },
     {
       name: t('team.member3Name'),
@@ -2593,7 +2625,7 @@ function Team() {
       gradient: 'from-[oklch(0.70_0.12_90)] to-[oklch(0.60_0.14_60)]',
       border: 'border-[oklch(0.70_0.12_90_/_0.3)]',
       glow: 'shadow-[oklch(0.70_0.12_90_/_0.15)]',
-      badge: 'محاسبة',
+      badge: 'Accounting',
     },
     {
       name: t('team.member4Name'),
@@ -2603,7 +2635,7 @@ function Team() {
       gradient: 'from-[oklch(0.60_0.18_30)] to-[oklch(0.55_0.14_50)]',
       border: 'border-[oklch(0.60_0.18_30_/_0.3)]',
       glow: 'shadow-[oklch(0.60_0.18_30_/_0.15)]',
-      badge: 'فرع',
+      badge: 'Branch',
     },
     {
       name: t('team.member5Name'),
@@ -2661,10 +2693,10 @@ function Team() {
         <div className="text-center mb-14">
           <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('team.label')}</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
-            الهيكل <span className="gradient-text">الإداري</span>
+            {t('team.headingPrefix')} <span className="gradient-text">{t('team.headingHighlight')}</span>
           </h2>
           <p className="text-[var(--t-7)] max-w-2xl mx-auto">
-            هيكل إداري متكامل يضم نخبة من المهندسين والمتخصصين تحت قيادة متميزة
+            {t('team.subheading')}
           </p>
         </div>
 
@@ -2739,7 +2771,7 @@ function Team() {
         >
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl border border-[var(--b-3)] bg-[var(--bg-3)]">
             <Users className="w-5 h-5 text-[oklch(0.72_0.14_180)]" />
-            <span className="text-[var(--t-5)] text-sm">فريق متخصص يضم نخبة من المهندسين ذوي الكفاءات العالية</span>
+            <span className="text-[var(--t-5)] text-sm">{t('team.ctaText')}</span>
           </div>
         </motion.div>
       </div>
@@ -2801,17 +2833,17 @@ function Contact() {
 
   const socialChannels = [
     {
-      name: 'واتساب',
+      name: t('contact.whatsappName'),
       nameEn: 'WhatsApp',
       href: whatsappUrl,
       color: '#25D366',
       hoverColor: '#20BD5A',
       icon: <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>,
       desc: t('contact.whatsappDesc'),
-      badge: 'الأسرع',
+      badge: t('contact.whatsappBadge'),
     },
     {
-      name: 'ماسنجر',
+      name: t('contact.messengerName'),
       nameEn: 'Messenger',
       href: messengerUrl,
       color: '#0084FF',
@@ -2821,7 +2853,7 @@ function Contact() {
       badge: null,
     },
     {
-      name: 'انستغرام',
+      name: t('contact.instagramName'),
       nameEn: 'Instagram',
       href: instagramUrl,
       color: '#E1306C',
@@ -2833,10 +2865,10 @@ function Contact() {
   ]
 
   const contactDetails = [
-    { icon: <Phone className="w-5 h-5" />, label: 'هاتف', value: '0594224497' },
-    { icon: <Phone className="w-5 h-5" />, label: 'هاتف', value: '0595289999' },
-    { icon: <Mail className="w-5 h-5" />, label: 'بريد إلكتروني', value: 'adnan@axis-gps.com' },
-    { icon: <Mail className="w-5 h-5" />, label: 'بريد إلكتروني', value: 'salame@axis-gps.com' },
+    { icon: <Phone className="w-5 h-5" />, label: t('contact.phoneLabel'), value: '0594224497' },
+    { icon: <Phone className="w-5 h-5" />, label: t('contact.phoneLabel'), value: '0595289999' },
+    { icon: <Mail className="w-5 h-5" />, label: t('contact.emailLabel'), value: 'adnan@axis-gps.com' },
+    { icon: <Mail className="w-5 h-5" />, label: t('contact.emailLabel'), value: 'salame@axis-gps.com' },
   ]
 
   return (
@@ -2846,10 +2878,10 @@ function Contact() {
         <div className="text-center mb-16">
           <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('contact.label')}</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
-            لنبدأ <span className="gradient-text">مشروعك القادم</span>
+            {t('contact.headingPrefix')} <span className="gradient-text">{t('contact.headingHighlight')}</span>
           </h2>
           <p className="text-[var(--t-7)] max-w-2xl mx-auto">
-            تواصل معنا مباشرة عبر قنوات التواصل الاجتماعي أو أرسل لنا تفاصيل مشروعك
+            {t('contact.subheading')}
           </p>
         </div>
 
@@ -2889,7 +2921,7 @@ function Contact() {
 
               <div className="relative z-10 mt-5 flex items-center gap-2 px-5 py-2.5 rounded-xl text-white font-semibold text-sm transition-all duration-300" style={{ background: ch.color }}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                افتح {ch.name}
+                {t('contact.openApp')} {ch.name}
               </div>
             </motion.a>
           ))}
@@ -2926,7 +2958,7 @@ function Contact() {
             >
               <h4 className="text-[oklch(0.72_0.14_180)] font-semibold text-sm mb-4 flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
-                مواقع فروعنا على الخريطة
+                {t('contact.mapTitle')}
               </h4>
               <BranchMap />
             </motion.div>
@@ -2942,21 +2974,21 @@ function Contact() {
           >
             <h3 className="text-lg font-bold text-[var(--t-0)] mb-5 flex items-center gap-2">
               <Mail className="w-5 h-5 text-[oklch(0.72_0.14_180)]" />
-              أو أرسل لنا تفاصيل مشروعك
+              {t('contact.formTitle')}
             </h3>
             <div className="grid sm:grid-cols-2 gap-4 mb-4">
               <div>
-                <label className="block text-sm text-[var(--t-6)] mb-2">الاسم الكامل</label>
+                <label className="block text-sm text-[var(--t-6)] mb-2">{t('contact.nameLabel')}</label>
                 <input
                   type="text"
                   name="name"
                   required
-                  placeholder="أدخل اسمك"
+                  placeholder={t('contact.namePlaceholder')}
                   className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] placeholder:text-[var(--t-10)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors"
                 />
               </div>
               <div>
-                <label className="block text-sm text-[var(--t-6)] mb-2">البريد الإلكتروني</label>
+                <label className="block text-sm text-[var(--t-6)] mb-2">{t('contact.emailLabel')}</label>
                 <input
                   type="email"
                   name="email"
@@ -2968,7 +3000,7 @@ function Contact() {
               </div>
             </div>
             <div className="mb-4">
-              <label className="block text-sm text-[var(--t-6)] mb-2">رقم الهاتف</label>
+              <label className="block text-sm text-[var(--t-6)] mb-2">{t('contact.phoneFormLabel')}</label>
               <input
                 type="tel"
                 name="phone"
@@ -2978,24 +3010,24 @@ function Contact() {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm text-[var(--t-6)] mb-2">نوع الخدمة</label>
+              <label className="block text-sm text-[var(--t-6)] mb-2">{t('contact.serviceLabel')}</label>
               <select name="service" className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors appearance-none">
-                <option value="">اختر الخدمة المطلوبة</option>
-                <option value="gps">أجهزة GPS و RTK</option>
-                <option value="total-station">أجهزة التوتل ستيشن</option>
-                <option value="scanning">المسح الضوئي ثلاثي الأبعاد</option>
-                <option value="gis">أنظمة GIS والخرائط</option>
-                <option value="monitoring">أنظمة مراقبة التحرك</option>
-                <option value="training">التدريب والدعم الفني</option>
+                <option value="">{t('contact.servicePlaceholder')}</option>
+                <option value="gps">{t('contact.serviceGps')}</option>
+                <option value="total-station">{t('contact.serviceTotalStation')}</option>
+                <option value="scanning">{t('contact.service3dScanning')}</option>
+                <option value="gis">{t('contact.serviceGis')}</option>
+                <option value="monitoring">{t('contact.serviceMonitoring')}</option>
+                <option value="training">{t('contact.serviceTraining')}</option>
               </select>
             </div>
             <div className="mb-6">
-              <label className="block text-sm text-[var(--t-6)] mb-2">تفاصيل المشروع</label>
+              <label className="block text-sm text-[var(--t-6)] mb-2">{t('contact.projectDetailsLabel')}</label>
               <textarea
                 rows={4}
                 name="message"
                 required
-                placeholder="اكتب تفاصيل مشروعك هنا..."
+                placeholder={t('contact.projectDetailsPlaceholder')}
                 className="w-full px-4 py-3 rounded-xl bg-[var(--bg-input)] border border-[var(--b-1)] text-[var(--t-1)] placeholder:text-[var(--t-10)] focus:border-[oklch(0.72_0.14_180)] focus:outline-none transition-colors resize-none"
               />
             </div>
@@ -3009,7 +3041,7 @@ function Contact() {
                   className="flex items-center justify-center gap-2 py-4 text-[oklch(0.72_0.14_180)] font-semibold"
                 >
                   <CheckCircle2 className="w-5 h-5" />
-                  تم إرسال رسالتك بنجاح! سنتواصل معك قريباً
+                  {t('contact.submitSuccess')}
                 </motion.div>
               ) : (
                 <motion.div initial={{ opacity: 1 }} exit={{ opacity: 0 }}>
@@ -3029,12 +3061,12 @@ function Contact() {
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                         </svg>
-                        جاري الإرسال...
+                        {t('contact.sending')}
                       </>
                     ) : (
                       <>
                         <Send className="w-5 h-5" />
-                        إرسال الرسالة
+                        {t('contact.sendMessage')}
                       </>
                     )}
                   </button>
@@ -3084,10 +3116,10 @@ function Documents() {
         <div className="text-center mb-14">
           <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('docs.label')}</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
-            تعرف اكثر <span className="gradient-text">علينا</span>
+            {t('docs.headingPrefix')} <span className="gradient-text">{t('docs.headingHighlight')}</span>
           </h2>
           <p className="text-[var(--t-7)] max-w-2xl mx-auto">
-            تصفح السيرة الذاتية للشركة ووثائق الدعم الفني
+            {t('docs.subheading')}
           </p>
         </div>
 
@@ -3135,7 +3167,7 @@ function Documents() {
                           <div className="w-10 h-10 rounded-full bg-[oklch(0.72_0.14_180_/_0.1)] group-hover:bg-[oklch(0.72_0.14_180)] flex items-center justify-center transition-all duration-300">
                             <Eye className="w-4 h-4 text-[oklch(0.72_0.14_180)] group-hover:text-[oklch(0.13_0.02_250)] transition-colors duration-300" />
                           </div>
-                          <span className="text-[9px] text-[var(--t-9)] group-hover:text-[oklch(0.72_0.14_180)] transition-colors">مشاهدة</span>
+                          <span className="text-[9px] text-[var(--t-9)] group-hover:text-[oklch(0.72_0.14_180)] transition-colors">{t('docs.view')}</span>
                         </div>
                         {/* Lock badge */}
                         <div className="absolute top-2 left-2 flex items-center gap-1 opacity-50">
@@ -3176,7 +3208,7 @@ function Documents() {
                     <div className="flex items-center gap-3">
                       <Lock className="w-4 h-4 text-[oklch(0.72_0.14_180)]" />
                       <span className="text-[var(--t-2)] text-sm font-semibold">{doc.title}</span>
-                      <span className="text-[var(--t-8)] text-xs">- مشاهدة فقط</span>
+                      <span className="text-[var(--t-8)] text-xs">- {t('docs.viewOnly')}</span>
                     </div>
                     <button
                       onClick={() => setActiveDoc(null)}
@@ -3228,7 +3260,7 @@ function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-lg overflow-hidden">
-                <img src="/logo.png" alt="اكسيس" className="w-full h-full object-contain" />
+                <img src="/logo.png" alt={t('nav.logoAlt')} className="w-full h-full object-contain" />
               </div>
               <div>
                 <span className="font-bold gradient-text">اكسيس</span>
@@ -3236,7 +3268,7 @@ function Footer() {
               </div>
             </div>
             <p className="text-[var(--t-8)] text-sm leading-relaxed mb-4">
-              شريكك الموثوق لتقنيات المساحة والجيوماتكس - الوكيل الحصري لشركات Trimble و NavVis و Spectra و Applanix و Kaarta
+              {t('footer.desc')}
             </p>
             {/* Footer Social Icons */}
             <div className="flex items-center gap-3">
@@ -3259,7 +3291,7 @@ function Footer() {
           <div>
             <h4 className="text-[var(--t-1)] font-semibold mb-4">{t('footer.quickLinks')}</h4>
             <div className="space-y-2">
-              {['الرئيسية', 'من نحن', 'خدماتنا', 'المعرض', 'تواصل معنا'].map((l, i) => (
+              {[t('footer.linkHome'), t('footer.linkAbout'), t('footer.linkServices'), t('footer.linkGallery'), t('footer.linkContact')].map((l, i) => (
                 <a key={i} href={`#${['hero', 'about', 'services', 'gallery', 'contact'][i]}`} className="block text-[var(--t-8)] hover:text-[oklch(0.72_0.14_180)] text-sm transition-colors">
                   {l}
                 </a>
@@ -3269,7 +3301,7 @@ function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-[var(--t-1)] font-semibold mb-4">خدماتنا</h4>
+            <h4 className="text-[var(--t-1)] font-semibold mb-4">{t('footer.servicesTitle')}</h4>
             <div className="space-y-2">
               {[t('footer.serviceGps'), t('footer.serviceTotalStation'), t('footer.service3dScanning'), t('footer.serviceGisVrs'), t('footer.serviceLaser'), 'Axis Campus'].map((s, i) => (
                 <span key={i} className="block text-[var(--t-8)] text-sm">{s}</span>
@@ -3279,7 +3311,7 @@ function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-[var(--t-1)] font-semibold mb-4">تواصل معنا</h4>
+            <h4 className="text-[var(--t-1)] font-semibold mb-4">{t('footer.contactTitle')}</h4>
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-[var(--t-8)] text-sm">
                 <Phone className="w-4 h-4 text-[oklch(0.72_0.14_180)]" />
@@ -3307,16 +3339,16 @@ function Footer() {
                 <MapPin className="w-4 h-4 text-[oklch(0.72_0.14_180)] mt-0.5 shrink-0" />
                 <div className="space-y-1.5">
                   <a href="https://www.google.com/maps?q=32.7579702,35.3189103" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
-                    الفرع الرئيسي: المنطقة الصناعية تسيفوريت ↗
+                    {t('footer.mainBranch')} ↗
                   </a>
                   <a href="https://www.google.com/maps?q=32.11146,34.96504" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
-                    فرع الشمال: كفر قاسم شارع علي بن أبي طالب ↗
+                    {t('footer.northBranch')} ↗
                   </a>
                   <a href="https://www.google.com/maps?q=31.8652474,35.2287424" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
-                    فرع رام الله: شارع الإرسال قرب السفينة ↗
+                    {t('footer.ramallahBranch')} ↗
                   </a>
                   <a href="https://www.google.com/maps?q=31.537372,35.0987544" target="_blank" rel="noopener noreferrer" className="block hover:text-[oklch(0.72_0.14_180)] transition-colors">
-                    فرع الخليل: شارع عين سارة مقابل ستاد الحسين ↗
+                    {t('footer.hebronBranch')} ↗
                   </a>
                 </div>
               </div>
@@ -3326,7 +3358,7 @@ function Footer() {
 
         <div className="mt-10 pt-8 border-t border-[var(--b-1)] flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[var(--t-10)] text-sm">
-            جميع الحقوق محفوظة &copy; {new Date().getFullYear()} اكسيس للحلول الهندسية المتقدمة
+            {t('footer.copyright')} &copy; {new Date().getFullYear()} اكسيس للحلول الهندسية المتقدمة
           </p>
           <div className="flex items-center gap-4">
             <a href="https://www.facebook.com/axisTRIMBLE" target="_blank" rel="noopener noreferrer" className="text-[var(--t-10)] hover:text-[oklch(0.72_0.14_180)] text-xs transition-colors">Facebook</a>
@@ -3356,7 +3388,7 @@ function FloatingWhatsApp() {
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 2, type: 'spring', stiffness: 200 }}
       className={`fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full bg-[#25D366] shadow-lg shadow-[#25D366]/30 flex items-center justify-center text-white hover:bg-[#20BD5A] hover:scale-110 transition-all duration-300 ${pulse ? 'animate-pulse' : ''}`}
-      title="تواصل معنا عبر واتساب"
+      title={t('whatsapp.title')}
     >
       <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     </motion.a>
@@ -3368,7 +3400,7 @@ function Branches() {
   const { t } = useLang()
   const branches = [
     {
-      name: 'الفرع الرئيسي',
+      name: t('branches.mainBranch'),
       address: t('branches.mainBranchAddress'),
       phone: '04-6419995',
       lat: 32.7579702,
@@ -3376,7 +3408,7 @@ function Branches() {
       color: '#0ea5a0',
     },
     {
-      name: 'فرع الشمال',
+      name: t('branches.northBranch'),
       address: t('branches.northBranchAddress'),
       phone: '0595289999',
       lat: 32.11146,
@@ -3384,7 +3416,7 @@ function Branches() {
       color: '#6366f1',
     },
     {
-      name: 'فرع رام الله',
+      name: t('branches.ramallahBranch'),
       address: t('branches.ramallahAddress'),
       phone: '02-2950149',
       lat: 31.92730,
@@ -3392,7 +3424,7 @@ function Branches() {
       color: '#f59e0b',
     },
     {
-      name: 'فرع الخليل',
+      name: t('branches.hebronBranch'),
       address: t('branches.hebronAddress'),
       phone: '0594224498',
       lat: 31.537372,
@@ -3411,10 +3443,10 @@ function Branches() {
             فروعنا
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
-            نصل <span className="gradient-text">إليك أينما كنت</span>
+            {t('branches.headingPrefix')} <span className="gradient-text">{t('branches.headingHighlight')}</span>
           </h2>
           <p className="text-[var(--t-7)] max-w-2xl mx-auto">
-            أربعة فروع رئيسية تغطي جميع أنحاء البلاد، لخدمتكم بأسرع وقت وأعلى جودة
+            {t('branches.subheading')}
           </p>
         </div>
 
@@ -3473,10 +3505,10 @@ function CEOMessage() {
         <div className="text-center mb-10">
           <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase flex items-center justify-center gap-2">
             <Quote className="w-4 h-4" />
-            كلمة المدير العام
+            {t('ceo.label')}
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
-            رسالة <span className="gradient-text">المهندس سلامة عواودة</span>
+            {t('ceo.headingPrefix')} <span className="gradient-text">{t('ceo.headingHighlight')}</span>
           </h2>
         </div>
 
@@ -3510,15 +3542,15 @@ function CEOMessage() {
             <div className="relative my-8 px-6 py-5 rounded-2xl bg-[oklch(0.72_0.14_180_/_0.08)] border border-[oklch(0.72_0.14_180_/_0.15)]">
               <Quote className="absolute top-3 right-3 w-5 h-5 text-[oklch(0.72_0.14_180)] opacity-30" />
               <p className="text-[var(--t-1)] text-lg sm:text-xl font-bold leading-relaxed">
-                سوف تواصل شركة AXIS بالاستثمار للحفاظ على التميز في مجال المساحة وسوف تعمل على ترقية هذه المهنة في البلاد.
+                {t('ceo.highlight')}
               </p>
             </div>
 
             {/* Signature */}
             <div className="flex items-center justify-end gap-4 pt-4 border-t border-[var(--b-1)]">
               <div className="text-start">
-                <p className="text-[var(--t-1)] font-bold text-base">المهندس سلامة عواودة</p>
-                <p className="text-[var(--t-7)] text-sm">المدير العام — شركة أكسيس للحلول الهندسية المتقدمة</p>
+                <p className="text-[var(--t-1)] font-bold text-base">{t('ceo.signatureName')}</p>
+                <p className="text-[var(--t-7)] text-sm">{t('ceo.signatureRole')}</p>
               </div>
               <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[oklch(0.72_0.14_180)] to-[oklch(0.65_0.16_200)] flex items-center justify-center text-white font-bold text-xl shrink-0">
                 س
@@ -3596,10 +3628,10 @@ function SocialFeed() {
         <div className="text-center mb-14">
           <span className="text-[oklch(0.72_0.14_180)] text-sm font-semibold tracking-wider uppercase">{t('socialFeed.label')}</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 mb-4">
-            أحدث <span className="gradient-text">أخبارنا ومنشوراتنا</span>
+            {t('socialFeed.headingPrefix')} <span className="gradient-text">{t('socialFeed.headingHighlight')}</span>
           </h2>
           <p className="text-[var(--t-7)] max-w-2xl mx-auto">
-            تابعونا على منصات التواصل الاجتماعي للحصول على آخر الأخبار والعروض والفيديوهات التعليمية
+            {t('socialFeed.subheading')}
           </p>
         </div>
 
@@ -3616,7 +3648,7 @@ function SocialFeed() {
               }`}
             >
               {p !== 'all' && platformConfig[p].icon}
-              {p === 'all' ? 'الكل' : platformConfig[p].label}
+              {p === 'all' ? t('socialFeed.filterAll') : platformConfig[p].label}
             </button>
           ))}
         </div>
