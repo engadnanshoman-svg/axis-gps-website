@@ -1932,7 +1932,7 @@ function Projects() {
 }
 
 /* ───────── review form ───────── */
-function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
+function ReviewForm({ onSubmitted }: { onSubmitted?: (newItem?: TestimonialData) => void }) {
   const { t } = useLang()
   const [hoverRating, setHoverRating] = useState(0)
   const [selectedRating, setSelectedRating] = useState(0)
@@ -1956,6 +1956,19 @@ function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
       text: formData.get('review-text') as string,
     }
 
+    // Build a local testimonial object immediately for localStorage backup
+    const localItem: TestimonialData = {
+      id: 'local-' + Date.now().toString(36) + Math.random().toString(36).substr(2, 5),
+      name: data.name,
+      company: data.company || null,
+      text: data.text,
+      rating: data.rating,
+      createdAt: new Date().toISOString(),
+      initials: getInitials(data.name),
+      color: AVATAR_COLORS[Math.floor(Math.random() * AVATAR_COLORS.length)],
+      role: data.company || undefined,
+    }
+
     try {
       const res = await fetch('/api/testimonials', {
         method: 'POST',
@@ -1964,16 +1977,25 @@ function ReviewForm({ onSubmitted }: { onSubmitted?: () => void }) {
       })
       const result = await res.json()
       if (res.ok) {
+        // Use the server-returned id if available, otherwise use local id
+        const savedItem: TestimonialData = result.testimonial
+          ? { ...localItem, id: result.testimonial.id || localItem.id }
+          : localItem
         setSubmitted(true)
         form.reset()
         setSelectedRating(0)
-        onSubmitted?.()
+        onSubmitted?.(savedItem)
         setTimeout(() => { setSubmitted(false); setFormOpen(false) }, 8000)
       } else {
         setErrorMsg(result.error || t('review.errorSubmit'))
       }
     } catch {
-      setErrorMsg(t('review.errorConnection'))
+      // Even if server fails, save locally and show the testimonial
+      setSubmitted(true)
+      form.reset()
+      setSelectedRating(0)
+      onSubmitted?.(localItem)
+      setTimeout(() => { setSubmitted(false); setFormOpen(false) }, 8000)
     } finally {
       setLoading(false)
     }
@@ -2196,6 +2218,33 @@ function getInitials(name: string): string {
   return parts[0][0] + parts[parts.length - 1][0]
 }
 
+/* ───────── localStorage helpers for testimonials persistence ───────── */
+const LS_KEY = 'axis:testimonials:db'
+
+function readLsTestimonials(): TestimonialData[] {
+  if (typeof window === 'undefined') return []
+  try {
+    const raw = localStorage.getItem(LS_KEY)
+    if (!raw) return []
+    const parsed = JSON.parse(raw)
+    return Array.isArray(parsed) ? parsed : []
+  } catch { return [] }
+}
+
+function writeLsTestimonials(items: TestimonialData[]) {
+  if (typeof window === 'undefined') return
+  try {
+    localStorage.setItem(LS_KEY, JSON.stringify(items))
+  } catch { /* quota exceeded etc */ }
+}
+
+/* Merge two testimonial arrays, deduplicating by id (server data wins) */
+function mergeTestimonials(server: TestimonialData[], local: TestimonialData[]): TestimonialData[] {
+  const seen = new Set(server.map(t => t.id))
+  const extras = local.filter(t => !seen.has(t.id))
+  return [...server, ...extras]
+}
+
 /* ───────── testimonials ───────── */
 function Testimonials() {
   const { t } = useLang()
@@ -2244,19 +2293,41 @@ function Testimonials() {
   ]
 
   // Fetch testimonials from database on mount
+  // Also uses localStorage as a persistent backup so testimonials never disappear
   useEffect(() => {
     async function fetchTestimonials() {
+      // 1. Load cached testimonials from localStorage first (instant)
+      const cached = readLsTestimonials()
+      if (cached.length > 0) {
+        const mapped = cached.map((t, i) => ({
+          ...t,
+          initials: t.initials || getInitials(t.name),
+          color: t.color || AVATAR_COLORS[i % AVATAR_COLORS.length],
+          role: t.role || t.company || undefined,
+        }))
+        setDbTestimonials(mapped)
+        setLoading(false)
+      }
+
+      // 2. Fetch fresh data from server
       try {
         const res = await fetch('/api/testimonials')
         if (res.ok) {
           const data = await res.json()
-          const mapped: TestimonialData[] = (data.testimonials || []).map((t: TestimonialData, i: number) => ({
+          const serverMapped: TestimonialData[] = (data.testimonials || []).map((t: TestimonialData, i: number) => ({
             ...t,
             initials: getInitials(t.name),
             color: AVATAR_COLORS[i % AVATAR_COLORS.length],
             role: t.company || undefined,
           }))
-          setDbTestimonials(mapped)
+
+          // 3. Merge server data with localStorage (server wins on conflicts, localStorage preserves items lost on server)
+          const merged = mergeTestimonials(serverMapped, cached)
+
+          // 4. Save merged data back to localStorage for next visit
+          writeLsTestimonials(merged)
+
+          setDbTestimonials(merged)
         }
       } catch { /* silent */ } finally {
         setLoading(false)
@@ -2308,21 +2379,43 @@ function Testimonials() {
           <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-l from-transparent via-[oklch(0.72_0.14_180_/_0.5)] to-transparent" />
 
           <div className="relative z-10">
-            <ReviewForm onSubmitted={() => {
-              // Re-fetch testimonials after submission
+            <ReviewForm onSubmitted={(newItem?: TestimonialData) => {
+              // If the form gives us the new item, save it to localStorage immediately
+              if (newItem) {
+                const cached = readLsTestimonials()
+                const updated = [newItem, ...cached.filter(c => c.id !== newItem.id)]
+                writeLsTestimonials(updated)
+              }
+              // Re-fetch testimonials from server after submission
               fetch('/api/testimonials')
                 .then(r => r.json())
                 .then(data => {
-                  const mapped: TestimonialData[] = (data.testimonials || []).map((t: TestimonialData, i: number) => ({
+                  const serverMapped: TestimonialData[] = (data.testimonials || []).map((t: TestimonialData, i: number) => ({
                     ...t,
                     initials: getInitials(t.name),
                     color: AVATAR_COLORS[(i + seedTestimonials.length) % AVATAR_COLORS.length],
                     role: t.company || undefined,
                   }))
-                  setDbTestimonials(mapped)
+                  // Merge with localStorage to preserve any items lost on server
+                  const cached = readLsTestimonials()
+                  const merged = mergeTestimonials(serverMapped, cached)
+                  writeLsTestimonials(merged)
+                  setDbTestimonials(merged)
                   setActiveIndex(seedTestimonials.length) // Show the new testimonial
                 })
-                .catch(() => {})
+                .catch(() => {
+                  // Even if server fetch fails, ensure localStorage items are shown
+                  const cached = readLsTestimonials()
+                  if (cached.length > 0) {
+                    const mapped = cached.map((t, i) => ({
+                      ...t,
+                      initials: t.initials || getInitials(t.name),
+                      color: t.color || AVATAR_COLORS[i % AVATAR_COLORS.length],
+                      role: t.role || t.company || undefined,
+                    }))
+                    setDbTestimonials(mapped)
+                  }
+                })
             }} />
           </div>
         </motion.div>
